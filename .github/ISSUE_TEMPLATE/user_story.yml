@@ -1,23 +1,12 @@
 name: User Story
 description: Create a new user story with editable acceptance criteria and definition of done
 title: "User Story: "
-labels: ["user story"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## User Story
-
-        Use the template below to describe your user story clearly.
-
   - type: textarea
     id: user_story
     attributes:
       label: User Story
-      description: Follow the structure:  
-        **As a [role],**  
-        **I want [an action or feature],**  
-        **So that [a reason or benefit].**
+      description: "Follow the structure: **As a [role], I want [an action or feature], So that [a reason or benefit].**"
       placeholder: |
         As a [role],
         I want [an action or feature],
