@@ -1,0 +1,26 @@
+<div class="main-container">
+  <div class="login-container">
+    <h1 class="login-title">Login</h1>
+    
+    <form class="login-form">
+      <div class="form-group">
+        <label for="contract-number" class="form-label">Vertragsnummer</label>
+        <input type="text" id="contract-number" class="form-input" />
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" class="form-input" />
+      </div>
+      
+      <button type="submit" class="login-button">Anmelden</button>
+    </form>
+
+    <div class="secondary-actions">
+      <a routerLink="/registration" class="secondary-link">Neu? Erstanmeldung</a>
+      <a routerLink="/create-account" class="secondary-link">Konto erstellen</a>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
