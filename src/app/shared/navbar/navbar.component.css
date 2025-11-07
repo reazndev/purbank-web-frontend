@@ -1,73 +1,93 @@
 .navbar {
-    border: 2px solid rgb(0, 0, 0); /* Need to change later cba rn */
-    border-radius: 24px;
-    padding: 25px;
-    overflow: hidden;
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray);
+    padding: 1rem 0;
+}
+
+.navbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 20px;;
+    padding: 0 25%;
+    max-width: 100%;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    flex: 0 0 50%;
-    justify-content: space-around;
+    gap: 2rem;
 }
 
 .nav-link {
-    margin: 0 20px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-accent-dark);
     text-decoration: none;
-    color: rgb(0, 0, 0); /* Need to change later cba rn */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.nav-link:hover {
+    color: var(--color-black);
+    border-bottom-color: var(--color-black);
 }
 
 .nav-controls {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 0 0 15%;
-    align-items: flex-end;
-    margin-left: 200px;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .theme-switch, .language-switch {
     display: flex;
-    gap: 10px;
+    gap: 0.5rem;
 }
 
 .theme-option, .language-option {
-    color: rgb(0, 0, 0);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-accent-dark);
     cursor: pointer;
-    text-decoration: none;
-    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+
+.theme-option:hover, .language-option:hover {
+    color: var(--color-black);
 }
 
 .theme-option.active, .language-option.active {
-    text-decoration: underline;
-    font-weight: bold;
+    color: var(--color-black);
+    font-weight: 500;
 }
 
 .user-info {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    flex: 0 0 15%;
-    font-size: 20px;
+    align-items: flex-end;
+    gap: 0.125rem;
 }
 
 .user-name {
-    color: rgb(0, 0, 0);
-    font-weight: bold;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-black);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .account-number {
-    color: rgb(0, 0, 0);
+    font-size: 0.625rem;
+    font-weight: 400;
+    color: var(--color-accent-dark);
+    letter-spacing: 0.05em;
 }
