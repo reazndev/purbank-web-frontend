@@ -1,14 +1,12 @@
-/* Main container - Swiss design principles */
 .main-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 60px); /* Account for footer height */
+  min-height: calc(100vh - 60px);
   padding: 2rem;
   background-color: var(--color-white);
 }
 
-/* Login container - Clean, minimal Swiss style */
 .login-container {
   width: 100%;
   max-width: 400px;
@@ -16,7 +14,6 @@
   background-color: var(--color-white);
 }
 
-/* Typography - Swiss design emphasis on clean hierarchy */
 .login-title {
   font-size: 2rem;
   font-weight: 400;
@@ -27,7 +24,6 @@
   text-transform: uppercase;
 }
 
-/* Form styling - Minimal and functional */
 .login-form {
   margin-bottom: 2rem;
 }
@@ -67,7 +63,6 @@
   color: var(--color-gray);
 }
 
-/* Login button - Swiss minimalism */
 .login-button {
   width: 100%;
   padding: 1rem;
@@ -88,7 +83,6 @@
   background-color: var(--color-accent-dark);
 }
 
-/* Secondary actions - Smaller, minimal styling */
 .secondary-actions {
   display: flex;
   flex-direction: column;
