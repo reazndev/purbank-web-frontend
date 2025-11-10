@@ -1,20 +1,29 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MobileDetectionService {
   private isMobile = signal<boolean>(false);
+  private destroyRef = inject(DestroyRef);
 
   constructor() {
     // Check initial state
     this.checkMobileDevice();
     
-    // Listen for window resize events
+    // Listen for window resize events with debouncing
     if (typeof window !== 'undefined') {
-      window.addEventListener('resize', () => {
-        this.checkMobileDevice();
-      });
+      fromEvent(window, 'resize')
+        .pipe(
+          debounceTime(300), // Debounce resize events by 300ms
+          takeUntilDestroyed(this.destroyRef)
+        )
+        .subscribe(() => {
+          this.checkMobileDevice();
+        });
     }
   }
 
