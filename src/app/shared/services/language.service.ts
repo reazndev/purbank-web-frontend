@@ -20,6 +20,7 @@ export interface Translations {
   loginButton: string;
   newRegistration: string;
   createAccount: string;
+  neuanmeldungTitle: string;
 }
 
 @Injectable({
@@ -46,7 +47,8 @@ export class LanguageService {
       password: 'Passwort',
       loginButton: 'Anmelden',
       newRegistration: 'Neu? Erstanmeldung',
-      createAccount: 'Konto erstellen'
+      createAccount: 'Konto erstellen',
+      neuanmeldungTitle: 'Neuanmeldung'
     },
     en: {
       dashboard: 'Dashboard',
@@ -65,7 +67,8 @@ export class LanguageService {
       password: 'Password',
       loginButton: 'Sign In',
       newRegistration: 'New? Initial Registration',
-      createAccount: 'Create Account'
+      createAccount: 'Create Account',
+      neuanmeldungTitle: 'Initial Registration'
     }
   };
 
