@@ -70,7 +70,8 @@
 .theme-option.active, .language-option.active {
     color: var(--color-black);
     font-weight: 500;
-      text-decoration-line: underline;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px; /* Increased distance for underline as @bettercallmilan requested*/
 }
 
 .user-info {
