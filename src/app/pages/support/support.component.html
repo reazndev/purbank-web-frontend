@@ -1,19 +1,21 @@
 <div class="page-container">
-  <h1 class="page-title">Support</h1>
+  <h1 class="page-title">{{ translations().supportTitle }}</h1>
   <p class="page-content">
-    Support text Support textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport textSupport text
+    {{ translations().supportContent }}
   </p>
   
   <div class="contact-info">
     <div class="contact-item">
-      <span class="contact-label">Telefon:</span>
+      <span class="contact-label">{{ translations().phoneLabel }}</span>
       <a href="tel:+41441234567" class="contact-link">+41 78 123 45 67</a>
     </div>
     <div class="contact-item">
-      <span class="contact-label">Email:</span>
+      <span class="contact-label">{{ translations().emailLabel }}</span>
       <a href="mailto:support@purbank.ch" class="contact-link">support@purbank.ch</a>
     </div>
   </div>
+  
+  <app-language-toggle></app-language-toggle>
 </div>
 
 <app-footer></app-footer>

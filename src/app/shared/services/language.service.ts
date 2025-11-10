@@ -21,6 +21,10 @@ export interface Translations {
   newRegistration: string;
   createAccount: string;
   neuanmeldungTitle: string;
+  supportTitle: string;
+  supportContent: string;
+  phoneLabel: string;
+  emailLabel: string;
 }
 
 @Injectable({
@@ -48,7 +52,11 @@ export class LanguageService {
       loginButton: 'Anmelden',
       newRegistration: 'Neu? Erstanmeldung',
       createAccount: 'Konto erstellen',
-      neuanmeldungTitle: 'Neuanmeldung'
+      neuanmeldungTitle: 'Neuanmeldung',
+      supportTitle: 'Support',
+      supportContent: 'Benötigen Sie Hilfe? Kontaktieren Sie unser Support-Team für alle Fragen rund um Ihr PurBank Konto. Wir sind gerne für Sie da.',
+      phoneLabel: 'Telefon:',
+      emailLabel: 'Email:'
     },
     en: {
       dashboard: 'Dashboard',
@@ -68,7 +76,11 @@ export class LanguageService {
       loginButton: 'Sign In',
       newRegistration: 'New? Initial Registration',
       createAccount: 'Create Account',
-      neuanmeldungTitle: 'Initial Registration'
+      neuanmeldungTitle: 'Initial Registration',
+      supportTitle: 'Support',
+      supportContent: 'Need help? Contact our support team for all questions regarding your PurBank account. We are here to assist you.',
+      phoneLabel: 'Phone:',
+      emailLabel: 'Email:'
     }
   };
 
