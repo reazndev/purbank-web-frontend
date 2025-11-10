@@ -12,6 +12,9 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 
+# Angular
+.angular/
+
 # IDEs and editors
 .vscode
 .idea/
