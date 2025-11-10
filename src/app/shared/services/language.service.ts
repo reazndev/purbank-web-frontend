@@ -14,6 +14,12 @@ export interface Translations {
   createAccountContent: string;
   viewInEnglish: string;
   viewInGerman: string;
+  loginTitle: string;
+  contractNumber: string;
+  password: string;
+  loginButton: string;
+  newRegistration: string;
+  createAccount: string;
 }
 
 @Injectable({
@@ -34,7 +40,13 @@ export class LanguageService {
       createAccountTitle: 'Konto erstellen',
       createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen!',
       viewInEnglish: 'View this page in English',
-      viewInGerman: 'Diese Seite auf Deutsch anzeigen'
+      viewInGerman: 'Diese Seite auf Deutsch anzeigen',
+      loginTitle: 'Login',
+      contractNumber: 'Vertragsnummer',
+      password: 'Passwort',
+      loginButton: 'Anmelden',
+      newRegistration: 'Neu? Erstanmeldung',
+      createAccount: 'Konto erstellen'
     },
     en: {
       dashboard: 'Dashboard',
@@ -47,7 +59,13 @@ export class LanguageService {
       createAccountTitle: 'Create Account',
       createAccountContent: 'Please contact your nearest PurBank branch to open an account!',
       viewInEnglish: 'View this page in English',
-      viewInGerman: 'Diese Seite auf Deutsch anzeigen'
+      viewInGerman: 'Diese Seite auf Deutsch anzeigen',
+      loginTitle: 'Login',
+      contractNumber: 'Account Number',
+      password: 'Password',
+      loginButton: 'Sign In',
+      newRegistration: 'New? Initial Registration',
+      createAccount: 'Create Account'
     }
   };
 
