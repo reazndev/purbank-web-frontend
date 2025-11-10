@@ -1,0 +1,97 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray);
+    padding: 1rem 0;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    padding: 0 25%;
+    max-width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-accent-dark);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.nav-link:hover {
+    color: var(--color-black);
+    border-bottom-color: var(--color-black);
+}
+
+.nav-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+.theme-switch, .language-switch {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.theme-option, .language-option {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-accent-dark);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+
+.theme-option:hover, .language-option:hover {
+    color: var(--color-black);
+}
+
+.theme-option.active, .language-option.active {
+    color: var(--color-black);
+    font-weight: 500;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px; /* Increased distance for underline as @bettercallmilan requested*/
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.125rem;
+}
+
+.user-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-black);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.account-number {
+    font-size: 0.625rem;
+    font-weight: 400;
+    color: var(--color-accent-dark);
+    letter-spacing: 0.05em;
+}
