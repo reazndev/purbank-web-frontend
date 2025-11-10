@@ -10,6 +10,10 @@ export interface Translations {
   logout: string;
   dark: string;
   light: string;
+  createAccountTitle: string;
+  createAccountContent: string;
+  viewInEnglish: string;
+  viewInGerman: string;
 }
 
 @Injectable({
@@ -17,7 +21,7 @@ export interface Translations {
 })
 export class LanguageService {
   private currentLanguage = signal<Language>('de');
-  
+
   private translations: Record<Language, Translations> = {
     de: {
       dashboard: 'Dashboard',
@@ -26,7 +30,11 @@ export class LanguageService {
       analytics: 'Analyse',
       logout: 'Abmelden',
       dark: 'Dunkel',
-      light: 'Hell'
+      light: 'Hell',
+      createAccountTitle: 'Konto erstellen',
+      createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen!',
+      viewInEnglish: 'View this page in English',
+      viewInGerman: 'Diese Seite auf Deutsch anzeigen'
     },
     en: {
       dashboard: 'Dashboard',
@@ -35,7 +43,11 @@ export class LanguageService {
       analytics: 'Analytics',
       logout: 'Logout',
       dark: 'Dark',
-      light: 'Light'
+      light: 'Light',
+      createAccountTitle: 'Create Account',
+      createAccountContent: 'Please contact your nearest PurBank branch to open an account!',
+      viewInEnglish: 'View this page in English',
+      viewInGerman: 'Diese Seite auf Deutsch anzeigen'
     }
   };
 
