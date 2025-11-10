@@ -1,0 +1,6 @@
+<button 
+  class="language-toggle-btn" 
+  (click)="toggleLanguage()"
+  [attr.aria-label]="getToggleText()">
+  {{ getToggleText() }}
+</button>
