@@ -10,7 +10,6 @@ export interface Translations {
   logout: string;
   dark: string;
   light: string;
-  createAccountTitle: string;
   createAccountContent: string;
   viewInEnglish: string;
   viewInGerman: string;
@@ -42,16 +41,15 @@ export class LanguageService {
       logout: 'Abmelden',
       dark: 'Dunkel',
       light: 'Hell',
-      createAccountTitle: 'Konto erstellen',
-      createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen!',
-      viewInEnglish: 'View this page in English',
-      viewInGerman: 'Diese Seite auf Deutsch anzeigen',
+      createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen.',
+      viewInEnglish: 'View this page in English', 
+      viewInGerman: 'Diese Seite auf Deutsch anzeigen', 
       loginTitle: 'Login',
       contractNumber: 'Vertragsnummer',
       password: 'Passwort',
       loginButton: 'Anmelden',
       newRegistration: 'Neu? Erstanmeldung',
-      createAccount: 'Konto erstellen',
+      createAccount: 'Konto erstellen', // ORIGINAL USECASE: landing page: options | now merged with createAccountTitle as this has the same content and will likely stay that way 
       neuanmeldungTitle: 'Neuanmeldung',
       supportTitle: 'Support',
       supportContent: 'Benötigen Sie Hilfe? Kontaktieren Sie unser Support-Team für alle Fragen rund um Ihr PurBank Konto. Wir sind gerne für Sie da.',
@@ -66,8 +64,8 @@ export class LanguageService {
       logout: 'Logout',
       dark: 'Dark',
       light: 'Light',
-      createAccountTitle: 'Create Account',
-      createAccountContent: 'Please contact your nearest PurBank branch to open an account!',
+      createAccountContent: 'Please contact your nearest PurBank branch to open an account.',
+      // yes these two are redundant but their values wont change in the future and this just makes it easier to work with
       viewInEnglish: 'View this page in English',
       viewInGerman: 'Diese Seite auf Deutsch anzeigen',
       loginTitle: 'Login',
@@ -75,7 +73,7 @@ export class LanguageService {
       password: 'Password',
       loginButton: 'Sign In',
       newRegistration: 'New? Initial Registration',
-      createAccount: 'Create Account',
+      createAccount: 'Create Account', // ORIGINAL USECASE: landing page: options | now merged with createAccountTitle as this has the same content and will likely stay that way 
       neuanmeldungTitle: 'Initial Registration',
       supportTitle: 'Support',
       supportContent: 'Need help? Contact our support team for all questions regarding your PurBank account. We are here to assist you.',
