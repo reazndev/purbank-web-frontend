@@ -1,25 +1,27 @@
 <div class="main-container">
   <div class="login-container">
-    <h1 class="login-title">Login</h1>
+    <h1 class="login-title">{{ translations().loginTitle }}</h1>
     
     <form class="login-form">
       <div class="form-group">
-        <label for="contract-number" class="form-label">Vertragsnummer</label>
+        <label for="contract-number" class="form-label">{{ translations().contractNumber }}</label>
         <input type="text" id="contract-number" class="form-input" />
       </div>
       
       <div class="form-group">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">{{ translations().password }}</label>
         <input type="password" id="password" class="form-input" />
       </div>
       
-      <button type="submit" class="login-button">Anmelden</button>
+      <button type="submit" class="login-button">{{ translations().loginButton }}</button>
     </form>
 
     <div class="secondary-actions">
-      <a routerLink="/registration" class="secondary-link">Neu? Erstanmeldung</a>
-      <a routerLink="/create-account" class="secondary-link">Konto erstellen</a>
+      <a routerLink="/registration" class="secondary-link">{{ translations().newRegistration }}</a>
+      <a routerLink="/create-account" class="secondary-link">{{ translations().createAccount }}</a>
     </div>
+    
+    <app-language-toggle></app-language-toggle>
   </div>
 </div>
 
