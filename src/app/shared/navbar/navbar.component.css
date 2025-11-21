@@ -54,7 +54,7 @@
         font-size: 0.8rem;
     }
     
-    .theme-option, .language-option {
+    .language-option {
         font-size: 0.7rem;
     }
 }
@@ -101,7 +101,7 @@
         letter-spacing: 0.03em;
     }
     
-    .theme-option, .language-option {
+    .language-option {
         font-size: 0.65rem;
     }
 }
@@ -139,12 +139,12 @@
     margin-right: 2rem;
 }
 
-.theme-switch, .language-switch {
+.language-switch {
     display: flex;
     gap: 0.5rem;
 }
 
-.theme-option, .language-option {
+.language-option {
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--color-accent-dark);
@@ -154,11 +154,11 @@
     transition: color 0.2s ease;
 }
 
-.theme-option:hover, .language-option:hover {
+.language-option:hover {
     color: var(--color-black);
 }
 
-.theme-option.active, .language-option.active {
+.language-option.active {
     color: var(--color-black);
     font-weight: 500;
     border-bottom: 1px solid #000;
