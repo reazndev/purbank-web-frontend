@@ -4,8 +4,10 @@
   --color-black: #1D1D1D;
   --color-gray: #BFBFBF;
   --color-white: #EFEFEF;
+  --color-whiter: #fefdfd;
   --color-accent-light: #A5B3BA;
   --color-accent-dark: #5A7684;
+  --padding-standard: 24px;
 }
 
 * {
