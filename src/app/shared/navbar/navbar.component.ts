@@ -10,7 +10,7 @@ import { LanguageService, Language } from '../services/language.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  private languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService);
   private readonly router = inject(Router);
   
   currentLanguage = this.languageService.getCurrentLanguage();
