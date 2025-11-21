@@ -5,5 +5,4 @@
   background-color: var(--color-white);
   font-family: var(--font-family);
   color: var(--color-black);
-  width: 90%; /* for now, might have to go back to 100 if possible, have to see about transactions box*/
 }
