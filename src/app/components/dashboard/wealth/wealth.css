@@ -59,3 +59,8 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+.wealth-footer a:hover {
+    color: var(--color-black);
+    border-bottom-color: var(--color-black);
+}
