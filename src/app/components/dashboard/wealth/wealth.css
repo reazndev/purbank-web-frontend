@@ -1,7 +1,6 @@
 .wealth-container {
   border: 1px solid var(--color-gray);
   padding: var(--padding-standard);
-  margin-top: 3vh;
   background-color: var(--color-white);
   font-family: var(--font-family);
   color: var(--color-black);
