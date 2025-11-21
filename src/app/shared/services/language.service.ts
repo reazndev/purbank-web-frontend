@@ -24,6 +24,8 @@ export interface Translations {
   supportContent: string;
   phoneLabel: string;
   emailLabel: string;
+  provisional: string;
+  seeMore: string;
 }
 
 @Injectable({
@@ -54,7 +56,9 @@ export class LanguageService {
       supportTitle: 'Support',
       supportContent: 'Benötigen Sie Hilfe? Kontaktieren Sie unser Support-Team für alle Fragen rund um Ihr PurBank Konto. Wir sind gerne für Sie da.',
       phoneLabel: 'Telefon:',
-      emailLabel: 'Email:'
+      emailLabel: 'Email:',
+      provisional: 'Provisorisches',
+      seeMore: 'Siehe mehr'
     },
     en: {
       dashboard: 'Dashboard',
@@ -78,7 +82,9 @@ export class LanguageService {
       supportTitle: 'Support',
       supportContent: 'Need help? Contact our support team for all questions regarding your PurBank account. We are here to assist you.',
       phoneLabel: 'Phone:',
-      emailLabel: 'Email:'
+      emailLabel: 'Email:',
+      provisional: 'Provisional',
+      seeMore: 'See more'
     }
   };
 
