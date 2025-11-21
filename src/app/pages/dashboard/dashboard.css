@@ -1,0 +1,18 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: calc(100vh - 60px);
+  padding: 4rem 25%;
+  background-color: var(--color-white);
+}
+
+.page-content {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-black);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
