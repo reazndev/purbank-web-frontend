@@ -12,7 +12,7 @@ import { LanguageToggleComponent } from '../../shared/language-toggle/language-t
   styleUrl: './neuanmeldung.component.css'
 })
 export class NeuanmeldungComponent {
-  private languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService);
   
   translations = computed(() => this.languageService.getTranslations());
 }

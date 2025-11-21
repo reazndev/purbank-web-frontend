@@ -30,9 +30,9 @@ export interface Translations {
   providedIn: 'root'
 })
 export class LanguageService {
-  private currentLanguage = signal<Language>('de');
+  private readonly currentLanguage = signal<Language>('de');
 
-  private translations: Record<Language, Translations> = {
+  private readonly translations: Record<Language, Translations> = {
     de: {
       dashboard: 'Dashboard',
       wealth: 'Vermögen',
