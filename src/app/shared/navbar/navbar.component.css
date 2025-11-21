@@ -130,6 +130,12 @@
     border-bottom-color: var(--color-black);
 }
 
+.nav-link.active {
+    color: var(--color-black);
+    font-weight: 500;
+    border-bottom-color: var(--color-black);
+}
+
 .nav-controls {
     display: flex;
     flex-direction: row;

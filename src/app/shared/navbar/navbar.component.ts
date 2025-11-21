@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { LanguageService, Language } from '../services/language.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { LanguageService, Language } from '../services/language.service';
 })
 export class NavbarComponent {
   private languageService = inject(LanguageService);
+  private readonly router = inject(Router);
   
   currentLanguage = this.languageService.getCurrentLanguage();
   translations = computed(() => this.languageService.getTranslations());
@@ -21,5 +22,9 @@ export class NavbarComponent {
 
   isLanguageActive(language: Language): boolean {
     return this.currentLanguage() === language;
+  }
+
+  isRouteActive(route: string): boolean {
+    return this.router.url === route;
   }
 }

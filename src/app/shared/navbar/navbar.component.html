@@ -1,11 +1,11 @@
 <div class="navbar">
     <div class="navbar-content">
         <div class="nav-links">
-            <a routerLink="/dashboard" class="nav-link">{{ translations().dashboard }}</a>
-            <a routerLink="/wealth" class="nav-link">{{ translations().wealth }}</a>
-            <a routerLink="/transactions" class="nav-link">{{ translations().transactions }}</a>
-            <a routerLink="/analytics" class="nav-link">{{ translations().analytics }}</a>
-            <a routerLink="/logout" class="nav-link">{{ translations().logout }}</a>
+            <a routerLink="/dashboard" class="nav-link" [class.active]="isRouteActive('/dashboard')">{{ translations().dashboard }}</a>
+            <a routerLink="/wealth" class="nav-link" [class.active]="isRouteActive('/wealth')">{{ translations().wealth }}</a>
+            <a routerLink="/transactions" class="nav-link" [class.active]="isRouteActive('/transactions')">{{ translations().transactions }}</a>
+            <a routerLink="/analytics" class="nav-link" [class.active]="isRouteActive('/analytics')">{{ translations().analytics }}</a>
+            <a routerLink="/logout" class="nav-link" [class.active]="isRouteActive('/logout')">{{ translations().logout }}</a>
         </div>
         <div class="nav-controls">
             <div class="language-switch">
