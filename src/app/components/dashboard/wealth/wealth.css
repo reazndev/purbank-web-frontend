@@ -3,7 +3,7 @@
   padding: var(--padding-standard);
   margin-top: 3vh;
   background-color: var(--color-white);
-  font-family: 'Special Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-family);
   color: var(--color-black);
   width: 90%; /* for now, might have to go back to 100 if possible, have to see about transactions box*/
 }
@@ -50,7 +50,7 @@
 
 .account-name {
   font-weight: normal;
-  max-width: 12ch; /* max 12 chars then cutoff */
+  max-width: 10ch; /* max 10 chars then cutoff */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
