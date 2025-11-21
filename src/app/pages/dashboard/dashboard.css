@@ -1,11 +1,26 @@
 .page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  margin-top: 3vh;
+  display: grid;
+  grid-template-areas: "wealth transactions" "chart transactions";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 24px;
   min-height: calc(100vh - 60px);
   padding: 4rem 25%;
   background-color: var(--color-white);
+}
+
+
+.wealth {
+  grid-area: wealth;
+}
+
+.chart {
+  grid-area: chart;
+}
+
+.transactions {
+  grid-area: transactions;
 }
 
 .page-content {
