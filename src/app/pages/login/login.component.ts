@@ -12,7 +12,7 @@ import { LanguageToggleComponent } from '../../shared/language-toggle/language-t
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  private languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService);
   
   translations = computed(() => this.languageService.getTranslations());
 }

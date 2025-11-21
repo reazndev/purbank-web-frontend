@@ -9,7 +9,7 @@ import { LanguageService, Language } from '../services/language.service';
   styleUrl: './language-toggle.component.css'
 })
 export class LanguageToggleComponent {
-  private languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService);
   
   currentLanguage = this.languageService.getCurrentLanguage();
   translations = computed(() => this.languageService.getTranslations());
