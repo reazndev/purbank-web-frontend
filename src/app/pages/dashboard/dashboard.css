@@ -1,5 +1,5 @@
 .page-container {
-  margin-top: 5vh;
+  margin-top: 7vh;
   display: grid;
   grid-template-areas: "wealth transactions" "chart transactions";
   grid-template-columns: minmax(300px, 475px) minmax(300px, 475px);
