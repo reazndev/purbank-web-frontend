@@ -1,0 +1,7 @@
+.chart-container {
+  border: 1px solid var(--color-gray);
+  padding: var(--padding-standard);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  color: var(--color-black);
+}

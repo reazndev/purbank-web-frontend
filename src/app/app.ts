@@ -11,7 +11,7 @@ import { MobileWarningComponent } from './shared/mobile-warning/mobile-warning.c
   styleUrl: './app.css'
 })
 export class App {
-  private mobileDetectionService = inject(MobileDetectionService);
+  private readonly mobileDetectionService = inject(MobileDetectionService);
   
   getIsMobile() {
     return this.mobileDetectionService.getIsMobile();

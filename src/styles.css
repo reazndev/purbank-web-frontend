@@ -4,8 +4,11 @@
   --color-black: #1D1D1D;
   --color-gray: #BFBFBF;
   --color-white: #EFEFEF;
+  --color-whiter: #fefdfd;
   --color-accent-light: #A5B3BA;
   --color-accent-dark: #5A7684;
+  --padding-standard: 24px;
+  --font-family: 'Special Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 * {
@@ -15,7 +18,7 @@
 }
 
 body {
-  font-family: 'Special Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-family);
   background-color: var(--color-white);
   color: var(--color-black);
 }

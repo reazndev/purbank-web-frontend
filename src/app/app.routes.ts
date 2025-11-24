@@ -4,6 +4,7 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
 import { NeuanmeldungComponent } from './pages/neuanmeldung/neuanmeldung.component';
 import { SupportComponent } from './pages/support/support.component';
 import { DevelopmentComponent } from './pages/development/development.component';
+import { DashboardComponent } from './pages/dashboard/dashboard';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'create-account', component: CreateAccountComponent },
   { path: 'registration', component: NeuanmeldungComponent },
   { path: 'support', component: SupportComponent },
-  { path: 'development', component: DevelopmentComponent }
+  { path: 'development', component: DevelopmentComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];
