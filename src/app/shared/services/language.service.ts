@@ -30,6 +30,7 @@ export interface Translations {
   accountname: string;
   interestRate: string;
   balance: string;
+  quickAction: string;
   openNewAccount: string;
   closeAccount: string;
 }
@@ -69,6 +70,7 @@ export class LanguageService {
       accountname: 'Kontoname',
       interestRate: 'Zinssatz',
       balance: 'Kontostand',
+  quickAction: 'Schnellaktion',
       openNewAccount: 'Neues Konto eröffnen',
       closeAccount: 'Konto schliessen'
     },
@@ -101,6 +103,7 @@ export class LanguageService {
       accountname: 'Account Name',
       interestRate: 'Interest Rate',
       balance: 'Balance',
+  quickAction: 'Quick action',
       openNewAccount: 'Open New Account',
       closeAccount: 'Close Account'
     }
