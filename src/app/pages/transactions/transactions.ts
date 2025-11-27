@@ -5,10 +5,11 @@ import { ComponentWealthDetailed } from '../../components/wealth/wealth-detailed
 import { SettingsComponent } from '../../components/wealth/settings/settings';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { PieChartComponent } from '../../components/wealth/pie-chart/pie-chart';
 
 @Component({
   selector: 'app-transactions',
-  imports: [RouterModule, ComponentWealthDetailed, SettingsComponent, FooterComponent, NavbarComponent],
+  imports: [RouterModule, ComponentWealthDetailed, SettingsComponent, FooterComponent, NavbarComponent, PieChartComponent],
   templateUrl: './transactions.html',
   styleUrls: ['./transactions.css'],
 })
