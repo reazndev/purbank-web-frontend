@@ -5,22 +5,28 @@
   border-radius: 0;
   font-family: var(--font-family);
   color: var(--color-black);
-  max-width: 220px;
+  max-width: 100%;
 }
 
 .settings-link {
   color: var(--color-accent-dark);
   text-decoration: none;
   font-size: 0.95rem;
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding: 6px 0;
   text-align: left;
+}
+
+.settings-link-text {
+  display: inline-block;
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
 }
 
-.settings-link:hover {
+.settings-link:hover .settings-link-text {
   color: var(--color-black);
   text-decoration-color: var(--color-black);
 }
