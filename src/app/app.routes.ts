@@ -5,6 +5,7 @@ import { NeuanmeldungComponent } from './pages/neuanmeldung/neuanmeldung.compone
 import { SupportComponent } from './pages/support/support.component';
 import { DevelopmentComponent } from './pages/development/development.component';
 import { DashboardComponent } from './pages/dashboard/dashboard';
+import { TransactionsComponent } from './pages/transactions/transactions';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'registration', component: NeuanmeldungComponent },
   { path: 'support', component: SupportComponent },
   { path: 'development', component: DevelopmentComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'transactions', component: TransactionsComponent }
 ];
