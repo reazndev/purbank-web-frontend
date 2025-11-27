@@ -1,0 +1,73 @@
+.wealth-container {
+  border: 1px solid var(--color-gray);
+  padding: var(--padding-standard);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  color: var(--color-black);
+}
+
+.wealth-header h2 {
+  font-weight: normal;
+  margin-bottom: 10px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+.wealth-amount {
+  color: var(--color-accent-dark);
+  font-weight: normal;
+  margin-left: auto;
+}
+.wealth-header hr {
+  border: 0;
+  border-top: 1px solid var(--color-black);
+  margin-bottom: 20px;
+}
+
+.accounts-header {
+  margin-bottom: 15px;
+  display: grid;
+  /* columns: name | interest rate | balance */
+  grid-template-columns: 1fr 6rem 8rem;
+  align-items: center;
+  gap: 12px;
+}
+
+.accounts-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.account-box {
+  background-color: var(--color-accent-light);
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr 6rem 8rem;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-name {
+  font-weight: normal;
+  max-width: 20ch; /* max 20 chars then cutoff */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.account-balance {
+  font-weight: normal;
+}
+
+.account-interest-rate,
+.account-header-interest-rate {
+  text-align: center;
+  justify-self: center;
+}
+
+.account-balance,
+.account-header-interest-balance {
+  text-align: right;
+  justify-self: end;
+}
