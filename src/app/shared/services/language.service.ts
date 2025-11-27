@@ -25,7 +25,13 @@ export interface Translations {
   phoneLabel: string;
   emailLabel: string;
   provisional: string;
+  current: string;
   seeMore: string;
+  accountname: string;
+  interestRate: string;
+  balance: string;
+  openNewAccount: string;
+  closeAccount: string;
 }
 
 @Injectable({
@@ -58,7 +64,13 @@ export class LanguageService {
       phoneLabel: 'Telefon:',
       emailLabel: 'Email:',
       provisional: 'Provisorisches',
-      seeMore: 'Siehe mehr'
+      current: 'Aktuelles',
+      seeMore: 'Siehe mehr',
+      accountname: 'Kontoname',
+      interestRate: 'Zinssatz',
+      balance: 'Kontostand',
+      openNewAccount: 'Neues Konto eröffnen',
+      closeAccount: 'Konto schliessen'
     },
     en: {
       dashboard: 'Dashboard',
@@ -84,7 +96,13 @@ export class LanguageService {
       phoneLabel: 'Phone:',
       emailLabel: 'Email:',
       provisional: 'Provisional',
-      seeMore: 'See more'
+      current: 'Current',
+      seeMore: 'See more',
+      accountname: 'Account Name',
+      interestRate: 'Interest Rate',
+      balance: 'Balance',
+      openNewAccount: 'Open New Account',
+      closeAccount: 'Close Account'
     }
   };
 
