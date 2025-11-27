@@ -8,14 +8,6 @@
   max-width: 220px;
 }
 
-.settings-nav {	
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0;
-  margin: 0;
-}
-
 .settings-link {
   color: var(--color-accent-dark);
   text-decoration: none;
@@ -29,8 +21,8 @@
 }
 
 .settings-link:hover {
-    color: var(--color-black);
-    text-decoration-color: var(--color-black);
+  color: var(--color-black);
+  text-decoration-color: var(--color-black);
 }
 
 .settings-box .wealth-header h2 {
