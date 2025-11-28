@@ -8,7 +8,7 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './pie-chart.html',
   styleUrls: ['./pie-chart.css'],
 })
-export class PieChartComponent implements AfterViewInit {
+export class ComponentWealthPieChart implements AfterViewInit {
   @ViewChild('pieCanvas', { static: true }) pieCanvas!: ElementRef<HTMLCanvasElement>;
 
   // This is all temporary mock data
