@@ -6,10 +6,12 @@ import { SettingsComponent } from '../../components/wealth/settings/settings';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { PieChartComponent } from '../../components/wealth/pie-chart/pie-chart';
+import { NegPosChartComponent } from '../../components/wealth/neg-pos-chart/neg-pos-chart';
+
 
 @Component({
   selector: 'app-transactions',
-  imports: [RouterModule, ComponentWealthDetailed, SettingsComponent, FooterComponent, NavbarComponent, PieChartComponent],
+  imports: [RouterModule, ComponentWealthDetailed, SettingsComponent, FooterComponent, NavbarComponent, PieChartComponent, NegPosChartComponent],
   templateUrl: './transactions.html',
   styleUrls: ['./transactions.css'],
 })
