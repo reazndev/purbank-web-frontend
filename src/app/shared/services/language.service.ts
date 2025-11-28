@@ -33,6 +33,8 @@ export interface Translations {
   quickAction: string;
   openNewAccount: string;
   closeAccount: string;
+  positive: string;
+  negative: string;
 }
 
 @Injectable({
@@ -72,7 +74,9 @@ export class LanguageService {
       balance: 'Kontostand',
   quickAction: 'Schnellaktion',
       openNewAccount: 'Neues Konto eröffnen',
-      closeAccount: 'Konto schliessen'
+      closeAccount: 'Konto schliessen',
+      positive: 'Positiv',
+      negative: 'Negativ'
     },
     en: {
       dashboard: 'Dashboard',
@@ -105,7 +109,9 @@ export class LanguageService {
       balance: 'Balance',
   quickAction: 'Quick action',
       openNewAccount: 'Open New Account',
-      closeAccount: 'Close Account'
+      closeAccount: 'Close Account',
+      positive: 'Positive',
+      negative: 'Negative'
     }
   };
 
