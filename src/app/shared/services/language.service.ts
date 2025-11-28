@@ -25,7 +25,19 @@ export interface Translations {
   phoneLabel: string;
   emailLabel: string;
   provisional: string;
+  current: string;
   seeMore: string;
+  accountname: string;
+  interestRate: string;
+  balance: string;
+  quickAction: string;
+  openNewAccount: string;
+  closeAccount: string;
+  positive: string;
+  negative: string;
+  scrollForMore: string;
+  provisionalWealthTooltip: string;
+  currentWealthTooltip: string;
 }
 
 @Injectable({
@@ -58,7 +70,19 @@ export class LanguageService {
       phoneLabel: 'Telefon:',
       emailLabel: 'Email:',
       provisional: 'Provisorisches',
-      seeMore: 'Siehe mehr'
+      current: 'Aktuelles',
+      seeMore: 'Siehe mehr',
+      accountname: 'Kontoname',
+      interestRate: 'Zinssatz',
+      balance: 'Kontostand',
+      quickAction: 'Schnellaktion',
+      openNewAccount: 'Neues Konto eröffnen',
+      closeAccount: 'Konto schliessen',
+      positive: 'Positiv',
+      negative: 'Negativ',
+      scrollForMore: 'Scrollen für mehr',
+      provisionalWealthTooltip: 'Das provisorische Vermögen zeigt den erwarteten Kontostand basierend auf ausstehenden Transaktionen und geplanten Zahlungen.',
+      currentWealthTooltip: 'Das aktuelle Vermögen zeigt den tatsächlichen, bestätigten Kontostand über alle Ihre Konten.'
     },
     en: {
       dashboard: 'Dashboard',
@@ -84,7 +108,19 @@ export class LanguageService {
       phoneLabel: 'Phone:',
       emailLabel: 'Email:',
       provisional: 'Provisional',
-      seeMore: 'See more'
+      current: 'Current',
+      seeMore: 'See more',
+      accountname: 'Account Name',
+      interestRate: 'Interest Rate',
+      balance: 'Balance',
+      quickAction: 'Quick action',
+      openNewAccount: 'Open New Account',
+      closeAccount: 'Close Account',
+      positive: 'Positive',
+      negative: 'Negative',
+      scrollForMore: 'Scroll for more',
+      provisionalWealthTooltip: 'Provisional wealth shows the expected account balance based on pending transactions and scheduled payments.',
+      currentWealthTooltip: 'Current wealth shows the actual, confirmed account balance across all your accounts.'
     }
   };
 
