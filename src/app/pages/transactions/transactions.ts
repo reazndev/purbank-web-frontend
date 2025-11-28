@@ -10,11 +10,11 @@ import { NegPosChartComponent } from '../../components/wealth/neg-pos-chart/neg-
 
 
 @Component({
-  selector: 'app-transactions',
+  selector: 'app-wealth',
   imports: [RouterModule, ComponentWealthDetailed, SettingsComponent, FooterComponent, NavbarComponent, PieChartComponent, NegPosChartComponent],
-  templateUrl: './transactions.html',
-  styleUrls: ['./transactions.css'],
+  templateUrl: './wealth.html',
+  styleUrls: ['./wealth.css'],
 })
-export class TransactionsComponent {
+export class WealthComponent {
 
 }
