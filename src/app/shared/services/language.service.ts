@@ -35,6 +35,9 @@ export interface Translations {
   closeAccount: string;
   positive: string;
   negative: string;
+  scrollForMore: string;
+  provisionalWealthTooltip: string;
+  currentWealthTooltip: string;
 }
 
 @Injectable({
@@ -72,11 +75,14 @@ export class LanguageService {
       accountname: 'Kontoname',
       interestRate: 'Zinssatz',
       balance: 'Kontostand',
-  quickAction: 'Schnellaktion',
+      quickAction: 'Schnellaktion',
       openNewAccount: 'Neues Konto eröffnen',
       closeAccount: 'Konto schliessen',
       positive: 'Positiv',
-      negative: 'Negativ'
+      negative: 'Negativ',
+      scrollForMore: 'Scrollen für mehr',
+      provisionalWealthTooltip: 'Das provisorische Vermögen zeigt den erwarteten Kontostand basierend auf ausstehenden Transaktionen und geplanten Zahlungen.',
+      currentWealthTooltip: 'Das aktuelle Vermögen zeigt den tatsächlichen, bestätigten Kontostand über alle Ihre Konten.'
     },
     en: {
       dashboard: 'Dashboard',
@@ -107,11 +113,14 @@ export class LanguageService {
       accountname: 'Account Name',
       interestRate: 'Interest Rate',
       balance: 'Balance',
-  quickAction: 'Quick action',
+      quickAction: 'Quick action',
       openNewAccount: 'Open New Account',
       closeAccount: 'Close Account',
       positive: 'Positive',
-      negative: 'Negative'
+      negative: 'Negative',
+      scrollForMore: 'Scroll for more',
+      provisionalWealthTooltip: 'Provisional wealth shows the expected account balance based on pending transactions and scheduled payments.',
+      currentWealthTooltip: 'Current wealth shows the actual, confirmed account balance across all your accounts.'
     }
   };
 

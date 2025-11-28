@@ -1,7 +1,21 @@
 <div class="wealth-container">
   <div class="wealth-header">
-    <h2>{{ languageService.translate('provisional') }} {{ languageService.translate('wealth') }}: <span class="wealth-amount">150000 CHF</span></h2>
-    <h2>{{ languageService.translate('current') }} {{ languageService.translate('wealth') }}: <span class="wealth-amount">150500 CHF</span></h2>
+    <h2 class="wealth-tooltip-container">
+      {{ languageService.translate('provisional') }} {{ languageService.translate('wealth') }}:
+      <span class="info-icon">
+        <img src="icons/info.svg" alt="info" class="info-svg">
+        <span class="tooltip">{{ languageService.translate('provisionalWealthTooltip') }}</span>
+      </span>
+      <span class="wealth-amount">150000 CHF</span>
+    </h2>
+    <h2 class="wealth-tooltip-container">
+      {{ languageService.translate('current') }} {{ languageService.translate('wealth') }}:
+      <span class="info-icon">
+        <img src="icons/info.svg" alt="info" class="info-svg">
+        <span class="tooltip">{{ languageService.translate('currentWealthTooltip') }}</span>
+      </span>
+      <span class="wealth-amount">150500 CHF</span>
+    </h2>
     <hr>
   </div>
   <div class="accounts-header">
@@ -57,8 +71,26 @@
     </div>
     <div class="account-box">
       <span class="account-name">Konto 5</span>
+      <span class="account-interest-rate">3.5%</span>
+      <span class="account-balance">-500 CHF</span>
+    </div>
+    <div class="account-box">
+      <span class="account-name">Konto 5</span>
+      <span class="account-interest-rate">3.5%</span>
+      <span class="account-balance">-500 CHF</span>
+    </div>
+    <div class="account-box">
+      <span class="account-name">Konto 5</span>
+      <span class="account-interest-rate">3.5%</span>
+      <span class="account-balance">-500 CHF</span>
+    </div>
+    <div class="account-box">
+      <span class="account-name">Konto 5</span>
       <span class="account-interest-rate">2%</span>
       <span class="account-balance">-500 CHF</span>
     </div>
+  </div>
+  <div class="scroll-indicator">
+    <p>{{ languageService.translate('scrollForMore') }}</p>
   </div>
 </div>

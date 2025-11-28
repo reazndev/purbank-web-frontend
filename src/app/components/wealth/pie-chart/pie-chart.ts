@@ -14,7 +14,6 @@ export class PieChartComponent implements AfterViewInit {
   // This is all temporary mock data
   // Needs to be replaced with actual backend once that is finished
   // TODO: Replace with backend data
-  // TODO: Reduce height 
 
   public konten = [
     { name: 'Konto 1', amount: 420 },
