@@ -7,6 +7,6 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './chart.html',
   styleUrls: ['./chart.css'],
 })
-export class ComponentDashboardChart {
+export class DashboardChartComponent {
   constructor(public languageService: LanguageService) {}
 }

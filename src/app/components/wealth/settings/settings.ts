@@ -7,6 +7,6 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './settings.html',
   styleUrls: ['./settings.css'],
 })
-export class ComponentWealthSettings {
+export class WealthSettingsComponent {
   constructor(public languageService: LanguageService) {}
 }

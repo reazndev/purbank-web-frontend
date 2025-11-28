@@ -8,7 +8,7 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './neg-pos-chart.html',
   styleUrls: ['./neg-pos-chart.css'],
 })
-export class ComponentWealthNegPosChart implements AfterViewInit {
+export class WealthNegPosChartComponent implements AfterViewInit {
   @ViewChild('pieCanvas', { static: true }) pieCanvas!: ElementRef<HTMLCanvasElement>;
 
   // This is all temporary mock data
