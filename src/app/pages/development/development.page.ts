@@ -7,9 +7,9 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
   selector: 'app-development',
   standalone: true,
   imports: [RouterModule, FooterComponent, NavbarComponent],
-  templateUrl: './development.component.html',
-  styleUrls: ['./development.component.css']
+  templateUrl: './development.page.html',
+  styleUrls: ['./development.page.css']
 })
-export class DevelopmentComponent {
+export class DevelopmentPage {
   // Development component - testing shit out
 }

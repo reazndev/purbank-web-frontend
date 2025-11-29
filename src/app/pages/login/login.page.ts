@@ -5,13 +5,13 @@ import { LanguageService } from '../../shared/services/language.service';
 import { LanguageToggleComponent } from '../../shared/language-toggle/language-toggle.component';
 
 @Component({
-  selector: 'app-neuanmeldung',
+  selector: 'app-login',
   standalone: true,
   imports: [RouterModule, FooterComponent, LanguageToggleComponent],
-  templateUrl: './neuanmeldung.component.html',
-  styleUrl: './neuanmeldung.component.css'
+  templateUrl: './login.page.html',
+  styleUrl: './login.page.css'
 })
-export class NeuanmeldungComponent {
+export class LoginPage {
   private readonly languageService = inject(LanguageService);
   
   translations = computed(() => this.languageService.getTranslations());

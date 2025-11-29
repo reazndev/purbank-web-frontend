@@ -5,8 +5,8 @@ import { LanguageService } from '../../../shared/services/language.service';
 @Component({
   selector: 'app-pie-chart',
   standalone: true,
-  templateUrl: './pie-chart.html',
-  styleUrls: ['./pie-chart.css'],
+  templateUrl: './pie-chart.component.html',
+  styleUrls: ['./pie-chart.component.css'],
 })
 export class WealthPieChartComponent implements AfterViewInit {
   @ViewChild('pieCanvas', { static: true }) pieCanvas!: ElementRef<HTMLCanvasElement>;
