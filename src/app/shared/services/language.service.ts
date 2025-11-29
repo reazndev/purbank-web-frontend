@@ -3,16 +3,17 @@ import { Injectable, signal } from '@angular/core';
 export type Language = 'de' | 'en';
 
 export interface Translations {
+  // General Page names
   dashboard: string;
   wealth: string;
   transactions: string;
   analytics: string;
   logout: string;
-  dark: string;
-  light: string;
   createAccountContent: string;
+  // Language switcher
   viewInEnglish: string;
   viewInGerman: string;
+  // Page: Login
   loginTitle: string;
   contractNumber: string;
   password: string;
@@ -20,10 +21,12 @@ export interface Translations {
   newRegistration: string;
   createAccount: string;
   neuanmeldungTitle: string;
+  // Page: Support
   supportTitle: string;
   supportContent: string;
   phoneLabel: string;
   emailLabel: string;
+  // Page: dashboard -> transactions (shared)
   provisional: string;
   current: string;
   seeMore: string;
@@ -33,11 +36,25 @@ export interface Translations {
   quickAction: string;
   openNewAccount: string;
   closeAccount: string;
+  // Charts:
   positive: string;
   negative: string;
+  // misc.
   scrollForMore: string;
+  // Tooltips
   provisionalWealthTooltip: string;
   currentWealthTooltip: string;
+  // Page: Transactions
+  createTransaction: string;
+  account: string;
+  amount: string;
+  ibanTo: string;
+  reoccuring: string;
+  instantTransaction: string;
+  after: string; // used for balance after -> combine {balance} + {after}
+  message: string;
+  note: string;
+  submit: string;
 }
 
 @Injectable({
@@ -50,11 +67,9 @@ export class LanguageService {
     de: {
       dashboard: 'Dashboard',
       wealth: 'Vermögen',
-      transactions: 'Transaktionen',
+      transactions: 'Überweisungen',
       analytics: 'Analyse',
       logout: 'Abmelden',
-      dark: 'Dunkel',
-      light: 'Hell',
       createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen.',
       viewInEnglish: 'View this page in English', 
       viewInGerman: 'Diese Seite auf Deutsch anzeigen', 
@@ -82,7 +97,17 @@ export class LanguageService {
       negative: 'Negativ',
       scrollForMore: 'Scrollen für mehr',
       provisionalWealthTooltip: 'Das provisorische Vermögen zeigt den erwarteten Kontostand basierend auf ausstehenden Transaktionen und geplanten Zahlungen.',
-      currentWealthTooltip: 'Das aktuelle Vermögen zeigt den tatsächlichen, bestätigten Kontostand über alle Ihre Konten.'
+      currentWealthTooltip: 'Das aktuelle Vermögen zeigt den tatsächlichen, bestätigten Kontostand über alle Ihre Konten.',
+      createTransaction: "Überweisung erfassen",
+      account: "Konto",
+      amount: "Betrag",
+      ibanTo: "IBAN des Empfängers",
+      reoccuring: "Forlaufend",
+      instantTransaction: "Sofortüberweisung",
+      after: "danach", // NOT CAPITALISED ON PORPUSE
+      message: "Nachricht",
+      note: "Notiz",
+      submit: "Absenden"
     },
     en: {
       dashboard: 'Dashboard',
@@ -90,8 +115,6 @@ export class LanguageService {
       transactions: 'Transactions',
       analytics: 'Analytics',
       logout: 'Logout',
-      dark: 'Dark',
-      light: 'Light',
       createAccountContent: 'Please contact your nearest PurBank branch to open an account.',
       // yes these two are redundant but their values wont change in the future and this just makes it easier to work with
       viewInEnglish: 'View this page in English',
@@ -120,7 +143,17 @@ export class LanguageService {
       negative: 'Negative',
       scrollForMore: 'Scroll for more',
       provisionalWealthTooltip: 'Provisional wealth shows the expected account balance based on pending transactions and scheduled payments.',
-      currentWealthTooltip: 'Current wealth shows the actual, confirmed account balance across all your accounts.'
+      currentWealthTooltip: 'Current wealth shows the actual, confirmed account balance across all your accounts.',
+      createTransaction: "Create transaction",
+      account: "Account",
+      amount: "Amount",
+      ibanTo: "IBAN of receiver",
+      reoccuring: "Reoccuring",
+      instantTransaction: "Instant transaction",
+      after: "after", // NOT CAPITALISED ON PORPUSE
+      message: "Message",
+      note: "Note",
+      submit: "Send"
     }
   };
 
