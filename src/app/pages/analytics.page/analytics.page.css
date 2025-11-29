@@ -1,0 +1,33 @@
+.page-container {
+  margin-top: 7vh;
+  display: grid;
+  /* grid-template-areas: replace with elements ; */ 
+  grid-template-columns: minmax(300px, 475px) minmax(300px, 475px);
+  grid-template-rows: auto 1fr 1fr;
+  gap: 24px;
+  min-height: calc(100vh - 60px);
+  padding: 4rem clamp(1rem, calc(50vw - 475px), 25%);
+  background-color: var(--color-white);
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.page-content {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-black);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    grid-template-areas: 
+/* add elements here that we will showcase on the website in the adjacent grid */;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 2rem 1rem;
+  }
+}
