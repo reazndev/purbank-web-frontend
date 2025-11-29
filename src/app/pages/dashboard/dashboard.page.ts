@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DashboardWealthComponent } from '../../components/dashboard/wealth/wealth';
-import { DashboardTransactionsComponent } from '../../components/dashboard/transactions/transactions';
-import { DashboardChartComponent } from '../../components/dashboard/chart/chart';
+import { DashboardWealthComponent } from '../../components/dashboard/wealth/wealth.component';
+import { DashboardTransactionsComponent } from '../../components/dashboard/transactions/transactions.component';
+import { DashboardChartComponent } from '../../components/dashboard/chart/chart.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 

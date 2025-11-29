@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { LanguageService } from '../../../shared/services/language.service';
 
 @Component({
-  selector: 'app-chart',
+  selector: 'app-settings',
   standalone: true,
-  templateUrl: './chart.html',
-  styleUrls: ['./chart.css'],
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.css'],
 })
-export class DashboardChartComponent {
+export class WealthSettingsComponent {
   constructor(public languageService: LanguageService) {}
 }

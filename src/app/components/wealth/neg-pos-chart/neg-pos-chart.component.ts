@@ -5,8 +5,8 @@ import { LanguageService } from '../../../shared/services/language.service';
 @Component({
   selector: 'app-neg-pos-chart',
   standalone: true,
-  templateUrl: './neg-pos-chart.html',
-  styleUrls: ['./neg-pos-chart.css'],
+  templateUrl: './neg-pos-chart.component.html',
+  styleUrls: ['./neg-pos-chart.component.css'],
 })
 export class WealthNegPosChartComponent implements AfterViewInit {
   @ViewChild('pieCanvas', { static: true }) pieCanvas!: ElementRef<HTMLCanvasElement>;
