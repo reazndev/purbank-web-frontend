@@ -9,9 +9,9 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 @Component({
   selector: 'app-dashboard',
   imports: [RouterModule, DashboardWealthComponent, FooterComponent, NavbarComponent, DashboardTransactionsComponent, DashboardChartComponent],
-  templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css'],
+  templateUrl: './dashboard.page.html',
+  styleUrls: ['./dashboard.page.css'],
 })
-export class DashboardComponent {
+export class DashboardPage {
 
 }

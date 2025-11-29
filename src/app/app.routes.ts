@@ -1,19 +1,21 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { CreateAccountComponent } from './pages/create-account/create-account.component';
-import { NeuanmeldungComponent } from './pages/neuanmeldung/neuanmeldung.component';
-import { SupportComponent } from './pages/support/support.component';
-import { DevelopmentComponent } from './pages/development/development.component';
-import { DashboardComponent } from './pages/dashboard/dashboard';
-import { WealthComponent } from './pages/wealth/wealth';
+import { LoginPage } from './pages/login/login.page';
+import { CreateAccountPage } from './pages/create-account/create-account.page';
+import { NeuanmeldungPage } from './pages/neuanmeldung/neuanmeldung.page';
+import { SupportPage } from './pages/support/support.page';
+import { DevelopmentPage } from './pages/development/development.page';
+import { DashboardPage } from './pages/dashboard/dashboard.page';
+import { WealthPage } from './pages/wealth/wealth.page';
+import { TransactionsPage } from './pages/transactions/transactions.page';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'create-account', component: CreateAccountComponent },
-  { path: 'registration', component: NeuanmeldungComponent },
-  { path: 'support', component: SupportComponent },
-  { path: 'development', component: DevelopmentComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'wealth', component: WealthComponent }
+  { path: '', component: LoginPage },
+  { path: 'login', component: LoginPage },
+  { path: 'create-account', component: CreateAccountPage },
+  { path: 'registration', component: NeuanmeldungPage },
+  { path: 'support', component: SupportPage },
+  { path: 'development', component: DevelopmentPage },
+  { path: 'dashboard', component: DashboardPage },
+  { path: 'wealth', component: WealthPage },
+  { path: 'transactions', component: TransactionsPage}
 ];

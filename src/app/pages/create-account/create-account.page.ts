@@ -5,13 +5,13 @@ import { LanguageService } from '../../shared/services/language.service';
 import { LanguageToggleComponent } from '../../shared/language-toggle/language-toggle.component';
 
 @Component({
-  selector: 'app-support',
+  selector: 'app-create-account',
   standalone: true,
   imports: [RouterModule, FooterComponent, LanguageToggleComponent],
-  templateUrl: './support.component.html',
-  styleUrl: './support.component.css'
+  templateUrl: './create-account.page.html',
+  styleUrl: './create-account.page.css'
 })
-export class SupportComponent {
+export class CreateAccountPage {
   private readonly languageService = inject(LanguageService);
   
   translations = computed(() => this.languageService.getTranslations());

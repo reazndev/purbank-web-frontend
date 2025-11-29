@@ -12,9 +12,9 @@ import { WealthNegPosChartComponent } from '../../components/wealth/neg-pos-char
 @Component({
   selector: 'app-wealth',
   imports: [RouterModule, WealthWealthDetailedComponent, WealthSettingsComponent, FooterComponent, NavbarComponent, WealthPieChartComponent, WealthNegPosChartComponent],
-  templateUrl: './wealth.html',
-  styleUrls: ['./wealth.css'],
+  templateUrl: './wealth.page.html',
+  styleUrls: ['./wealth.page.css'],
 })
-export class WealthComponent {
+export class WealthPage {
 
 }
