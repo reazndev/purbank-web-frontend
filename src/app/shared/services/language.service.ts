@@ -58,6 +58,9 @@ export interface Translations {
   completedTransactions: string;
   pendingTransactions: string;
   reoccuringTransactions: string;
+  description: string;
+  pendingTransactionsHint: string;
+  totalPending: string;
 }
 
 @Injectable({
@@ -106,14 +109,17 @@ export class LanguageService {
       amount: "Betrag",
       ibanTo: "IBAN des Empfängers",
       reoccuring: "Forlaufend",
-      instantTransaction: "Sofortüberweisung",
+      instantTransaction: "Sofort",
       after: "danach", // NOT CAPITALISED ON PORPUSE
       message: "Nachricht",
       note: "Notiz",
       submit: "Absenden",
       completedTransactions: "Ausgeführte Überweisungen",
       pendingTransactions: "Überweisungen in Verarbeitung",
-      reoccuringTransactions: "Fortlaufende Überweisungen"
+      reoccuringTransactions: "Fortlaufende Überweisungen",
+      description: "Beschreibung",
+      pendingTransactionsHint: "Alle Transaktionen werden um 01:00 Uhr Züricher Zeit ausgeführt.",
+      totalPending: "Total ausstehend"
     },
     en: {
       dashboard: 'Dashboard',
@@ -155,14 +161,17 @@ export class LanguageService {
       amount: "Amount",
       ibanTo: "IBAN of receiver",
       reoccuring: "Reoccuring",
-      instantTransaction: "Instant transaction",
+      instantTransaction: "Instant",
       after: "after", // NOT CAPITALISED ON PORPUSE
       message: "Message",
       note: "Note",
       submit: "Send",
       completedTransactions: "Completed transaction",
       pendingTransactions: "Pending transactions",
-      reoccuringTransactions: "Reoccuring transactions"
+      reoccuringTransactions: "Reoccuring transactions",
+      description: "Description",
+      pendingTransactionsHint: "All transactions will go through at 01:00 AM Zurich time.",
+      totalPending: "Total pending"
     }
   };
 
