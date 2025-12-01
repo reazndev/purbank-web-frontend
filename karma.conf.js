@@ -6,7 +6,10 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
-      require('karma-coverage')
+      // AI GEN START
+      require('karma-coverage'),
+      require('karma-junit-reporter')
+      // AI GEN END
     ],
     client: {
       jasmine: {
@@ -26,7 +29,15 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
-    reporters: ['progress', 'kjhtml'],
+
+    // AI GEN START
+    reporters: ['progress', 'kjhtml', 'junit'],
+    junitReporter: {
+      outputDir: 'test-results', // results will be saved as $outputDir/$browserName.xml
+      outputFile: 'test-results.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
+      useBrowserName: false // add browser name to report and classes names
+    },
+    // AI GEN END
     browsers: ['Chromium'], // havent tested other browsers, could be done tho
     customLaunchers: {
       ChromeHeadlessCI: {
