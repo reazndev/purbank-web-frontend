@@ -45,3 +45,7 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Test results
+/test-results
+test-summary.md
