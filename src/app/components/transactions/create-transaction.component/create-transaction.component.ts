@@ -21,8 +21,6 @@ export class CreateTransactionComponent {
     { id: 4, name: 'Investment Account' }
   ]; // Mock data
 
-  // TODO: Need to validate IBAN -> is valid or not -> allow send / dont allow 
-
   selectedAccount: string = '';
   isInstant: boolean = false;
   isReoccuring: boolean = false;
@@ -33,6 +31,7 @@ export class CreateTransactionComponent {
 
   calculateBalanceAfter(): string {
     // TODO: Connect to backend for real balance calculation
-    return 'TODO: Calculate balance';
+    // For now, return a mock number
+    return '1234.56';
   }
 }

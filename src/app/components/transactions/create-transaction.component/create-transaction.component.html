@@ -11,13 +11,17 @@
         <option value="">{{ languageService.translate('account') }}</option>
         <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
       </select>
-      <div class="checkbox-group">
-        <input type="checkbox" id="instant" name="isInstant" [(ngModel)]="isInstant">
-        <label for="instant">{{ languageService.translate('instantTransaction') }}</label>
+      <div class="transaction-option-box">
+        <div class="checkbox-group">
+          <input type="checkbox" id="instant" name="isInstant" [(ngModel)]="isInstant">
+          <label for="instant">{{ languageService.translate('instantTransaction') }}</label>
+        </div>
       </div>
-      <div class="checkbox-group">
-        <input type="checkbox" id="reoccuring" name="isReoccuring" [(ngModel)]="isReoccuring">
-        <label for="reoccuring">{{ languageService.translate('reoccuring') }}</label>
+      <div class="transaction-option-box">
+        <div class="checkbox-group">
+          <input type="checkbox" id="reoccuring" name="isReoccuring" [(ngModel)]="isReoccuring">
+          <label for="reoccuring">{{ languageService.translate('reoccuring') }}</label>
+        </div>
       </div>
     </div>
 
@@ -27,8 +31,12 @@
 
     <div class="form-row">
       <input type="number" name="amount" [(ngModel)]="amount" [placeholder]="languageService.translate('amount')" required>
-      <div class="balance-after">
-        {{ languageService.translate('after') }}: {{ calculateBalanceAfter() }}
+      <div class="balance-after-box">
+        <div class="balance-after">
+          <div class="balance-label">{{ languageService.translate('after') }}</div>
+          <div class="vertical-line"></div>
+          <div class="balance-value">{{ calculateBalanceAfter() }} CHF</div>
+        </div>
       </div>
     </div>
 

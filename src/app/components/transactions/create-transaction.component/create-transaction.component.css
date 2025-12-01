@@ -1,6 +1,7 @@
 .box {
   border: 1px solid var(--color-gray);
   padding: var(--padding-standard);
+  padding-bottom: 10px;
   box-sizing: border-box;
   border-radius: 0;
   font-family: var(--font-family);
@@ -27,7 +28,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
-  align-items: center;
+  align-items: stretch;
 }
 
 .toggle-group {
@@ -60,12 +61,24 @@
   cursor: pointer;
 }
 
-select, input {
+select {
   padding: 8px;
   border: 1px solid var(--color-gray);
   box-sizing: border-box;
-    background-color: var(--color-white);
+  background-color: var(--color-white);
+  flex: 1.5;
+}
 
+input {
+  padding: 8px;
+  border: 1px solid var(--color-gray);
+  box-sizing: border-box;
+  background-color: var(--color-white);
+}
+
+input[name="amount"] {
+  width: 40%;
+  flex: unset;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -86,8 +99,48 @@ button[type="submit"] {
   width: 100%;
 }
 
+.balance-after-box {
+  border: 1px solid var(--color-gray);
+  padding: 0px;
+  background-color: transparent;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 60%;
+  flex: unset;
+}
+
 .balance-after {
-  font-weight: bold;
+  font-weight: normal;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  gap: 0px;
+}
+
+.balance-label {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balance-value {
+  flex: 2;
+  text-align: center;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-line {
+  width: 1px;
+  background-color: var(--color-gray);
+  margin: 0;
 }
 
 button[type="submit"] {
@@ -96,6 +149,7 @@ button[type="submit"] {
   color: var(--color-white);
   border: none;
   cursor: pointer;
+  margin-bottom: 0;
 }
 
 button[type="submit"]:disabled {
@@ -105,8 +159,18 @@ button[type="submit"]:disabled {
 }
 
 .form-container {
-  padding: 15px;
+  padding: 0px;
   border-radius: 4px;
   margin-top: 10px;
+}
+
+.transaction-option-box {
+  border: 1px solid var(--color-gray);
+  padding: 6px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
