@@ -1,4 +1,4 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node.
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 name: Angular Build
 
@@ -20,11 +20,11 @@ jobs:
     steps:
       # {2} Checkout source code
       - name: Checkout the source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # {3} Def runtime for pipeline
+      # {3} Define runtime for pipeline
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}          
           cache: 'npm'
@@ -33,7 +33,7 @@ jobs:
       # {4} Install dependencies
       - name: Install dependencies
         run: npm ci
-      # {5} add tests later when we have them 
+      # {5} Add tests later when we have them 
       # - name: Run tests
       #  run: npm run test:ci
       # {6} Build it :)
