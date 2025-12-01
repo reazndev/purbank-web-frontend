@@ -1,7 +1,62 @@
-<div class="box">
-  <div class="header">
-    <h2>{{ languageService.translate('pendingTransactions') }}</h2>
+<div class="transaction-container">
+  <div class="transaction-header">
+    <div class="header-row">
+      <h2>
+        {{ languageService.translate('pendingTransactions') }}
+      </h2>
+      <button class="icon-btn" (click)="toggleExpand()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-expand"><path d="m15 15 6 6"></path><path d="m15 9 6-6"></path><path d="M21 16v5h-5"></path><path d="M21 8V3h-5"></path><path d="M3 16v5h5"></path><path d="m3 21 6-6"></path><path d="M3 8V3h5"></path><path d="M9 9 3 3"></path></svg>
+      </button>
+    </div>
     <hr>
+    <div class="total-amount-wrapper">
+      <span>{{ languageService.translate('totalPending') }}:</span>
+      <span class="transaction-amount">{{ totalAmount }} CHF</span>
+    </div>
   </div>
+  <div class="transactions-grid scrollable-grid">
+    <ng-container>
+      <div class="transaction-box" *ngFor="let transaction of transactions">
+        <span class="transaction-name">{{ transaction.name }}</span>
+        <span class="transaction-konto">{{ transaction.account }}</span>
+        <span class="transaction-balance">
+          {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} CHF
+        </span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="transaction-hint">
+    {{ languageService.translate('pendingTransactionsHint') }}
+  </div>
+</div>
 
+<div class="modal-overlay" *ngIf="isExpanded" (click)="toggleExpand()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="transaction-header">
+        <div class="header-row">
+          <h2>
+            {{ languageService.translate('pendingTransactions') }}
+          </h2>
+          <button class="icon-btn" (click)="toggleExpand()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minimize-2"><path d="m14 10 7-7"></path><path d="M20 10h-6V4"></path><path d="m3 21 7-7"></path><path d="M4 14h6v6"></path></svg>
+          </button>
+        </div>
+        <hr>
+        <div class="total-amount-wrapper">
+          <span>{{ languageService.translate('totalPending') }}:</span>
+          <span class="transaction-amount">{{ totalAmount }} CHF</span>
+        </div>
+      </div>
+      <div class="transactions-grid full-height-grid">
+        <ng-container>
+          <div class="transaction-box" *ngFor="let transaction of transactions">
+            <span class="transaction-name">{{ transaction.name }}</span>
+            <span class="transaction-konto">{{ transaction.account }}</span>
+            <span class="transaction-balance">
+              {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} CHF
+            </span>
+          </div>
+        </ng-container>
+      </div>
+  </div>
 </div>
