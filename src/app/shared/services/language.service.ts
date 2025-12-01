@@ -55,6 +55,9 @@ export interface Translations {
   message: string;
   note: string;
   submit: string;
+  completedTransactions: string;
+  pendingTransactions: string;
+  reoccuringTransactions: string;
 }
 
 @Injectable({
@@ -107,7 +110,10 @@ export class LanguageService {
       after: "danach", // NOT CAPITALISED ON PORPUSE
       message: "Nachricht",
       note: "Notiz",
-      submit: "Absenden"
+      submit: "Absenden",
+      completedTransactions: "Ausgeführte Überweisungen",
+      pendingTransactions: "Überweisungen in Verarbeitung",
+      reoccuringTransactions: "Fortlaufende Überweisungen"
     },
     en: {
       dashboard: 'Dashboard',
@@ -153,7 +159,10 @@ export class LanguageService {
       after: "after", // NOT CAPITALISED ON PORPUSE
       message: "Message",
       note: "Note",
-      submit: "Send"
+      submit: "Send",
+      completedTransactions: "Completed transaction",
+      pendingTransactions: "Pending transactions",
+      reoccuringTransactions: "Reoccuring transactions"
     }
   };
 

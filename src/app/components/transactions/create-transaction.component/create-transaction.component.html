@@ -1,1 +1,49 @@
-<p>create-transaction.component works!</p>
+<div class="box">
+  <div class="header">
+    <h2>{{ languageService.translate('createTransaction') }}</h2>
+    <hr>
+  </div>
+
+  <div class="form-container">
+    <form #transactionForm="ngForm">
+    <div class="form-row">
+      <select name="account" [(ngModel)]="selectedAccount" required>
+        <option value="">{{ languageService.translate('account') }}</option>
+        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+      </select>
+      <div class="checkbox-group">
+        <input type="checkbox" id="instant" name="isInstant" [(ngModel)]="isInstant">
+        <label for="instant">{{ languageService.translate('instantTransaction') }}</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="reoccuring" name="isReoccuring" [(ngModel)]="isReoccuring">
+        <label for="reoccuring">{{ languageService.translate('reoccuring') }}</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <input type="text" name="ibanReceiver" [(ngModel)]="ibanReceiver" [placeholder]="languageService.translate('ibanTo')" required>
+    </div>
+
+    <div class="form-row">
+      <input type="number" name="amount" [(ngModel)]="amount" [placeholder]="languageService.translate('amount')" required>
+      <div class="balance-after">
+        {{ languageService.translate('after') }}: {{ calculateBalanceAfter() }}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <input type="text" name="message" [(ngModel)]="message" [placeholder]="languageService.translate('message')">
+    </div>
+
+    <div class="form-row">
+      <input type="text" name="note" [(ngModel)]="note" [placeholder]="languageService.translate('note')">
+    </div>
+
+    <div class="form-row">
+      <button type="submit" [disabled]="!transactionForm.valid">{{ languageService.translate('submit') }}</button>
+    </div>
+  </form>
+  </div>
+
+</div>

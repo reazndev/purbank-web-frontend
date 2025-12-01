@@ -1,0 +1,112 @@
+.box {
+  border: 1px solid var(--color-gray);
+  padding: var(--padding-standard);
+  box-sizing: border-box;
+  border-radius: 0;
+  font-family: var(--font-family);
+  color: var(--color-black);
+  max-width: 100%;
+  grid-area: create-transaction;
+}
+
+.box .header h2 {
+  font-weight: normal;
+  margin-bottom: 10px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+.box .header hr {
+  border: 0;
+  border-top: 1px solid var(--color-black);
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.toggle-group button {
+  padding: 5px 10px;
+  border: 1px solid var(--color-gray);
+  cursor: pointer;
+}
+
+.toggle-group button.active {
+  background: var(--color-accent-dark);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin: 0;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+}
+
+select, input {
+  padding: 8px;
+  border: 1px solid var(--color-gray);
+  box-sizing: border-box;
+    background-color: var(--color-white);
+
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[name="ibanReceiver"],
+input[name="message"],
+input[name="note"],
+button[type="submit"] {
+  width: 100%;
+}
+
+.balance-after {
+  font-weight: bold;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background: var(--color-accent-dark);
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled {
+  background: var(--color-accent-light);
+  color: var(--color-white);
+  cursor: not-allowed;
+}
+
+.form-container {
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
