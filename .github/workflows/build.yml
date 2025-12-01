@@ -34,9 +34,9 @@ jobs:
       # {4} Install dependencies
       - name: Install dependencies
         run: npm ci
-      # {5} Add tests later when we have them 
-      # - name: Run tests
-      #  run: npm run test:ci
+      # {5} Run tests
+      - name: Run tests
+        run: npm run test:ci
       # {6} Build it :)
       - name: Build
         run: npm run build
