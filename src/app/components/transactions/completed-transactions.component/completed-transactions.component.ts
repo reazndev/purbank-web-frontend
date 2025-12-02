@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../../shared/services/language.service';
 
@@ -8,7 +8,7 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './completed-transactions.component.html',
   styleUrl: './completed-transactions.component.css',
 })
-export class CompletedTransactionsComponent {
+export class CompletedTransactionsComponent implements OnInit {
   transactions = [
     { name: 'Rent', account: 'Main Account', amount: -1500, date: '2025-12-01' },
     { name: 'Salary', account: 'Main Account', amount: 5000, date: '2025-12-01' },
@@ -56,7 +56,9 @@ export class CompletedTransactionsComponent {
     }
   }
 
-  get groupedTransactions() {
+  groupedTransactions: { date: string; transactions: any[] }[] = [];
+
+  ngOnInit() {
     const groups: { date: string; transactions: any[] }[] = [];
     this.transactions.forEach(t => {
       const existingGroup = groups.find(g => g.date === t.date);
@@ -66,7 +68,7 @@ export class CompletedTransactionsComponent {
         groups.push({ date: t.date, transactions: [t] });
       }
     });
-    return groups;
+    this.groupedTransactions = groups;
   }
 
   protected MathAbs(val: number): number {
