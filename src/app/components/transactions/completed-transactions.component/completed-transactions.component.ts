@@ -41,6 +41,8 @@ export class CompletedTransactionsComponent implements OnInit {
   // TODO: shocase date in german -> Sonntag, 30. November instead of in English
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
 
+  // TODO: implement automated ftests
+
   constructor(public languageService: LanguageService) {}
 
   isExpanded: boolean = false;

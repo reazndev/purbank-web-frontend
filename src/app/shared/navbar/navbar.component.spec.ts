@@ -149,4 +149,19 @@ describe('NavbarComponent', () => {
     expect(wealthLink.nativeElement.classList).toContain('active');
     expect(dashboardLink.nativeElement.classList).not.toContain('active');
   });
+
+  /**
+   * Test: Transactions Navigation
+   * Prerequisite: The transactions link exists and the router is configured.
+   * Expected Result: Clicking the transactions link should update the browser location path to '/transactions'.
+   */
+  it('should navigate to transactions when clicked', async () => {
+    const link = fixture.debugElement.query(By.css('a[routerLink="/transactions"]'));
+    expect(link).toBeTruthy();
+    
+    link.nativeElement.click();
+    await fixture.whenStable();
+    
+    expect(location.path()).toBe('/transactions');
+  });
 });
