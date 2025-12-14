@@ -181,7 +181,7 @@ export class LanguageService {
       ibanTo: "IBAN of receiver",
       reoccuring: "Reoccuring",
       instantTransaction: "Instant",
-      after: "after", // NOT CAPITALISED ON PORPUSE
+      after: "after", // NOT CAPITALISED ON PURPOSE
       message: "Message",
       note: "Note",
       submit: "Send",
