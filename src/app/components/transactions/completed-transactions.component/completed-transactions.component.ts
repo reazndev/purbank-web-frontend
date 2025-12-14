@@ -38,7 +38,7 @@ export class CompletedTransactionsComponent implements OnInit {
   ];
 
   // TODO: connect with backend once pushed
-  // TODO: shocase date in german -> Sonntag, 30. November instead of in English
+  // TODO: showcase date in german -> Sonntag, 30. November instead of in English
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
 
   // TODO: implement automated ftests
