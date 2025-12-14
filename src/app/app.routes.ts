@@ -7,6 +7,7 @@ import { DevelopmentPage } from './pages/development/development.page';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { WealthPage } from './pages/wealth/wealth.page';
 import { TransactionsPage } from './pages/transactions/transactions.page';
+import { AdminPage } from './pages/admin/admin.page';
 
 export const routes: Routes = [
   { path: '', component: LoginPage },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'development', component: DevelopmentPage },
   { path: 'dashboard', component: DashboardPage },
   { path: 'wealth', component: WealthPage },
-  { path: 'transactions', component: TransactionsPage }
+  { path: 'transactions', component: TransactionsPage },
+  { path: 'management', component: AdminPage }
 ];
