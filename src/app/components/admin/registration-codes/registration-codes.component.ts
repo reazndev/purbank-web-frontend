@@ -41,7 +41,7 @@ export class RegistrationCodesComponent implements OnChanges {
   loadRegistrationCodes() {
     // TODO: Implement API call to fetch registration codes
     // GET /api/v1/admin/users/{userId}/registration
-    this.isLoading = true;
+    
     
     // Placeholder for when backend is implemented
     // this.http.get<RegistrationCode[]>(`/api/v1/admin/users/${this.userId}/registration`).subscribe(...)
