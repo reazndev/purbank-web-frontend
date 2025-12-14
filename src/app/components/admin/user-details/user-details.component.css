@@ -1,0 +1,120 @@
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.section-header {
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  padding-bottom: 0.5rem;
+}
+
+.user-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-dark);
+}
+
+.detail-value {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-black);
+  word-wrap: break-word;
+}
+
+.detail-id {
+  font-size: 0.875rem;
+  font-family: 'Courier New', monospace;
+  color: var(--color-accent-dark);
+}
+
+.detail-contract {
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.detail-status {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 12px;
+  background-color: var(--color-accent-light);
+  display: inline-block;
+  width: fit-content;
+}
+
+.detail-status.active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-weight: 400;
+}
+
+.detail-date {
+  font-size: 0.875rem;
+  color: var(--color-accent-dark);
+}
+
+.empty-state,
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  flex: 1;
+}
+
+.empty-state p,
+.loading-state p {
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .detail-value {
+    font-size: 0.875rem;
+  }
+  
+  .detail-label {
+    font-size: 0.7rem;
+  }
+  
+  .detail-row {
+    gap: 0.3rem;
+    padding-bottom: 0.8rem;
+  }
+}
