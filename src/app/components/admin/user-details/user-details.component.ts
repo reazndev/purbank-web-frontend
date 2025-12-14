@@ -33,7 +33,7 @@ export class UserDetailsComponent implements OnChanges {
   loadUserDetails() {
     // TODO: Implement API call to fetch user details
     // GET /api/v1/admin/users/{userId}
-    this.isLoading = true;
+    
     
     // Placeholder for when backend is implemented
     // this.http.get<UserDetails>(`/api/v1/admin/users/${this.userId}`).subscribe(...)
