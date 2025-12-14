@@ -1,85 +1,8 @@
+/* shared transaction styles */
+@import '../shared-transactions.css';
+
 .transaction-container {
-  border: 1px solid var(--color-gray);
-  padding: var(--padding-standard);
-  padding-bottom: 10px;
-  background-color: var(--color-white);
-  font-family: var(--font-family);
-  color: var(--color-black);
   grid-area: completed-transactions;
-}
-
-.transaction-header h2 {
-  font-weight: normal;
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-
-.header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: var(--color-black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-btn:hover {
-  color: var(--color-accent-dark);
-}
-
-.transaction-header hr {
-  border: 0;
-  border-top: 1px solid var(--color-black);
-  margin-bottom: 20px;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: var(--color-white);
-  padding: 40px;
-  border-radius: 4px;
-  width: 80%;
-  max-width: 800px;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.full-height-grid {
-  overflow-y: auto;
-  flex: 1;
-  padding-right: 5px;
-  overscroll-behavior: contain;
-}
-
-.transactions-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-bottom: 15px;
 }
 
 .date-header {
@@ -93,51 +16,18 @@
 
 .scrollable-grid {
   max-height: 350px;
-  overflow-y: auto;
-  padding-right: 5px;
 }
 
+/* Override transaction box layout for completed transactions */
 .transaction-box {
-  background-color: var(--color-accent-light);
   padding: 12px 10px;
-  display: grid;
   grid-template-columns: 10ch 1fr auto auto;
-  align-items: center;
   gap: 10px 15px;
   min-height: 44px;
 }
 
 .transaction-name {
-  font-weight: normal;
   max-width: 10ch;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 0.85em;
-}
-
-.transaction-konto {
-  font-weight: normal;
-  color: var(--color-gray-dark);
-  font-size: 0.85em;
-  text-align: left;
-  padding-left: 25px;
-}
-
-.transaction-balance {
-  font-weight: normal;
-  font-size: 0.85em;
-  text-align: right;
-}
-
-.modal-content .transaction-box {
-  grid-template-columns: 10ch 1fr auto auto;
-  gap: 10px 15px;
-}
-
-.modal-content .transaction-konto {
-  text-align: left;
-  padding-left: 25px;
 }
 
 .scroll-indicator {
@@ -145,125 +35,4 @@
   margin-top: 0px;
   font-size: 0.9em;
   color: var(--color-accent-dark);
-}
-
-.info-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  color: var(--color-gray-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s;
-  height: 20px;
-  width: 20px;
-  min-height: 20px;
-  min-width: 20px;
-}
-
-.info-btn svg {
-  width: 16px;
-  height: 16px;
-}
-
-.info-btn:hover {
-  color: var(--color-accent-dark);
-}
-
-/* Detail Modal Styles */
-.detail-modal-content {
-  background-color: var(--color-white);
-  padding: 30px 40px;
-  border-radius: 4px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.detail-header h2 {
-  font-weight: normal;
-  margin: 0;
-}
-
-.detail-header hr {
-  border: 0;
-  border-top: 1px solid var(--color-black);
-  margin: 15px 0 20px 0;
-}
-
-.detail-modal-content hr {
-  border: 0;
-  border-top: 1px solid var(--color-black);
-  margin: 15px 0 20px 0;
-}
-
-.detail-content {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--color-gray);
-}
-
-.detail-row:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: var(--color-gray-dark);
-  min-width: 150px;
-}
-
-.detail-value {
-  text-align: right;
-  flex: 1;
-  word-break: break-word;
-}
-
-.detail-value.positive {
-  color: green;
-}
-
-.detail-value.negative {
-  color: red;
-}
-
-.status-badge {
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.85em;
-  font-weight: 600;
-}
-
-.status-pending {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status-completed {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.status-failed {
-  background-color: #f8d7da;
-  color: #721c24;
 }
