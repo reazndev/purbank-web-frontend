@@ -35,11 +35,12 @@
 
 .transaction-box {
   background-color: var(--color-accent-light);
-  padding: 15px;
+  padding: 10px 15px;
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 15px;
+  min-height: 0;
 }
 
 .transaction-name {
@@ -69,12 +70,21 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
   color: var(--color-gray-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: color 0.2s;
+  height: 20px;
+  width: 20px;
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.info-btn svg {
+  width: 16px;
+  height: 16px;
 }
 
 .info-btn:hover {
