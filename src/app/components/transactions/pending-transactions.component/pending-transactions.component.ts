@@ -22,7 +22,7 @@ export class PendingTransactionsComponent {
      { name: 'Transaction 10', account: 'Mock Account 10', amount: 200 },
   ];
   // TODO: connect with backend once pushed
-  // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
+  // TODO: show transactions from accounts with multiple members with icon (public/icons/users.svg)
 
   constructor(public languageService: LanguageService) {}
 
