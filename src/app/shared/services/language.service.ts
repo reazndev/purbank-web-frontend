@@ -185,7 +185,7 @@ export class LanguageService {
       message: "Message",
       note: "Note",
       submit: "Send",
-      completedTransactions: "Completed transaction",
+      completedTransactions: "Completed transactions",
       pendingTransactions: "Pending transactions",
       reoccuringTransactions: "Reoccuring transactions",
       description: "Description",
