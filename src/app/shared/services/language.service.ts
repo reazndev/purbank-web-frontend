@@ -120,7 +120,7 @@ export class LanguageService {
       ibanTo: "IBAN des Empfängers",
       reoccuring: "Forlaufend",
       instantTransaction: "Sofort",
-      after: "danach", // NOT CAPITALISED ON PORPUSE
+      after: "danach", // NOT CAPITALISED ON PURPOSE
       message: "Nachricht",
       note: "Notiz",
       submit: "Absenden",
