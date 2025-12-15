@@ -1,57 +1,28 @@
-.transaction-container {
-  border: 1px solid var(--color-gray);
-  padding: var(--padding-standard);
-  background-color: var(--color-white);
-  font-family: var(--font-family);
-  color: var(--color-black);
-}
+/* shared transaction styles */
+@import '../../transactions/shared-transactions.css';
 
 .transaction-header h2 {
-  font-weight: normal;
   margin-bottom: 10px;
   margin-top: 0;
-  display: flex;
-  align-items: center;
 }
 
 .transaction-amount {
-  color: var(--color-accent-dark);
-  font-weight: normal;
   margin-left: auto;
 }
 
-.transaction-header hr {
-  border: 0;
-  border-top: 1px solid var(--color-black);
-  margin-bottom: 20px;
-}
-
+/* Override transaction grid gap for dashboard */
 .transactions-grid {
-  display: grid;
-  grid-template-columns: 1fr;
   gap: 15px;
-  margin-bottom: 15px;
 }
 
+/* Override transaction box layout for dashboard */
 .transaction-box {
-  background-color: var(--color-accent-light);
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  grid-template-columns: 1fr auto auto;
+  min-height: 0;
 }
 
 .transaction-name {
-  font-weight: normal;
-  max-width: 25ch; /* max 25 chars then cutoff */
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.transaction-balance {
-  font-weight: normal;
+  max-width: 25ch;
 }
 
 .transaction-footer a {
