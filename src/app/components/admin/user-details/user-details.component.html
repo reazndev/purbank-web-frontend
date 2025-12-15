@@ -1,0 +1,51 @@
+<div class="user-details-container">
+  <div class="section-header">
+    <h2 class="section-title">USER DETAILS</h2>
+  </div>
+
+  <div class="user-details-content" *ngIf="!isLoading && userDetails">
+    <div class="detail-row">
+      <label class="detail-label">USER ID</label>
+      <span class="detail-value detail-id">{{ userDetails.id }}</span>
+    </div>
+
+    <div class="detail-row">
+      <label class="detail-label">NAME</label>
+      <span class="detail-value">{{ userDetails.firstName }} {{ userDetails.lastName }}</span>
+    </div>
+
+    <div class="detail-row">
+      <label class="detail-label">EMAIL</label>
+      <span class="detail-value">{{ userDetails.email }}</span>
+    </div>
+
+    <div class="detail-row">
+      <label class="detail-label">CONTRACT NUMBER</label>
+      <span class="detail-value detail-contract">{{ userDetails.contractNumber }}</span>
+    </div>
+
+    <div class="detail-row">
+      <label class="detail-label">STATUS</label>
+      <span class="detail-value detail-status" [class.active]="userDetails.status === 'ACTIVE'">
+        {{ userDetails.status }}
+      </span>
+    </div>
+
+    <div class="detail-row">
+      <label class="detail-label">CREATED AT</label>
+      <span class="detail-value detail-date">{{ formatDate(userDetails.createdAt) }}</span>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && !userDetails && !userId">
+    <p>SELECT A USER TO VIEW DETAILS</p>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && !userDetails && userId">
+    <p>USER DETAILS NOT AVAILABLE</p>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <p>LOADING USER DETAILS...</p>
+  </div>
+</div>

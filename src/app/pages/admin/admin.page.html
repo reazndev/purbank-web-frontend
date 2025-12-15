@@ -1,0 +1,19 @@
+<main class="admin-container">
+  <h1 class="admin-title">USER MANAGEMENT</h1>
+  
+  <div class="admin-layout">
+    <div class="admin-section user-list-section">
+      <app-user-list (userSelected)="onUserSelected($event)"></app-user-list>
+    </div>
+    
+    <div class="admin-section user-details-section">
+      <app-user-details [userId]="selectedUserId"></app-user-details>
+    </div>
+    
+    <div class="admin-section registration-section">
+      <app-registration-codes [userId]="selectedUserId"></app-registration-codes>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

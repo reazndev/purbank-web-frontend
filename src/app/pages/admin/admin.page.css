@@ -1,0 +1,93 @@
+.admin-container {
+  padding: 4rem clamp(1rem, calc(50vw - 600px), 25%);
+  min-height: calc(100vh - 120px);
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+
+.admin-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--color-black);
+  padding-bottom: 0.5rem;
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-areas: 
+    "users details"
+    "users registration";
+  grid-template-columns: minmax(400px, 600px) minmax(400px, 600px);
+  gap: var(--padding-standard);
+  justify-content: center;
+}
+
+.admin-section {
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-white);
+  padding: var(--padding-standard);
+}
+
+.user-list-section {
+  grid-area: users;
+}
+
+.user-details-section {
+  grid-area: details;
+}
+
+.registration-section {
+  grid-area: registration;
+}
+
+@media (max-width: 1400px) {
+  .admin-container {
+    padding: 4rem 10%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .admin-layout {
+    grid-template-columns: minmax(350px, 550px) minmax(350px, 550px);
+    gap: 20px;
+  }
+  
+  .admin-container {
+    padding: 3rem 5%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin-layout {
+    grid-template-areas: 
+      "users"
+      "details"
+      "registration";
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .admin-container {
+    padding: 3rem 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 2rem 2%;
+    margin-top: 70px;
+  }
+  
+  .admin-title {
+    font-size: 1.2rem;
+  }
+  
+  .admin-section {
+    padding: 15px;
+  }
+}
