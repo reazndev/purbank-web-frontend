@@ -2,6 +2,10 @@
   <h1 class="admin-title">USER MANAGEMENT</h1>
   
   <div class="admin-layout">
+    <div class="admin-section create-user-section">
+      <app-create-user (userCreated)="onUserCreated()"></app-create-user>
+    </div>
+
     <div class="admin-section user-list-section">
       <app-user-list (userSelected)="onUserSelected($event)"></app-user-list>
     </div>

@@ -1,16 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface RegistrationCode {
-  id: string;
-  registrationCode: string;
-  status: 'OPEN' | 'USED';
-  title: string;
-  description: string;
-  createdAt: string;
-  usedAt: string | null;
-}
+import { AdminService, RegistrationCode } from '../../../shared/services/admin.service';
 
 @Component({
   selector: 'app-registration-codes',
@@ -25,28 +16,42 @@ export class RegistrationCodesComponent implements OnChanges {
   registrationCodes: RegistrationCode[] = [];
   isLoading = false;
   showCreateForm = false;
+  errorMessage: string | null = null;
   
   newCodeTitle = '';
   newCodeDescription = '';
   isCreating = false;
   showCopiedToast = false;
 
+  constructor(readonly adminService: AdminService) {}
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['userId'] && this.userId) {
       this.loadRegistrationCodes();
       this.showCreateForm = false;
+    } else if (changes['userId'] && !this.userId) {
+      this.registrationCodes = [];
+      this.errorMessage = null;
     }
   }
 
   loadRegistrationCodes() {
-    // TODO: Implement API call to fetch registration codes
-    // GET /api/v1/admin/users/{userId}/registration
+    if (!this.userId) return;
+
     this.isLoading = true;
-    
-    // Placeholder for when backend is implemented
-    // this.http.get<RegistrationCode[]>(`/api/v1/admin/users/${this.userId}/registration`).subscribe(...)
-    
-    this.isLoading = false;
+    this.errorMessage = null;
+
+    this.adminService.getUserRegistrationCodes(this.userId).subscribe({
+      next: (codes) => {
+        this.registrationCodes = codes;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading registration codes:', error);
+        this.errorMessage = 'Failed to load registration codes. Please try again.';
+        this.isLoading = false;
+      }
+    });
   }
 
   toggleCreateForm() {
@@ -61,19 +66,25 @@ export class RegistrationCodesComponent implements OnChanges {
       return;
     }
 
-    // TODO: Implement API call to create registration code
-    // POST /api/v1/admin/users/{userId}/registration
     this.isCreating = true;
-    
-    // Placeholder for when backend is implemented
-    // this.http.post(`/api/v1/admin/users/${this.userId}/registration`, {
-    //   title: this.newCodeTitle,
-    //   description: this.newCodeDescription
-    // }).subscribe(...)
-    
-    this.isCreating = false;
-    this.resetForm();
-    this.showCreateForm = false;
+    this.errorMessage = null;
+
+    this.adminService.createRegistrationCode(this.userId, {
+      title: this.newCodeTitle,
+      description: this.newCodeDescription
+    }).subscribe({
+      next: (newCode) => {
+        this.registrationCodes = [...this.registrationCodes, newCode];
+        this.isCreating = false;
+        this.resetForm();
+        this.showCreateForm = false;
+      },
+      error: (error) => {
+        console.error('Error creating registration code:', error);
+        this.errorMessage = 'Failed to create registration code. Please try again.';
+        this.isCreating = false;
+      }
+    });
   }
 
   resetForm() {

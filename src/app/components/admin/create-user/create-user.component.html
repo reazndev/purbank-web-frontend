@@ -1,0 +1,89 @@
+<div class="create-user-container">
+  <div class="create-user-header">
+    <h2>Create New User</h2>
+    <button 
+      class="btn-toggle" 
+      (click)="toggleCreateForm()"
+      [class.active]="showCreateForm">
+      {{ showCreateForm ? 'Cancel' : '+ New User' }}
+    </button>
+  </div>
+
+  <div class="create-form" *ngIf="showCreateForm">
+    <form (ngSubmit)="createUser()">
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="newUser.email"
+          name="email"
+          placeholder="user@example.com"
+          required
+          [disabled]="isCreating">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input
+            type="text"
+            id="firstName"
+            [(ngModel)]="newUser.firstName"
+            name="firstName"
+            placeholder="John"
+            required
+            [disabled]="isCreating">
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input
+            type="text"
+            id="lastName"
+            [(ngModel)]="newUser.lastName"
+            name="lastName"
+            placeholder="Doe"
+            required
+            [disabled]="isCreating">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contractNumber">Contract Number *</label>
+        <input
+          type="text"
+          id="contractNumber"
+          [(ngModel)]="newUser.contractNumber"
+          name="contractNumber"
+          placeholder="CTR-123456"
+          required
+          [disabled]="isCreating">
+      </div>
+
+      <div class="alert alert-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn-secondary" 
+          (click)="toggleCreateForm()"
+          [disabled]="isCreating">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="btn-primary"
+          [disabled]="isCreating || !isFormValid()">
+          {{ isCreating ? 'Creating...' : 'Create User' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

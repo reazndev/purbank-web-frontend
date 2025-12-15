@@ -1,15 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface UserDetails {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  contractNumber: string;
-  status: string;
-  createdAt: string;
-}
+import { AdminService, UserDetails } from '../../../shared/services/admin.service';
 
 @Component({
   selector: 'app-user-details',
@@ -23,22 +14,36 @@ export class UserDetailsComponent implements OnChanges {
   
   userDetails: UserDetails | null = null;
   isLoading = false;
+  errorMessage: string | null = null;
+
+  constructor(private adminService: AdminService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['userId'] && this.userId) {
       this.loadUserDetails();
+    } else if (changes['userId'] && !this.userId) {
+      this.userDetails = null;
+      this.errorMessage = null;
     }
   }
 
   loadUserDetails() {
-    // TODO: Implement API call to fetch user details
-    // GET /api/v1/admin/users/{userId}
+    if (!this.userId) return;
+
     this.isLoading = true;
-    
-    // Placeholder for when backend is implemented
-    // this.http.get<UserDetails>(`/api/v1/admin/users/${this.userId}`).subscribe(...)
-    
-    this.isLoading = false;
+    this.errorMessage = null;
+
+    this.adminService.getUserDetails(this.userId).subscribe({
+      next: (details) => {
+        this.userDetails = details;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading user details:', error);
+        this.errorMessage = 'Failed to load user details. Please try again.';
+        this.isLoading = false;
+      }
+    });
   }
 
   formatDate(dateString: string): string {

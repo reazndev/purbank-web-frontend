@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { UserListComponent } from '../../components/admin/user-list/user-list.component';
 import { UserDetailsComponent } from '../../components/admin/user-details/user-details.component';
 import { RegistrationCodesComponent } from '../../components/admin/registration-codes/registration-codes.component';
+import { CreateUserComponent } from '../../components/admin/create-user/create-user.component';
 
 @Component({
   selector: 'app-admin',
@@ -13,15 +14,24 @@ import { RegistrationCodesComponent } from '../../components/admin/registration-
     FooterComponent,
     UserListComponent,
     UserDetailsComponent,
-    RegistrationCodesComponent
+    RegistrationCodesComponent,
+    CreateUserComponent
   ],
   templateUrl: './admin.page.html',
   styleUrls: ['./admin.page.css']
 })
 export class AdminPage {
+  @ViewChild(UserListComponent) userListComponent!: UserListComponent;
+  
   selectedUserId: string | null = null;
 
   onUserSelected(userId: string) {
     this.selectedUserId = userId;
+  }
+
+  onUserCreated() {
+    if (this.userListComponent) {
+      this.userListComponent.loadUsers();
+    }
   }
 }
