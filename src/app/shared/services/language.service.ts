@@ -61,6 +61,8 @@ export interface Translations {
   description: string;
   pendingTransactionsHint: string;
   totalPending: string;
+  cancel: string;
+  create: string;
 }
 
 @Injectable({
@@ -119,7 +121,9 @@ export class LanguageService {
       reoccuringTransactions: "Fortlaufende Überweisungen",
       description: "Beschreibung",
       pendingTransactionsHint: "Alle Transaktionen werden um 01:00 Uhr Züricher Zeit ausgeführt.",
-      totalPending: "Total ausstehend"
+      totalPending: "Total ausstehend",
+      cancel: "Abbrechen",
+      create: "Erstellen"
     },
     en: {
       dashboard: 'Dashboard',
@@ -171,7 +175,9 @@ export class LanguageService {
       reoccuringTransactions: "Reoccuring transactions",
       description: "Description",
       pendingTransactionsHint: "All transactions will go through at 01:00 AM Zurich time.",
-      totalPending: "Total pending"
+      totalPending: "Total pending",
+      cancel: "Cancel",
+      create: "Create"
     }
   };
 

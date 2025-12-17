@@ -19,9 +19,9 @@
                     (click)="setLanguage('en')">EN</span>
             </div>
         </div>
-        <div class="user-info">
-            <div class="user-name">[lastname] [name]</div>
-            <div class="account-number">[kontonummer]</div>
+        <div class="user-info" *ngIf="currentUser">
+            <div class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</div>
+            <div class="account-number">{{ currentUser.contractNumber }}</div>
         </div>
     </div>
 </div>

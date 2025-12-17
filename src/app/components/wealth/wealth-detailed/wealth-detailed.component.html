@@ -6,7 +6,7 @@
         <img src="icons/info.svg" alt="info" class="info-svg">
         <span class="tooltip">{{ languageService.translate('provisionalWealthTooltip') }}</span>
       </span>
-      <span class="wealth-amount">150000 CHF</span>
+      <span class="wealth-amount">{{ provisionalWealth }} CHF</span>
     </h2>
     <h2 class="wealth-tooltip-container">
       {{ languageService.translate('current') }} {{ languageService.translate('wealth') }}:
@@ -14,7 +14,7 @@
         <img src="icons/info.svg" alt="info" class="info-svg">
         <span class="tooltip">{{ languageService.translate('currentWealthTooltip') }}</span>
       </span>
-      <span class="wealth-amount">150500 CHF</span>
+      <span class="wealth-amount">{{ currentWealth }} CHF</span>
     </h2>
     <hr>
   </div>
@@ -24,70 +24,10 @@
     <span class="account-header-interest-balance">{{ languageService.translate('balance') }}</span>
   </div>
   <div class="accounts-grid">
-    <div class="account-box">
-      <span class="account-name">Konto 1</span>
-      <span class="account-interest-rate">1.5%</span>
-      <span class="account-balance">12500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 2</span>
-      <span class="account-interest-rate">1.7%</span>
-      <span class="account-balance">50000 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 3</span>
-      <span class="account-interest-rate">1.5%</span>
-      <span class="account-balance">5000 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 4</span>
-      <span class="account-interest-rate">1.2%</span>
-      <span class="account-balance">20000 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">0.5%</span>
-      <span class="account-balance">60000 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 6</span>
-      <span class="account-interest-rate">1.5%</span>
-      <span class="account-balance">2500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Longer namer is also suitable</span>
-      <span class="account-interest-rate">1.5%</span>
-      <span class="account-balance">5 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">0.5%</span>
-      <span class="account-balance">-500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">3.5%</span>
-      <span class="account-balance">-500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">3.5%</span>
-      <span class="account-balance">-500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">3.5%</span>
-      <span class="account-balance">-500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">3.5%</span>
-      <span class="account-balance">-500 CHF</span>
-    </div>
-    <div class="account-box">
-      <span class="account-name">Konto 5</span>
-      <span class="account-interest-rate">2%</span>
-      <span class="account-balance">-500 CHF</span>
+    <div class="account-box" *ngFor="let konto of konten">
+      <span class="account-name">{{ konto.kontoName }}</span>
+      <span class="account-interest-rate">N/A</span>
+      <span class="account-balance">{{ konto.balance }} CHF</span>
     </div>
   </div>
   <div class="scroll-indicator">

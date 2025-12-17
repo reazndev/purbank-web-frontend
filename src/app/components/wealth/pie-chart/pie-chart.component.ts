@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { LanguageService } from '../../../shared/services/language.service';
+import { KontenService, Konto } from '../../../shared/services/konten.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -8,27 +9,49 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.css'],
 })
-export class WealthPieChartComponent implements AfterViewInit {
+export class WealthPieChartComponent implements OnInit, AfterViewInit {
   @ViewChild('pieCanvas', { static: true }) pieCanvas!: ElementRef<HTMLCanvasElement>;
 
-  // This is all temporary mock data
-  // Needs to be replaced with actual backend once that is finished
-  // TODO: Replace with backend data
-
-  public konten = [
-    { name: 'Konto 1', amount: 420 },
-    { name: 'Konto 2', amount: 260 },
-    { name: 'Konto 3', amount: 320 },
-    { name: 'Konto 4', amount: 620 },
-    { name: 'Konto 5', amount: 160 },
-    { name: 'Konto 6', amount: 820 },
-  ];
-
+  public konten: { name: string; amount: number }[] = [];
   private chart?: Chart;
 
-  constructor(public languageService: LanguageService) {}
+  constructor(
+    public languageService: LanguageService,
+    private kontenService: KontenService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadKonten();
+  }
+
+  loadKonten(): void {
+    this.kontenService.getKonten().subscribe({
+      next: (data) => {
+        this.konten = data.map(konto => ({
+          name: konto.kontoName,
+          amount: konto.balance
+        }));
+        if (this.pieCanvas) {
+          this.createChart();
+        }
+      },
+      error: (error) => {
+        console.error('Error loading konten:', error);
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
+    if (this.konten.length > 0) {
+      this.createChart();
+    }
+  }
+
+  private createChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
     const labels = this.konten.map((k) => k.name);
     const data = this.konten.map((k) => k.amount);
 

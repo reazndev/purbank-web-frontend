@@ -5,8 +5,104 @@
   </div>
 
   <div class="settings-nav">
-    <a class="settings-link"><span class="settings-link-text">{{ languageService.translate('openNewAccount') }}</span></a>
-    <a class="settings-link"><span class="settings-link-text">{{ languageService.translate('closeAccount') }}</span></a>
+    <a class="settings-link" (click)="openCreateModal()"><span class="settings-link-text">{{ languageService.translate('openNewAccount') }}</span></a>
+    <a class="settings-link" (click)="openDeleteModal()"><span class="settings-link-text">{{ languageService.translate('closeAccount') }}</span></a>
   </div>
-<!-- TODO: popup for account actions -> need to connect with backend first -->
+</div>
+
+<!-- Create Account Modal -->
+<div class="modal-overlay" *ngIf="showCreateModal" (click)="closeCreateModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ languageService.translate('openNewAccount') }}</h2>
+      <button class="modal-close" (click)="closeCreateModal()">&times;</button>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="accountName">{{ languageService.translate('accountname') || 'Account Name' }}</label>
+        <input 
+          type="text" 
+          id="accountName" 
+          [(ngModel)]="accountName" 
+          [disabled]="isSubmitting"
+          class="form-input"
+          placeholder="Enter account name"
+          (keyup.enter)="createAccount()"
+        />
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+    </div>
+    <div class="modal-footer">
+      <button 
+        class="btn-secondary" 
+        (click)="closeCreateModal()" 
+        [disabled]="isSubmitting"
+      >
+        {{ languageService.translate('cancel') || 'Cancel' }}
+      </button>
+      <button 
+        class="btn-primary" 
+        (click)="createAccount()" 
+        [disabled]="isSubmitting || !accountName.trim()"
+      >
+        {{ isSubmitting ? 'Creating...' : (languageService.translate('create') || 'Create') }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal-overlay" *ngIf="showDeleteModal" (click)="closeDeleteModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ languageService.translate('closeAccount') }}</h2>
+      <button class="modal-close" (click)="closeDeleteModal()">&times;</button>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <div class="warning-message">
+        <strong>Warning:</strong> Only accounts with a balance of 0 CHF can be deleted.
+      </div>
+
+      <div class="form-group" *ngIf="deletableAccounts.length > 0">
+        <label>{{ languageService.translate('account') || 'Select Account to Delete' }}</label>
+        <div class="account-selection-list">
+          <div 
+            *ngFor="let konto of deletableAccounts" 
+            class="account-selection-item"
+            [class.selected]="selectedAccountId === konto.kontoId"
+            (click)="selectAccount(konto.kontoId)"
+          >
+            <div class="account-selection-name">{{ konto.kontoName }}</div>
+            <div class="account-selection-details">
+              <span class="account-selection-iban">{{ konto.iban }}</span>
+              <span class="account-selection-balance">{{ konto.balance }} CHF</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+    </div>
+    <div class="modal-footer">
+      <button 
+        class="btn-secondary" 
+        (click)="closeDeleteModal()" 
+        [disabled]="isSubmitting"
+      >
+        {{ languageService.translate('cancel') || 'Cancel' }}
+      </button>
+      <button 
+        class="btn-delete" 
+        (click)="deleteAccount()" 
+        [disabled]="isSubmitting || !selectedAccountId || deletableAccounts.length === 0"
+      >
+        {{ isSubmitting ? 'Deleting...' : 'Delete Account' }}
+      </button>
+    </div>
+  </div>
 </div>
