@@ -25,6 +25,8 @@ export class DashboardTransactionsComponent implements OnInit {
   displayedTransactions: TransactionDisplay[] = [];
   isLoading = true;
   Math = Math;
+  showDetailModal = false;
+  selectedTransaction: TransactionDisplay | null = null;
 
   constructor(
     public languageService: LanguageService,
@@ -113,5 +115,15 @@ export class DashboardTransactionsComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  showTransactionDetail(transaction: TransactionDisplay): void {
+    this.selectedTransaction = transaction;
+    this.showDetailModal = true;
+  }
+
+  closeDetailModal(): void {
+    this.showDetailModal = false;
+    this.selectedTransaction = null;
   }
 }

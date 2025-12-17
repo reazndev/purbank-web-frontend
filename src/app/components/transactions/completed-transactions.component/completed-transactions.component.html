@@ -15,7 +15,6 @@
       <div class="date-header">{{ group.date | date:'fullDate' }}</div>
       <div class="transaction-box" *ngFor="let transaction of group.transactions">
         <span class="transaction-name">{{ transaction.name }}</span>
-        <span class="transaction-konto">{{ transaction.account }}</span>
         <span class="transaction-balance">
           {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} CHF
         </span>

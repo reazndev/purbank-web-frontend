@@ -93,17 +93,13 @@
   max-height: 350px;
 }
 
-/* Override transaction box layout for completed transactions */
 .transaction-box {
   padding: 12px 10px;
-  grid-template-columns: 10ch 1fr auto auto;
+  grid-template-columns: 1fr auto auto;
   gap: 10px 15px;
   min-height: 44px;
 }
 
-.transaction-name {
-  max-width: 10ch;
-}
 
 .transaction-header-row {
   display: grid;
