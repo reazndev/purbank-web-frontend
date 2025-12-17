@@ -13,9 +13,7 @@ COPY package*.json ./
 # Use BuildKit cache for npm to speed up repeated builds
 # This requires Docker BuildKit enabled (DOCKER_BUILDKIT=1)
 RUN --mount=type=cache,target=/root/.npm \
-	--mount=type=cache,target=/app/node_modules \
 	npm ci --silent
-
 # Copy the rest of the source
 COPY . .
 
