@@ -63,6 +63,16 @@ export interface Translations {
   totalPending: string;
   cancel: string;
   create: string;
+  // Transaction Details
+  transactionDetails: string;
+  transactionName: string;
+  toIban: string;
+  executionType: string;
+  executionDate: string;
+  status: string;
+  locked: string;
+  yes: string;
+  no: string;
 }
 
 @Injectable({
@@ -112,7 +122,7 @@ export class LanguageService {
       ibanTo: "IBAN des Empfängers",
       reoccuring: "Forlaufend",
       instantTransaction: "Sofort",
-      after: "danach", // NOT CAPITALISED ON PORPUSE
+      after: "danach", // NOT CAPITALISED ON PURPOSE
       message: "Nachricht",
       note: "Notiz",
       submit: "Absenden",
@@ -123,7 +133,16 @@ export class LanguageService {
       pendingTransactionsHint: "Alle Transaktionen werden um 01:00 Uhr Züricher Zeit ausgeführt.",
       totalPending: "Total ausstehend",
       cancel: "Abbrechen",
-      create: "Erstellen"
+      create: "Erstellen",
+      transactionDetails: "Transaktionsdetails",
+      transactionName: "Transaktionsname",
+      toIban: "Empfänger IBAN",
+      executionType: "Ausführungsart",
+      executionDate: "Ausführungsdatum",
+      status: "Status",
+      locked: "Gesperrt",
+      yes: "Ja",
+      no: "Nein"
     },
     en: {
       dashboard: 'Dashboard',
@@ -166,18 +185,27 @@ export class LanguageService {
       ibanTo: "IBAN of receiver",
       reoccuring: "Reoccuring",
       instantTransaction: "Instant",
-      after: "after", // NOT CAPITALISED ON PORPUSE
+      after: "after", // NOT CAPITALISED ON PURPOSE
       message: "Message",
       note: "Note",
       submit: "Send",
-      completedTransactions: "Completed transaction",
+      completedTransactions: "Completed transactions",
       pendingTransactions: "Pending transactions",
       reoccuringTransactions: "Reoccuring transactions",
       description: "Description",
       pendingTransactionsHint: "All transactions will go through at 01:00 AM Zurich time.",
       totalPending: "Total pending",
       cancel: "Cancel",
-      create: "Create"
+      create: "Create",
+      transactionDetails: "Transaction Details",
+      transactionName: "Transaction Name",
+      toIban: "Recipient IBAN",
+      executionType: "Execution Type",
+      executionDate: "Execution Date",
+      status: "Status",
+      locked: "Locked",
+      yes: "Yes",
+      no: "No"
     }
   };
 

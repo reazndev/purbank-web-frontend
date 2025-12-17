@@ -32,14 +32,28 @@ export class CompletedTransactionsComponent implements OnInit {
   ) {}
 
   isExpanded: boolean = false;
+  selectedTransaction: any = null;
+  showDetailModal: boolean = false;
 
   toggleExpand() {
     this.isExpanded = !this.isExpanded;
   }
 
+  showTransactionDetail(transaction: any) {
+    this.selectedTransaction = transaction;
+    this.showDetailModal = true;
+  }
+
+  closeDetailModal() {
+    this.showDetailModal = false;
+    this.selectedTransaction = null;
+  }
+
   @HostListener('document:keydown.escape', ['$event'])
   onEscKey(event: Event) {
-    if (this.isExpanded) {
+    if (this.showDetailModal) {
+      this.closeDetailModal();
+    } else if (this.isExpanded) {
       this.toggleExpand();
     }
   }
