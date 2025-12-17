@@ -1,0 +1,84 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    types: [labeled]
+
+jobs:
+  # This job runs ONLY when code is pushed/merged to main
+  build-and-push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3 # Updated v2 -> v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3 # Updated v2 -> v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5 # Updated v4 -> v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/reazndev/purbank-web-frontend:latest
+            ghcr.io/reazndev/purbank-web-frontend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # This job runs ONLY when a PR is labeled with "preview"
+preview-build:
+    # This only runs if the PR is labeled AND that label is 'preview'
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'preview')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push preview image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          # This creates the ghcr.io/reazndev/purbank-web-frontend:pr-123 tag
+          tags: |
+            ghcr.io/reazndev/purbank-web-frontend:pr-${{ github.event.pull_request.number }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

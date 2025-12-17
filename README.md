@@ -57,3 +57,26 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+## Docker / Deployment
+
+1. Create a GitHub Personal Access Token (classic) with read:packages permissions.
+
+2. Run this command in your terminal:
+```Bash
+echo YOUR_TOKEN | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin
+
+docker compose up -d
+```
+
+Note: if you normally use ```sudo docker compose up -d``` then make sure to perform the login command with sudo as well, else it wont detect the login. Alternatively add your user to the docker group and perform the command without sudo.
+
+Docker pulls the latest build from the repo, there might not be one yet.
+We do this as else it would have to download all dependencies which takes 15m+.
+
+Note: the `extra_hosts: "host.docker.internal:host-gateway"` entry is used in
+`docker-compose.yml` to allow containers to reach services running on the host
+at `localhost` (Linux requires Docker Engine >= 20.10). If you prefer to run
+the backend as a container on the same network, you can instead connect both
+compose stacks to the same `purbank-network`.
