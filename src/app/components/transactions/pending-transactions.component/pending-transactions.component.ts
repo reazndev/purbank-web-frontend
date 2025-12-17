@@ -1,6 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../../shared/services/language.service';
+import { PaymentsService, Payment } from '../../../shared/services/payments.service';
+import { KontenService, Konto } from '../../../shared/services/konten.service';
+import { forkJoin } from 'rxjs';
+
+interface PaymentDisplay {
+  name: string;
+  account: string;
+  amount: number;
+  toIban: string;
+  message: string;
+  note: string;
+}
 
 @Component({
   selector: 'app-pending-transactions',
@@ -8,25 +20,59 @@ import { LanguageService } from '../../../shared/services/language.service';
   templateUrl: './pending-transactions.component.html',
   styleUrl: './pending-transactions.component.css',
 })
-export class PendingTransactionsComponent {
-  transactions = [
-    { name: 'Transaction 1', account: 'Mock Account 1', amount: 12500 },
-    { name: 'Transaction 2', account: 'Mock Account 2', amount: 50000 },
-    { name: 'Transaction 3', account: 'Mock Account 3', amount: -5000 },
-    { name: 'Transaction 4', account: 'Mock Account 4', amount: 20000 },
-    { name: 'Transaction 5', account: 'Mock Account 5', amount: 500 },
-    { name: 'Transaction 6', account: 'Mock Account 6', amount: 2500 },
-    { name: 'Transaction 7', account: 'Mock Account 7', amount: -2500 },
-    { name: 'Transaction 8', account: 'Mock Account 8', amount: 5 },
-     { name: 'Transaction 9', account: 'Mock Account 9', amount: 100 },
-     { name: 'Transaction 10', account: 'Mock Account 10', amount: 200 },
-  ];
-  // TODO: connect with backend once pushed
+export class PendingTransactionsComponent implements OnInit {
+  transactions: PaymentDisplay[] = [];
+  isLoading = true;
+  konten: Konto[] = [];
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
 
-  constructor(public languageService: LanguageService) {}
+  constructor(
+    public languageService: LanguageService,
+    private paymentsService: PaymentsService,
+    private kontenService: KontenService
+  ) {}
 
   isExpanded: boolean = false;
+
+  ngOnInit() {
+    this.loadPayments();
+  }
+
+  loadPayments(): void {
+    forkJoin({
+      konten: this.kontenService.getKonten(),
+      payments: this.paymentsService.getAllPayments()
+    }).subscribe({
+      next: ({ konten, payments }) => {
+        this.konten = konten;
+        
+        // most recent first
+        const sortedPayments = payments.sort((a, b) => {
+          const dateA = a.executionDate || a.execution_date || '';
+          const dateB = b.executionDate || b.execution_date || '';
+          return new Date(dateB).getTime() - new Date(dateA).getTime();
+        });
+        
+        this.transactions = sortedPayments.map(p => {
+          const kontoId = p.kontoId || p.konto || '';
+          const konto = this.konten.find(k => k.kontoId === kontoId);
+          return {
+            name: konto?.kontoName || 'Unknown Account',
+            account: kontoId,
+            amount: p.amount,
+            toIban: p.toIban,
+            message: p.message,
+            note: p.note
+          };
+        });
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading payments:', error);
+        this.isLoading = false;
+      }
+    });
+  }
 
   toggleExpand() {
     this.isExpanded = !this.isExpanded;

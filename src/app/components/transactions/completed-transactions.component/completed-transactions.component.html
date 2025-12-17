@@ -41,11 +41,18 @@
         <hr>
       </div>
       <div class="transactions-grid full-height-grid">
+        <div class="transaction-header-row">
+          <span class="transaction-label">{{ languageService.translate('message') }}</span>
+          <span class="transaction-label">{{ languageService.translate('ibanTo') }}</span>
+          <span class="transaction-label">{{ languageService.translate('note') }}</span>
+          <span class="transaction-label">{{ languageService.translate('amount') }}</span>
+        </div>
         <ng-container *ngFor="let group of groupedTransactions">
           <div class="date-header">{{ group.date | date:'fullDate' }}</div>
-          <div class="transaction-box" *ngFor="let transaction of group.transactions">
-            <span class="transaction-name">{{ transaction.name }}</span>
-            <span class="transaction-konto">{{ transaction.account }}</span>
+          <div class="transaction-box-expanded" *ngFor="let transaction of group.transactions">
+            <span class="transaction-value">{{ transaction.name }}</span>
+            <span class="transaction-value">{{ transaction.fromIban }}</span>
+            <span class="transaction-value">{{ transaction.note || '-' }}</span>
             <span class="transaction-balance">
               {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} CHF
             </span>

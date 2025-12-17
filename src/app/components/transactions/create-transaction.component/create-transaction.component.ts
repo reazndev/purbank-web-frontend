@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LanguageService } from '../../../shared/services/language.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { KontenService, Konto } from '../../../shared/services/konten.service';
+import { PaymentsService, CreatePaymentRequest } from '../../../shared/services/payments.service';
 
 @Component({
   selector: 'app-create-transaction',
@@ -11,16 +12,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './create-transaction.component.html',
   styleUrl: './create-transaction.component.css',
 })
-export class CreateTransactionComponent {
-  constructor(public languageService: LanguageService) {}
+export class CreateTransactionComponent implements OnInit {
+  constructor(
+    public languageService: LanguageService,
+    private kontenService: KontenService,
+    private paymentsService: PaymentsService
+  ) {}
 
-  accounts: any[] = [
-    { id: 1, name: 'Checking Account' },
-    { id: 2, name: 'Savings Account' },
-    { id: 3, name: 'Business Account' },
-    { id: 4, name: 'Investment Account' }
-  ]; // Mock data
-
+  accounts: Konto[] = [];
   selectedAccount: string = '';
   isInstant: boolean = false;
   isReoccuring: boolean = false;
@@ -28,10 +27,124 @@ export class CreateTransactionComponent {
   amount: number = 0;
   message: string = '';
   note: string = '';
+  executionDate: string = '';
+  isLoading: boolean = false;
+  isSubmitting: boolean = false;
+  errorMessage: string = '';
+  successMessage: string = '';
+
+  ngOnInit(): void {
+    this.loadAccounts();
+    // Set execution date to next day (TODO: might require input field for user selection)
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.executionDate = tomorrow.toISOString().split('T')[0];
+  }
+
+  loadAccounts(): void {
+    this.isLoading = true;
+    this.kontenService.getKonten().subscribe({
+      next: (konten) => {
+        this.accounts = konten;
+        if (konten.length > 0) {
+          this.selectedAccount = konten[0].kontoId;
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading accounts:', error);
+        this.errorMessage = 'Failed to load accounts';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  getSelectedAccountBalance(): number {
+    const account = this.accounts.find(a => a.kontoId === this.selectedAccount);
+    return account ? account.balance : 0;
+  }
 
   calculateBalanceAfter(): string {
-    // TODO: Connect to backend for real balance calculation
-    // For now, return a mock number
-    return '1234.56';
+    const currentBalance = this.getSelectedAccountBalance();
+    const balanceAfter = currentBalance - this.amount;
+    return balanceAfter.toFixed(2);
+  }
+
+  createPayment(): void {
+    // Validation
+    if (!this.selectedAccount) {
+      this.errorMessage = 'Please select an account';
+      return;
+    }
+    if (!this.ibanReceiver || this.ibanReceiver.trim() === '') {
+      this.errorMessage = 'Please enter receiver IBAN';
+      return;
+    }
+    if (this.amount <= 0) {
+      this.errorMessage = 'Amount must be greater than 0';
+      return;
+    }
+    if (!this.message || this.message.trim() === '') {
+      this.errorMessage = 'Please enter a message';
+      return;
+    }
+
+    // Check balance for instant payments
+    if (this.isInstant) {
+      const balance = this.getSelectedAccountBalance();
+      if (balance < this.amount) {
+        this.errorMessage = 'Insufficient funds for instant payment';
+        return;
+      }
+    }
+
+    this.isSubmitting = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    const payment: CreatePaymentRequest = {
+      kontoId: this.selectedAccount,
+      toIban: this.ibanReceiver,
+      amount: this.amount,
+      message: this.message,
+      note: this.note,
+      executionType: this.isInstant ? 'INSTANT' : 'NORMAL',
+      executionDate: this.isInstant ? new Date().toISOString().split('T')[0] : this.executionDate
+    };
+
+    console.log('Payment object before sending:', payment);
+    console.log('executionType:', payment.executionType);
+
+    this.paymentsService.createPayment(payment).subscribe({
+      next: (response) => {
+        this.successMessage = `Payment created successfully! ${this.isInstant ? 'Executing immediately...' : 'Will be processed at 1:00 AM Zurich time.'}`;
+        this.isSubmitting = false;
+        
+        // Reset form after 2 seconds
+        setTimeout(() => {
+          this.resetForm();
+        }, 2000);
+      },
+      error: (error) => {
+        console.error('Error creating payment:', error);
+        this.errorMessage = error.error?.message || 'Failed to create payment. Please try again.';
+        this.isSubmitting = false;
+      }
+    });
+  }
+
+  resetForm(): void {
+    this.ibanReceiver = '';
+    this.amount = 0;
+    this.message = '';
+    this.note = '';
+    // Set execution date to next day (TODO: might require input field for user selection)
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.executionDate = tomorrow.toISOString().split('T')[0];
+    this.isInstant = false;
+    this.isReoccuring = false;
+    this.successMessage = '';
+    this.errorMessage = '';
   }
 }

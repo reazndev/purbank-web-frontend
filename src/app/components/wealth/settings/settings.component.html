@@ -54,7 +54,6 @@
   </div>
 </div>
 
-<!-- Delete Account Modal -->
 <div class="modal-overlay" *ngIf="showDeleteModal" (click)="closeDeleteModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-header">
@@ -67,8 +66,9 @@
         <strong>Warning:</strong> Only accounts with a balance of 0 CHF can be deleted.
       </div>
 
-      <div class="form-group" *ngIf="deletableAccounts.length > 0">
-        <label>{{ languageService.translate('account') || 'Select Account to Delete' }}</label>
+
+      <!-- TODO: see issue: #48 -->
+      <div *ngIf="deletableAccounts.length > 0">
         <div class="account-selection-list">
           <div 
             *ngFor="let konto of deletableAccounts" 
@@ -77,9 +77,9 @@
             (click)="selectAccount(konto.kontoId)"
           >
             <div class="account-selection-name">{{ konto.kontoName }}</div>
-            <div class="account-selection-details">
-              <span class="account-selection-iban">{{ konto.iban }}</span>
-              <span class="account-selection-balance">{{ konto.balance }} CHF</span>
+            <div class="account-selection-balance">{{ konto.balance }} CHF</div>
+            <div class="account-selection-iban-box">
+              {{ konto.iban }}
             </div>
           </div>
         </div>

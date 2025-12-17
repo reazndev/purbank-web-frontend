@@ -42,6 +42,10 @@
   gap: 20px;
 }
 
+.transaction-box.pending {
+  background-color: var(--color-accent-lighter);
+}
+
 .transaction-name {
   font-weight: normal;
   max-width: 25ch; /* max 25 chars then cutoff */

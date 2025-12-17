@@ -1,6 +1,16 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../../shared/services/language.service';
+import { KontenService, Transaction, Konto } from '../../../shared/services/konten.service';
+
+interface TransactionDisplay {
+  name: string;
+  account: string;
+  amount: number;
+  date: string;
+  fromIban: string;
+  note: string;
+}
 
 @Component({
   selector: 'app-completed-transactions',
@@ -9,41 +19,17 @@ import { LanguageService } from '../../../shared/services/language.service';
   styleUrl: './completed-transactions.component.css',
 })
 export class CompletedTransactionsComponent implements OnInit {
-  transactions = [
-    { name: 'Rent', account: 'Main Account', amount: -1500, date: '2025-12-01' },
-    { name: 'Salary', account: 'Main Account', amount: 5000, date: '2025-12-01' },
-    { name: 'Groceries', account: 'Debit Card', amount: -120, date: '2025-11-30' },
-    { name: 'Restaurant', account: 'Credit Card', amount: -85, date: '2025-11-30' },
-    { name: 'Utilities', account: 'Main Account', amount: -200, date: '2025-11-29' },
-    { name: 'Internet', account: 'Main Account', amount: -60, date: '2025-11-29' },
-    { name: 'Insurance', account: 'Main Account', amount: -300, date: '2025-11-28' },
-    { name: 'Cinema', account: 'Debit Card', amount: -30, date: '2025-11-28' },
-    { name: 'Gym', account: 'Debit Card', amount: -50, date: '2025-11-28' },
-    { name: 'Transfer', account: 'Savings', amount: -1000, date: '2025-11-25' },
-    { name: 'Coffee', account: 'Debit Card', amount: -5, date: '2025-11-24' },
-    { name: 'Lunch', account: 'Main Account', amount: -25, date: '2025-11-24' },
-    { name: 'Book Store', account: 'Credit Card', amount: -45, date: '2025-11-23' },
-    { name: 'Online Course', account: 'Credit Card', amount: -199, date: '2025-11-22' },
-    { name: 'Gas Station', account: 'Debit Card', amount: -80, date: '2025-11-21' },
-    { name: 'Supermarket', account: 'Main Account', amount: -150, date: '2025-11-20' },
-    { name: 'Streaming Svc', account: 'Credit Card', amount: -15, date: '2025-11-19' },
-    { name: 'Mobile Bill', account: 'Main Account', amount: -45, date: '2025-11-18' },
-    { name: 'Electricity', account: 'Main Account', amount: -90, date: '2025-11-17' },
-    { name: 'Water Bill', account: 'Main Account', amount: -30, date: '2025-11-17' },
-    { name: 'Train Ticket', account: 'Debit Card', amount: -120, date: '2025-11-16' },
-    { name: 'Gift Shop', account: 'Debit Card', amount: -40, date: '2025-11-15' },
-    { name: 'Pharmacy', account: 'Main Account', amount: -25, date: '2025-11-14' },
-    { name: 'Bakery', account: 'Cash', amount: -10, date: '2025-11-13' },
-    { name: 'Hardware Store', account: 'Credit Card', amount: -230, date: '2025-11-12' },
-  ];
+  transactions: TransactionDisplay[] = [];
+  isLoading = true;
 
-  // TODO: connect with backend once pushed
   // TODO: shocase date in german -> Sonntag, 30. November instead of in English
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
-
   // TODO: implement automated ftests
 
-  constructor(public languageService: LanguageService) {}
+  constructor(
+    public languageService: LanguageService,
+    private kontenService: KontenService
+  ) {}
 
   isExpanded: boolean = false;
 
@@ -61,6 +47,71 @@ export class CompletedTransactionsComponent implements OnInit {
   groupedTransactions: { date: string; transactions: any[] }[] = [];
 
   ngOnInit() {
+    this.loadTransactions();
+  }
+
+  loadTransactions(): void {
+    // Get all konten first
+    this.kontenService.getKonten().subscribe({
+      next: (konten: Konto[]) => {
+        if (konten.length === 0) {
+          this.isLoading = false;
+          return;
+        }
+
+        // Fetch transactions from all konten
+        const transactionRequests = konten.map(konto => 
+          this.kontenService.getTransactions(konto.kontoId)
+        );
+
+        // Wait for all requests to complete
+        let completedRequests = 0;
+        const allTransactions: Transaction[] = [];
+
+        transactionRequests.forEach((request, index) => {
+          request.subscribe({
+            next: (data: Transaction[]) => {
+              allTransactions.push(...data);
+              completedRequests++;
+              
+              if (completedRequests === transactionRequests.length) {
+                // Sort by timestamp (most recent first)
+                allTransactions.sort((a, b) => 
+                  new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+                );
+                
+                // Transform API transactions to display format
+                this.transactions = allTransactions.map(t => ({
+                  name: t.message,
+                  account: t.fromIban,
+                  amount: t.amount,
+                  date: t.timestamp.split('T')[0],
+                  fromIban: t.fromIban,
+                  note: t.note
+                }));
+                this.groupTransactions();
+                this.isLoading = false;
+              }
+            },
+            error: (error) => {
+              console.error('Error loading transactions for konto:', error);
+              completedRequests++;
+              
+              if (completedRequests === transactionRequests.length) {
+                this.isLoading = false;
+              }
+            }
+          });
+        });
+      },
+      error: (error) => {
+        console.error('Error loading konten:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  groupTransactions(): void {
     const groups: { date: string; transactions: any[] }[] = [];
     this.transactions.forEach(t => {
       const existingGroup = groups.find(g => g.date === t.date);

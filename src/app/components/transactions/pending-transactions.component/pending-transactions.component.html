@@ -11,16 +11,17 @@
     <hr>
     <div class="total-amount-wrapper">
       <span>{{ languageService.translate('totalPending') }}:</span>
-      <span class="transaction-amount">{{ totalAmount }} CHF</span>
+      <span class="transaction-amount">- {{ totalAmount }} CHF</span>
     </div>
   </div>
   <div class="transactions-grid scrollable-grid">
     <ng-container>
       <div class="transaction-box" *ngFor="let transaction of transactions">
         <span class="transaction-name">{{ transaction.name }}</span>
-        <span class="transaction-konto">{{ transaction.account }}</span>
+        <span class="transaction-konto">{{ transaction.message }}</span>
+
         <span class="transaction-balance">
-          {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} CHF
+          - {{ MathAbs(transaction.amount) }} CHF
         </span>
       </div>
     </ng-container>
@@ -48,13 +49,20 @@
         </div>
       </div>
       <div class="transactions-grid full-height-grid">
+        <div class="transaction-header-row">
+          <span class="transaction-label">{{ languageService.translate('account') }}</span>
+          <span class="transaction-label">{{ languageService.translate('message') }}</span>
+          <span class="transaction-label">{{ languageService.translate('ibanTo') }}</span>
+          <span class="transaction-label">{{ languageService.translate('note') }}</span>
+          <span class="transaction-label">{{ languageService.translate('amount') }}</span>
+        </div>
         <ng-container>
-          <div class="transaction-box" *ngFor="let transaction of transactions">
-            <span class="transaction-name">{{ transaction.name }}</span>
-            <span class="transaction-konto">{{ transaction.account }}</span>
-            <span class="transaction-balance">
-              {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} CHF
-            </span>
+          <div class="transaction-box-expanded" *ngFor="let transaction of transactions">
+            <span class="transaction-value">{{ transaction.name }}</span>
+            <span class="transaction-value">{{ transaction.message }}</span>
+            <span class="transaction-value">{{ transaction.toIban }}</span>
+            <span class="transaction-value">{{ transaction.note || '-' }}</span>
+            <span class="transaction-balance">- {{ MathAbs(transaction.amount) }} CHF</span>
           </div>
         </ng-container>
       </div>

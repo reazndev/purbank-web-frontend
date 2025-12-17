@@ -10,6 +10,16 @@ export interface Konto {
   iban: string;
 }
 
+export interface Transaction {
+  transactionId: string;
+  amount: number;
+  balanceAfter: number;
+  timestamp: string;
+  fromIban: string;
+  message: string;
+  note: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,5 +38,9 @@ export class KontenService {
 
   deleteKonto(kontoId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/konten/${kontoId}`);
+  }
+
+  getTransactions(kontoId: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/konten/${kontoId}/transactions`);
   }
 }

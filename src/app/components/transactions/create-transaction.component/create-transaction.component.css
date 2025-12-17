@@ -66,7 +66,13 @@ select {
   border: 1px solid var(--color-gray);
   box-sizing: border-box;
   background-color: var(--color-white);
+  color: var(--color-black);
   flex: 1.5;
+}
+
+select option {
+  color: var(--color-black);
+  background-color: var(--color-white);
 }
 
 input {
@@ -160,7 +166,7 @@ button[type="submit"]:disabled {
 
 .form-container {
   padding: 0px;
-  border-radius: 4px;
+  border-radius: 0px;
   margin-top: 10px;
 }
 
@@ -169,8 +175,25 @@ button[type="submit"]:disabled {
   padding: 6px;
   background-color: transparent;
   display: flex;
+}
+
+.error-message {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+  border-radius: 0px;
+}
+
+.success-message {
+  width: 100%;
+  padding: 10px;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+  border-radius: 0px;
   align-items: center;
   justify-content: center;
   flex: 1;
 }
-

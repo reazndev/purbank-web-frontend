@@ -78,8 +78,9 @@
 .transactions-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 5px;
   margin-bottom: 15px;
+  grid-auto-rows: min-content;
 }
 
 .date-header {
@@ -137,6 +138,44 @@
 .modal-content .transaction-konto {
   text-align: center;
   padding-left: 0;
+}
+
+.transaction-header-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1.6fr 1fr 150px;
+  gap: 15px;
+  padding: 10px 15px;
+  background-color: var(--color-white);
+  border-bottom: 2px solid var(--color-gray);
+  margin-bottom: 10px;
+}
+
+.transaction-header-row span:last-child {
+  text-align: right;
+}
+
+.transaction-box-expanded {
+  background-color: var(--color-accent-light);
+  padding: 10px 15px;
+  display: grid;
+  grid-template-columns: 1.5fr 1.6fr 1fr 150px;
+  gap: 15px;
+  align-items: center;
+  min-height: auto;
+  height: fit-content;
+  line-height: 1.2;
+}
+
+.transaction-label {
+  font-weight: 500;
+  color: var(--color-gray-dark);
+  font-size: 0.9em;
+}
+
+.transaction-value {
+  font-size: 0.9em;
+  word-break: break-all;
+  line-height: 1.2;
 }
 
 .scroll-indicator {

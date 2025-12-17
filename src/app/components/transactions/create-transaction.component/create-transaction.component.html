@@ -5,11 +5,11 @@
   </div>
 
   <div class="form-container">
-    <form #transactionForm="ngForm">
+    <form #transactionForm="ngForm" (ngSubmit)="createPayment()">
     <div class="form-row">
       <select name="account" [(ngModel)]="selectedAccount" required>
         <option value="">{{ languageService.translate('account') }}</option>
-        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+        <option *ngFor="let account of accounts" [value]="account.kontoId">{{ account.kontoName }}</option>
       </select>
       <div class="transaction-option-box">
         <div class="checkbox-group">
@@ -48,8 +48,16 @@
       <input type="text" name="note" [(ngModel)]="note" [placeholder]="languageService.translate('note')">
     </div>
 
+    <div class="form-row" *ngIf="errorMessage">
+      <div class="error-message">{{ errorMessage }}</div>
+    </div>
+
+    <div class="form-row" *ngIf="successMessage">
+      <div class="success-message">{{ successMessage }}</div>
+    </div>
+
     <div class="form-row">
-      <button type="submit" [disabled]="!transactionForm.valid">{{ languageService.translate('submit') }}</button>
+      <button type="submit" [disabled]="!transactionForm.valid || isSubmitting || isLoading">{{ isSubmitting ? 'Processing...' : languageService.translate('submit') }}</button>
     </div>
   </form>
   </div>
