@@ -46,7 +46,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   # This job runs ONLY when a PR is labeled with "preview"
-preview-build:
+  preview-build:
     # This only runs if the PR is labeled AND that label is 'preview'
     if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'preview')
     runs-on: ubuntu-latest
