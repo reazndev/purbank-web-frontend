@@ -13,13 +13,7 @@ export interface Payment {
   executionDate: string;
   locked: boolean;
   // Legacy fields for backward compatibility
-  paymentId?: string;
-  timestamp?: string;
-  fromIban?: string;
-  status?: string;
-  konto?: string;
-  execution_type?: string;
-  execution_date?: string;
+
 }
 
 export interface CreatePaymentRequest {

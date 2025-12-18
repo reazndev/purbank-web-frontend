@@ -50,17 +50,16 @@ export class PendingTransactionsComponent implements OnInit {
         
         // most recent first
         const sortedPayments = payments.sort((a, b) => {
-          const dateA = a.executionDate || a.execution_date || '';
-          const dateB = b.executionDate || b.execution_date || '';
+          const dateA = a.executionDate || '';
+          const dateB = b.executionDate || '';
           return new Date(dateB).getTime() - new Date(dateA).getTime();
         });
         
         this.transactions = sortedPayments.map(p => {
-          const kontoId = p.kontoId || p.konto || '';
-          const konto = this.konten.find(k => k.kontoId === kontoId);
+          const konto = this.konten.find(k => k.kontoId === p.kontoId);
           return {
             name: konto?.kontoName || 'Unknown Account',
-            account: kontoId,
+            account: p.kontoId,
             amount: p.amount,
             toIban: p.toIban,
             message: p.message,

@@ -15,7 +15,6 @@ interface TransactionDisplay {
   note: string;
   executionType: string;
   executionDate: string;
-  status: string;
   locked: boolean;
   timestamp: string;
   isPending: boolean;
@@ -84,11 +83,10 @@ export class DashboardTransactionsComponent implements OnInit {
                     amount: -p.amount, // negative since it's outgoing
                     message: p.message,
                     note: p.note || '',
-                    executionType: p.executionType || p.execution_type || 'NORMAL',
-                    executionDate: p.executionDate || p.execution_date || new Date().toISOString(),
-                    status: p.status || 'Pending',
+                    executionType: p.executionType || p.executionType || 'NORMAL',
+                    executionDate: p.executionDate || p.executionDate || new Date().toISOString(),
                     locked: p.locked !== undefined ? p.locked : false,
-                    timestamp: p.executionDate || p.execution_date || new Date().toISOString(),
+                    timestamp: p.executionDate || p.executionDate || new Date().toISOString(),
                     isPending: true
                   };
                 });

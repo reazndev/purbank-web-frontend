@@ -67,7 +67,6 @@
   </div>
 </div>
 
-<!-- Transaction Detail Modal -->
 <div class="modal-overlay" *ngIf="showDetailModal" (click)="closeDetailModal()">
   <div class="detail-modal-content" (click)="$event.stopPropagation()">
     <div class="detail-header">
@@ -98,23 +97,15 @@
       </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('message') }}:</span>
-        <span class="detail-value">{{ selectedTransaction.message }}</span>
+        <span class="detail-value">{{ selectedTransaction.name }}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('note') }}:</span>
         <span class="detail-value">{{ selectedTransaction.note }}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">{{ languageService.translate('executionType') }}:</span>
-        <span class="detail-value">{{ selectedTransaction.executionType }}</span>
-      </div>
-      <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('executionDate') }}:</span>
-        <span class="detail-value">{{ selectedTransaction.executionDate }}</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">{{ languageService.translate('status') }}:</span>
-        <span class="detail-value status-badge" [class]="'status-' + selectedTransaction.status.toLowerCase()">{{ selectedTransaction.status }}</span>
+        <span class="detail-value">{{ selectedTransaction.date }}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('locked') }}:</span>
