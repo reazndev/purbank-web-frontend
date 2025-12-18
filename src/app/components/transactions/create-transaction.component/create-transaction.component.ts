@@ -35,10 +35,17 @@ export class CreateTransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAccounts();
-    // Set execution date to next day (TODO: might require input field for user selection)
+    // Set execution date to next day
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.executionDate = tomorrow.toISOString().split('T')[0];
+  }
+
+  getMinDate(): string {
+    // Return tomorrow's date as the minimum selectable date
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
   }
 
   loadAccounts(): void {
@@ -87,6 +94,20 @@ export class CreateTransactionComponent implements OnInit {
     if (!this.message || this.message.trim() === '') {
       this.errorMessage = 'Please enter a message';
       return;
+    }
+
+    // Validate execution date for non-instant payments
+    if (!this.isInstant) {
+      const selectedDate = new Date(this.executionDate);
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      selectedDate.setHours(0, 0, 0, 0);
+      
+      if (selectedDate < tomorrow) {
+        this.errorMessage = 'Execution date must be tomorrow or later';
+        return;
+      }
     }
 
     // Check balance for instant payments
@@ -138,7 +159,7 @@ export class CreateTransactionComponent implements OnInit {
     this.amount = 0;
     this.message = '';
     this.note = '';
-    // Set execution date to next day (TODO: might require input field for user selection)
+    // Set execution date to next day
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.executionDate = tomorrow.toISOString().split('T')[0];

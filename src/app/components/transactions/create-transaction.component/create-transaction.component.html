@@ -29,6 +29,10 @@
       <input type="text" name="ibanReceiver" [(ngModel)]="ibanReceiver" [placeholder]="languageService.translate('ibanTo')" required>
     </div>
 
+    <div class="form-row" *ngIf="!isInstant">
+      <input type="date" name="executionDate" [(ngModel)]="executionDate" [min]="getMinDate()" [placeholder]="languageService.translate('executionDate')" required>
+    </div>
+
     <div class="form-row">
       <input type="number" name="amount" [(ngModel)]="amount" [placeholder]="languageService.translate('amount')" required>
       <div class="balance-after-box">

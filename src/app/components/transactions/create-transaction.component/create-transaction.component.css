@@ -101,6 +101,7 @@ input[type="number"] {
 input[name="ibanReceiver"],
 input[name="message"],
 input[name="note"],
+input[name="executionDate"],
 button[type="submit"] {
   width: 100%;
 }
