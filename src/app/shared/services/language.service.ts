@@ -77,6 +77,7 @@ export interface Translations {
   apply: string;
   editTransaction: string;
   pendingPayments: string;
+  deleteAccountWarning: string;
 }
 
 @Injectable({
@@ -150,7 +151,8 @@ export class LanguageService {
       deletePayment: "Zahlung löschen",
       apply: "Bestätigen",
       editTransaction: "Überweisung bearbeiten",
-      pendingPayments: "Überweisungen in Verarbeitung"
+      pendingPayments: "Überweisungen in Verarbeitung",
+      deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 CHF können gelöscht werden."
     },
     en: {
       dashboard: 'Dashboard',
@@ -217,7 +219,8 @@ export class LanguageService {
       deletePayment: "Delete Payment",
       apply: "Apply",
       editTransaction: "Edit Transaction",
-      pendingPayments: "Pending Payments"
+      pendingPayments: "Pending Payments",
+      deleteAccountWarning: "Only accounts with a balance of 0 CHF can be deleted."
     }
   };
 

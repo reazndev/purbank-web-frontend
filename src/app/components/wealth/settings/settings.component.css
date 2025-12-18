@@ -222,6 +222,7 @@
   border-color: var(--color-accent-light);
   cursor: not-allowed;
   opacity: 0.6;
+}
 
 .error-message {
   color: #d32f2f;
@@ -242,18 +243,16 @@
 }
 
 .warning-message {
-  color: #f57c00;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-  padding: 12px;
-  background-color: rgba(245, 124, 0, 0.1);
-  border-left: 3px solid #f57c00;
+  color: var(--color-accent-dark);
+  font-weight: 500;
+  margin-bottom: 10px;
+  padding: 6px;
 }
 
 .account-selection-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
   max-height: 300px;
   overflow-y: auto;
   padding-right: 4px;
@@ -261,58 +260,37 @@
 
 .account-selection-item {
   background-color: var(--color-accent-light);
-  padding: 15px;
+  padding: 8px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.account-selection-item:hover {
-  background-color: var(--color-accent-dark);
-  color: var(--color-white);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
 }
 
 .account-selection-item.selected {
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-.account-selection-item.selected .account-selection-iban-box {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--color-white);
-}
-
-.account-selection-item:hover .account-selection-iban-box {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--color-accent-dark);
   color: var(--color-white);
 }
 
 .account-selection-name {
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: 500;
   color: inherit;
-  margin: 0;
-}
-
-.account-selection-balance {
-  font-weight: normal;
-  color: inherit;
-  font-size: 1rem;
-  margin: 0;
+  margin: 0 16px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .account-selection-iban-box {
-  background-color: var(--color-whiter);
-  padding: 8px 12px;
-  font-size: 0.85rem;
-  color: var(--color-black);
-  font-family: monospace;
+  background-color: transparent;
+  padding: 0;
   letter-spacing: 0.02em;
-  word-break: break-all;
-  transition: all 0.2s ease;
+  margin-left: auto;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -330,5 +308,4 @@
   .btn-secondary {
     width: 100%;
   }
-}
 }

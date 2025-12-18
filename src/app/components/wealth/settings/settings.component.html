@@ -63,11 +63,9 @@
     <hr>
     <div class="modal-body">
       <div class="warning-message">
-        <strong>Warning:</strong> Only accounts with a balance of 0 CHF can be deleted.
+        {{ languageService.translate('deleteAccountWarning') }}
       </div>
 
-
-      <!-- TODO: see issue: #48 -->
       <div *ngIf="deletableAccounts.length > 0">
         <div class="account-selection-list">
           <div 
@@ -76,11 +74,8 @@
             [class.selected]="selectedAccountId === konto.kontoId"
             (click)="selectAccount(konto.kontoId)"
           >
-            <div class="account-selection-name">{{ konto.kontoName }}</div>
-            <div class="account-selection-balance">{{ konto.balance }} CHF</div>
-            <div class="account-selection-iban-box">
-              {{ konto.iban }}
-            </div>
+            <span class="account-selection-name">{{ konto.kontoName }}</span>
+            <span class="account-selection-iban-box">{{ konto.iban }}</span>
           </div>
         </div>
       </div>
