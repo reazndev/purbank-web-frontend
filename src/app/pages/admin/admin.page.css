@@ -1,7 +1,5 @@
 .admin-container {
   padding: 4rem clamp(1rem, calc(50vw - 600px), 25%);
-  min-height: calc(100vh - 120px);
-  margin-top: 80px;
   margin-bottom: 60px;
 }
 

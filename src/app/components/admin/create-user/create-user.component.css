@@ -30,13 +30,11 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .btn-toggle:hover {
   color: var(--color-black);
-  border-color: var(--color-black);
-  background-color: var(--color-white);
+  background-color: var(--color-accent-light);
 }
 
 .btn-toggle.active {
