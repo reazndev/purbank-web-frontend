@@ -7,8 +7,16 @@ import { PaymentsService, Payment } from '../../../shared/services/payments.serv
 import { forkJoin } from 'rxjs';
 
 interface TransactionDisplay {
-  message: string;
+  name: string;
+  account: string;
+  toIban: string;
   amount: number;
+  message: string;
+  note: string;
+  executionType: string;
+  executionDate: string;
+  status: string;
+  locked: boolean;
   timestamp: string;
   isPending: boolean;
 }
@@ -67,20 +75,42 @@ export class DashboardTransactionsComponent implements OnInit {
               
               if (completedRequests === transactionRequests.length) {
                 // Convert payments to TransactionDisplay format (pending)
-                const pendingPayments: TransactionDisplay[] = payments.map(p => ({
-                  message: p.message,
-                  amount: -p.amount, // negative since it's outgoing
-                  timestamp: p.executionDate || p.execution_date || new Date().toISOString(),
-                  isPending: true
-                }));
+                const pendingPayments: TransactionDisplay[] = payments.map(p => {
+                  const konto = konten.find(k => k.kontoId === p.kontoId);
+                  return {
+                    name: p.message || '',
+                    account: konto?.kontoName || '',
+                    toIban: p.toIban,
+                    amount: -p.amount, // negative since it's outgoing
+                    message: p.message,
+                    note: p.note || '',
+                    executionType: p.executionType || p.execution_type || 'NORMAL',
+                    executionDate: p.executionDate || p.execution_date || new Date().toISOString(),
+                    status: p.status || 'Pending',
+                    locked: p.locked !== undefined ? p.locked : false,
+                    timestamp: p.executionDate || p.execution_date || new Date().toISOString(),
+                    isPending: true
+                  };
+                });
 
                 // Convert transactions to TransactionDisplay format
-                const completedTransactions: TransactionDisplay[] = allTransactions.map(t => ({
-                  message: t.message,
-                  amount: t.amount,
-                  timestamp: t.timestamp,
-                  isPending: false
-                }));
+                const completedTransactions: TransactionDisplay[] = allTransactions.map(t => {
+                  const konto = konten.find(k => k.iban === t.fromIban);
+                  return {
+                    name: t.message || '',
+                    account: konto?.kontoName || '',
+                    toIban: t.fromIban || '',
+                    amount: t.amount,
+                    message: t.message,
+                    note: t.note || '',
+                    executionType: 'INSTANT',
+                    executionDate: t.timestamp,
+                    status: 'Completed',
+                    locked: false,
+                    timestamp: t.timestamp,
+                    isPending: false
+                  };
+                });
 
                 // Sort pending payments by execution date (most recent first)
                 pendingPayments.sort((a, b) => 
