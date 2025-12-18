@@ -27,10 +27,12 @@ export class WealthPieChartComponent implements OnInit, AfterViewInit {
   loadKonten(): void {
     this.kontenService.getKonten().subscribe({
       next: (data) => {
-        this.konten = data.map(konto => ({
-          name: konto.kontoName,
-          amount: konto.balance
-        }));
+        this.konten = data
+          .map(konto => ({
+            name: konto.kontoName,
+            amount: konto.balance
+          }))
+          .filter(konto => konto.amount !== 0);
         if (this.pieCanvas) {
           this.createChart();
         }
@@ -59,7 +61,7 @@ export class WealthPieChartComponent implements OnInit, AfterViewInit {
       type: 'pie',
       data: {
         labels,
-        datasets: [{ data, backgroundColor: ['#438a8eff', '#6ea4daff', '#165087ff'] }],
+        datasets: [{ data, backgroundColor: ['#A2C5D6', '#5A7684', '#81B1AA', '#616D9E', '#C8BCB6', '#E1E8EB', '#3E4E56'] }],
       },
       options: {
         responsive: true,
