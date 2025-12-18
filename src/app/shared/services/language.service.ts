@@ -76,6 +76,7 @@ export interface Translations {
   deletePayment: string;
   apply: string;
   editTransaction: string;
+  pendingPayments: string;
 }
 
 @Injectable({
@@ -148,7 +149,8 @@ export class LanguageService {
       no: "Nein",
       deletePayment: "Zahlung löschen",
       apply: "Bestätigen",
-      editTransaction: "Überweisung bearbeiten"
+      editTransaction: "Überweisung bearbeiten",
+      pendingPayments: "Überweisungen in Verarbeitung"
     },
     en: {
       dashboard: 'Dashboard',
@@ -214,7 +216,8 @@ export class LanguageService {
       no: "No",
       deletePayment: "Delete Payment",
       apply: "Apply",
-      editTransaction: "Edit Transaction"
+      editTransaction: "Edit Transaction",
+      pendingPayments: "Pending Payments"
     }
   };
 

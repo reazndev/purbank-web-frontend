@@ -3,17 +3,27 @@
     <h2>{{ languageService.translate('transactions') }}</h2>
     <hr>
   </div>
-<div class="transactions-grid" *ngIf="!isLoading; else loading">
-  <div class="transaction-box" *ngFor="let transaction of displayedTransactions" [class.pending]="transaction.isPending">
-    <span class="transaction-name">{{ transaction.message }}</span>
-    <span class="transaction-balance" [class.negative]="transaction.amount < 0">
-      {{ transaction.amount > 0 ? '' : '- ' }}{{ Math.abs(transaction.amount).toFixed(2) }} CHF
-    </span>
-    
-    <button class="info-btn" (click)="showTransactionDetail(transaction)" title="View details">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-    </button>
-  </div>
+<div class="transactions-wrapper" *ngIf="!isLoading; else loading">
+  <ng-container *ngFor="let group of groupedTransactions">
+    <div class="date-header" *ngIf="group.isPending">
+      {{ languageService.translate('pendingPayments') }}
+    </div>
+    <div class="date-header" *ngIf="!group.isPending">
+      {{ group.date | date:'fullDate' }}
+    </div>
+    <div class="transactions-grid">
+      <div class="transaction-box" *ngFor="let transaction of group.transactions" [class.pending]="transaction.isPending">
+        <span class="transaction-name">{{ transaction.message }}</span>
+        <span class="transaction-balance" [class.negative]="transaction.amount < 0">
+          {{ transaction.amount > 0 ? '' : '- ' }}{{ Math.abs(transaction.amount).toFixed(2) }} CHF
+        </span>
+        
+        <button class="info-btn" (click)="showTransactionDetail(transaction)" title="View details">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+        </button>
+      </div>
+    </div>
+  </ng-container>
 </div>
   <ng-template #loading>
     <div class="transactions-grid">

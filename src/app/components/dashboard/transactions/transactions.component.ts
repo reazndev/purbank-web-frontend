@@ -30,6 +30,7 @@ interface TransactionDisplay {
 export class DashboardTransactionsComponent implements OnInit {
   transactions: TransactionDisplay[] = [];
   displayedTransactions: TransactionDisplay[] = [];
+  groupedTransactions: { date: string; isPending: boolean; transactions: TransactionDisplay[] }[] = [];
   isLoading = true;
   Math = Math;
   showDetailModal = false;
@@ -122,8 +123,9 @@ export class DashboardTransactionsComponent implements OnInit {
                 
                 // Combine: pending payments first, then completed transactions
                 this.transactions = [...pendingPayments, ...completedTransactions];
-                // Show only the first 8 items for the dashboard
-                this.displayedTransactions = this.transactions.slice(0, 8);
+                // Show only the first 50 items for the dashboard
+                this.displayedTransactions = this.transactions.slice(0, 50);
+                this.groupTransactions();
                 this.isLoading = false;
               }
             },
@@ -143,6 +145,34 @@ export class DashboardTransactionsComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  groupTransactions(): void {
+    const groups: { date: string; isPending: boolean; transactions: TransactionDisplay[] }[] = [];
+    
+    // Group pending transactions together
+    const pendingTransactions = this.displayedTransactions.filter(t => t.isPending);
+    if (pendingTransactions.length > 0) {
+      groups.push({ 
+        date: 'pending', 
+        isPending: true, 
+        transactions: pendingTransactions 
+      });
+    }
+    
+    // Group completed transactions by date
+    const completedTransactions = this.displayedTransactions.filter(t => !t.isPending);
+    completedTransactions.forEach(t => {
+      const date = t.timestamp.split('T')[0];
+      const existingGroup = groups.find(g => g.date === date && !g.isPending);
+      if (existingGroup) {
+        existingGroup.transactions.push(t);
+      } else {
+        groups.push({ date, isPending: false, transactions: [t] });
+      }
+    });
+    
+    this.groupedTransactions = groups;
   }
 
   showTransactionDetail(transaction: TransactionDisplay): void {

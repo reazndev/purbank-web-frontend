@@ -10,15 +10,34 @@
   margin-left: auto;
 }
 
+/* Wrapper for all transaction groups with scrolling */
+.transactions-wrapper {
+  height: 65vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 /* Override transaction grid gap for dashboard */
 .transactions-grid {
-  gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  margin-bottom: 15px;
 }
 
 /* Override transaction box layout for dashboard */
 .transaction-box {
   grid-template-columns: 1fr auto auto;
   min-height: 0;
+}
+
+.date-header {
+  font-size: 0.9em;
+  color: var(--color-gray-dark);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: normal;
+  padding-left: 5px;
 }
 
 .transaction-box.pending {
