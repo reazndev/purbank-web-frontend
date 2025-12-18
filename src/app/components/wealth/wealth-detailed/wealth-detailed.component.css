@@ -91,7 +91,7 @@
 .accounts-grid {
   display: grid;
   gap: 12px;
-  height: 60vh;
+  height: 62vh;
   overflow-y: auto;
   padding-right: 4px;
   align-content: start;
