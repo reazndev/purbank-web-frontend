@@ -48,7 +48,7 @@ export interface CreateRegistrationCodeDto {
   providedIn: 'root'
 })
 export class AdminService {
-  private readonly baseUrl = 'http://localhost:8080/api/v1/admin';
+  private readonly baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -58,27 +58,31 @@ export class AdminService {
   }
 
   createUser(userData: CreateUserDto): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/users`, userData);
+    return this.http.post<User>(`${this.baseUrl}/admin/users`, userData);
   }
 
   getUserDetails(userId: string): Observable<UserDetails> {
-    return this.http.get<UserDetails>(`${this.baseUrl}/users/${userId}`);
+    return this.http.get<UserDetails>(`${this.baseUrl}/admin/users/${userId}`);
   }
 
   deleteUser(userId: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/users/${userId}`);
+    return this.http.delete<void>(`${this.baseUrl}/admin/users/${userId}`);
   }
 
   // Registration Code Endpoints
   getUserRegistrationCodes(userId: string): Observable<RegistrationCode[]> {
-    return this.http.get<RegistrationCode[]>(`${this.baseUrl}/users/${userId}/registration`);
+    return this.http.get<RegistrationCode[]>(`${this.baseUrl}/admin/users/${userId}/registration`);
   }
 
   createRegistrationCode(userId: string, codeData: CreateRegistrationCodeDto): Observable<RegistrationCode> {
-    return this.http.post<RegistrationCode>(`${this.baseUrl}/users/${userId}/registration`, codeData);
+    const params: any = { title: codeData.title };
+    if (codeData.description) {
+      params.description = codeData.description;
+    }
+    return this.http.post<RegistrationCode>(`${this.baseUrl}/admin/users/${userId}/registration`, null, { params });
   }
 
   deleteRegistrationCode(userId: string, codeId: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/users/${userId}/registration/${codeId}`);
+    return this.http.delete<void>(`${this.baseUrl}/admin/users/${userId}/registration/${codeId}`);
   }
 }
