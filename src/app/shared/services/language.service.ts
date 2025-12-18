@@ -73,6 +73,9 @@ export interface Translations {
   locked: string;
   yes: string;
   no: string;
+  deletePayment: string;
+  apply: string;
+  editTransaction: string;
 }
 
 @Injectable({
@@ -142,7 +145,10 @@ export class LanguageService {
       status: "Status",
       locked: "Gesperrt",
       yes: "Ja",
-      no: "Nein"
+      no: "Nein",
+      deletePayment: "Zahlung löschen",
+      apply: "Bestätigen",
+      editTransaction: "Überweisung bearbeiten"
     },
     en: {
       dashboard: 'Dashboard',
@@ -205,7 +211,10 @@ export class LanguageService {
       status: "Status",
       locked: "Locked",
       yes: "Yes",
-      no: "No"
+      no: "No",
+      deletePayment: "Delete Payment",
+      apply: "Apply",
+      editTransaction: "Edit Transaction"
     }
   };
 
