@@ -47,7 +47,6 @@ export class DashboardTransactionsComponent implements OnInit {
   }
 
   loadTransactions(): void {
-    // Load both konten and payments
     forkJoin({
       konten: this.kontenService.getKonten(),
       payments: this.paymentsService.getAllPayments()
@@ -58,12 +57,10 @@ export class DashboardTransactionsComponent implements OnInit {
           return;
         }
 
-        // Fetch transactions from all konten
         const transactionRequests = konten.map(konto => 
           this.kontenService.getTransactions(konto.kontoId)
         );
 
-        // Wait for all requests to complete
         let completedRequests = 0;
         const allTransactions: Transaction[] = [];
 
@@ -74,7 +71,6 @@ export class DashboardTransactionsComponent implements OnInit {
               completedRequests++;
               
               if (completedRequests === transactionRequests.length) {
-                // Convert payments to TransactionDisplay format (pending)
                 const pendingPayments: TransactionDisplay[] = payments.map(p => {
                   const konto = konten.find(k => k.kontoId === p.kontoId);
                   return {
@@ -92,7 +88,6 @@ export class DashboardTransactionsComponent implements OnInit {
                   };
                 });
 
-                // Convert transactions to TransactionDisplay format
                 const completedTransactions: TransactionDisplay[] = allTransactions.map(t => {
                   const konto = konten.find(k => k.iban === t.fromIban);
                   return {
@@ -111,19 +106,15 @@ export class DashboardTransactionsComponent implements OnInit {
                   };
                 });
 
-                // Sort pending payments by execution date (most recent first)
                 pendingPayments.sort((a, b) => 
                   new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
                 );
 
-                // Sort completed transactions by timestamp (most recent first)
                 completedTransactions.sort((a, b) => 
                   new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
                 );
                 
-                // Combine: pending payments first, then completed transactions
                 this.transactions = [...pendingPayments, ...completedTransactions];
-                // Show only the first 50 items for the dashboard
                 this.displayedTransactions = this.transactions.slice(0, 50);
                 this.groupTransactions();
                 this.isLoading = false;

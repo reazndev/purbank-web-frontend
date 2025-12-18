@@ -10,14 +10,12 @@
   margin-left: auto;
 }
 
-/* Wrapper for all transaction groups with scrolling */
 .transactions-wrapper {
   height: 65vh;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
-/* Override transaction grid gap for dashboard */
 .transactions-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -25,7 +23,6 @@
   margin-bottom: 15px;
 }
 
-/* Override transaction box layout for dashboard */
 .transaction-box {
   grid-template-columns: 1fr auto auto;
   min-height: 0;
