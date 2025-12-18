@@ -91,9 +91,11 @@
 .accounts-grid {
   display: grid;
   gap: 12px;
-  max-height: 630px;
+  height: 60vh;
   overflow-y: auto;
   padding-right: 4px;
+  align-content: start;
+  grid-auto-rows: min-content;
 }
 
 .account-box {
@@ -104,6 +106,8 @@
   align-items: center;
   gap: 12px;
   margin-bottom: -5px;
+  min-height: 50px;
+  height: fit-content;
 }
 
 .account-name {
