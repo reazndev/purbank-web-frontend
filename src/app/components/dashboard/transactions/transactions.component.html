@@ -70,10 +70,6 @@
         <span class="detail-value">{{ selectedTransaction.executionDate }}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">{{ languageService.translate('status') }}:</span>
-        <span class="detail-value status-badge" [class]="'status-' + selectedTransaction.status.toLowerCase()">{{ selectedTransaction.status }}</span>
-      </div>
-      <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('locked') }}:</span>
         <span class="detail-value">{{ selectedTransaction.locked ? languageService.translate('yes') : languageService.translate('no') }}</span>
       </div>
