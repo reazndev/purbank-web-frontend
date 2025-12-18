@@ -12,8 +12,6 @@ export interface Payment {
   executionType: 'INSTANT' | 'NORMAL';
   executionDate: string;
   locked: boolean;
-  // Legacy fields for backward compatibility
-
 }
 
 export interface CreatePaymentRequest {

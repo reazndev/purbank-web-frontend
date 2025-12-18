@@ -14,11 +14,13 @@ export interface Transaction {
   transactionId: string;
   amount: number;
   balanceAfter: number;
-  timestamp: string;
+  timestamp: string;  
   fromIban: string;
   message: string;
   note: string;
 }
+// toIban will be added later in backend
+
 
 @Injectable({
   providedIn: 'root'
