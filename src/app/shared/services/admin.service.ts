@@ -16,7 +16,7 @@ export interface CreateUserDto {
   email: string;
   firstName: string;
   lastName: string;
-  contractNumber: string;
+  contractNumber?: string; // Optional - auto-generated if not provided
 }
 
 export interface UserDetails {
@@ -54,7 +54,7 @@ export class AdminService {
 
   // User Management Endpoints
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/users`);
+    return this.http.get<User[]>(`${this.baseUrl}/admin/users`);
   }
 
   createUser(userData: CreateUserDto): Observable<User> {

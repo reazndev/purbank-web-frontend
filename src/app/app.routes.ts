@@ -8,6 +8,7 @@ import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { WealthPage } from './pages/wealth/wealth.page';
 import { TransactionsPage } from './pages/transactions/transactions.page';
 import { AdminPage } from './pages/admin/admin.page';
+import { adminAuthGuard, authGuard } from './shared/services/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: LoginPage },
@@ -16,8 +17,29 @@ export const routes: Routes = [
   { path: 'registration', component: NeuanmeldungPage },
   { path: 'support', component: SupportPage },
   { path: 'development', component: DevelopmentPage },
-  { path: 'dashboard', component: DashboardPage },
-  { path: 'wealth', component: WealthPage },
-  { path: 'transactions', component: TransactionsPage },
-  { path: 'management', component: AdminPage }
+  { 
+    path: 'dashboard', 
+    component: DashboardPage,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'wealth', 
+    component: WealthPage,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'transactions', 
+    component: TransactionsPage,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'admin', 
+    component: AdminPage,
+    canActivate: [adminAuthGuard]
+  },
+  { 
+    path: 'management', 
+    component: AdminPage,
+    canActivate: [adminAuthGuard]
+  }
 ];
