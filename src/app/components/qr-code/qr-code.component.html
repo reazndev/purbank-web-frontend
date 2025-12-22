@@ -1,0 +1,25 @@
+<div class="qr-container" [class.loading]="loading" [class.error]="error">
+  <canvas 
+    #qrCanvas
+    class="qr-canvas"
+    [class.hidden]="loading || error"
+  ></canvas>
+  
+  @if (loading) {
+    <div class="qr-loading">
+      <div class="spinner"></div>
+      <p class="loading-text">Generating QR code...</p>
+    </div>
+  }
+  
+  @if (error) {
+    <div class="qr-error">
+      <span>⚠️</span>
+      <p>QR Code</p>
+      <div class="qr-code-text">
+        <p class="text-label">Verification Code:</p>
+        <p class="code-value">{{ data }}</p>
+      </div>
+    </div>
+  }
+</div>
