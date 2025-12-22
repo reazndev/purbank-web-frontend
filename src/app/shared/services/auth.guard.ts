@@ -14,7 +14,6 @@ export const adminAuthGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  console.log('Admin guard failed, redirecting to login');
   // Store the attempted URL for redirecting after login
   router.navigate(['/login'], { 
     queryParams: { returnUrl: state.url }

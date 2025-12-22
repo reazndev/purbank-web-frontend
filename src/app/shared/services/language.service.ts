@@ -21,6 +21,23 @@ export interface Translations {
   newRegistration: string;
   createAccount: string;
   neuanmeldungTitle: string;
+  // Login specific
+  mobileVerification: string;
+  scanQrCode: string;
+  waitingForApproval: string;
+  loginApproved: string;
+  redirectingToDashboard: string;
+  verificationTimeout: string;
+  verificationTimeoutMessage: string;
+  tryAgain: string;
+  email: string;
+  enterYourPassword: string;
+  hidePassword: string;
+  showPassword: string;
+  initiatingLogin: string;
+  loggingIn: string;
+  adminLogin: string;
+  userLogin: string;
   // Page: Support
   supportTitle: string;
   supportContent: string;
@@ -78,6 +95,8 @@ export interface Translations {
   editTransaction: string;
   pendingPayments: string;
   deleteAccountWarning: string;
+  // Wealth Detailed
+  myRole: string;
 }
 
 @Injectable({
@@ -87,7 +106,7 @@ export class LanguageService {
   private readonly currentLanguage = signal<Language>('de');
 
   private readonly translations: Record<Language, Translations> = {
-    de: {
+  de: {
       dashboard: 'Dashboard',
       wealth: 'Vermögen',
       transactions: 'Überweisungen',
@@ -103,6 +122,22 @@ export class LanguageService {
       newRegistration: 'Neu? Erstanmeldung',
       createAccount: 'Konto erstellen', // ORIGINAL USECASE: landing page: options | now merged with createAccountTitle as this has the same content and will likely stay that way 
       neuanmeldungTitle: 'Neuanmeldung',
+      mobileVerification: 'Mobile Verifizierung',
+      scanQrCode: 'Scannen Sie diesen QR-Code mit Ihrer Purbank Mobile-App, um die Anmeldung zu genehmigen',
+      waitingForApproval: 'Warten auf Genehmigung...',
+      loginApproved: 'Anmeldung genehmigt',
+      redirectingToDashboard: 'Weiterleitung zum Dashboard...',
+      verificationTimeout: 'Verifizierungs-Timeout',
+      verificationTimeoutMessage: 'Die Verifizierungsanfrage ist abgelaufen. Bitte versuchen Sie es erneut.',
+      tryAgain: 'Erneut versuchen',
+      email: 'E-Mail',
+      enterYourPassword: 'Geben Sie Ihr Passwort ein',
+      hidePassword: 'Passwort ausblenden',
+      showPassword: 'Passwort anzeigen',
+      initiatingLogin: 'Anmeldung wird eingeleitet...',
+      loggingIn: 'Anmeldung läuft...',
+      adminLogin: 'Admin-Anmeldung',
+      userLogin: 'Benutzer-Anmeldung',
       supportTitle: 'Support',
       supportContent: 'Benötigen Sie Hilfe? Kontaktieren Sie unser Support-Team für alle Fragen rund um Ihr PurBank Konto. Wir sind gerne für Sie da.',
       phoneLabel: 'Telefon:',
@@ -152,7 +187,8 @@ export class LanguageService {
       apply: "Bestätigen",
       editTransaction: "Überweisung bearbeiten",
       pendingPayments: "Überweisungen in Verarbeitung",
-      deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 CHF können gelöscht werden."
+      deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 CHF können gelöscht werden.",
+      myRole: "Meine Rolle"
     },
     en: {
       dashboard: 'Dashboard',
@@ -171,6 +207,22 @@ export class LanguageService {
       newRegistration: 'New? Initial Registration',
       createAccount: 'Create Account', // ORIGINAL USECASE: landing page: options | now merged with createAccountTitle as this has the same content and will likely stay that way 
       neuanmeldungTitle: 'Initial Registration',
+      mobileVerification: 'Mobile Verification',
+      scanQrCode: 'Scan this QR code with your Purbank mobile app to approve the login',
+      waitingForApproval: 'Waiting for approval...',
+      loginApproved: 'Login Approved',
+      redirectingToDashboard: 'Redirecting to dashboard...',
+      verificationTimeout: 'Verification Timeout',
+      verificationTimeoutMessage: 'The verification request has timed out. Please try again.',
+      tryAgain: 'Try Again',
+      email: 'Email',
+      enterYourPassword: 'Enter your password',
+      hidePassword: 'Hide password',
+      showPassword: 'Show password',
+      initiatingLogin: 'Initiating login...',
+      loggingIn: 'Logging in...',
+      adminLogin: 'Admin Login',
+      userLogin: 'User Login',
       supportTitle: 'Support',
       supportContent: 'Need help? Contact our support team for all questions regarding your PurBank account. We are here to assist you.',
       phoneLabel: 'Phone:',
@@ -220,7 +272,8 @@ export class LanguageService {
       apply: "Apply",
       editTransaction: "Edit Transaction",
       pendingPayments: "Pending Payments",
-      deleteAccountWarning: "Only accounts with a balance of 0 CHF can be deleted."
+      deleteAccountWarning: "Only accounts with a balance of 0 CHF can be deleted.",
+      myRole: "My Role"
     }
   };
 

@@ -106,8 +106,8 @@ export class QrCodeComponent implements OnChanges, AfterViewInit {
         text: this.data,
         width: this.size,
         height: this.size,
-        colorDark: '#000000',
-        colorLight: '#ffffff',
+        colorDark: '#5A7684',
+        colorLight: '#EFEFEF',
         correctLevel: QRCodeLib.CorrectLevel.H
       });
 

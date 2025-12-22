@@ -20,7 +20,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  // Returns the authenticated user's data
+  getCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users`);
   }
 }

@@ -1,0 +1,59 @@
+<form class="login-form" (ngSubmit)="submit.emit()">
+  <div class="form-group">
+    <label for="email" class="form-label">Email</label>
+    <input 
+      type="email" 
+      id="email" 
+      class="form-input" 
+      [(ngModel)]="formState.email"
+      name="email"
+      placeholder="admin@purbank.ch"
+      required
+      [disabled]="formState.loading"
+      autocomplete="email"
+    />
+  </div>
+  
+  <div class="form-group">
+    <label for="password" class="form-label">{{ translations.password }}</label>
+    <div class="password-input-wrapper">
+      <input 
+        [type]="showPassword ? 'text' : 'password'"
+        id="password" 
+        class="form-input"
+        [(ngModel)]="formState.password"
+        name="password"
+        placeholder="Enter your password"
+        required
+        [disabled]="formState.loading"
+        autocomplete="current-password"
+      />
+      <button 
+        type="button" 
+        class="password-toggle"
+        (click)="togglePassword.emit()"
+        [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+      >
+        {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+      </button>
+    </div>
+  </div>
+
+  @if (formState.error) {
+    <div class="error-message">
+      {{ formState.error }}
+    </div>
+  }
+  
+  <button 
+    type="submit" 
+    class="login-button"
+    [disabled]="formState.loading"
+  >
+    @if (formState.loading) {
+      Logging in...
+    } @else {
+      {{ translations.loginButton }}
+    }
+  </button>
+</form>

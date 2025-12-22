@@ -24,7 +24,8 @@ export interface TokenPayload {
   sub: string; // email
   exp: number;
   iat: number;
-  authorities: string[];
+  authorities?: string[];
+  roles?: string[];
 }
 
 @Injectable({
@@ -166,9 +167,14 @@ export class AdminLoginService {
       return false;
     }
     
-    // Check if authorities array exists and contains ROLE_ADMIN
+    // Check if authorities array exists and contains ROLE_ADMIN or ADMIN
     if (user.authorities && Array.isArray(user.authorities)) {
-      return user.authorities.includes('ROLE_ADMIN');
+      return user.authorities.includes('ROLE_ADMIN') || user.authorities.includes('ADMIN');
+    }
+    
+    // Check for roles claim as alternative
+    if (user.roles && Array.isArray(user.roles)) {
+      return user.roles.includes('ROLE_ADMIN') || user.roles.includes('ADMIN');
     }
     
     // Fallback: Check if user logged in via admin password endpoint
@@ -228,7 +234,18 @@ export class AdminLoginService {
     if (!token) {
       return null;
     }
-    return this.decodeToken(token);
+    const decoded = this.decodeToken(token);
+    if (!decoded) {
+      return null;
+    }
+    
+    // If authorities are not present but user logged in via admin endpoint, add ADMIN role
+    if ((!decoded.authorities || !Array.isArray(decoded.authorities) || decoded.authorities.length === 0) 
+        && localStorage.getItem(this.ADMIN_FLAG_KEY) === 'true') {
+      decoded.authorities = ['ADMIN'];
+    }
+    
+    return decoded;
   }
 
   /**

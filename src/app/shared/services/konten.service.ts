@@ -21,6 +21,18 @@ export interface Transaction {
 }
 // toIban will be added later in backend
 
+export interface KontoMember {
+  id: string;
+  name: string;
+  email: string;
+  role: 'OWNER' | 'MANAGER' | 'VIEWER';
+}
+
+export interface InviteMemberRequest {
+  contractNumber: string;
+  role: 'OWNER' | 'MANAGER' | 'VIEWER';
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +56,13 @@ export class KontenService {
 
   getTransactions(kontoId: string): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.apiUrl}/konten/${kontoId}/transactions`);
+  }
+
+  getKontoMembers(kontoId: string): Observable<KontoMember[]> {
+    return this.http.get<KontoMember[]>(`${this.apiUrl}/konten/${kontoId}/members`);
+  }
+
+  inviteMember(kontoId: string, request: InviteMemberRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/konten/${kontoId}/members`, request);
   }
 }

@@ -1,0 +1,101 @@
+.login-form {
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-black);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 0;
+  border: none;
+  border-bottom: 1px solid var(--color-gray);
+  background-color: transparent;
+  color: var(--color-black);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  border-bottom-color: var(--color-accent-dark);
+}
+
+.form-input::placeholder {
+  color: var(--color-gray);
+}
+
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+}
+
+.login-button:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.login-button:disabled {
+  background-color: var(--color-gray);
+  cursor: not-allowed;
+}
+
+.login-button:disabled:hover {
+  background-color: var(--color-gray);
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .form-input {
+  padding-right: 2.5rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-gray);
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: var(--color-black);
+}
+
+.error-message {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #fee;
+  color: #c00;
+  border-left: 3px solid #c00;
+  font-size: 0.875rem;
+}

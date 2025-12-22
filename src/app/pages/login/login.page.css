@@ -104,3 +104,209 @@
   color: var(--color-black);
   border-bottom-color: var(--color-black);
 }
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .form-input {
+  padding-right: 2.5rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-gray);
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: var(--color-black);
+}
+
+.admin-toggle {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 2px 0;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-toggle:hover {
+  color: var(--color-black);
+  border-bottom-color: var(--color-black);
+}
+
+.error-message {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #fee;
+  color: #c00;
+  border-left: 3px solid #c00;
+  font-size: 0.875rem;
+}
+
+.login-button:disabled {
+  background-color: var(--color-gray);
+  cursor: not-allowed;
+}
+
+.login-button:disabled:hover {
+  background-color: var(--color-gray);
+}
+
+/* Mobile Verification Styles */
+.verification-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.verification-header {
+  text-align: center;
+}
+
+.verification-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem 0;
+}
+
+.verification-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-gray);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.verification-status {
+  display: flex;
+  justify-content: center;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-indicator.pending {
+  color: var(--color-accent-dark);
+  border: 1px solid var(--color-accent-dark);
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-accent-light);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+.verification-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.cancel-button {
+  padding: 0.75rem 2rem;
+  background-color: transparent;
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+/* Status Success/Error Screens */
+.status-success,
+.status-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.status-success .status-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e6f7e6;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.status-error .status-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #fee;
+  color: #c00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.status-success h2,
+.status-error h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-success p,
+.status-error p {
+  font-size: 0.875rem;
+  color: var(--color-gray);
+  margin: 0;
+}
