@@ -1,28 +1,127 @@
 <div class="wealth-container">
   <div class="wealth-header">
-    <h2 class="wealth-tooltip-container">
-      {{ languageService.translate('current') }} {{ languageService.translate('wealth') }}:
-      <span class="info-icon">
-        <img src="icons/info.svg" alt="info" class="info-svg">
-        <span class="tooltip">{{ languageService.translate('currentWealthTooltip') }}</span>
-      </span>
-      <span class="wealth-amount">{{ currentWealth }} CHF</span>
-    </h2>
+    <div class="header-row">
+      <h2 class="wealth-tooltip-container">
+        {{ languageService.translate('current') }} {{ languageService.translate('wealth') }}:
+        <span class="info-icon">
+          <img src="icons/info.svg" alt="info" class="info-svg">
+          <span class="tooltip">{{ languageService.translate('currentWealthTooltip') }}</span>
+        </span>
+      </h2>
+      <div class="header-right">
+        <span class="wealth-amount">{{ currentWealth }} CHF</span>
+        <button class="icon-btn" (click)="toggleExpand()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-expand"><path d="m15 15 6 6"></path><path d="m15 9 6-6"></path><path d="M21 16v5h-5"></path><path d="M21 8V3h-5"></path><path d="M3 16v5h5"></path><path d="m3 21 6-6"></path><path d="M3 8V3h5"></path><path d="M9 9 3 3"></path></svg>
+        </button>
+      </div>
+    </div>
     <hr>
   </div>
   <div class="accounts-header">
     <span class="account-header-name"> {{ languageService.translate('accountname') }}</span>
+    <span class="account-header-role">{{ languageService.translate('myRole') || 'My Role' }}</span>
     <span class="account-header-interest-rate">{{ languageService.translate('interestRate') }}</span>
     <span class="account-header-interest-balance">{{ languageService.translate('balance') }}</span>
+    <span class="account-header-actions"></span>
   </div>
-  <div class="accounts-grid">
+  <div class="accounts-grid scrollable-grid">
     <div class="account-box" *ngFor="let konto of konten">
       <span class="account-name">{{ konto.kontoName }}</span>
+      <span class="account-role">{{ konto.role }}</span>
       <span class="account-interest-rate">N/A</span>
       <span class="account-balance">{{ konto.balance }} CHF</span>
+      <button class="info-btn" (click)="showKontoDetail(konto)" title="View details">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+      </button>
     </div>
   </div>
   <div class="scroll-indicator">
     <p>{{ languageService.translate('scrollForMore') }}</p>
+  </div>
+</div>
+
+<!-- Expanded Modal -->
+<div class="modal-overlay" *ngIf="isExpanded" (click)="toggleExpand()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="wealth-header">
+      <div class="header-row">
+        <h2 class="wealth-tooltip-container">
+          {{ languageService.translate('current') }} {{ languageService.translate('wealth') }}:
+          <span class="wealth-amount">{{ currentWealth }} CHF</span>
+        </h2>
+        <button class="icon-btn" (click)="toggleExpand()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minimize-2"><path d="m14 10 7-7"></path><path d="M20 10h-6V4"></path><path d="m3 21 7-7"></path><path d="M4 14h6v6"></path></svg>
+        </button>
+      </div>
+      <hr>
+    </div>
+    <div class="accounts-grid full-height-grid">
+      <div class="account-header-row">
+        <span class="account-label">{{ languageService.translate('accountname') }}</span>
+        <span class="account-label">{{ languageService.translate('myRole') }}</span>
+        <span class="account-label">IBAN</span>
+        <span class="account-label">{{ languageService.translate('interestRate') }}</span>
+        <span class="account-label">{{ languageService.translate('balance') }}</span>
+      </div>
+      <div class="account-box-expanded" *ngFor="let konto of konten">
+        <span class="account-value">{{ konto.kontoName }}</span>
+        <span class="account-value">{{ konto.role }}</span>
+        <span class="account-value">{{ konto.iban }}</span>
+        <span class="account-value">N/A</span>
+        <span class="account-balance">{{ konto.balance }} CHF</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" *ngIf="showDetailModal" (click)="closeDetailModal()">
+  <div class="detail-modal-content" (click)="$event.stopPropagation()">
+    <div class="detail-header">
+      <h2>{{ languageService.translate('accountname') }}</h2>
+      <button class="icon-btn" (click)="closeDetailModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </div>
+    <hr>
+    <div class="detail-content" *ngIf="selectedKonto">
+      <div class="detail-row">
+        <span class="detail-label">{{ languageService.translate('accountname') }}:</span>
+        <span class="detail-value">{{ selectedKonto.kontoName }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">IBAN:</span>
+        <span class="detail-value">{{ selectedKonto.iban }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">{{ languageService.translate('balance') }}:</span>
+        <span class="detail-value">{{ selectedKonto.balance }} CHF</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">{{ languageService.translate('myRole') }}:</span>
+        <span class="detail-value">{{ selectedKonto.role }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">{{ languageService.translate('interestRate') }}:</span>
+        <span class="detail-value">N/A</span>
+      </div>
+      
+      <div class="members-section">
+        <h3>Members</h3>
+        <div *ngIf="loadingMembers" class="loading">Loading members...</div>
+        <div *ngIf="!loadingMembers && kontoMembers.length > 0" class="members-list">
+          <div class="member-item" *ngFor="let member of kontoMembers">
+            <div class="member-info">
+              <span class="member-name">{{ member.name }}</span>
+              <span class="member-email">{{ member.email }}</span>
+            </div>
+            <span class="member-role">{{ member.role }}</span>
+          </div>
+        </div>
+        <div *ngIf="!loadingMembers && kontoMembers.length === 0" class="no-members">
+          No members found
+        </div>
+      </div>
+    </div>
   </div>
 </div>

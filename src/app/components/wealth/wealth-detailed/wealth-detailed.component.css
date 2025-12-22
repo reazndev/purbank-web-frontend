@@ -71,8 +71,17 @@
 .wealth-amount {
   color: var(--color-accent-dark);
   font-weight: normal;
-  margin-left: auto;
+  margin-right: 12px;
+  font-size: 24px;
+  margin-bottom: 6px;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .wealth-header hr {
   border: 0;
   border-top: 1px solid var(--color-black);
@@ -82,8 +91,8 @@
 .accounts-header {
   margin-bottom: 15px;
   display: grid;
-  /* columns: name | interest rate | balance */
-  grid-template-columns: 1fr 6rem 8rem;
+  /* columns: name | role | interest rate | balance | actions */
+  grid-template-columns: 1fr 4rem 9rem 8rem auto;
   align-items: center;
   gap: 12px;
 }
@@ -102,7 +111,7 @@
   background-color: var(--color-accent-light);
   padding: 15px;
   display: grid;
-  grid-template-columns: 1fr 6rem 8rem;
+  grid-template-columns: 1fr 7rem 6rem 8rem;
   align-items: center;
   gap: 12px;
   margin-bottom: -5px;
@@ -122,6 +131,15 @@
   font-weight: normal;
 }
 
+.account-role,
+.account-header-role {
+  text-align: right;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
 .account-interest-rate,
 .account-header-interest-rate {
   text-align: center;
@@ -138,4 +156,226 @@
   margin-top: 10px;
   font-size: 0.9em;
   color: var(--color-accent-dark);
+}
+
+/* Header row with expand button */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-black);
+  margin-bottom: 6px;
+}
+
+.icon-btn:hover {
+  opacity: 0.7;
+}
+
+.info-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-black);
+  transition: opacity 0.2s;
+  margin-left: 8px;
+}
+
+.info-btn:hover {
+  opacity: 0.7;
+}
+
+.account-box {
+  background-color: var(--color-accent-light);
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr 7rem 6rem 8rem auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: -5px;
+  min-height: 50px;
+  height: fit-content;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--color-white);
+  padding: 40px;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 1000px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.detail-modal-content {
+  background-color: var(--color-white);
+  padding: 30px 40px;
+  border-radius: 4px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.detail-header h2 {
+  font-weight: normal;
+  margin: 0;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.detail-label {
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.detail-value {
+  color: var(--color-accent-dark);
+}
+
+/* Expanded view grid */
+.full-height-grid {
+  height: calc(80vh - 150px);
+  overflow-y: auto;
+}
+
+.account-header-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr;
+  gap: 12px;
+  padding: 15px;
+  font-weight: 500;
+  border-bottom: 2px solid var(--color-black);
+  position: sticky;
+  top: 0;
+  background-color: var(--color-white);
+  z-index: 1;
+}
+
+.account-label {
+  text-align: left;
+}
+
+.account-box-expanded {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr;
+  gap: 12px;
+  padding: 15px;
+  background-color: var(--color-accent-light);
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.account-value {
+  text-align: left;
+  word-break: break-word;
+}
+
+/* Members section in detail modal */
+.members-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid var(--color-black);
+}
+
+.members-section h3 {
+  font-weight: normal;
+  margin: 0 0 15px 0;
+}
+
+.members-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.member-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: var(--color-accent-light);
+  border-radius: 4px;
+}
+
+.member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.member-name {
+  font-weight: 500;
+}
+
+.member-email {
+  font-size: 0.9em;
+  color: var(--color-accent-dark);
+}
+
+.member-role {
+  font-weight: 500;
+  color: var(--color-accent-dark);
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--color-accent-dark);
+}
+
+.no-members {
+  text-align: center;
+  padding: 20px;
+  color: var(--color-accent-dark);
+  font-style: italic;
 }
