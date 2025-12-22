@@ -36,7 +36,7 @@ export class WealthNegPosChartComponent implements OnInit, AfterViewInit {
         }
       },
       error: (error) => {
-        console.error('Error loading konten:', error);
+        // Handle error silently
       }
     });
   }

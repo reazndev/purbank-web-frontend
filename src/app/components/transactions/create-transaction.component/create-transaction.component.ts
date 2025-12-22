@@ -59,7 +59,6 @@ export class CreateTransactionComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading accounts:', error);
         this.errorMessage = 'Failed to load accounts';
         this.isLoading = false;
       }
@@ -133,9 +132,6 @@ export class CreateTransactionComponent implements OnInit {
       executionDate: this.isInstant ? new Date().toISOString().split('T')[0] : this.executionDate
     };
 
-    console.log('Payment object before sending:', payment);
-    console.log('executionType:', payment.executionType);
-
     this.paymentsService.createPayment(payment).subscribe({
       next: (response) => {
         this.successMessage = `Payment created successfully! ${this.isInstant ? 'Executing immediately...' : 'Will be processed at 1:00 AM Zurich time.'}`;
@@ -147,7 +143,6 @@ export class CreateTransactionComponent implements OnInit {
         }, 2000);
       },
       error: (error) => {
-        console.error('Error creating payment:', error);
         this.errorMessage = error.error?.message || 'Failed to create payment. Please try again.';
         this.isSubmitting = false;
       }

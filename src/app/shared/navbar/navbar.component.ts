@@ -25,14 +25,12 @@ export class NavbarComponent implements OnInit {
   }
 
   loadUser(): void {
-    this.userService.getUsers().subscribe({
-      next: (users) => {
-        if (users && users.length > 0) {
-          this.currentUser = users[0]; // Get first user (current logged in user)
-        }
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.currentUser = user;
       },
       error: (error) => {
-        console.error('Error loading user:', error);
+        // Handle error silently
       }
     });
   }

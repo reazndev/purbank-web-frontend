@@ -36,7 +36,7 @@ export class WealthWealthDetailedComponent implements OnInit {
         this.calculateWealth();
       },
       error: (error) => {
-        console.error('Error loading konten:', error);
+        // Handle error silently
       }
     });
   }
@@ -70,7 +70,6 @@ export class WealthWealthDetailedComponent implements OnInit {
         this.loadingMembers = false;
       },
       error: (error) => {
-        console.error('Error loading konto members:', error);
         this.loadingMembers = false;
       }
     });

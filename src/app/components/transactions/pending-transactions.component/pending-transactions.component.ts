@@ -87,7 +87,6 @@ export class PendingTransactionsComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading payments:', error);
         this.isLoading = false;
       }
     });
@@ -137,7 +136,6 @@ export class PendingTransactionsComponent implements OnInit {
         this.loadPayments();
       },
       error: (error) => {
-        console.error('Error updating payment:', error);
         alert('Failed to update payment. Please try again.');
       }
     });
@@ -154,7 +152,6 @@ export class PendingTransactionsComponent implements OnInit {
         this.loadPayments();
       },
       error: (error) => {
-        console.error('Error deleting payment:', error);
         alert('Failed to delete payment. Please try again.');
       }
     });

@@ -27,7 +27,6 @@ export class WealthSettingsComponent {
   ) {}
 
   openCreateModal(): void {
-    console.log('Opening create modal');
     this.showCreateModal = true;
     this.accountName = '';
     this.errorMessage = '';
@@ -60,7 +59,6 @@ export class WealthSettingsComponent {
         }, 1500);
       },
       error: (error) => {
-        console.error('Error creating account:', error);
         this.errorMessage = 'Failed to create account. Please try again.';
         this.isSubmitting = false;
       }
@@ -68,7 +66,6 @@ export class WealthSettingsComponent {
   }
 
   openDeleteModal(): void {
-    console.log('Opening delete modal');
     this.showDeleteModal = true;
     this.errorMessage = '';
     this.successMessage = '';
@@ -93,7 +90,6 @@ export class WealthSettingsComponent {
         }
       },
       error: (error) => {
-        console.error('Error loading accounts:', error);
         this.errorMessage = 'Failed to load accounts. Please try again.';
       }
     });
@@ -122,7 +118,6 @@ export class WealthSettingsComponent {
         }, 1500);
       },
       error: (error) => {
-        console.error('Error deleting account:', error);
         this.errorMessage = 'Failed to delete account. Please try again.';
         this.isSubmitting = false;
       }

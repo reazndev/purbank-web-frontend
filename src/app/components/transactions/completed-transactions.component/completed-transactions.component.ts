@@ -108,7 +108,6 @@ export class CompletedTransactionsComponent implements OnInit {
               }
             },
             error: (error) => {
-              console.error('Error loading transactions for konto:', error);
               completedRequests++;
               
               if (completedRequests === transactionRequests.length) {
@@ -119,7 +118,6 @@ export class CompletedTransactionsComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.error('Error loading konten:', error);
         this.isLoading = false;
       }
     });

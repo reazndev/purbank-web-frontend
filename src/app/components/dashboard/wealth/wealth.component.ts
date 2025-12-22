@@ -30,7 +30,7 @@ export class DashboardWealthComponent implements OnInit {
         this.calculateTotalWealth();
       },
       error: (error) => {
-        console.error('Error loading konten:', error);
+        // Handle error silently
       }
     });
   }
