@@ -21,8 +21,7 @@ export class CreateUserComponent {
   newUser = {
     email: '',
     firstName: '',
-    lastName: '',
-    contractNumber: ''
+    lastName: ''
   };
 
   constructor(readonly adminService: AdminService) {}
@@ -58,7 +57,6 @@ export class CreateUserComponent {
         }, 3000);
       },
       error: (error) => {
-        console.error('Error creating user:', error);
         this.errorMessage = error.error?.message || 'Failed to create user. Please try again.';
         this.isCreating = false;
       }
@@ -69,8 +67,7 @@ export class CreateUserComponent {
     return !!(
       this.newUser.email.trim() &&
       this.newUser.firstName.trim() &&
-      this.newUser.lastName.trim() &&
-      this.newUser.contractNumber.trim()
+      this.newUser.lastName.trim()
     );
   }
 
@@ -78,8 +75,7 @@ export class CreateUserComponent {
     this.newUser = {
       email: '',
       firstName: '',
-      lastName: '',
-      contractNumber: ''
+      lastName: ''
     };
     this.errorMessage = null;
     this.successMessage = null;

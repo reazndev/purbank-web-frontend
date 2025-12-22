@@ -201,8 +201,6 @@ export class AdminLoginService {
           .join('')
       );
       const decoded = JSON.parse(jsonPayload);
-      console.log('Full decoded token:', decoded);
-      console.log('All token fields:', Object.keys(decoded));
       return decoded;
     } catch (error) {
       return null;

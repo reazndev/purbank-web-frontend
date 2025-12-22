@@ -47,7 +47,6 @@ export class RegistrationCodesComponent implements OnChanges {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading registration codes:', error);
         this.errorMessage = 'Failed to load registration codes. Please try again.';
         this.isLoading = false;
       }
@@ -80,7 +79,7 @@ export class RegistrationCodesComponent implements OnChanges {
         this.showCreateForm = false;
       },
       error: (error) => {
-        console.error('Error creating registration code:', error);
+
         this.errorMessage = 'Failed to create registration code. Please try again.';
         this.isCreating = false;
       }

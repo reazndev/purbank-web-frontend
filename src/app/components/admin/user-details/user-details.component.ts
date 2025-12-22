@@ -39,7 +39,6 @@ export class UserDetailsComponent implements OnChanges {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading user details:', error);
         this.errorMessage = 'Failed to load user details. Please try again.';
         this.isLoading = false;
       }

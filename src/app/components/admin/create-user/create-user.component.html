@@ -50,15 +50,8 @@
       </div>
 
       <div class="form-group">
-        <label for="contractNumber">Contract Number *</label>
-        <input
-          type="text"
-          id="contractNumber"
-          [(ngModel)]="newUser.contractNumber"
-          name="contractNumber"
-          placeholder="CTR-123456"
-          required
-          [disabled]="isCreating">
+        <label for="contractNumber">Contract Number (auto-generated)</label>
+        <p class="field-info">Contract number will be automatically generated</p>
       </div>
 
       <div class="alert alert-error" *ngIf="errorMessage">

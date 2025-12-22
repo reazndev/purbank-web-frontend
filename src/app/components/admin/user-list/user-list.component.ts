@@ -33,8 +33,11 @@ export class UserListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error loading users:', error);
-        this.errorMessage = 'Failed to load users. Please try again.';
+        if (error.status === 403) {
+          this.errorMessage = 'Access denied. Your account does not have admin privileges. Please ensure the JWT token includes the ADMIN role.';
+        } else {
+          this.errorMessage = 'Failed to load users. Please try again.';
+        }
         this.isLoading = false;
       }
     });
