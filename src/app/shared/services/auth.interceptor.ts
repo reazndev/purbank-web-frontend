@@ -25,10 +25,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // Clone request to add headers
   let modifiedReq = req;
 
-  // Add access token to request if available (prefer user token, fallback to admin)
+  // Add access token to request if available
   const userAccessToken = userAuthService.getAccessToken();
   const adminAccessToken = adminLoginService.getAccessToken();
-  const accessToken = userAccessToken || adminAccessToken;
+  
+  // Prefer admin token if user is logged in as admin (via password), otherwise prefer user token
+  const isAdmin = adminLoginService.isAdmin();
+  const accessToken = isAdmin ? (adminAccessToken || userAccessToken) : (userAccessToken || adminAccessToken);
   
   if (accessToken) {
     modifiedReq = modifiedReq.clone({
@@ -58,8 +61,29 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         // Determine which service to use for refresh
         const hasUserRefreshToken = !!userAuthService.getStoredRefreshToken();
         const hasAdminRefreshToken = !!adminLoginService.getRefreshToken();
+        const isAdmin = adminLoginService.isAdmin();
 
-        if (hasUserRefreshToken) {
+        // If user is admin, prefer admin refresh token
+        if (isAdmin && hasAdminRefreshToken) {
+          isRefreshing = true;
+          return adminLoginService.refreshToken().pipe(
+            switchMap(() => {
+              isRefreshing = false;
+              const newToken = adminLoginService.getAccessToken();
+              const clonedRequest = modifiedReq.clone({
+                setHeaders: {
+                  Authorization: `Bearer ${newToken}`
+                }
+              });
+              return next(clonedRequest);
+            }),
+            catchError((refreshError) => {
+              isRefreshing = false;
+              adminLoginService.logout();
+              return throwError(() => refreshError);
+            })
+          );
+        } else if (hasUserRefreshToken) {
           isRefreshing = true;
           return userAuthService.refreshAccessToken().pipe(
             switchMap(() => {

@@ -162,6 +162,12 @@ export class AdminLoginService {
    * Check if user has admin role
    */
   isAdmin(): boolean {
+    // Fallback: Check if user logged in via admin password endpoint 
+    // -> normal users dont have passwords so only admin accounts could login via that 
+    if (localStorage.getItem(this.ADMIN_FLAG_KEY) === 'true') {
+      return true;
+    }
+
     const user = this.getCurrentUser();
     if (!user) {
       return false;
@@ -169,17 +175,19 @@ export class AdminLoginService {
     
     // Check if authorities array exists and contains ROLE_ADMIN or ADMIN
     if (user.authorities && Array.isArray(user.authorities)) {
-      return user.authorities.includes('ROLE_ADMIN') || user.authorities.includes('ADMIN');
+      if (user.authorities.includes('ROLE_ADMIN') || user.authorities.includes('ADMIN')) {
+        return true;
+      }
     }
     
     // Check for roles claim as alternative
     if (user.roles && Array.isArray(user.roles)) {
-      return user.roles.includes('ROLE_ADMIN') || user.roles.includes('ADMIN');
+      if (user.roles.includes('ROLE_ADMIN') || user.roles.includes('ADMIN')) {
+        return true;
+      }
     }
     
-    // Fallback: Check if user logged in via admin password endpoint
-    // Since the backend JWT doesn't include authorities, we track this client-side
-    return localStorage.getItem(this.ADMIN_FLAG_KEY) === 'true';
+    return false;
   }
 
   /**
@@ -239,10 +247,13 @@ export class AdminLoginService {
       return null;
     }
     
-    // If authorities are not present but user logged in via admin endpoint, add ADMIN role
-    if ((!decoded.authorities || !Array.isArray(decoded.authorities) || decoded.authorities.length === 0) 
-        && localStorage.getItem(this.ADMIN_FLAG_KEY) === 'true') {
-      decoded.authorities = ['ADMIN'];
+    // If user logged in via admin endpoint, ensure they have ADMIN role in the frontend object
+    if (localStorage.getItem(this.ADMIN_FLAG_KEY) === 'true') {
+      if (!decoded.authorities) {
+        decoded.authorities = ['ADMIN'];
+      } else if (Array.isArray(decoded.authorities) && !decoded.authorities.includes('ADMIN') && !decoded.authorities.includes('ROLE_ADMIN')) {
+        decoded.authorities.push('ADMIN');
+      }
     }
     
     return decoded;
