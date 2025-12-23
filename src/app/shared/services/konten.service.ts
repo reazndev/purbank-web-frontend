@@ -31,6 +31,7 @@ export interface KontoMember {
 export interface InviteMemberRequest {
   contractNumber: string;
   role: 'OWNER' | 'MANAGER' | 'VIEWER';
+  deviceId: string;
 }
 
 
@@ -64,5 +65,9 @@ export class KontenService {
 
   inviteMember(kontoId: string, request: InviteMemberRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/konten/${kontoId}/members`, request);
+  }
+
+  removeMember(kontoId: string, memberId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/konten/${kontoId}/members/${memberId}`);
   }
 }

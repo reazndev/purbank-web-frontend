@@ -379,3 +379,89 @@
   color: var(--color-accent-dark);
   font-style: italic;
 }
+
+.member-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #dc3545;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.remove-btn:hover {
+  opacity: 0.7;
+}
+
+.invite-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid var(--color-black);
+}
+
+.invite-section h3 {
+  font-weight: normal;
+  margin-bottom: 15px;
+}
+
+.invite-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.invite-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.invite-select {
+  padding: 8px 12px;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  background-color: white;
+  font-family: inherit;
+}
+
+.invite-btn {
+  padding: 8px 20px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.invite-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.invite-btn:not(:disabled):hover {
+  opacity: 0.8;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
