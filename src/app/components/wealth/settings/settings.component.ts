@@ -16,6 +16,8 @@ export class WealthSettingsComponent {
   showDeleteModal = false;
   showInviteModal = false;
   accountName = '';
+  currency = 'CHF';
+  currencies = ['CHF', 'EUR', 'USD'];
   isSubmitting = false;
   errorMessage = '';
   successMessage = '';
@@ -33,6 +35,7 @@ export class WealthSettingsComponent {
   openCreateModal(): void {
     this.showCreateModal = true;
     this.accountName = '';
+    this.currency = 'CHF';
     this.errorMessage = '';
     this.successMessage = '';
   }
@@ -53,7 +56,7 @@ export class WealthSettingsComponent {
     this.isSubmitting = true;
     this.errorMessage = '';
 
-    this.kontenService.createKonto(this.accountName).subscribe({
+    this.kontenService.createKonto(this.accountName, this.currency).subscribe({
       next: (response) => {
         this.successMessage = `Account "${this.accountName}" created successfully!`;
         this.isSubmitting = false;

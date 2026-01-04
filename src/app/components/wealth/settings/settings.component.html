@@ -33,6 +33,18 @@
         />
       </div>
 
+      <div class="form-group">
+        <label for="currency">{{ languageService.translate('currency') || 'Currency' }}</label>
+        <select 
+          id="currency" 
+          [(ngModel)]="currency" 
+          [disabled]="isSubmitting"
+          class="form-input"
+        >
+          <option *ngFor="let curr of currencies" [value]="curr">{{ curr }}</option>
+        </select>
+      </div>
+
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
       <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
     </div>

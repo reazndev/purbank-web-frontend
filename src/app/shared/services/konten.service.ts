@@ -49,10 +49,11 @@ export class KontenService {
     return this.http.get<Konto[]>(`${this.apiUrl}/konten`);
   }
 
-  createKonto(name: string): Observable<any> {
+  createKonto(name: string, currency: string): Observable<any> {
     const deviceId = this.userAuthService.getOrCreateDeviceId();
     return this.http.post(`${this.apiUrl}/konten`, { 
       name,
+      currency,
       deviceId 
     });
   }
