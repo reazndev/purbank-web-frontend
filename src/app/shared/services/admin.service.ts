@@ -48,7 +48,7 @@ export interface CreateRegistrationCodeDto {
   providedIn: 'root'
 })
 export class AdminService {
-  private readonly baseUrl = 'http://localhost:8080/api/v1';
+  private readonly baseUrl = '/api/v1';
 
   constructor(private readonly http: HttpClient) {}
 

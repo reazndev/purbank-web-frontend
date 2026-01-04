@@ -59,7 +59,7 @@ export type LoginState =
   providedIn: 'root'
 })
 export class UserAuthService {
-  private readonly BASE_URL = 'http://localhost:8080/api/v1';
+  private readonly BASE_URL = '/api/v1';
   private readonly ACCESS_TOKEN_KEY = 'user_access_token';
   private readonly REFRESH_TOKEN_KEY = 'user_refresh_token';
   private readonly DEVICE_ID_KEY = 'device_id';

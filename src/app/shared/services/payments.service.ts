@@ -38,7 +38,7 @@ export interface UpdatePaymentRequest {
   providedIn: 'root'
 })
 export class PaymentsService {
-  private apiUrl = 'http://localhost:8080/api/v1';
+  private apiUrl = '/api/v1';
   private userAuthService = inject(UserAuthService);
 
   constructor(private http: HttpClient) {}
