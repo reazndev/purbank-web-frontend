@@ -97,6 +97,7 @@ export interface Translations {
   deleteAccountWarning: string;
   inviteMember: string;
   role: string;
+  currency: string;
   owner: string;
   manager: string;
   viewer: string;
@@ -197,6 +198,7 @@ export class LanguageService {
       deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 CHF können gelöscht werden.",
       inviteMember: "Mitglied einladen",
       role: "Rolle",
+      currency: "Währung",
       owner: "Inhaber",
       manager: "Verwalter",
       viewer: "Betrachter",
@@ -288,6 +290,7 @@ export class LanguageService {
       deleteAccountWarning: "Only accounts with a balance of 0 CHF can be deleted.",
       inviteMember: "Invite Member",
       role: "Role",
+      currency: "Currency",
       owner: "Owner",
       manager: "Manager",
       viewer: "Viewer",
