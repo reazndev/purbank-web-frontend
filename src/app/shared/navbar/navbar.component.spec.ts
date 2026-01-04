@@ -23,7 +23,6 @@ describe('NavbarComponent', () => {
       dashboard: 'Dashboard',
       wealth: 'Wealth',
       transactions: 'Transactions',
-      analytics: 'Analytics',
       logout: 'Logout'
     }),
     setLanguage: jasmine.createSpy('setLanguage')
@@ -37,7 +36,6 @@ describe('NavbarComponent', () => {
           { path: 'dashboard', component: DummyComponent },
           { path: 'wealth', component: DummyComponent },
           { path: 'transactions', component: DummyComponent },
-          { path: 'analytics', component: DummyComponent },
           { path: 'logout', component: DummyComponent }
         ]),
         { provide: LanguageService, useValue: mockLanguageService }
