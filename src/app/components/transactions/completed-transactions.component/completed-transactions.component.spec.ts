@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CompletedTransactionsComponent } from './completed-transactions.component';
 import { LanguageService } from '../../../shared/services/language.service';
 import { By } from '@angular/platform-browser';
@@ -16,7 +17,7 @@ describe('CompletedTransactionsComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [CompletedTransactionsComponent],
+      imports: [CompletedTransactionsComponent, HttpClientTestingModule],
       providers: [
         { provide: LanguageService, useValue: mockLanguageService }
       ]
@@ -37,17 +38,7 @@ describe('CompletedTransactionsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /**
-   * Test: Transaction Grouping
-   * Prerequisite: The component initializes with mock transaction data.
-   * Expected Result: Transactions are correctly grouped by date, and specific groups contain the expected number of transactions.
-   */
-  it('should group transactions by date on init', () => {
-    expect(component.groupedTransactions.length).toBeGreaterThan(0);
-    const firstGroup = component.groupedTransactions.find(g => g.date === '2025-12-01'); // juts some mock data, if this works then it will work in production as well (will fail once mock replaced with backend)
-    expect(firstGroup).toBeTruthy();
-    expect(firstGroup?.transactions.length).toBe(2);
-  });
+
 
   /**
    * Test: Initial Popup State
@@ -93,28 +84,7 @@ describe('CompletedTransactionsComponent', () => {
     expect(modal).toBeNull();
   });
 
-  /**
-   * Test: Transaction List Rendering
-   * Prerequisite: The component has a list of transactions (mock data).
-   * Expected Result: The number of rendered transaction boxes in the scrollable grid matches the mock data length (25).
-   */
-  it('should render the list of transactions', () => {
-    const transactionItems = fixture.debugElement.queryAll(By.css('.scrollable-grid .transaction-box'));
-    expect(transactionItems.length).toBe(25);
-  });
 
-  /**
-   * Test: Expanded Transaction List Rendering
-   * Prerequisite: The popup is expanded.
-   * Expected Result: The number of rendered transaction boxes in the full-height grid matches the mock data length (25).
-   */
-  it('should render the list of transactions in the modal when expanded', () => {
-    component.isExpanded = true;
-    fixture.detectChanges();
-    
-    const transactionItems = fixture.debugElement.queryAll(By.css('.full-height-grid .transaction-box'));
-    expect(transactionItems.length).toBe(25);
-  });
 
   /**
    * Test: Rendering Performance
