@@ -1,0 +1,15 @@
+services:
+  frontend:
+    image: ghcr.io/reazndev/purbank-web-frontend:latest
+    container_name: purbank-frontend
+    ports:
+      - "80:80"
+    networks:
+      - purbank-network
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+networks:
+  purbank-network:
+    driver: bridge
