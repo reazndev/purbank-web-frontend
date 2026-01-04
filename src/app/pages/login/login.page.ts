@@ -9,7 +9,6 @@ import { LanguageToggleComponent } from '../../shared/language-toggle/language-t
 import { AdminLoginService } from '../../shared/services/admin-login.service';
 import { UserAuthService, LoginState, AuthStatusResponse } from '../../shared/services/user-auth.service';
 import { QrCodeComponent } from '../../components/qr-code/qr-code.component';
-import { AdminLoginComponent } from '../../components/admin-login/admin-login.component';
 
 type LoginMode = 'user' | 'admin';
 
@@ -24,7 +23,7 @@ interface LoginFormState {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, LanguageToggleComponent, QrCodeComponent, AdminLoginComponent],
+  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, LanguageToggleComponent, QrCodeComponent],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css'
 })

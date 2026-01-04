@@ -14,12 +14,16 @@ import { KontenService } from '../../../shared/services/konten.service';
 export class WealthSettingsComponent {
   showCreateModal = false;
   showDeleteModal = false;
+  showInviteModal = false;
   accountName = '';
   isSubmitting = false;
   errorMessage = '';
   successMessage = '';
   deletableAccounts: any[] = [];
+  invitableAccounts: any[] = [];
   selectedAccountId: string | null = null;
+  inviteContractNumber = '';
+  inviteRole: 'OWNER' | 'MANAGER' | 'VIEWER' = 'VIEWER';
 
   constructor(
     public languageService: LanguageService,
@@ -119,6 +123,71 @@ export class WealthSettingsComponent {
       },
       error: (error) => {
         this.errorMessage = 'Failed to delete account. Please try again.';
+        this.isSubmitting = false;
+      }
+    });
+  }
+
+  openInviteModal(): void {
+    this.showInviteModal = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.selectedAccountId = null;
+    this.inviteContractNumber = '';
+    this.inviteRole = 'VIEWER';
+    this.loadInvitableAccounts();
+  }
+
+  closeInviteModal(): void {
+    this.showInviteModal = false;
+    this.invitableAccounts = [];
+    this.selectedAccountId = null;
+    this.errorMessage = '';
+    this.successMessage = '';
+  }
+
+  loadInvitableAccounts(): void {
+    this.kontenService.getKonten().subscribe({
+      next: (konten) => {
+        // Only OWNER can invite
+        this.invitableAccounts = konten.filter(konto => konto.role === 'OWNER');
+        if (this.invitableAccounts.length === 0) {
+          this.errorMessage = 'No accounts available. You must be the OWNER of an account to invite members.';
+        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Failed to load accounts. Please try again.';
+      }
+    });
+  }
+
+  inviteMember(): void {
+    if (!this.selectedAccountId) {
+      this.errorMessage = 'Please select an account';
+      return;
+    }
+    if (!this.inviteContractNumber.trim()) {
+      this.errorMessage = 'Contract number is required';
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.errorMessage = '';
+
+    this.kontenService.inviteMember(this.selectedAccountId, {
+      contractNumber: this.inviteContractNumber,
+      role: this.inviteRole,
+      deviceId: '' // Will be filled by service
+    }).subscribe({
+      next: (response) => {
+        this.successMessage = 'Invitation sent successfully!';
+        this.isSubmitting = false;
+        setTimeout(() => {
+          this.closeInviteModal();
+        }, 1500);
+      },
+      error: (error) => {
+        this.errorMessage = error.error?.message || 'Failed to invite member. Please try again.';
         this.isSubmitting = false;
       }
     });

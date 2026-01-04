@@ -6,6 +6,7 @@
 
   <div class="settings-nav">
     <a class="settings-link" (click)="openCreateModal()"><span class="settings-link-text">{{ languageService.translate('openNewAccount') }}</span></a>
+    <a class="settings-link" (click)="openInviteModal()"><span class="settings-link-text">{{ languageService.translate('inviteMember') }}</span></a>
     <a class="settings-link" (click)="openDeleteModal()"><span class="settings-link-text">{{ languageService.translate('closeAccount') }}</span></a>
   </div>
 </div>
@@ -49,6 +50,78 @@
         [disabled]="isSubmitting || !accountName.trim()"
       >
         {{ isSubmitting ? 'Creating...' : (languageService.translate('create') || 'Create') }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Invite Member Modal -->
+<div class="modal-overlay" *ngIf="showInviteModal" (click)="closeInviteModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ languageService.translate('inviteMember') }}</h2>
+      <button class="modal-close" (click)="closeInviteModal()">&times;</button>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <div *ngIf="invitableAccounts.length > 0">
+        <label>{{ languageService.translate('account') }}</label>
+        <div class="account-selection-list">
+          <div 
+            *ngFor="let konto of invitableAccounts" 
+            class="account-selection-item"
+            [class.selected]="selectedAccountId === konto.kontoId"
+            (click)="selectAccount(konto.kontoId)"
+          >
+            <span class="account-selection-name">{{ konto.kontoName }}</span>
+            <span class="account-selection-iban-box">{{ konto.iban }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contractNumber">{{ languageService.translate('contractNumber') }}</label>
+          <input 
+            type="text" 
+            id="contractNumber" 
+            [(ngModel)]="inviteContractNumber" 
+            [disabled]="isSubmitting"
+            class="form-input"
+            placeholder="12345678"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="role">{{ languageService.translate('role') }}</label>
+          <select 
+            id="role" 
+            [(ngModel)]="inviteRole" 
+            [disabled]="isSubmitting"
+            class="form-input"
+          >
+            <option value="VIEWER">{{ languageService.translate('viewer') }}</option>
+            <option value="MANAGER">{{ languageService.translate('manager') }}</option>
+            <option value="OWNER">{{ languageService.translate('owner') }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+    </div>
+    <div class="modal-footer">
+      <button 
+        class="btn-secondary" 
+        (click)="closeInviteModal()" 
+        [disabled]="isSubmitting"
+      >
+        {{ languageService.translate('cancel') || 'Cancel' }}
+      </button>
+      <button 
+        class="btn-primary" 
+        (click)="inviteMember()" 
+        [disabled]="isSubmitting || !selectedAccountId || !inviteContractNumber.trim() || invitableAccounts.length === 0"
+      >
+        {{ isSubmitting ? 'Inviting...' : (languageService.translate('inviteMember') || 'Invite') }}
       </button>
     </div>
   </div>

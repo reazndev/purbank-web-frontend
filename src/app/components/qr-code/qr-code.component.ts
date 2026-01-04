@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 declare const QRCode: any;
@@ -15,6 +15,8 @@ export class QrCodeComponent implements OnChanges, AfterViewInit {
   @Input() size: number = 256;
   
   @ViewChild('qrCanvas') qrCanvas!: ElementRef<HTMLCanvasElement>;
+
+  private cdr = inject(ChangeDetectorRef);
 
   loading: boolean = false;
   error: boolean = false;
@@ -34,11 +36,13 @@ export class QrCodeComponent implements OnChanges, AfterViewInit {
   private generateQrCode(): void {
     if (!this.data) {
       this.error = true;
+      this.cdr.detectChanges();
       return;
     }
 
     this.loading = true;
     this.error = false;
+    this.cdr.detectChanges();
 
     try {
       // Check if canvas is available
@@ -122,10 +126,12 @@ export class QrCodeComponent implements OnChanges, AfterViewInit {
             ctx.drawImage(qrCanvas, 0, 0);
             this.loading = false;
             this.error = false;
+            this.cdr.detectChanges();
           }
         } else {
           this.error = true;
           this.loading = false;
+          this.cdr.detectChanges();
         }
         
         // Clean up
@@ -134,6 +140,7 @@ export class QrCodeComponent implements OnChanges, AfterViewInit {
     } catch (err) {
       this.error = true;
       this.loading = false;
+      this.cdr.detectChanges();
       if (tempDiv.parentNode) {
         document.body.removeChild(tempDiv);
       }

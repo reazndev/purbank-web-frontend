@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserAuthService } from './user-auth.service';
 
 export interface Konto {
   kontoId: string;
@@ -40,6 +41,7 @@ export interface InviteMemberRequest {
 })
 export class KontenService {
   private apiUrl = 'http://localhost:8080/api/v1';
+  private userAuthService = inject(UserAuthService);
 
   constructor(private http: HttpClient) {}
 
@@ -48,11 +50,18 @@ export class KontenService {
   }
 
   createKonto(name: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/konten`, { name });
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.post(`${this.apiUrl}/konten`, { 
+      name,
+      deviceId 
+    });
   }
 
   deleteKonto(kontoId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/konten/${kontoId}`);
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.request('DELETE', `${this.apiUrl}/konten/${kontoId}`, {
+      body: { deviceId }
+    });
   }
 
   getTransactions(kontoId: string): Observable<Transaction[]> {
@@ -64,7 +73,11 @@ export class KontenService {
   }
 
   inviteMember(kontoId: string, request: InviteMemberRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/konten/${kontoId}/members`, request);
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.post(`${this.apiUrl}/konten/${kontoId}/members`, {
+      ...request,
+      deviceId
+    });
   }
 
   removeMember(kontoId: string, memberId: string): Observable<any> {

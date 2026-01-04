@@ -95,8 +95,15 @@ export interface Translations {
   editTransaction: string;
   pendingPayments: string;
   deleteAccountWarning: string;
+  inviteMember: string;
+  role: string;
+  owner: string;
+  manager: string;
+  viewer: string;
   // Wealth Detailed
   myRole: string;
+  // Mobile Verify
+  actionExecutedAccordingToMobile: string;
 }
 
 @Injectable({
@@ -188,7 +195,13 @@ export class LanguageService {
       editTransaction: "Überweisung bearbeiten",
       pendingPayments: "Überweisungen in Verarbeitung",
       deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 CHF können gelöscht werden.",
-      myRole: "Meine Rolle"
+      inviteMember: "Mitglied einladen",
+      role: "Rolle",
+      owner: "Inhaber",
+      manager: "Verwalter",
+      viewer: "Betrachter",
+      myRole: "Meine Rolle",
+      actionExecutedAccordingToMobile: "Aktion ausgeführt gemäss Mobile App"
     },
     en: {
       dashboard: 'Dashboard',
@@ -273,7 +286,13 @@ export class LanguageService {
       editTransaction: "Edit Transaction",
       pendingPayments: "Pending Payments",
       deleteAccountWarning: "Only accounts with a balance of 0 CHF can be deleted.",
-      myRole: "My Role"
+      inviteMember: "Invite Member",
+      role: "Role",
+      owner: "Owner",
+      manager: "Manager",
+      viewer: "Viewer",
+      myRole: "My Role",
+      actionExecutedAccordingToMobile: "Action executed according to mobile app"
     }
   };
 

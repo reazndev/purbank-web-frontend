@@ -133,6 +133,11 @@ export class UserAuthService {
       { headers }
     ).pipe(
       tap(response => {
+        // Clear admin flag to avoid context mixing
+        localStorage.removeItem('is_admin_user');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        
         // Handle different possible response formats
         const mobileVerifyCode = response.mobileVerifyCode || response.mobileVerify || response.mobile_verify || response.code;
         
@@ -186,9 +191,21 @@ export class UserAuthService {
    * Automatically stops when status is APPROVED, REJECTED, INVALID, or on timeout.
    */
   startPolling(): Observable<AuthStatusResponse> {
+    const mobileVerify = this.mobileVerifyCodeSubject.getValue();
+    if (!mobileVerify) {
+      return throwError(() => new Error('No mobile-verify code available'));
+    }
+    return this.startPollingForCode(mobileVerify);
+  }
+
+  /**
+   * Start continuous polling for a specific mobile-verify code.
+   */
+  startPollingForCode(mobileVerify: string): Observable<AuthStatusResponse> {
     this.stopPolling$.next(); // Stop any existing polling
     
     const startTime = Date.now();
+    const deviceId = this.getOrCreateDeviceId();
     
     return timer(0, this.POLLING_INTERVAL_MS).pipe(
       takeUntil(this.stopPolling$),
@@ -199,25 +216,34 @@ export class UserAuthService {
           this.stopPolling();
           return throwError(() => new Error('Verification timeout'));
         }
-        
-        return this.pollAuthStatus();
-      }),
-      tap(response => {
-        switch (response.status) {
-          case 'APPROVED':
-            this.loginStateSubject.next('approved');
-            this.stopPolling();
-            break;
-          case 'REJECTED':
-            this.loginStateSubject.next('rejected');
-            this.stopPolling();
-            break;
-          case 'INVALID':
-            this.loginStateSubject.next('invalid');
-            this.stopPolling();
-            break;
-          // PENDING continues polling
-        }
+
+        const request: AuthStatusRequest = {
+          mobileVerify,
+          deviceId
+        };
+
+        return this.http.post<AuthStatusResponse>(
+          `${this.BASE_URL}/auth/status`,
+          request
+        ).pipe(
+          tap(response => {
+            if (response.status === 'APPROVED') {
+              this.loginStateSubject.next('approved');
+              this.stopPolling();
+            } else if (response.status === 'REJECTED') {
+              this.loginStateSubject.next('rejected');
+              this.stopPolling();
+            } else if (response.status === 'INVALID') {
+              this.loginStateSubject.next('invalid');
+              this.stopPolling();
+            }
+          }),
+          catchError(error => {
+            // Don't stop polling on transient errors
+            console.error('Polling error:', error);
+            return throwError(() => error);
+          })
+        );
       })
     );
   }

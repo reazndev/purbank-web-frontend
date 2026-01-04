@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserAuthService } from './user-auth.service';
 
 export interface Payment {
   id: string;
@@ -38,6 +39,7 @@ export interface UpdatePaymentRequest {
 })
 export class PaymentsService {
   private apiUrl = 'http://localhost:8080/api/v1';
+  private userAuthService = inject(UserAuthService);
 
   constructor(private http: HttpClient) {}
 
@@ -53,14 +55,25 @@ export class PaymentsService {
   }
 
   createPayment(payment: CreatePaymentRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/payments`, payment);
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.post(`${this.apiUrl}/payments`, {
+      ...payment,
+      deviceId
+    });
   }
 
   updatePayment(paymentId: string, payment: UpdatePaymentRequest): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/payments/${paymentId}`, payment);
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.patch(`${this.apiUrl}/payments/${paymentId}`, {
+      ...payment,
+      deviceId
+    });
   }
 
   deletePayment(paymentId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/payments/${paymentId}`);
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.request('DELETE', `${this.apiUrl}/payments/${paymentId}`, {
+      body: { deviceId }
+    });
   }
 }

@@ -63,6 +63,11 @@ export class AdminLoginService {
       { headers }
     ).pipe(
       tap(response => {
+        // Clear user tokens to avoid context mixing
+        localStorage.removeItem('user_access_token');
+        localStorage.removeItem('user_refresh_token');
+        localStorage.removeItem('contract_number');
+        
         this.setTokens(response.access_token, response.refresh_token);
         // Mark user as admin since they logged in via password endpoint (admin-only)
         localStorage.setItem(this.ADMIN_FLAG_KEY, 'true');
