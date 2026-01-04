@@ -80,10 +80,10 @@ export class DashboardTransactionsComponent implements OnInit {
                     amount: -p.amount, // negative since it's outgoing
                     message: p.message,
                     note: p.note || '',
-                    executionType: p.executionType || p.executionType || 'NORMAL',
-                    executionDate: p.executionDate || p.executionDate || new Date().toISOString(),
+                    executionType: p.executionType || 'NORMAL',
+                    executionDate: p.executionDate || new Date().toISOString(),
                     locked: p.locked !== undefined ? p.locked : false,
-                    timestamp: p.executionDate || p.executionDate || new Date().toISOString(),
+                    timestamp: p.executionDate || new Date().toISOString(),
                     isPending: true
                   };
                 });
