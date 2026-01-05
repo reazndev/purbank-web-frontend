@@ -10,6 +10,7 @@ export interface Translations {
   analytics: string;
   logout: string;
   createAccountContent: string;
+  exchangeRates: string;
   // Language switcher
   viewInEnglish: string;
   viewInGerman: string;
@@ -105,7 +106,7 @@ export interface Translations {
   myRole: string;
   // Mobile Verify
   actionExecutedAccordingToMobile: string;
-  wealthOnlyCHF: string;
+  wealthConvertedToCHF: string;
 }
 
 @Injectable({
@@ -122,6 +123,7 @@ export class LanguageService {
       analytics: 'Analyse',
       logout: 'Abmelden',
       createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen.',
+      exchangeRates: 'Wechselkurse',
       viewInEnglish: 'View this page in English', 
       viewInGerman: 'Diese Seite auf Deutsch anzeigen', 
       loginTitle: 'Login',
@@ -205,7 +207,7 @@ export class LanguageService {
       viewer: "Betrachter",
       myRole: "Meine Rolle",
       actionExecutedAccordingToMobile: "Aktion ausgeführt gemäss Mobile App",
-      wealthOnlyCHF: "Nur CHF Konten werden berücksichtigt"
+      wealthConvertedToCHF: "Alle Konten werden in CHF umgerechnet und angezeigt"
     },
     en: {
       dashboard: 'Dashboard',
@@ -213,8 +215,7 @@ export class LanguageService {
       transactions: 'Transactions',
       analytics: 'Analytics',
       logout: 'Logout',
-      createAccountContent: 'Please contact your nearest PurBank branch to open an account.',
-      // yes these two are redundant but their values wont change in the future and this just makes it easier to work with
+      createAccountContent: 'Please contact your nearest PurBank branch to open an account.',      exchangeRates: 'Exchange Rates',      // yes these two are redundant but their values wont change in the future and this just makes it easier to work with
       viewInEnglish: 'View this page in English',
       viewInGerman: 'Diese Seite auf Deutsch anzeigen',
       loginTitle: 'Login',
@@ -298,7 +299,7 @@ export class LanguageService {
       viewer: "Viewer",
       myRole: "My Role",
       actionExecutedAccordingToMobile: "Action executed according to mobile app",
-      wealthOnlyCHF: "Only CHF accounts are considered"
+      wealthConvertedToCHF: "All accounts are converted to CHF for the total"
     }
   };
 

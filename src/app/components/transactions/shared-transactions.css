@@ -49,6 +49,12 @@
   margin: 0;
 }
 
+.small-note {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--color-gray);
+}
+
 .detail-header hr {
   border: 0;
   border-top: 1px solid var(--color-black);

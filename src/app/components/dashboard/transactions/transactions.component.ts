@@ -18,6 +18,7 @@ interface TransactionDisplay {
   locked: boolean;
   timestamp: string;
   isPending: boolean;
+  currency: string;
 }
 
 @Component({
@@ -84,7 +85,8 @@ export class DashboardTransactionsComponent implements OnInit {
                     executionDate: p.executionDate || new Date().toISOString(),
                     locked: p.locked !== undefined ? p.locked : false,
                     timestamp: p.executionDate || new Date().toISOString(),
-                    isPending: true
+                    isPending: true,
+                    currency: konto?.currency || 'CHF'
                   };
                 });
 
@@ -102,7 +104,8 @@ export class DashboardTransactionsComponent implements OnInit {
                     status: 'Completed',
                     locked: false,
                     timestamp: t.timestamp,
-                    isPending: false
+                    isPending: false,
+                    currency: t.currency || konto?.currency || 'CHF'
                   };
                 });
 

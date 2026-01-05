@@ -54,6 +54,12 @@
   font-weight: normal;
 }
 
+.wealth-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .wealth-footer a {
   color: var(--color-accent-dark);
   text-decoration: underline;
@@ -63,4 +69,10 @@
 .wealth-footer a:hover {
     color: var(--color-black);
     border-bottom-color: var(--color-black);
+}
+
+.small-note {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--color-gray);
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Konto, KontoMember } from '../../../shared/services/konten.service';
 import { UserAuthService } from '../../../shared/services/user-auth.service';
+import { CurrencyService } from '../../../shared/services/currency.service';
 
 @Component({
   selector: 'app-wealth-detailed',
@@ -31,7 +32,8 @@ export class WealthWealthDetailedComponent implements OnInit {
   constructor(
     public languageService: LanguageService,
     private kontenService: KontenService,
-    private authService: UserAuthService
+    private authService: UserAuthService,
+    private currencyService: CurrencyService
   ) {}
 
   ngOnInit(): void {
@@ -51,8 +53,26 @@ export class WealthWealthDetailedComponent implements OnInit {
   }
 
   calculateWealth(): void {
-    this.provisionalWealth = this.konten.reduce((sum, konto) => sum + konto.balance, 0);
-    this.currentWealth = this.provisionalWealth;
+    // Convert all account balances to CHF and sum them
+    const accountAmounts = this.konten.map(k => ({
+      amount: k.balance,
+      currency: k.currency
+    }));
+
+    this.currencyService.convertAndSum(accountAmounts, 'CHF').subscribe({
+      next: (total) => {
+        this.currentWealth = Math.round(total * 100) / 100; // Round to 2 decimal places
+        this.provisionalWealth = this.currentWealth; // For now, same as current
+      },
+      error: (error) => {
+        console.error('Failed to calculate wealth:', error);
+        // Fallback: just sum CHF accounts
+        this.currentWealth = this.konten
+          .filter(k => k.currency === 'CHF')
+          .reduce((sum, konto) => sum + konto.balance, 0);
+        this.provisionalWealth = this.currentWealth;
+      }
+    });
   }
 
   toggleExpand(): void {

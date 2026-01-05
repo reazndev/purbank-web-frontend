@@ -21,6 +21,7 @@ export interface Transaction {
   fromIban: string;
   message: string;
   note: string;
+  currency: string;
 }
 // toIban will be added later in backend
 

@@ -70,6 +70,11 @@ export class CreateTransactionComponent implements OnInit {
     return account ? account.balance : 0;
   }
 
+  getSelectedAccountCurrency(): string {
+    const account = this.accounts.find(a => a.kontoId === this.selectedAccount);
+    return account ? account.currency : 'CHF';
+  }
+
   calculateBalanceAfter(): string {
     const currentBalance = this.getSelectedAccountBalance();
     const balanceAfter = currentBalance - this.amount;

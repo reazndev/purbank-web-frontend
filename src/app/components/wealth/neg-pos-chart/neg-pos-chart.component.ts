@@ -2,6 +2,9 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import Chart from 'chart.js/auto';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Konto } from '../../../shared/services/konten.service';
+import { CurrencyService } from '../../../shared/services/currency.service';
+import { forkJoin, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-neg-pos-chart',
@@ -17,7 +20,8 @@ export class WealthNegPosChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     public languageService: LanguageService,
-    private kontenService: KontenService
+    private kontenService: KontenService,
+    private currencyService: CurrencyService
   ) {}
 
   ngOnInit(): void {
@@ -27,13 +31,46 @@ export class WealthNegPosChartComponent implements OnInit, AfterViewInit {
   loadKonten(): void {
     this.kontenService.getKonten().subscribe({
       next: (data) => {
-        this.konten = data.map(konto => ({
-          name: konto.kontoName,
-          amount: konto.balance
-        }));
-        if (this.pieCanvas) {
-          this.createChart();
+        // Convert all account balances to CHF for the chart
+        const conversionObservables = data.map(konto => {
+          if (konto.currency === 'CHF') {
+            return of({ name: konto.kontoName, amount: konto.balance });
+          } else {
+            return this.currencyService.convertAmount(konto.balance, konto.currency, 'CHF').pipe(
+              map(convertedAmount => ({
+                name: konto.kontoName,
+                amount: Math.round(convertedAmount * 100) / 100
+              }))
+            );
+          }
+        });
+
+        if (conversionObservables.length === 0) {
+          this.konten = [];
+          return;
         }
+
+        forkJoin(conversionObservables).subscribe({
+          next: (convertedKonten) => {
+            this.konten = convertedKonten;
+            if (this.pieCanvas) {
+              this.createChart();
+            }
+          },
+          error: (error) => {
+            console.error('Failed to convert currencies:', error);
+            // Fallback: show only CHF accounts
+            this.konten = data
+              .filter(konto => konto.currency === 'CHF')
+              .map(konto => ({
+                name: konto.kontoName,
+                amount: konto.balance
+              }));
+            if (this.pieCanvas) {
+              this.createChart();
+            }
+          }
+        });
       },
       error: (error) => {
         // Handle error silently

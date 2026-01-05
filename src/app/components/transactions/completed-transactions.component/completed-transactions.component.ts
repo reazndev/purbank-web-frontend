@@ -10,6 +10,7 @@ interface TransactionDisplay {
   date: string;
   fromIban: string;
   note: string;
+  currency: string;
 }
 
 @Component({
@@ -95,14 +96,18 @@ export class CompletedTransactionsComponent implements OnInit {
                 );
                 
                 // Transform API transactions to display format
-                this.transactions = allTransactions.map(t => ({
-                  name: t.message,
-                  account: t.fromIban,
-                  amount: t.amount,
-                  date: t.timestamp.split('T')[0],
-                  fromIban: t.fromIban,
-                  note: t.note
-                }));
+                this.transactions = allTransactions.map(t => {
+                  const konto = konten.find(k => k.iban === t.fromIban);
+                  return {
+                    name: t.message,
+                    account: t.fromIban,
+                    amount: t.amount,
+                    date: t.timestamp,
+                    fromIban: t.fromIban,
+                    note: t.note,
+                    currency: t.currency || konto?.currency || 'CHF'
+                  };
+                });
                 this.groupTransactions();
                 this.isLoading = false;
               }

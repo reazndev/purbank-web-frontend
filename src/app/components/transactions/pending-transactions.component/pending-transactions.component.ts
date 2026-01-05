@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../../shared/services/language.service';
 import { PaymentsService, Payment } from '../../../shared/services/payments.service';
 import { KontenService, Konto } from '../../../shared/services/konten.service';
+import { CurrencyService } from '../../../shared/services/currency.service';
 import { forkJoin } from 'rxjs';
 
 interface PaymentDisplay {
@@ -17,6 +18,7 @@ interface PaymentDisplay {
   executionType: string;
   executionDate: string;
   locked: boolean;
+  currency: string;
 }
 
 @Component({
@@ -29,12 +31,14 @@ export class PendingTransactionsComponent implements OnInit {
   transactions: PaymentDisplay[] = [];
   isLoading = true;
   konten: Konto[] = [];
+  totalAmountCHF: number = 0;
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
 
   constructor(
     public languageService: LanguageService,
     private paymentsService: PaymentsService,
-    private kontenService: KontenService
+    private kontenService: KontenService,
+    private currencyService: CurrencyService
   ) {}
 
   isExpanded: boolean = false;
@@ -81,13 +85,36 @@ export class PendingTransactionsComponent implements OnInit {
             note: p.note,
             executionType: p.executionType,
             executionDate: p.executionDate,
-            locked: p.locked
+            locked: p.locked,
+            currency: konto?.currency || 'CHF'
           };
         });
+        this.calculateTotalAmount();
         this.isLoading = false;
       },
       error: (error) => {
         this.isLoading = false;
+      }
+    });
+  }
+
+  calculateTotalAmount(): void {
+    // Convert all transaction amounts to CHF and sum them
+    const transactionAmounts = this.transactions.map(t => ({
+      amount: t.amount,
+      currency: t.currency
+    }));
+
+    this.currencyService.convertAndSum(transactionAmounts, 'CHF').subscribe({
+      next: (total) => {
+        this.totalAmountCHF = Math.round(total * 100) / 100;
+      },
+      error: (error) => {
+        console.error('Failed to calculate total amount:', error);
+        // Fallback: just sum CHF transactions
+        this.totalAmountCHF = this.transactions
+          .filter(t => t.currency === 'CHF')
+          .reduce((sum, t) => sum + t.amount, 0);
       }
     });
   }
@@ -168,11 +195,7 @@ export class PendingTransactionsComponent implements OnInit {
     }
   }
 
-  get totalAmount(): number {
-    return this.transactions.reduce((sum, t) => sum + t.amount, 0);
-  }
-
-  protected MathAbs(val: number): number {
+  MathAbs(val: number): number {
     return Math.abs(val);
   }
 }

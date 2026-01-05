@@ -5,3 +5,59 @@
   font-family: var(--font-family);
   color: var(--color-black);
 }
+
+.chart-header h2 {
+  font-weight: normal;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.chart-header hr {
+  border: 0;
+  border-top: 1px solid var(--color-black);
+  margin-bottom: 20px;
+}
+
+.rates-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rate-box {
+  background-color: var(--color-accent-light);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.rate-pair {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: normal;
+}
+
+.currency-from,
+.currency-to {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.arrow-icon {
+  color: var(--color-accent-dark);
+}
+
+.rate-value {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--color-accent-dark);
+}
+
+.loading-state {
+  padding: 20px;
+  text-align: center;
+  color: var(--color-gray);
+}

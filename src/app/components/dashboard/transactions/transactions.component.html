@@ -15,7 +15,7 @@
       <div class="transaction-box" *ngFor="let transaction of group.transactions" [class.pending]="transaction.isPending">
         <span class="transaction-name">{{ transaction.message }}</span>
         <span class="transaction-balance" [class.negative]="transaction.amount < 0">
-          {{ transaction.amount > 0 ? '' : '- ' }}{{ Math.abs(transaction.amount).toFixed(2) }} CHF
+          {{ transaction.amount > 0 ? '' : '- ' }}{{ Math.abs(transaction.amount).toFixed(2) }} {{ transaction.currency }}
         </span>
         
         <button class="info-btn" (click)="showTransactionDetail(transaction)" title="View details">
@@ -60,7 +60,7 @@
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('amount') }}:</span>
         <span class="detail-value" [class.positive]="selectedTransaction.amount > 0" [class.negative]="selectedTransaction.amount < 0">
-          {{ selectedTransaction.amount > 0 ? '+' : '' }}{{ selectedTransaction.amount }} CHF
+          {{ selectedTransaction.amount > 0 ? '+' : '' }}{{ selectedTransaction.amount }} {{ selectedTransaction.currency }}
         </span>
       </div>
       <div class="detail-row">

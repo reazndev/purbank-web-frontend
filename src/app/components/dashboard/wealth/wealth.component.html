@@ -1,15 +1,16 @@
 <div class="wealth-container">
   <div class="wealth-header">
-    <h2>{{ languageService.translate('provisional') }} {{ languageService.translate('wealth') }}: <span class="wealth-amount">{{ totalWealth }} CHF</span></h2>
+    <h2>{{ languageService.translate('provisional') }} {{ languageService.translate('wealth') }}: <span class="wealth-amount">{{ totalWealth }} CHF*</span></h2>
     <hr>
   </div>
   <div class="accounts-grid">
     <div class="account-box" *ngFor="let konto of konten">
       <span class="account-name">{{ konto.kontoName }}</span>
-      <span class="account-balance">{{ konto.balance }} CHF</span>
+      <span class="account-balance">{{ konto.balance }} {{ konto.currency }}</span>
     </div>
   </div>
   <div class="wealth-footer">
     <a href="/wealth">{{ languageService.translate('seeMore') }}</a>
+    <span class="small-note">* {{ languageService.translate('wealthConvertedToCHF') }}</span>
   </div>
 </div>
