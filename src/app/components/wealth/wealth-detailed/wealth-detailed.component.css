@@ -48,7 +48,6 @@
   white-space: normal;
   width: 250px;
   text-align: left;
-  z-index: 1000;
   transition: opacity 0.3s, visibility 0.3s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
@@ -304,7 +303,7 @@
   position: sticky;
   top: 0;
   background-color: var(--color-white);
-  z-index: 1;
+  z-index: 10;
 }
 
 .account-label {
