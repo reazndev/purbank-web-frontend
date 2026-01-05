@@ -105,6 +105,7 @@ export interface Translations {
   myRole: string;
   // Mobile Verify
   actionExecutedAccordingToMobile: string;
+  wealthOnlyCHF: string;
 }
 
 @Injectable({
@@ -195,7 +196,7 @@ export class LanguageService {
       apply: "Bestätigen",
       editTransaction: "Überweisung bearbeiten",
       pendingPayments: "Überweisungen in Verarbeitung",
-      deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 CHF können gelöscht werden.",
+      deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 können gelöscht werden.",
       inviteMember: "Mitglied einladen",
       role: "Rolle",
       currency: "Währung",
@@ -203,7 +204,8 @@ export class LanguageService {
       manager: "Verwalter",
       viewer: "Betrachter",
       myRole: "Meine Rolle",
-      actionExecutedAccordingToMobile: "Aktion ausgeführt gemäss Mobile App"
+      actionExecutedAccordingToMobile: "Aktion ausgeführt gemäss Mobile App",
+      wealthOnlyCHF: "Nur CHF Konten werden berücksichtigt"
     },
     en: {
       dashboard: 'Dashboard',
@@ -287,7 +289,7 @@ export class LanguageService {
       apply: "Apply",
       editTransaction: "Edit Transaction",
       pendingPayments: "Pending Payments",
-      deleteAccountWarning: "Only accounts with a balance of 0 CHF can be deleted.",
+      deleteAccountWarning: "Only accounts with a balance of 0 can be deleted.",
       inviteMember: "Invite Member",
       role: "Role",
       currency: "Currency",
@@ -295,7 +297,8 @@ export class LanguageService {
       manager: "Manager",
       viewer: "Viewer",
       myRole: "My Role",
-      actionExecutedAccordingToMobile: "Action executed according to mobile app"
+      actionExecutedAccordingToMobile: "Action executed according to mobile app",
+      wealthOnlyCHF: "Only CHF accounts are considered"
     }
   };
 

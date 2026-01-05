@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError, timer, Subject } from 'rxjs';
 import { tap, catchError, switchMap, takeUntil, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 export interface UserLoginRequest {
   contractNumber: string;
@@ -59,7 +60,7 @@ export type LoginState =
   providedIn: 'root'
 })
 export class UserAuthService {
-  private readonly BASE_URL = '/api/v1';
+  private readonly BASE_URL = environment.apiUrl;
   private readonly ACCESS_TOKEN_KEY = 'user_access_token';
   private readonly REFRESH_TOKEN_KEY = 'user_refresh_token';
   private readonly DEVICE_ID_KEY = 'device_id';

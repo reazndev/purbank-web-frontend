@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 export interface LoginRequest {
   email: string;
@@ -32,7 +33,7 @@ export interface TokenPayload {
   providedIn: 'root'
 })
 export class AdminLoginService {
-  private readonly BASE_URL = '/api/v1';
+  private readonly BASE_URL = environment.apiUrl;
   private readonly ACCESS_TOKEN_KEY = 'access_token';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly ADMIN_FLAG_KEY = 'is_admin_user';

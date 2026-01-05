@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserAuthService } from './user-auth.service';
+import { environment } from '../../../environments/environment';
 
 export interface Konto {
   kontoId: string;
@@ -9,6 +10,7 @@ export interface Konto {
   balance: number;
   role: string;
   iban: string;
+  currency: string;
 }
 
 export interface Transaction {
@@ -40,7 +42,7 @@ export interface InviteMemberRequest {
   providedIn: 'root'
 })
 export class KontenService {
-  private apiUrl = '/api/v1';
+  private apiUrl = environment.apiUrl;
   private userAuthService = inject(UserAuthService);
 
   constructor(private http: HttpClient) {}

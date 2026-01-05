@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserAuthService } from './user-auth.service';
+import { environment } from '../../../environments/environment';
 
 export interface Payment {
   id: string;
@@ -38,7 +39,7 @@ export interface UpdatePaymentRequest {
   providedIn: 'root'
 })
 export class PaymentsService {
-  private apiUrl = '/api/v1';
+  private apiUrl = environment.apiUrl;
   private userAuthService = inject(UserAuthService);
 
   constructor(private http: HttpClient) {}
