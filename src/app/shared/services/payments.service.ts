@@ -20,7 +20,7 @@ export interface CreatePaymentRequest {
   kontoId: string;
   toIban: string;
   amount: number;
-  message: string;
+  message?: string;
   note: string;
   executionType: 'INSTANT' | 'NORMAL';
   executionDate?: string;

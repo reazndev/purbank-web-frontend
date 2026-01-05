@@ -95,10 +95,6 @@ export class CreateTransactionComponent implements OnInit {
       this.errorMessage = 'Amount must be greater than 0';
       return;
     }
-    if (!this.message || this.message.trim() === '') {
-      this.errorMessage = 'Please enter a message';
-      return;
-    }
 
     // Validate execution date for non-instant payments
     if (!this.isInstant) {
