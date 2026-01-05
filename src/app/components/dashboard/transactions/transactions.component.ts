@@ -10,6 +10,7 @@ interface TransactionDisplay {
   name: string;
   account: string;
   toIban: string;
+  fromIban: string;
   amount: number;
   message: string;
   note: string;
@@ -19,6 +20,7 @@ interface TransactionDisplay {
   timestamp: string;
   isPending: boolean;
   currency: string;
+  transactionType?: 'INCOMING' | 'OUTGOING';
 }
 
 @Component({
@@ -78,6 +80,7 @@ export class DashboardTransactionsComponent implements OnInit {
                     name: p.message || '',
                     account: konto?.kontoName || '',
                     toIban: p.toIban,
+                    fromIban: konto?.iban || '',
                     amount: -p.amount, // negative since it's outgoing
                     message: p.message,
                     note: p.note || '',
@@ -91,11 +94,12 @@ export class DashboardTransactionsComponent implements OnInit {
                 });
 
                 const completedTransactions: TransactionDisplay[] = allTransactions.map(t => {
-                  const konto = konten.find(k => k.iban === t.fromIban);
+                  const konto = konten.find(k => k.iban === (t.transactionType === 'OUTGOING' ? t.iban : k.iban));
                   return {
                     name: t.message || '',
                     account: konto?.kontoName || '',
-                    toIban: t.fromIban || '',
+                    toIban: t.transactionType === 'OUTGOING' ? t.iban : '',
+                    fromIban: t.transactionType === 'INCOMING' ? t.iban : '',
                     amount: t.amount,
                     message: t.message,
                     note: t.note || '',
@@ -105,7 +109,8 @@ export class DashboardTransactionsComponent implements OnInit {
                     locked: false,
                     timestamp: t.timestamp,
                     isPending: false,
-                    currency: t.currency || konto?.currency || 'CHF'
+                    currency: t.currency || konto?.currency || 'CHF',
+                    transactionType: t.transactionType
                   };
                 });
 

@@ -13,6 +13,7 @@ interface PaymentDisplay {
   account: string;
   amount: number;
   toIban: string;
+  fromIban: string;
   message: string;
   note: string;
   executionType: string;
@@ -81,6 +82,7 @@ export class PendingTransactionsComponent implements OnInit {
             account: p.kontoId,
             amount: p.amount,
             toIban: p.toIban,
+            fromIban: konto?.iban || '',
             message: p.message,
             note: p.note,
             executionType: p.executionType,

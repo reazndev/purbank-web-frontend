@@ -14,7 +14,7 @@
     <ng-container *ngFor="let group of groupedTransactions">
       <div class="date-header">{{ group.date | date:'fullDate' }}</div>
       <div class="transaction-box" *ngFor="let transaction of group.transactions">
-        <span class="transaction-name">{{ transaction.name }}</span>
+        <span class="transaction-name">{{ transaction.name || transaction.toIban || transaction.fromIban || transaction.account }}</span>
         <span class="transaction-balance">
           {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) }} {{ transaction.currency }}
         </span>
@@ -52,7 +52,7 @@
         <ng-container *ngFor="let group of groupedTransactions">
           <div class="date-header">{{ group.date | date:'fullDate' }}</div>
           <div class="transaction-box-expanded" *ngFor="let transaction of group.transactions">
-            <span class="transaction-value">{{ transaction.name }}</span>
+            <span class="transaction-value">{{ transaction.name || transaction.toIban || transaction.fromIban || transaction.account }}</span>
             <span class="transaction-value">{{ transaction.fromIban }}</span>
             <span class="transaction-value">{{ transaction.note || '-' }}</span>
             <span class="transaction-balance">
@@ -70,7 +70,7 @@
 <div class="modal-overlay" *ngIf="showDetailModal" (click)="closeDetailModal()">
   <div class="detail-modal-content" (click)="$event.stopPropagation()">
     <div class="detail-header">
-      <h2>{{ languageService.translate('transactionDetails') }}</h2>
+      <h2>{{ selectedTransaction?.name || selectedTransaction?.toIban || selectedTransaction?.fromIban || selectedTransaction?.account }}</h2>
       <button class="icon-btn" (click)="closeDetailModal()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
       </button>
@@ -78,18 +78,17 @@
     <hr>
     <div class="detail-content" *ngIf="selectedTransaction">
       <div class="detail-row">
-        <span class="detail-label">{{ languageService.translate('transactionName') }}:</span>
-        <span class="detail-value">{{ selectedTransaction.name }}</span>
-      </div>
-      <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('account') }}:</span>
         <span class="detail-value">{{ selectedTransaction.account }}</span>
       </div>
-      <!-- <div class="detail-row">
+      <div class="detail-row" *ngIf="selectedTransaction.fromIban">
+        <span class="detail-label">{{ languageService.translate('fromIban') }}:</span>
+        <span class="detail-value">{{ selectedTransaction.fromIban }}</span>
+      </div>
+      <div class="detail-row" *ngIf="selectedTransaction.toIban">
         <span class="detail-label">{{ languageService.translate('toIban') }}:</span>
-        <span class="detail-value">{{ selectedTransaction.ibanTo }}</span> 
-        needs to be redone in backend, impl after that
-      </div> -->
+        <span class="detail-value">{{ selectedTransaction.toIban }}</span>
+      </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('amount') }}:</span>
         <span class="detail-value" [class.positive]="selectedTransaction.amount > 0" [class.negative]="selectedTransaction.amount < 0">
@@ -108,7 +107,7 @@
         <span class="detail-label">{{ languageService.translate('executionDate') }}:</span>
         <span class="detail-value">{{ selectedTransaction.date }}</span>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" *ngIf="selectedTransaction.locked !== undefined">
         <span class="detail-label">{{ languageService.translate('locked') }}:</span>
         <span class="detail-value">{{ selectedTransaction.locked ? languageService.translate('yes') : languageService.translate('no') }}</span>
       </div>

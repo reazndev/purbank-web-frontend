@@ -9,8 +9,11 @@ interface TransactionDisplay {
   amount: number;
   date: string;
   fromIban: string;
+  toIban: string;
   note: string;
   currency: string;
+  transactionType: 'INCOMING' | 'OUTGOING';
+  locked?: boolean;
 }
 
 @Component({
@@ -97,15 +100,17 @@ export class CompletedTransactionsComponent implements OnInit {
                 
                 // Transform API transactions to display format
                 this.transactions = allTransactions.map(t => {
-                  const konto = konten.find(k => k.iban === t.fromIban);
+                  const konto = konten.find(k => k.iban === (t.transactionType === 'OUTGOING' ? t.iban : k.iban));
                   return {
                     name: t.message,
-                    account: t.fromIban,
+                    account: konto?.kontoName || t.iban,
                     amount: t.amount,
                     date: t.timestamp,
-                    fromIban: t.fromIban,
+                    fromIban: t.transactionType === 'INCOMING' ? t.iban : konto?.iban || '',
+                    toIban: t.transactionType === 'OUTGOING' ? t.iban : '',
                     note: t.note,
-                    currency: t.currency || konto?.currency || 'CHF'
+                    currency: t.currency || konto?.currency || 'CHF',
+                    transactionType: t.transactionType
                   };
                 });
                 this.groupTransactions();

@@ -18,12 +18,12 @@ export interface Transaction {
   amount: number;
   balanceAfter: number;
   timestamp: string;  
-  fromIban: string;
+  iban: string; // sender IBAN for INCOMING, recipient IBAN for OUTGOING
+  transactionType: 'INCOMING' | 'OUTGOING';
   message: string;
   note: string;
   currency: string;
 }
-// toIban will be added later in backend
 
 export interface KontoMember {
   id: string;

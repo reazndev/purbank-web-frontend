@@ -85,6 +85,7 @@ export interface Translations {
   transactionDetails: string;
   transactionName: string;
   toIban: string;
+  fromIban: string;
   executionType: string;
   executionDate: string;
   status: string;
@@ -188,6 +189,7 @@ export class LanguageService {
       transactionDetails: "Transaktionsdetails",
       transactionName: "Transaktionsname",
       toIban: "Empfänger IBAN",
+      fromIban: "Absender IBAN",
       executionType: "Ausführungsart",
       executionDate: "Ausführungsdatum",
       status: "Status",
@@ -280,6 +282,7 @@ export class LanguageService {
       transactionDetails: "Transaction Details",
       transactionName: "Transaction Name",
       toIban: "Recipient IBAN",
+      fromIban: "Sender IBAN",
       executionType: "Execution Type",
       executionDate: "Execution Date",
       status: "Status",
