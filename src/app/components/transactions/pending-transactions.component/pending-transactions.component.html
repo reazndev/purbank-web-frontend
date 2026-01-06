@@ -101,8 +101,8 @@
       </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('amount') }}:</span>
-        <span class="detail-value" [class.positive]="selectedTransaction.amount > 0" [class.negative]="selectedTransaction.amount < 0">
-          {{ selectedTransaction.amount > 0 ? '+' : '' }}{{ selectedTransaction.amount }} {{ selectedTransaction.currency }}
+        <span class="detail-value negative">
+          - {{ MathAbs(selectedTransaction.amount) }} {{ selectedTransaction.currency }}
         </span>
       </div>
       <div class="detail-row">
