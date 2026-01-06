@@ -15,10 +15,6 @@
   gap: 4px;
 }
 
-.wealth-tooltip-container {
-  position: relative;
-}
-
 .info-icon {
   cursor: help;
   display: inline-flex;
