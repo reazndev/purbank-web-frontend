@@ -9,12 +9,12 @@
       </button>
     </div>
     <hr>
-    <div class="total-amount-wrapper">
+    <div class="total-amount-wrapper" *ngIf="transactions.length > 0">
       <span>{{ languageService.translate('totalPending') }}:</span>
       <span class="transaction-amount">- {{ totalAmountCHF }} CHF</span>
     </div>
   </div>
-  <div class="transactions-grid scrollable-grid">
+  <div class="transactions-grid scrollable-grid" *ngIf="transactions.length > 0">
     <ng-container>
       <div class="transaction-box" *ngFor="let transaction of transactions">
         <span class="transaction-name">{{ transaction.name }}</span>
@@ -23,7 +23,7 @@
         <span class="transaction-balance">
           - {{ MathAbs(transaction.amount) }} {{ transaction.currency }}
         </span>
-        <button class="info-btn" (click)="showTransactionDetail(transaction)" title="View details">
+        <button class="info-btn" (click)="showTransactionDetail(transaction)" [title]="languageService.translate('viewDetails')">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
         </button>
         <button class="info-btn" (click)="showEditModal_func(transaction)" title="Edit payment">
@@ -32,7 +32,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="transaction-hint">
+  <div class="transaction-hint" *ngIf="transactions.length > 0">
     {{ languageService.translate('pendingTransactionsHint') }}
     <br>
     <span class="small-note">* {{ languageService.translate('wealthConvertedToCHF') }}</span>

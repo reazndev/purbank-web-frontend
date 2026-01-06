@@ -155,11 +155,13 @@ export class CompletedTransactionsComponent implements OnInit {
   groupTransactions(): void {
     const groups: { date: string; transactions: any[] }[] = [];
     this.transactions.forEach(t => {
-      const existingGroup = groups.find(g => g.date === t.date);
+      // Extract date part from timestamp (YYYY-MM-DD)
+      const dateKey = t.date.split('T')[0];
+      const existingGroup = groups.find(g => g.date === dateKey);
       if (existingGroup) {
         existingGroup.transactions.push(t);
       } else {
-        groups.push({ date: t.date, transactions: [t] });
+        groups.push({ date: dateKey, transactions: [t] });
       }
     });
     this.groupedTransactions = groups;
