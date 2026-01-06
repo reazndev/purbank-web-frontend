@@ -11,7 +11,7 @@
 }
 
 .transactions-wrapper {
-  height: 65vh;
+  height: 64.3vh;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
