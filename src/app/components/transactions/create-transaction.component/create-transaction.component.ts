@@ -161,9 +161,9 @@ export class CreateTransactionComponent implements OnInit {
         this.successMessage = `Payment created successfully! ${this.isInstant ? 'Executing immediately...' : 'Will be processed at 1:00 AM Zurich time.'}`;
         this.isSubmitting = false;
         
-        // Reset form after 2 seconds
+        // Refresh page after 2 seconds to update all components
         setTimeout(() => {
-          this.resetForm();
+          window.location.reload();
         }, 2000);
       },
       error: (error) => {
