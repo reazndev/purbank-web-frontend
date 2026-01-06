@@ -45,7 +45,6 @@ export interface Translations {
   phoneLabel: string;
   emailLabel: string;
   // Page: dashboard -> transactions (shared)
-  provisional: string;
   current: string;
   seeMore: string;
   accountname: string;
@@ -59,9 +58,6 @@ export interface Translations {
   negative: string;
   // misc.
   scrollForMore: string;
-  // Tooltips
-  provisionalWealthTooltip: string;
-  currentWealthTooltip: string;
   // Page: Transactions
   createTransaction: string;
   account: string;
@@ -154,7 +150,6 @@ export class LanguageService {
       supportContent: 'Benötigen Sie Hilfe? Kontaktieren Sie unser Support-Team für alle Fragen rund um Ihr PurBank Konto. Wir sind gerne für Sie da.',
       phoneLabel: 'Telefon:',
       emailLabel: 'Email:',
-      provisional: 'Provisorisches',
       current: 'Aktuelles',
       seeMore: 'Siehe mehr',
       accountname: 'Kontoname',
@@ -166,8 +161,6 @@ export class LanguageService {
       positive: 'Positiv',
       negative: 'Negativ',
       scrollForMore: 'Scrollen für mehr',
-      provisionalWealthTooltip: 'Das provisorische Vermögen zeigt den erwarteten Kontostand basierend auf ausstehenden Transaktionen und geplanten Zahlungen.',
-      currentWealthTooltip: 'Das aktuelle Vermögen zeigt den tatsächlichen, bestätigten Kontostand über alle Ihre Konten.',
       createTransaction: "Überweisung erfassen",
       account: "Konto",
       amount: "Betrag",
@@ -217,7 +210,8 @@ export class LanguageService {
       transactions: 'Transactions',
       analytics: 'Analytics',
       logout: 'Logout',
-      createAccountContent: 'Please contact your nearest PurBank branch to open an account.',      exchangeRates: 'Exchange Rates',      // yes these two are redundant but their values wont change in the future and this just makes it easier to work with
+      createAccountContent: 'Please contact your nearest PurBank branch to open an account.',      
+      exchangeRates: 'Exchange Rates',      // yes these two are redundant but their values wont change in the future and this just makes it easier to work with
       viewInEnglish: 'View this page in English',
       viewInGerman: 'Diese Seite auf Deutsch anzeigen',
       loginTitle: 'Login',
@@ -247,7 +241,6 @@ export class LanguageService {
       supportContent: 'Need help? Contact our support team for all questions regarding your PurBank account. We are here to assist you.',
       phoneLabel: 'Phone:',
       emailLabel: 'Email:',
-      provisional: 'Provisional',
       current: 'Current',
       seeMore: 'See more',
       accountname: 'Account Name',
@@ -259,8 +252,6 @@ export class LanguageService {
       positive: 'Positive',
       negative: 'Negative',
       scrollForMore: 'Scroll for more',
-      provisionalWealthTooltip: 'Provisional wealth shows the expected account balance based on pending transactions and scheduled payments.',
-      currentWealthTooltip: 'Current wealth shows the actual, confirmed account balance across all your accounts.',
       createTransaction: "Create transaction",
       account: "Account",
       amount: "Amount",

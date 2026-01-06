@@ -1,13 +1,6 @@
 <div class="wealth-container">
   <div class="wealth-header">
     <div class="header-row">
-      <h2 class="wealth-tooltip-container">
-        {{ languageService.translate('current') }} {{ languageService.translate('wealth') }}:
-        <span class="info-icon">
-          <img src="icons/info.svg" alt="info" class="info-svg">
-          <span class="tooltip">{{ languageService.translate('currentWealthTooltip') }}</span>
-        </span>
-      </h2>
       <div class="header-right">
         <span class="wealth-amount">{{ currentWealth.toFixed(2) }} CHF*</span>
         <button class="icon-btn" (click)="toggleExpand()">
