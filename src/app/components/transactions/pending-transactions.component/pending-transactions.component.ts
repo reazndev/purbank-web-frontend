@@ -1,16 +1,18 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../../shared/services/language.service';
 import { PaymentsService, Payment } from '../../../shared/services/payments.service';
 import { KontenService, Konto } from '../../../shared/services/konten.service';
 import { CurrencyService } from '../../../shared/services/currency.service';
+import { TransactionFilterService } from '../../../shared/services/transaction-filter.service';
 import { forkJoin } from 'rxjs';
 
 interface PaymentDisplay {
   id: string;
   name: string;
-  account: string;
+  account: string; // accountId in reality? No, looks like name based on usage in template {{transaction.name}}
+  accountId: string; // Add this
   amount: number;
   toIban: string;
   fromIban: string;
@@ -29,10 +31,13 @@ interface PaymentDisplay {
   styleUrl: './pending-transactions.component.css',
 })
 export class PendingTransactionsComponent implements OnInit {
-  transactions: PaymentDisplay[] = [];
+  transactions: PaymentDisplay[] = []; // Displayed
+  private allTransactions: PaymentDisplay[] = []; // All fetched
   isLoading = true;
   konten: Konto[] = [];
   totalAmountCHF: number = 0;
+  private filterService = inject(TransactionFilterService);
+  
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
 
   constructor(
@@ -40,7 +45,12 @@ export class PendingTransactionsComponent implements OnInit {
     private paymentsService: PaymentsService,
     private kontenService: KontenService,
     private currencyService: CurrencyService
-  ) {}
+  ) {
+    effect(() => {
+      const selectedId = this.filterService.getSelectedKontoId()();
+      this.filterTransactions(selectedId);
+    });
+  }
 
   isExpanded: boolean = false;
   selectedTransaction: any = null;
@@ -74,12 +84,13 @@ export class PendingTransactionsComponent implements OnInit {
           return new Date(dateB).getTime() - new Date(dateA).getTime();
         });
         
-        this.transactions = sortedPayments.map(p => {
+        this.allTransactions = sortedPayments.map(p => {
           const konto = this.konten.find(k => k.kontoId === p.kontoId);
           return {
             id: p.id,
             name: konto?.kontoName || 'Unknown Account',
-            account: p.kontoId,
+            account: p.kontoId, // This seems to be the ID in the original code, confusing naming in interface but okay
+            accountId: p.kontoId,
             amount: p.amount,
             toIban: p.toIban,
             fromIban: konto?.iban || '',
@@ -91,7 +102,8 @@ export class PendingTransactionsComponent implements OnInit {
             currency: konto?.currency || 'CHF'
           };
         });
-        this.calculateTotalAmount();
+        
+        this.filterTransactions(this.filterService.getSelectedKontoId()());
         this.isLoading = false;
       },
       error: (error) => {
@@ -100,12 +112,26 @@ export class PendingTransactionsComponent implements OnInit {
     });
   }
 
+  filterTransactions(selectedId: string): void {
+    if (selectedId === 'all') {
+      this.transactions = [...this.allTransactions];
+    } else {
+      this.transactions = this.allTransactions.filter(t => t.accountId === selectedId);
+    }
+    this.calculateTotalAmount();
+  }
+
   calculateTotalAmount(): void {
     // Convert all transaction amounts to CHF and sum them
     const transactionAmounts = this.transactions.map(t => ({
       amount: t.amount,
       currency: t.currency
     }));
+
+    if (transactionAmounts.length === 0) {
+      this.totalAmountCHF = 0;
+      return;
+    }
 
     this.currencyService.convertAndSum(transactionAmounts, 'CHF').subscribe({
       next: (total) => {

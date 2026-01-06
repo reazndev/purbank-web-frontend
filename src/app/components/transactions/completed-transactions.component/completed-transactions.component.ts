@@ -1,11 +1,13 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Transaction, Konto } from '../../../shared/services/konten.service';
+import { TransactionFilterService } from '../../../shared/services/transaction-filter.service';
 
 interface TransactionDisplay {
   name: string;
   account: string;
+  accountId: string;
   amount: number;
   date: string;
   otherPartyIban: string;
@@ -22,8 +24,10 @@ interface TransactionDisplay {
   styleUrl: './completed-transactions.component.css',
 })
 export class CompletedTransactionsComponent implements OnInit {
-  transactions: TransactionDisplay[] = [];
+  transactions: TransactionDisplay[] = []; // Displayed (filtered)
+  private allTransactions: TransactionDisplay[] = []; // All fetched
   isLoading = true;
+  private filterService = inject(TransactionFilterService);
 
   // TODO: shocase date in german -> Sonntag, 30. November instead of in English
   // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
@@ -32,7 +36,12 @@ export class CompletedTransactionsComponent implements OnInit {
   constructor(
     public languageService: LanguageService,
     private kontenService: KontenService
-  ) {}
+  ) {
+    effect(() => {
+      const selectedId = this.filterService.getSelectedKontoId()();
+      this.filterTransactions(selectedId);
+    });
+  }
 
   isExpanded: boolean = false;
   selectedTransaction: any = null;
@@ -93,13 +102,14 @@ export class CompletedTransactionsComponent implements OnInit {
               const mapped = data.map(t => ({
                 name: t.message,
                 account: myKonto.kontoName,
+                accountId: myKonto.kontoId,
                 amount: t.amount,
                 date: t.timestamp,
                 otherPartyIban: t.iban,
                 note: t.note,
                 currency: t.currency || myKonto.currency || 'CHF',
                 transactionType: t.transactionType,
-                locked: false // Default to false if not present, though Transaction interface doesn't show it, API might return it?
+                locked: false 
               }));
               
               allDisplayTransactions.push(...mapped);
@@ -111,8 +121,9 @@ export class CompletedTransactionsComponent implements OnInit {
                   new Date(b.date).getTime() - new Date(a.date).getTime()
                 );
                 
-                this.transactions = allDisplayTransactions;
-                this.groupTransactions();
+                this.allTransactions = allDisplayTransactions;
+                // Filter initially based on current selection
+                this.filterTransactions(this.filterService.getSelectedKontoId()());
                 this.isLoading = false;
               }
             },
@@ -130,6 +141,15 @@ export class CompletedTransactionsComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  filterTransactions(selectedId: string): void {
+    if (selectedId === 'all') {
+      this.transactions = [...this.allTransactions];
+    } else {
+      this.transactions = this.allTransactions.filter(t => t.accountId === selectedId);
+    }
+    this.groupTransactions();
   }
 
   groupTransactions(): void {
