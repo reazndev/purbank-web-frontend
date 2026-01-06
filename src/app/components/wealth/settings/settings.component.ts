@@ -91,9 +91,10 @@ export class WealthSettingsComponent {
   loadDeletableAccounts(): void {
     this.kontenService.getKonten().subscribe({
       next: (konten) => {
-        this.deletableAccounts = konten.filter(konto => konto.balance === 0);
+        // Only accounts with 0 balance and where the user is the OWNER can be deleted
+        this.deletableAccounts = konten.filter(konto => konto.balance === 0 && konto.role === 'OWNER');
         if (this.deletableAccounts.length === 0) {
-          this.errorMessage = 'No accounts available for deletion. Only accounts with 0 balance can be deleted.';
+          this.errorMessage = 'No accounts available for deletion. Only accounts with 0 balance and where you are the OWNER can be deleted.';
         }
       },
       error: (error) => {
