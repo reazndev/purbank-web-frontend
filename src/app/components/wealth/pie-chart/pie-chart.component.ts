@@ -98,7 +98,7 @@ export class WealthPieChartComponent implements OnInit, AfterViewInit {
       type: 'pie',
       data: {
         labels,
-        datasets: [{ data, backgroundColor: ['#A2C5D6', '#5A7684', '#81B1AA', '#616D9E', '#C8BCB6', '#E1E8EB', '#3E4E56'] }],
+        datasets: [{ data, backgroundColor: ['#A2C5D6', '#5A7684', '#81B1AA', '#616D9E', '#bca89dff', '#3E4E56'] }],
       },
       options: {
         responsive: true,
@@ -125,8 +125,12 @@ export class WealthPieChartComponent implements OnInit, AfterViewInit {
             const ctx = chart.ctx;
             chart.data.datasets.forEach((dataset, datasetIndex) => {
               const meta = chart.getDatasetMeta(datasetIndex);
+              const total = (dataset.data as number[]).reduce((a, b) => a + b, 0);
+
               meta.data.forEach((element: any, index) => {
                 const data = dataset.data[index] as number;
+                if ((data / total) * 100 < 10) return;
+
                 const label = chart.data.labels?.[index] as string;
                 
                 // Get the center of the chart and the midpoint angle
@@ -141,7 +145,7 @@ export class WealthPieChartComponent implements OnInit, AfterViewInit {
                 const x = centerX + Math.cos(midAngle) * radius;
                 const y = centerY + Math.sin(midAngle) * radius;
                 
-                ctx.fillStyle = '#fff';
+                ctx.fillStyle = '#ffffffff';
                 ctx.font = 'bold 14px Arial'; 
                 // TODO: figure out if we can use custom fonts here 
                 // not that important tho
