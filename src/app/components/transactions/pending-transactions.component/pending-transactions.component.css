@@ -74,14 +74,14 @@
 
 .transaction-box {
   padding: 8px 10px;
-  grid-template-columns: 8ch 1fr 80px 20px 20px;
-  gap: 8px;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 12px;
   height: 44px;
   align-items: center;
 }
 
 .transaction-name {
-  max-width: 8ch;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

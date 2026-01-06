@@ -88,8 +88,8 @@ export class PendingTransactionsComponent implements OnInit {
           const konto = this.konten.find(k => k.kontoId === p.kontoId);
           return {
             id: p.id,
-            name: konto?.kontoName || 'Unknown Account',
-            account: p.kontoId, // This seems to be the ID in the original code, confusing naming in interface but okay
+            name: p.message || konto?.kontoName || 'Unknown',
+            account: konto?.kontoName || 'Unknown Account',
             accountId: p.kontoId,
             amount: p.amount,
             toIban: p.toIban,
