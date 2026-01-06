@@ -154,7 +154,7 @@ export class WealthPieChartComponent implements OnInit, AfterViewInit {
                 
                 // Draw the label name & amount
                 ctx.fillText(label, x, y - 8);
-                ctx.fillText(`${data}`, x, y + 8);
+                ctx.fillText(`${data.toFixed(2)}`, x, y + 8);
               });
             });
           }

@@ -149,7 +149,7 @@ export class WealthNegPosChartComponent implements OnInit, AfterViewInit {
             callbacks: {
               label: (context) => {
                 const value = Math.abs(context.parsed.y || 0);
-                return `${context.label}: ${value}`;
+                return `${context.label}: ${value.toFixed(2)}`;
               }
             }
           }
@@ -174,7 +174,7 @@ export class WealthNegPosChartComponent implements OnInit, AfterViewInit {
                 ctx.textBaseline = 'bottom';
                 
                 // Draw the amount on top of the bar
-                ctx.fillText(value.toString(), x, y);
+                ctx.fillText(value.toFixed(2), x, y);
               });
             });
           }

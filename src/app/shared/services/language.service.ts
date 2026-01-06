@@ -58,11 +58,12 @@ export interface Translations {
   negative: string;
   // misc.
   scrollForMore: string;
+  viewDetails: string;
   // Page: Transactions
   createTransaction: string;
   account: string;
   amount: string;
-  ibanTo: string;
+  ibanTo: string;  // unneeded can probably be removed
   reoccuring: string;
   instantTransaction: string;
   after: string; // used for balance after -> combine {balance} + {after}
@@ -80,8 +81,8 @@ export interface Translations {
   // Transaction Details
   transactionDetails: string;
   transactionName: string;
-  toIban: string;
-  fromIban: string;
+  toIban: string;  // duplicate can probably be removed
+  fromIban: string; // duplicate can probably be removed
   executionType: string;
   executionDate: string;
   status: string;
@@ -104,6 +105,7 @@ export interface Translations {
   // Mobile Verify
   actionExecutedAccordingToMobile: string;
   wealthConvertedToCHF: string;
+  iban: string;
 }
 
 @Injectable({
@@ -161,6 +163,7 @@ export class LanguageService {
       positive: 'Positiv',
       negative: 'Negativ',
       scrollForMore: 'Scrollen für mehr',
+      viewDetails: 'Details anzeigen',
       createTransaction: "Überweisung erfassen",
       account: "Konto",
       amount: "Betrag",
@@ -202,7 +205,8 @@ export class LanguageService {
       viewer: "Betrachter",
       myRole: "Meine Rolle",
       actionExecutedAccordingToMobile: "Aktion ausgeführt gemäss Mobile App",
-      wealthConvertedToCHF: "Alle Konten werden in CHF umgerechnet und angezeigt"
+      wealthConvertedToCHF: "Alle Konten werden in CHF umgerechnet und angezeigt",
+      iban: "IBAN"
     },
     en: {
       dashboard: 'Dashboard',
@@ -252,6 +256,7 @@ export class LanguageService {
       positive: 'Positive',
       negative: 'Negative',
       scrollForMore: 'Scroll for more',
+      viewDetails: 'View details',
       createTransaction: "Create transaction",
       account: "Account",
       amount: "Amount",
@@ -293,7 +298,8 @@ export class LanguageService {
       viewer: "Viewer",
       myRole: "My Role",
       actionExecutedAccordingToMobile: "Action executed according to mobile app",
-      wealthConvertedToCHF: "All accounts are converted to CHF for the total"
+      wealthConvertedToCHF: "All accounts are converted to CHF for the total",
+      iban: "IBAN"
     }
   };
 

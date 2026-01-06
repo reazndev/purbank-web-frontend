@@ -8,8 +8,7 @@ interface TransactionDisplay {
   account: string;
   amount: number;
   date: string;
-  fromIban: string;
-  toIban: string;
+  otherPartyIban: string;
   note: string;
   currency: string;
   transactionType: 'INCOMING' | 'OUTGOING';
@@ -84,35 +83,35 @@ export class CompletedTransactionsComponent implements OnInit {
 
         // Wait for all requests to complete
         let completedRequests = 0;
-        const allTransactions: Transaction[] = [];
+        const allDisplayTransactions: TransactionDisplay[] = [];
 
         transactionRequests.forEach((request, index) => {
           request.subscribe({
             next: (data: Transaction[]) => {
-              allTransactions.push(...data);
+              const myKonto = konten[index];
+              
+              const mapped = data.map(t => ({
+                name: t.message,
+                account: myKonto.kontoName,
+                amount: t.amount,
+                date: t.timestamp,
+                otherPartyIban: t.iban,
+                note: t.note,
+                currency: t.currency || myKonto.currency || 'CHF',
+                transactionType: t.transactionType,
+                locked: false // Default to false if not present, though Transaction interface doesn't show it, API might return it?
+              }));
+              
+              allDisplayTransactions.push(...mapped);
               completedRequests++;
               
               if (completedRequests === transactionRequests.length) {
                 // Sort by timestamp (most recent first)
-                allTransactions.sort((a, b) => 
-                  new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+                allDisplayTransactions.sort((a, b) => 
+                  new Date(b.date).getTime() - new Date(a.date).getTime()
                 );
                 
-                // Transform API transactions to display format
-                this.transactions = allTransactions.map(t => {
-                  const konto = konten.find(k => k.iban === (t.transactionType === 'OUTGOING' ? t.iban : k.iban));
-                  return {
-                    name: t.message,
-                    account: konto?.kontoName || t.iban,
-                    amount: t.amount,
-                    date: t.timestamp,
-                    fromIban: t.transactionType === 'INCOMING' ? t.iban : konto?.iban || '',
-                    toIban: t.transactionType === 'OUTGOING' ? t.iban : '',
-                    note: t.note,
-                    currency: t.currency || konto?.currency || 'CHF',
-                    transactionType: t.transactionType
-                  };
-                });
+                this.transactions = allDisplayTransactions;
                 this.groupTransactions();
                 this.isLoading = false;
               }
