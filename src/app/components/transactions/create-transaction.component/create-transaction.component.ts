@@ -19,11 +19,14 @@ export class CreateTransactionComponent implements OnInit {
     private paymentsService: PaymentsService
   ) {}
 
-  accounts: Konto[] = [];
+  accounts: Konto[] = []; // Source accounts (Owner/Manager)
+  allAccounts: Konto[] = []; // All accounts for internal transfer destination
   selectedAccount: string = '';
   isInstant: boolean = false;
   isReoccuring: boolean = false;
+  isInternalTransfer: boolean = false;
   ibanReceiver: string = '';
+  selectedDestinationAccount: string = ''; // ID of selected destination account
   amount: number = 0;
   message: string = '';
   note: string = '';
@@ -52,7 +55,8 @@ export class CreateTransactionComponent implements OnInit {
     this.isLoading = true;
     this.kontenService.getKonten().subscribe({
       next: (konten) => {
-        // Filter accounts to only include OWNER and MANAGER roles
+        this.allAccounts = konten;
+        // Filter accounts to only include OWNER and MANAGER roles for source
         this.accounts = konten.filter(konto => 
           konto.role === 'OWNER' || konto.role === 'MANAGER'
         );
@@ -66,6 +70,22 @@ export class CreateTransactionComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  getAvailableDestinationAccounts(): Konto[] {
+    return this.allAccounts.filter(a => a.kontoId !== this.selectedAccount);
+  }
+
+  onDestinationAccountChange(): void {
+    const account = this.allAccounts.find(a => a.kontoId === this.selectedDestinationAccount);
+    if (account) {
+      this.ibanReceiver = account.iban;
+    }
+  }
+
+  onInternalTransferToggle(): void {
+    this.ibanReceiver = '';
+    this.selectedDestinationAccount = '';
   }
 
   getSelectedAccountBalance(): number {
@@ -155,6 +175,7 @@ export class CreateTransactionComponent implements OnInit {
 
   resetForm(): void {
     this.ibanReceiver = '';
+    this.selectedDestinationAccount = '';
     this.amount = 0;
     this.message = '';
     this.note = '';
@@ -164,6 +185,7 @@ export class CreateTransactionComponent implements OnInit {
     this.executionDate = tomorrow.toISOString().split('T')[0];
     this.isInstant = false;
     this.isReoccuring = false;
+    this.isInternalTransfer = false;
     this.successMessage = '';
     this.errorMessage = '';
   }

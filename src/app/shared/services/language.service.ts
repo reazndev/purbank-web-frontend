@@ -107,6 +107,7 @@ export interface Translations {
   wealthConvertedToCHF: string;
   iban: string;
   allAccounts: string;
+  internalTransfer: string;
 }
 
 @Injectable({
@@ -208,7 +209,8 @@ export class LanguageService {
       actionExecutedAccordingToMobile: "Aktion ausgeführt gemäss Mobile App",
       wealthConvertedToCHF: "Alle Konten werden in CHF umgerechnet und angezeigt",
       iban: "IBAN",
-      allAccounts: "Alle Konten"
+      allAccounts: "Alle Konten",
+      internalTransfer: "Interner Übertrag"
     },
     en: {
       dashboard: 'Dashboard',
@@ -302,7 +304,8 @@ export class LanguageService {
       actionExecutedAccordingToMobile: "Action executed according to mobile app",
       wealthConvertedToCHF: "All accounts are converted to CHF for the total",
       iban: "IBAN",
-      allAccounts: "All Accounts"
+      allAccounts: "All Accounts",
+      internalTransfer: "Internal Transfer"
     }
   };
 

@@ -100,7 +100,7 @@ export class CompletedTransactionsComponent implements OnInit {
               const myKonto = konten[index];
               
               const mapped = data.map(t => ({
-                name: t.message,
+                name: t.message || myKonto.kontoName,
                 account: myKonto.kontoName,
                 accountId: myKonto.kontoId,
                 amount: t.amount,

@@ -26,7 +26,21 @@
     </div>
 
     <div class="form-row">
-      <input type="text" name="ibanReceiver" [(ngModel)]="ibanReceiver" [placeholder]="languageService.translate('ibanTo')" required>
+      <div class="iban-container">
+        <input *ngIf="!isInternalTransfer" type="text" name="ibanReceiver" [(ngModel)]="ibanReceiver" [placeholder]="languageService.translate('ibanTo')" required>
+        <select *ngIf="isInternalTransfer" name="internalAccount" [(ngModel)]="selectedDestinationAccount" (change)="onDestinationAccountChange()" required>
+          <option value="" disabled selected>{{ languageService.translate('account') }}</option>
+          <option *ngFor="let account of getAvailableDestinationAccounts()" [value]="account.kontoId">
+            {{ account.kontoName }} ({{ account.iban }})
+          </option>
+        </select>
+      </div>
+      <div class="transaction-option-box">
+        <div class="checkbox-group">
+          <input type="checkbox" id="internalTransfer" name="isInternalTransfer" [(ngModel)]="isInternalTransfer" (change)="onInternalTransferToggle()">
+          <label for="internalTransfer">{{ languageService.translate('internalTransfer') }}</label>
+        </div>
+      </div>
     </div>
 
     <div class="form-row" *ngIf="!isInstant">

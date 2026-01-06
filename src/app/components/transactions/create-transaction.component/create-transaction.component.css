@@ -82,6 +82,15 @@ input {
   background-color: var(--color-white);
 }
 
+.iban-container {
+  flex: 1;
+}
+
+.iban-container input,
+.iban-container select {
+  width: 100%;
+}
+
 input[name="amount"] {
   width: 40%;
   flex: unset;
