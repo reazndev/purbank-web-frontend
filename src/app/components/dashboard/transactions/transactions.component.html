@@ -9,7 +9,7 @@
       {{ languageService.translate('pendingPayments') }}
     </div>
     <div class="date-header" *ngIf="!group.isPending">
-      {{ group.date | date:'fullDate' }}
+      {{ languageService.formatDate(group.date) }}
     </div>
     <div class="transactions-grid">
       <div class="transaction-box" *ngFor="let transaction of group.transactions" [class.pending]="transaction.isPending">

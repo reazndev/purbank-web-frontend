@@ -330,4 +330,9 @@ export class LanguageService {
   translate(key: keyof Translations): string {
     return this.translations[this.currentLanguage()][key];
   }
+
+  formatDate(date: string | Date): string {
+    const locale = this.currentLanguage() === 'de' ? 'de-CH' : 'en-US';
+    return new Date(date).toLocaleDateString(locale, { dateStyle: 'full' });
+  }
 }

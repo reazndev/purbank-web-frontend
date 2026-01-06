@@ -12,7 +12,7 @@
   </div>
   <div class="transactions-grid scrollable-grid">
     <ng-container *ngFor="let group of groupedTransactions">
-      <div class="date-header">{{ group.date | date:'fullDate' }}</div>
+      <div class="date-header">{{ languageService.formatDate(group.date) }}</div>
       <div class="transaction-box" *ngFor="let transaction of group.transactions">
         <span class="transaction-name">{{ transaction.name }}</span>
         <span class="transaction-balance">
@@ -50,7 +50,7 @@
           <span class="transaction-label">{{ languageService.translate('amount') }}</span>
         </div>
         <ng-container *ngFor="let group of groupedTransactions">
-          <div class="date-header">{{ group.date | date:'fullDate' }}</div>
+          <div class="date-header">{{ languageService.formatDate(group.date) }}</div>
           <div class="transaction-box-expanded" *ngFor="let transaction of group.transactions">
             <span class="transaction-value">{{ transaction.name }}</span>
             <span class="transaction-value">{{ transaction.otherPartyIban }}</span>
