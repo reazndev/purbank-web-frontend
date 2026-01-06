@@ -1,3 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* MAXMIN */
+  min-height: 0;
+}
+
 .chart-box {
   border: 1px solid var(--color-gray);
   padding: var(--padding-standard);
@@ -6,10 +13,14 @@
   font-family: var(--font-family);
   color: var(--color-black);
   max-width: 100%;
+  height: 100%; /* MAXMIN */
+  display: flex;
+  flex-direction: column;
 }
 
 .bar-chart-container {
-  height: 160px;
+  flex: 1; /* MAXMIN */
+  min-height: 150px; /* MAXMIN */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,8 +1,18 @@
 /* shared transaction styles */
 @import '../shared-transactions.css';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 .transaction-container {
   grid-area: completed-transactions;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .transaction-header h2 {
@@ -90,7 +100,9 @@
 }
 
 .scrollable-grid {
-  max-height: 350px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: none;
 }
 
 .transaction-box {

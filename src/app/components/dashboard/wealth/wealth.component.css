@@ -1,9 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* MAXMIN */
+  min-height: 0;
+  overflow: hidden;
+}
+
 .wealth-container {
   border: 1px solid var(--color-gray);
   padding: var(--padding-standard);
   background-color: var(--color-white);
   font-family: var(--font-family);
   color: var(--color-black);
+  height: 100%; /* MAXMIN */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .wealth-header h2 {
@@ -31,6 +43,10 @@
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-bottom: 15px;
+  overflow-y: auto;
+  flex: 1; /* MAXMIN */
+  min-height: 0;
+  grid-auto-rows: min-content;
 }
 
 .account-box {

@@ -1,8 +1,18 @@
 /* shared transaction styles */
 @import '../shared-transactions.css';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  max-height: 50%;
+  min-height: min-content;
+}
+
 .transaction-container {
   grid-area: pending-transactions;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .total-amount-wrapper {
@@ -56,7 +66,10 @@
 }
 
 .scrollable-grid {
-  max-height: 200px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: none;
+  min-height: 0;
 }
 
 .transaction-box {

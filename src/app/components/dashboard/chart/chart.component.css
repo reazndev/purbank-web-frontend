@@ -1,9 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* MAXMIN */
+  min-height: 0;
+  overflow: hidden;
+}
+
 .chart-container {
   border: 1px solid var(--color-gray);
   padding: var(--padding-standard);
   background-color: var(--color-white);
   font-family: var(--font-family);
   color: var(--color-black);
+  height: 100%; /* MAXMIN */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .chart-header h2 {
@@ -22,6 +34,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex: 1; /* MAXMIN */
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .rate-box {
