@@ -52,9 +52,12 @@ export class CreateTransactionComponent implements OnInit {
     this.isLoading = true;
     this.kontenService.getKonten().subscribe({
       next: (konten) => {
-        this.accounts = konten;
-        if (konten.length > 0) {
-          this.selectedAccount = konten[0].kontoId;
+        // Filter accounts to only include OWNER and MANAGER roles
+        this.accounts = konten.filter(konto => 
+          konto.role === 'OWNER' || konto.role === 'MANAGER'
+        );
+        if (this.accounts.length > 0) {
+          this.selectedAccount = this.accounts[0].kontoId;
         }
         this.isLoading = false;
       },
