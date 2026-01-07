@@ -261,7 +261,7 @@ export class LanguageService {
       negative: 'Negative',
       scrollForMore: 'Scroll for more',
       viewDetails: 'View details',
-      createTransaction: "Create transaction",
+      createTransaction: "Create Transaction",
       account: "Account",
       amount: "Amount",
       ibanTo: "IBAN of receiver",
