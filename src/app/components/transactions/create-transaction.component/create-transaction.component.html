@@ -9,7 +9,9 @@
     <div class="form-row">
       <select name="account" [(ngModel)]="selectedAccount" required>
         <option value="">{{ languageService.translate('account') }}</option>
-        <option *ngFor="let account of accounts" [value]="account.kontoId">{{ account.kontoName }}</option>
+        <option *ngFor="let account of accounts" [value]="account.kontoId">
+          {{ account.kontoName }} ({{ account.balance.toFixed(2) }} {{ account.currency }})
+        </option>
       </select>
       <div class="transaction-option-box">
         <div class="checkbox-group">
