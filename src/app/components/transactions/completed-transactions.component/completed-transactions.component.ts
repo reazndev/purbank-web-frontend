@@ -99,18 +99,24 @@ export class CompletedTransactionsComponent implements OnInit {
             next: (data: Transaction[]) => {
               const myKonto = konten[index];
               
-              const mapped = data.map(t => ({
-                name: t.message || myKonto.kontoName,
-                account: myKonto.kontoName,
-                accountId: myKonto.kontoId,
-                amount: t.amount,
-                date: t.timestamp,
-                otherPartyIban: t.iban,
-                note: t.note,
-                currency: t.currency || myKonto.currency || 'CHF',
-                transactionType: t.transactionType,
-                locked: false 
-              }));
+              const mapped = data.map(t => {
+                // Check if the IBAN belongs to one of our own accounts
+                const ownAccount = konten.find(k => k.iban === t.iban);
+                const displayIban = ownAccount ? ownAccount.kontoName : t.iban;
+
+                return {
+                  name: t.message || myKonto.kontoName,
+                  account: myKonto.kontoName,
+                  accountId: myKonto.kontoId,
+                  amount: t.amount,
+                  date: t.timestamp,
+                  otherPartyIban: displayIban,
+                  note: t.note,
+                  currency: t.currency || myKonto.currency || 'CHF',
+                  transactionType: t.transactionType,
+                  locked: false 
+                };
+              });
               
               allDisplayTransactions.push(...mapped);
               completedRequests++;

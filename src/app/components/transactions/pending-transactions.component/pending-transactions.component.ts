@@ -86,13 +86,17 @@ export class PendingTransactionsComponent implements OnInit {
         
         this.allTransactions = sortedPayments.map(p => {
           const konto = this.konten.find(k => k.kontoId === p.kontoId);
+          // Check if the target IBAN belongs to one of our own accounts
+          const ownAccount = this.konten.find(k => k.iban === p.toIban);
+          const displayToIban = ownAccount ? ownAccount.kontoName : p.toIban;
+
           return {
             id: p.id,
             name: p.message || konto?.kontoName || 'Unknown',
             account: konto?.kontoName || 'Unknown Account',
             accountId: p.kontoId,
             amount: p.amount,
-            toIban: p.toIban,
+            toIban: displayToIban,
             fromIban: konto?.iban || '',
             message: p.message,
             note: p.note,

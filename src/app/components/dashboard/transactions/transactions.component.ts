@@ -65,21 +65,29 @@ export class DashboardTransactionsComponent implements OnInit {
         );
 
         let completedRequests = 0;
-        const allTransactions: Transaction[] = [];
+        const allTransactions: { transaction: Transaction, konto: Konto }[] = [];
 
         transactionRequests.forEach((request, index) => {
           request.subscribe({
             next: (data) => {
-              allTransactions.push(...data);
+              // Store transaction with its source account context
+              data.forEach(t => {
+                allTransactions.push({ transaction: t, konto: konten[index] });
+              });
               completedRequests++;
               
               if (completedRequests === transactionRequests.length) {
                 const pendingPayments: TransactionDisplay[] = payments.map(p => {
                   const konto = konten.find(k => k.kontoId === p.kontoId);
+                  
+                  // Check if target IBAN is one of our own accounts
+                  const targetOwnAccount = konten.find(k => k.iban === p.toIban);
+                  const displayToIban = targetOwnAccount ? targetOwnAccount.kontoName : p.toIban;
+
                   return {
-                    name: p.message || '',
+                    name: p.message || konto?.kontoName || '',
                     account: konto?.kontoName || '',
-                    toIban: p.toIban,
+                    toIban: displayToIban,
                     fromIban: konto?.iban || '',
                     amount: -p.amount, // negative since it's outgoing
                     message: p.message,
@@ -93,13 +101,19 @@ export class DashboardTransactionsComponent implements OnInit {
                   };
                 });
 
-                const completedTransactions: TransactionDisplay[] = allTransactions.map(t => {
-                  const konto = konten.find(k => k.iban === (t.transactionType === 'OUTGOING' ? t.iban : k.iban));
+                const completedTransactions: TransactionDisplay[] = allTransactions.map(item => {
+                  const t = item.transaction;
+                  const sourceKonto = item.konto;
+                  
+                  // For outgoing, t.iban is the receiver. For incoming, it's the sender.
+                  const otherPartyOwnAccount = konten.find(k => k.iban === t.iban);
+                  const displayIban = otherPartyOwnAccount ? otherPartyOwnAccount.kontoName : t.iban;
+
                   return {
-                    name: t.message || '',
-                    account: konto?.kontoName || '',
-                    toIban: t.transactionType === 'OUTGOING' ? t.iban : '',
-                    fromIban: t.transactionType === 'INCOMING' ? t.iban : '',
+                    name: t.message || sourceKonto.kontoName,
+                    account: sourceKonto.kontoName,
+                    toIban: t.transactionType === 'OUTGOING' ? displayIban : '',
+                    fromIban: t.transactionType === 'INCOMING' ? displayIban : '',
                     amount: t.amount,
                     message: t.message,
                     note: t.note || '',
@@ -109,7 +123,7 @@ export class DashboardTransactionsComponent implements OnInit {
                     locked: false,
                     timestamp: t.timestamp,
                     isPending: false,
-                    currency: t.currency || konto?.currency || 'CHF',
+                    currency: t.currency || sourceKonto.currency || 'CHF',
                     transactionType: t.transactionType
                   };
                 });
