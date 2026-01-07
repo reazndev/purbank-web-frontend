@@ -45,6 +45,15 @@ export class WealthWealthDetailedComponent implements OnInit {
       next: (data) => {
         this.konten = data;
         this.calculateWealth();
+
+        const savedKontoId = localStorage.getItem('openKontoId');
+        if (savedKontoId) {
+          const konto = this.konten.find(k => k.kontoId === savedKontoId);
+          if (konto) {
+            this.showKontoDetail(konto);
+          }
+          localStorage.removeItem('openKontoId');
+        }
       },
       error: (error) => {
         // Handle error silently
@@ -124,11 +133,14 @@ export class WealthWealthDetailedComponent implements OnInit {
       deviceId: this.authService.getOrCreateDeviceId()
     };
 
-    this.kontenService.inviteMember(this.selectedKonto.kontoId, request).subscribe({
+    const currentKontoId = this.selectedKonto.kontoId;
+
+    this.kontenService.inviteMember(currentKontoId, request).subscribe({
       next: (response) => {
         this.isInviting = false;
-        this.inviteSuccess = `Invitation sent! Please approve on your mobile device (Code: ${response.mobileVerify})`;
         this.newMemberContractNumber = '';
+        localStorage.setItem('openKontoId', currentKontoId);
+        window.location.reload();
       },
       error: (error) => {
         this.isInviting = false;
