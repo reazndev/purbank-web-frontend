@@ -31,7 +31,7 @@
         <select *ngIf="isInternalTransfer" name="internalAccount" [(ngModel)]="selectedDestinationAccount" (change)="onDestinationAccountChange()" required>
           <option value="" disabled selected>{{ languageService.translate('account') }}</option>
           <option *ngFor="let account of getAvailableDestinationAccounts()" [value]="account.kontoId">
-            {{ account.kontoName }} ({{ account.iban }})
+            {{ account.kontoName }}
           </option>
         </select>
       </div>
