@@ -150,6 +150,7 @@ export class CreateTransactionComponent implements OnInit {
       kontoId: this.selectedAccount,
       toIban: this.ibanReceiver,
       amount: this.amount,
+      paymentCurrency: this.getSelectedAccountCurrency(),
       message: this.message,
       note: this.note,
       executionType: this.isInstant ? 'INSTANT' : 'NORMAL',
