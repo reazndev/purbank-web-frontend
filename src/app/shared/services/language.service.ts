@@ -7,6 +7,7 @@ export interface Translations {
   dashboard: string;
   wealth: string;
   transactions: string;
+  payments: string;
   analytics: string;
   logout: string;
   createAccountContent: string;
@@ -71,6 +72,7 @@ export interface Translations {
   note: string;
   submit: string;
   completedTransactions: string;
+  completedPayments: string;
   pendingTransactions: string;
   description: string;
   pendingTransactionsHint: string;
@@ -106,7 +108,11 @@ export interface Translations {
   wealthConvertedToCHF: string;
   iban: string;
   allAccounts: string;
+  allTransactions: string;
+  incoming: string;
+  outgoing: string;
   internalTransfer: string;
+  loading: string;
 }
 
 @Injectable({
@@ -119,7 +125,8 @@ export class LanguageService {
   de: {
       dashboard: 'Dashboard',
       wealth: 'Vermögen',
-      transactions: 'Überweisungen',
+      transactions: 'Transaktionen',
+      payments: 'Zahlungen',
       analytics: 'Analyse',
       logout: 'Abmelden',
       createAccountContent: 'Kontaktieren Sie die nächste PurBank Filiale um ein Konto zu eröffnen.',
@@ -176,6 +183,7 @@ export class LanguageService {
       note: "Notiz",
       submit: "Absenden",
       completedTransactions: "Ausgeführte Überweisungen",
+      completedPayments: "Ausgeführte Zahlungen",
       pendingTransactions: "Überweisungen in Verarbeitung",
       description: "Beschreibung",
       pendingTransactionsHint: "Alle Transaktionen werden um 01:00 Uhr Züricher Zeit ausgeführt.",
@@ -208,12 +216,17 @@ export class LanguageService {
       wealthConvertedToCHF: "Alle Konten werden in CHF umgerechnet und angezeigt",
       iban: "IBAN",
       allAccounts: "Alle Konten",
-      internalTransfer: "Interner Übertrag"
+      allTransactions: "Alle Transaktionen",
+      incoming: "Eingehend",
+      outgoing: "Ausgehend",
+      internalTransfer: "Interner Übertrag",
+      loading: "Laden..."
     },
     en: {
       dashboard: 'Dashboard',
       wealth: 'Wealth',
       transactions: 'Transactions',
+      payments: 'Payments',
       analytics: 'Analytics',
       logout: 'Logout',
       createAccountContent: 'Please contact your nearest PurBank branch to open an account.',      
@@ -270,6 +283,7 @@ export class LanguageService {
       note: "Note",
       submit: "Send",
       completedTransactions: "Completed Transactions",
+      completedPayments: "Completed Payments",
       pendingTransactions: "Pending Payments",
       description: "Description",
       pendingTransactionsHint: "All payments will go through at 01:00 AM Zurich time.",
@@ -302,7 +316,11 @@ export class LanguageService {
       wealthConvertedToCHF: "All accounts are converted to CHF for the total",
       iban: "IBAN",
       allAccounts: "All Accounts",
-      internalTransfer: "Internal Transfer"
+      allTransactions: "All Transactions",
+      incoming: "Incoming",
+      outgoing: "Outgoing",
+      internalTransfer: "Internal Transfer",
+      loading: "Loading..."
     }
   };
 

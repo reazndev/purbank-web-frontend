@@ -98,9 +98,10 @@
   margin-bottom: 15px;
   display: grid;
   /* columns: name | role | interest rate | balance | actions */
-  grid-template-columns: 1fr 4rem 9rem 8rem auto;
+  grid-template-columns: 1fr 7rem 6rem 8rem auto;
   align-items: center;
   gap: 12px;
+  padding: 0 15px; /* match account-box padding */
 }
 
 .accounts-grid {
@@ -119,12 +120,18 @@
   background-color: var(--color-accent-light);
   padding: 15px;
   display: grid;
-  grid-template-columns: 1fr 7rem 6rem 8rem;
+  grid-template-columns: 1fr 7rem 6rem 8rem auto;
   align-items: center;
   gap: 12px;
   margin-bottom: -5px;
   min-height: 50px;
   height: fit-content;
+}
+
+.account-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
 }
 
 .account-name {
@@ -160,18 +167,6 @@
   justify-self: end;
 }
 
-.scroll-indicator {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: var(--color-accent-dark);
-}
-
-.small-note {
-  font-size: 0.7rem;
-  margin-top: 2px;
-  font-style: italic;
-}
-
 /* Header row with expand button */
 .header-row {
   display: flex;
@@ -181,7 +176,7 @@
 }
 
 .icon-btn {
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
   padding: 4px;
@@ -197,7 +192,7 @@
 }
 
 .info-btn {
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
   padding: 4px;
@@ -206,23 +201,10 @@
   justify-content: center;
   color: var(--color-black);
   transition: opacity 0.2s;
-  margin-left: 8px;
 }
 
 .info-btn:hover {
   opacity: 0.7;
-}
-
-.account-box {
-  background-color: var(--color-accent-light);
-  padding: 15px;
-  display: grid;
-  grid-template-columns: 1fr 7rem 6rem 8rem auto;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: -5px;
-  min-height: 50px;
-  height: fit-content;
 }
 
 /* Modal Styles */
@@ -304,7 +286,7 @@
 
 .account-header-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr;
+  grid-template-columns: 1fr 0.8fr 1.5fr 0.8fr 1fr auto;
   gap: 12px;
   padding: 15px;
   font-weight: 500;
@@ -321,7 +303,7 @@
 
 .account-box-expanded {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr;
+  grid-template-columns: 1fr 0.8fr 1.5fr 0.8fr 1fr auto;
   gap: 12px;
   padding: 15px;
   background-color: var(--color-accent-light);

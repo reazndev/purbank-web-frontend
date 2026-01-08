@@ -3,6 +3,7 @@
         <div class="nav-links">
             <a routerLink="/dashboard" class="nav-link" [class.active]="isRouteActive('/dashboard')">{{ translations().dashboard }}</a>
             <a routerLink="/wealth" class="nav-link" [class.active]="isRouteActive('/wealth')">{{ translations().wealth }}</a>
+            <a routerLink="/payments" class="nav-link" [class.active]="isRouteActive('/payments')">{{ translations().payments }}</a>
             <a routerLink="/transactions" class="nav-link" [class.active]="isRouteActive('/transactions')">{{ translations().transactions }}</a>
             <a (click)="logout()" class="nav-link" style="cursor: pointer;">{{ translations().logout }}</a>
         </div>

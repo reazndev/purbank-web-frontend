@@ -1,5 +1,5 @@
-import { Component, HostListener, OnInit, effect, inject, Input } from '@angular/core';
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { Component, OnInit, effect, inject, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Transaction, Konto } from '../../../shared/services/konten.service';
 import { TransactionFilterService } from '../../../shared/services/transaction-filter.service';
@@ -18,22 +18,20 @@ interface TransactionDisplay {
 }
 
 @Component({
-  selector: 'app-completed-transactions',
-  imports: [CommonModule, NgTemplateOutlet],
-  templateUrl: './completed-transactions.component.html',
-  styleUrl: './completed-transactions.component.css',
+  selector: 'app-transactions-list',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './transactions-list.component.html',
+  styleUrl: './transactions-list.component.css',
 })
-export class CompletedTransactionsComponent implements OnInit {
-  @Input() alwaysExpanded: boolean = false;
-  @Input() onlyOutgoing: boolean = false;
+export class TransactionsListComponent implements OnInit {
   transactions: TransactionDisplay[] = []; // Displayed (filtered)
   private allTransactions: TransactionDisplay[] = []; // All fetched
   isLoading = true;
   private filterService = inject(TransactionFilterService);
-
-  // TODO: shocase date in german -> Sonntag, 30. November instead of in English
-  // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
-  // TODO: implement automated ftests
+  
+  selectedTransaction: any = null;
+  showDetailModal: boolean = false;
 
   constructor(
     public languageService: LanguageService,
@@ -46,13 +44,10 @@ export class CompletedTransactionsComponent implements OnInit {
     });
   }
 
-  isExpanded: boolean = false;
-  selectedTransaction: any = null;
-  showDetailModal: boolean = false;
+  groupedTransactions: { date: string; transactions: TransactionDisplay[] }[] = [];
 
-  toggleExpand() {
-    if (this.alwaysExpanded) return;
-    this.isExpanded = !this.isExpanded;
+  ngOnInit() {
+    this.loadTransactions();
   }
 
   showTransactionDetail(transaction: any) {
@@ -69,16 +64,7 @@ export class CompletedTransactionsComponent implements OnInit {
   onEscKey(event: Event) {
     if (this.showDetailModal) {
       this.closeDetailModal();
-    } else if (this.isExpanded) {
-      this.toggleExpand();
     }
-  }
-
-  groupedTransactions: { date: string; transactions: any[] }[] = [];
-
-  ngOnInit() {
-    this.isExpanded = this.alwaysExpanded;
-    this.loadTransactions();
   }
 
   loadTransactions(): void {
@@ -164,9 +150,7 @@ export class CompletedTransactionsComponent implements OnInit {
       filtered = filtered.filter(t => t.accountId === selectedId);
     }
 
-    if (this.onlyOutgoing) {
-      filtered = filtered.filter(t => t.transactionType === 'OUTGOING');
-    } else if (selectedType !== 'all') {
+    if (selectedType !== 'all') {
       filtered = filtered.filter(t => t.transactionType === selectedType);
     }
 
@@ -175,7 +159,7 @@ export class CompletedTransactionsComponent implements OnInit {
   }
 
   groupTransactions(): void {
-    const groups: { date: string; transactions: any[] }[] = [];
+    const groups: { date: string; transactions: TransactionDisplay[] }[] = [];
     this.transactions.forEach(t => {
       // Extract date part from timestamp (YYYY-MM-DD)
       const dateKey = t.date.split('T')[0];

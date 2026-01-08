@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+    <div class="transaction-column">
+        <app-create-transaction></app-create-transaction>
+    </div>
+    <div class="transaction-column">
+        <app-transaction-filter></app-transaction-filter>
+        <app-pending-transactions></app-pending-transactions>
+        <app-completed-transactions [onlyOutgoing]="true"></app-completed-transactions>
+    </div>
+</div>
+<app-footer></app-footer>

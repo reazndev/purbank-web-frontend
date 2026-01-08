@@ -13,6 +13,18 @@
         </select>
         <svg class="chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </div>
+      
+      <div class="select-wrapper" *ngIf="showTypeFilter">
+        <select 
+          [(ngModel)]="selectedType" 
+          (change)="onTypeChange()" 
+          class="h2-select">
+          <option value="all">{{ languageService.translate('allTransactions') }}</option>
+          <option value="INCOMING">{{ languageService.translate('incoming') }}</option>
+          <option value="OUTGOING">{{ languageService.translate('outgoing') }}</option>
+        </select>
+        <svg class="chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
     </div>
     <hr>
   </div>

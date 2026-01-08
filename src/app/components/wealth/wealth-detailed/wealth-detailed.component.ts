@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Konto, KontoMember } from '../../../shared/services/konten.service';
 import { UserAuthService } from '../../../shared/services/user-auth.service';
 import { CurrencyService } from '../../../shared/services/currency.service';
+import { TransactionFilterService } from '../../../shared/services/transaction-filter.service';
 
 @Component({
   selector: 'app-wealth-detailed',
@@ -33,11 +35,18 @@ export class WealthWealthDetailedComponent implements OnInit {
     public languageService: LanguageService,
     private kontenService: KontenService,
     private authService: UserAuthService,
-    private currencyService: CurrencyService
+    private currencyService: CurrencyService,
+    private router: Router,
+    private filterService: TransactionFilterService
   ) {}
 
   ngOnInit(): void {
     this.loadKonten();
+  }
+
+  goToTransactions(kontoId: string): void {
+    this.filterService.setSelectedKontoId(kontoId);
+    this.router.navigate(['/transactions']);
   }
 
   loadKonten(): void {

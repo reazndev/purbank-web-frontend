@@ -1,0 +1,219 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.transactions-list-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--color-white);
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    color: var(--color-black);
+    padding: var(--padding-standard);
+}
+
+.list-header-section h2 {
+    font-weight: normal;
+    margin-bottom: 10px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.list-header-section hr {
+    border: 0;
+    border-top: 1px solid var(--color-black);
+    margin-bottom: 20px;
+}
+
+.list-column-headers {
+    display: grid;
+    /* message | account | iban | note | amount | button */
+    grid-template-columns: 1.5fr 1fr 1.6fr 1fr 150px auto; 
+    gap: 12px;
+    padding: 15px;
+    font-weight: 500;
+    border-bottom: 2px solid var(--color-black);
+    position: sticky;
+    top: 0;
+    background-color: var(--color-white);
+    z-index: 10;
+}
+
+.column-label {
+    text-align: left;
+}
+
+.column-label.align-right {
+    text-align: right;
+}
+
+.list-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    overscroll-behavior: contain;
+}
+
+.date-header {
+    font-size: 0.9em;
+    color: var(--color-gray-dark);
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-weight: normal;
+    padding-left: 5px;
+}
+
+.transaction-row {
+    background-color: var(--color-accent-light);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.6fr 1fr 150px auto;
+    gap: 12px;
+    align-items: center;
+    min-height: auto;
+    height: fit-content;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.transaction-value {
+    text-align: left;
+    word-break: break-all;
+    line-height: 1.2;
+    font-size: 0.9em;
+}
+
+.transaction-balance {
+    text-align: right;
+    font-size: 0.9em;
+}
+
+.info-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-black);
+    transition: opacity 0.2s;
+}
+
+.info-btn:hover {
+    opacity: 0.7;
+}
+
+.loading, .no-data {
+    padding: 20px;
+    text-align: center;
+    color: var(--color-gray);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.detail-modal-content {
+    background-color: var(--color-white);
+    padding: 30px 40px;
+    border-radius: 4px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.detail-header h2 {
+    font-weight: normal;
+    margin: 0;
+}
+
+.detail-header hr {
+    border: 0;
+    border-top: 1px solid var(--color-black);
+    margin: 15px 0 20px 0;
+}
+
+.detail-modal-content hr {
+    border: 0;
+    border-top: 1px solid var(--color-black);
+    margin: 15px 0 20px 0;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--color-gray-dark);
+    min-width: 150px;
+}
+
+.detail-value {
+    text-align: right;
+    flex: 1;
+    word-break: break-word;
+}
+
+.detail-value.positive {
+    color: green;
+}
+
+.detail-value.negative {
+    color: red;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-black);
+}
+
+.icon-btn:hover {
+    opacity: 0.7;
+}

@@ -7,6 +7,7 @@ import { DevelopmentPage } from './pages/development/development.page';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { WealthPage } from './pages/wealth/wealth.page';
 import { TransactionsPage } from './pages/transactions/transactions.page';
+import { PaymentsPage } from './pages/payments/payments.page';
 import { AdminPage } from './pages/admin/admin.page';
 import { adminAuthGuard, authGuard } from './shared/services/auth.guard';
 
@@ -30,6 +31,11 @@ export const routes: Routes = [
   { 
     path: 'transactions', 
     component: TransactionsPage,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'payments', 
+    component: PaymentsPage,
     canActivate: [authGuard]
   },
   { 
