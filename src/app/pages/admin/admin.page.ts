@@ -6,6 +6,7 @@ import { UserDetailsComponent } from '../../components/admin/user-details/user-d
 import { RegistrationCodesComponent } from '../../components/admin/registration-codes/registration-codes.component';
 import { CreateUserComponent } from '../../components/admin/create-user/create-user.component';
 import { KontoManagementComponent } from '../../components/admin/konto-management/konto-management.component';
+import { AuditLogsComponent } from '../../components/admin/audit-logs/audit-logs.component';
 
 @Component({
   selector: 'app-admin',
@@ -17,7 +18,8 @@ import { KontoManagementComponent } from '../../components/admin/konto-managemen
     UserDetailsComponent,
     RegistrationCodesComponent,
     CreateUserComponent,
-    KontoManagementComponent
+    KontoManagementComponent,
+    AuditLogsComponent
   ],
   templateUrl: './admin.page.html',
   styleUrls: ['./admin.page.css']

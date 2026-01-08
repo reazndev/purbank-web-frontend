@@ -19,7 +19,8 @@
   grid-template-areas: 
     "users details"
     "users registration"
-    "users konto";
+    "users konto"
+    "audit audit";
   grid-template-columns: minmax(400px, 600px) minmax(400px, 600px);
   gap: var(--padding-standard);
   justify-content: center;
@@ -47,6 +48,10 @@
   grid-area: konto;
 }
 
+.audit-section {
+  grid-area: audit;
+}
+
 @media (max-width: 1400px) {
   .admin-container {
     padding: 4rem 10%;
@@ -70,7 +75,8 @@
       "users"
       "details"
       "registration"
-      "konto";
+      "konto"
+      "audit";
     grid-template-columns: 1fr;
     max-width: 700px;
     margin: 0 auto;

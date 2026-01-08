@@ -1,0 +1,83 @@
+<div class="audit-logs-container">
+  <div class="section-header">
+    <h2 class="section-title">AUDIT LOGS</h2>
+  </div>
+
+  <div class="logs-content" *ngIf="!isLoading">
+    <div class="logs-header-row">
+      <span class="col-time">TIMESTAMP</span>
+      <span class="col-action">ACTION</span>
+      <span class="col-entity">ENTITY</span>
+      <span class="col-user">USER</span>
+      <span class="col-status">STATUS</span>
+      <span class="col-details">DETAILS</span>
+    </div>
+
+    <div class="logs-scrollable">
+      <div class="log-item" *ngFor="let log of logs" (click)="viewDetails(log)">
+        <span class="col-time">{{ formatDate(log.timestamp) }}</span>
+        <span class="col-action" [title]="log.action">{{ log.action }}</span>
+        <span class="col-entity" [title]="log.entityType + ' ' + log.entityId">
+            {{ log.entityType }} <small *ngIf="log.entityId">({{ log.entityId.substring(0,8) }}...)</small>
+        </span>
+        <span class="col-user" [title]="log.userEmail">{{ log.userEmail || log.userId?.substring(0,8) }}</span>
+        <span class="col-status" [class]="log.status">{{ log.status }}</span>
+        <span class="col-details text-truncate">{{ log.details }}</span>
+      </div>
+      <div class="empty-state" *ngIf="logs.length === 0">No logs found</div>
+    </div>
+
+    <div class="pagination-footer">
+        <button class="icon-btn" (click)="prevPage()" [disabled]="page === 0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <span class="page-info">Page {{ page + 1 }} of {{ totalPages || 1 }} ({{ totalElements }} total)</span>
+        <button class="icon-btn" (click)="nextPage()" [disabled]="page >= totalPages - 1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+    </div>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">Loading logs...</div>
+</div>
+
+<!-- Details Modal -->
+<div class="modal-overlay" *ngIf="showDetailModal && selectedLog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Log Details</h3>
+            <button class="close-icon" (click)="closeDetailModal()">X</button>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-row">
+                <label>ID:</label> <span>{{ selectedLog.id }}</span>
+            </div>
+            <div class="detail-row">
+                <label>Timestamp:</label> <span>{{ formatDate(selectedLog.timestamp) }}</span>
+            </div>
+            <div class="detail-row">
+                <label>Action:</label> <span>{{ selectedLog.action }}</span>
+            </div>
+            <div class="detail-row">
+                <label>Status:</label> <span [class]="selectedLog.status">{{ selectedLog.status }}</span>
+            </div>
+            <div class="detail-row">
+                <label>User:</label> <span>{{ selectedLog.userEmail }} ({{ selectedLog.userId }})</span>
+            </div>
+            <div class="detail-row">
+                <label>Entity:</label> <span>{{ selectedLog.entityType }} - {{ selectedLog.entityId }}</span>
+            </div>
+            <div class="detail-row">
+                <label>IP Address:</label> <span>{{ selectedLog.ipAddress }}</span>
+            </div>
+            <div class="detail-row full-width">
+                <label>Details:</label> 
+                <pre class="details-box">{{ selectedLog.details }}</pre>
+            </div>
+            <div class="detail-row full-width" *ngIf="selectedLog.errorMessage">
+                <label>Error:</label> 
+                <pre class="error-box">{{ selectedLog.errorMessage }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

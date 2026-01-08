@@ -67,6 +67,40 @@ export interface AdminKontoMember {
   role: string;
 }
 
+export interface AuditLog {
+  id: string;
+  timestamp: string;
+  userId: string;
+  userEmail: string;
+  action: string;
+  entityType: string;
+  entityId: string;
+  ipAddress: string;
+  details: string;
+  status: string;
+  errorMessage: string;
+}
+
+export interface AuditLogResponse {
+  content: AuditLog[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
+export interface AuditLogFilters {
+  userId?: string;
+  action?: string;
+  entityType?: string;
+  entityId?: string;
+  status?: string;
+  startDate?: string;
+  endDate?: string;
+  page?: number;
+  size?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -141,5 +175,17 @@ export class AdminService {
 
   getKontoMembers(kontoId: string): Observable<AdminKontoMember[]> {
     return this.http.get<AdminKontoMember[]>(`${this.baseUrl}/admin/konten/${kontoId}/members`);
+  }
+
+  // Audit Logs
+  getAuditLogs(filters: AuditLogFilters): Observable<AuditLogResponse> {
+    const params: any = {};
+    Object.keys(filters).forEach(key => {
+      const value = (filters as any)[key];
+      if (value !== null && value !== undefined && value !== '') {
+        params[key] = value;
+      }
+    });
+    return this.http.get<AuditLogResponse>(`${this.baseUrl}/admin/audit-logs`, { params });
   }
 }
