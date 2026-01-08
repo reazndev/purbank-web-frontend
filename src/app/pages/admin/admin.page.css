@@ -17,19 +17,24 @@
 .admin-layout {
   display: grid;
   grid-template-areas: 
+    "create settings"
     "users details"
-    "users registration"
-    "users konto"
+    "registration konto"
     "audit audit";
   grid-template-columns: minmax(400px, 600px) minmax(400px, 600px);
   gap: var(--padding-standard);
   justify-content: center;
+  align-items: start; /* Prevent vertical stretching */
 }
 
 .admin-section {
   border: 1px solid var(--color-gray);
   background-color: var(--color-white);
   padding: var(--padding-standard);
+}
+
+.create-user-section {
+  grid-area: create;
 }
 
 .user-list-section {
@@ -52,6 +57,10 @@
   grid-area: audit;
 }
 
+.settings-section {
+  grid-area: settings;
+}
+
 @media (max-width: 1400px) {
   .admin-container {
     padding: 4rem 10%;
@@ -72,6 +81,8 @@
 @media (max-width: 1024px) {
   .admin-layout {
     grid-template-areas: 
+      "create"
+      "settings"
       "users"
       "details"
       "registration"

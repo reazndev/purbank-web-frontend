@@ -34,6 +34,20 @@ export class ChangePasswordComponent {
   showCurrentPassword = false;
   showNewPassword = false;
   showConfirmPassword = false;
+  showModal = false;
+
+  openModal(): void {
+    this.showModal = true;
+    this.formState.error = '';
+    this.formState.success = '';
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.formState.currentPassword = '';
+    this.formState.newPassword = '';
+    this.formState.confirmationPassword = '';
+  }
 
   togglePasswordVisibility(field: 'current' | 'new' | 'confirm'): void {
     switch (field) {
@@ -50,11 +64,6 @@ export class ChangePasswordComponent {
   }
 
   validatePasswords(): boolean {
-    if (this.formState.newPassword.length < 8) {
-      this.formState.error = 'New password must be at least 8 characters long.';
-      return false;
-    }
-
     if (this.formState.newPassword !== this.formState.confirmationPassword) {
       this.formState.error = 'New password and confirmation do not match.';
       return false;
