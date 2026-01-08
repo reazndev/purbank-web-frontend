@@ -64,7 +64,6 @@ export interface Translations {
   account: string;
   amount: string;
   ibanTo: string;  // unneeded can probably be removed
-  reoccuring: string;
   instantTransaction: string;
   after: string; // used for balance after -> combine {balance} + {after}
   message: string;
@@ -72,7 +71,6 @@ export interface Translations {
   submit: string;
   completedTransactions: string;
   pendingTransactions: string;
-  reoccuringTransactions: string;
   description: string;
   pendingTransactionsHint: string;
   totalPending: string;
@@ -170,7 +168,6 @@ export class LanguageService {
       account: "Konto",
       amount: "Betrag",
       ibanTo: "IBAN des Empfängers",
-      reoccuring: "Forlaufend",
       instantTransaction: "Sofort",
       after: "danach", // NOT CAPITALISED ON PURPOSE
       message: "Nachricht",
@@ -178,7 +175,6 @@ export class LanguageService {
       submit: "Absenden",
       completedTransactions: "Ausgeführte Überweisungen",
       pendingTransactions: "Überweisungen in Verarbeitung",
-      reoccuringTransactions: "Fortlaufende Überweisungen",
       description: "Beschreibung",
       pendingTransactionsHint: "Alle Transaktionen werden um 01:00 Uhr Züricher Zeit ausgeführt.",
       totalPending: "Total ausstehend",
@@ -265,7 +261,6 @@ export class LanguageService {
       account: "Account",
       amount: "Amount",
       ibanTo: "IBAN of receiver",
-      reoccuring: "Reoccuring",
       instantTransaction: "Instant",
       after: "after", // NOT CAPITALISED ON PURPOSE
       message: "Message",
@@ -273,7 +268,6 @@ export class LanguageService {
       submit: "Send",
       completedTransactions: "Completed Transactions",
       pendingTransactions: "Pending Transactions",
-      reoccuringTransactions: "Reoccuring Transactions",
       description: "Description",
       pendingTransactionsHint: "All transactions will go through at 01:00 AM Zurich time.",
       totalPending: "Total pending",
