@@ -106,7 +106,7 @@ export class KontoManagementComponent implements OnChanges {
   openEditModal(konto: AdminKontoDetails) {
     this.editKontoId = konto.kontoId;
     this.editKontoName = konto.kontoName;
-    this.editKontoZinssatz = konto.zinssatz || 0;
+    this.editKontoZinssatz = (konto.zinssatz || 0) * 100;
     this.editBalanceAdjustment = 0;
     this.showEditModal = true;
   }
@@ -119,7 +119,7 @@ export class KontoManagementComponent implements OnChanges {
     this.adminService.updateKonto(
       this.editKontoId, 
       this.editKontoName, 
-      this.editKontoZinssatz, 
+      this.editKontoZinssatz / 100, 
       this.editBalanceAdjustment !== 0 ? this.editBalanceAdjustment : undefined
     ).subscribe({
       next: () => {

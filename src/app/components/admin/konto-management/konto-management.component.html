@@ -120,7 +120,7 @@
       </div>
       <div class="detail-item">
         <label>Interest Rate</label>
-        <span>{{ (selectedKonto.zinssatz || 0) | number:'1.2-2' }}%</span>
+        <span>{{ ((selectedKonto.zinssatz || 0) * 100) | number:'1.2-2' }}%</span>
       </div>
       <div class="detail-item">
         <label>Accrued Interest</label>

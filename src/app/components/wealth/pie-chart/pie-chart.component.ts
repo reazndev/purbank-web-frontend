@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import Chart from 'chart.js/auto';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Konto } from '../../../shared/services/konten.service';
@@ -9,6 +10,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-pie-chart',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.css'],
 })

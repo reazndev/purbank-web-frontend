@@ -120,6 +120,10 @@ export interface Translations {
   sessionLoginAgain: string;
   returnToLogin: string;
   inactiveIn: string;
+  wealthHistory: string;
+  wealthHistorySubtitle: string;
+  last7Days: string;
+  last14Days: string;
 }
 
 @Injectable({
@@ -234,7 +238,11 @@ export class LanguageService {
       sessionTimeoutReason: "Ihre Sitzung ist aus Sicherheitsgründen wegen Inaktivität abgelaufen.",
       sessionLoginAgain: "Bitte melden Sie sich erneut an, um Ihre Bankgeschäfte weiter zu verwalten.",
       returnToLogin: "ZURÜCK ZUM LOGIN",
-      inactiveIn: "Inaktiv in"
+      inactiveIn: "Inaktiv in",
+      wealthHistory: "Vermögensverlauf",
+      wealthHistorySubtitle: "Gesamtguthaben letzte 7 Tage (CHF)",
+      last7Days: "7 Tage",
+      last14Days: "14 Tage"
     },
     en: {
       dashboard: 'Dashboard',
@@ -341,7 +349,11 @@ export class LanguageService {
       sessionTimeoutReason: "Your session has timed out due to inactivity for security reasons.",
       sessionLoginAgain: "Please log in again to continue managing your banking transactions.",
       returnToLogin: "RETURN TO LOGIN",
-      inactiveIn: "Inactive in"
+      inactiveIn: "Inactive in",
+      wealthHistory: "Wealth History",
+      wealthHistorySubtitle: "Total balance last 7 days (CHF)",
+      last7Days: "7 Days",
+      last14Days: "14 Days"
     }
   };
 

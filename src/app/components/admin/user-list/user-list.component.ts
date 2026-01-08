@@ -52,8 +52,8 @@ export class UserListComponent implements OnInit {
     const date = new Date(dateString);
     return date.toLocaleDateString('de-CH', { 
       year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
+      month: '2-digit', 
+      day: '2-digit' 
     });
   }
 }

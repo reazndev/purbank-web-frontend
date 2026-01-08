@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.history-chart-box {
+  border: 1px solid var(--color-gray);
+  padding: var(--padding-standard);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  color: var(--color-black);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.chart-header h3 {
+  font-weight: normal;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.range-selector {
+    display: flex;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: var(--color-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.range-selector span {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.range-selector span:hover {
+    color: var(--color-black);
+}
+
+.range-selector span.active {
+    color: var(--color-black);
+    font-weight: bold;
+}
+
+.range-selector .separator {
+    cursor: default;
+    color: var(--color-gray);
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  color: var(--color-accent-dark);
+  margin-bottom: 10px;
+}
+
+.chart-header hr {
+  border: 0;
+  border-top: 1px solid var(--color-black);
+  margin-bottom: 20px;
+}
+
+.canvas-container {
+  position: relative;
+  flex: 1;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas-container.loading canvas {
+  opacity: 0.3;
+}
+
+.loader, .no-data {
+  position: absolute;
+  font-size: 0.9rem;
+  color: var(--color-accent-dark);
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

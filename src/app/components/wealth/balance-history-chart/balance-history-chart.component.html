@@ -1,0 +1,13 @@
+<div class="history-chart-box">
+  <div class="chart-header">
+    <h3>{{ languageService.translate('wealthHistory') }}</h3>
+    <p class="subtitle">{{ languageService.translate('wealthHistorySubtitle') }}</p>
+    <hr>
+  </div>
+  
+  <div class="canvas-container" [class.loading]="isLoading">
+    <canvas #historyCanvas></canvas>
+    <div *ngIf="isLoading" class="loader">{{ languageService.translate('loading') }}</div>
+    <div *ngIf="!isLoading && historyData.length === 0" class="no-data">{{ languageService.translate('noTransactionData') }}</div>
+  </div>
+</div>
