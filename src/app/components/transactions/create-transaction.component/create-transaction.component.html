@@ -7,7 +7,7 @@
   <div class="form-container">
     <form #transactionForm="ngForm" (ngSubmit)="createPayment()">
     <div class="form-row">
-      <select name="account" [(ngModel)]="selectedAccount" required>
+      <select name="account" [(ngModel)]="selectedAccount" (change)="onAccountChange()" required>
         <option value="" disabled>{{ languageService.translate('selectAccount') }}</option>
         <option *ngFor="let account of accounts" [value]="account.kontoId">
           {{ account.kontoName }} ({{ account.balance.toFixed(2) }} {{ account.currency }})
@@ -44,12 +44,15 @@
     </div>
 
     <div class="form-row">
-      <input type="number" name="amount" [(ngModel)]="amount" [placeholder]="languageService.translate('amount')" required>
+      <input type="number" name="amount" [(ngModel)]="amount" (ngModelChange)="updateBalanceAfter()" [placeholder]="languageService.translate('amount')" required>
+      <select name="currency" [(ngModel)]="paymentCurrency" (ngModelChange)="updateBalanceAfter()" class="currency-select" required>
+        <option *ngFor="let currency of availableCurrencies" [value]="currency">{{ currency }}</option>
+      </select>
       <div class="balance-after-box">
         <div class="balance-after">
           <div class="balance-label">{{ languageService.translate('after') }}</div>
           <div class="vertical-line"></div>
-          <div class="balance-value">{{ calculateBalanceAfter() }} {{ getSelectedAccountCurrency() }}</div>
+          <div class="balance-value">{{ balanceAfter }} {{ getSelectedAccountCurrency() }}</div>
         </div>
       </div>
     </div>
