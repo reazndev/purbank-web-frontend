@@ -20,7 +20,7 @@
         <span class="col-entity" [title]="log.entityType + ' ' + log.entityId">
             {{ log.entityType }} <small *ngIf="log.entityId">({{ log.entityId.substring(0,8) }}...)</small>
         </span>
-        <span class="col-user" [title]="log.userEmail">{{ log.userEmail || log.userId?.substring(0,8) }}</span>
+        <span class="col-user" [title]="log.userEmail">{{ log.userEmail || log.userId.substring(0,8) }}</span>
         <span class="col-status" [class]="log.status">{{ log.status }}</span>
         <span class="col-details text-truncate">{{ log.details }}</span>
       </div>

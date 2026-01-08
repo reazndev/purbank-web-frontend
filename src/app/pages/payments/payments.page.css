@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   gap: 24px;
-  height: 85vh; /* MAXMIN */
+  height: 85vh; /* Fixed height to match other pages */
   padding: 2rem clamp(1rem, calc(50vw - 475px), 25%);
   background-color: var(--color-white);
   max-width: 100%;
@@ -20,15 +20,29 @@
   flex: 1;
   width: 100%;
   min-width: 0;
-  height: 100%; /* MAXMIN */
+  height: 100%;
   overflow: hidden;
 }
 
-.page-content {
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--color-black);
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  max-width: 600px;
+/* Ensure the chart takes the remaining space and is scrollable if needed */
+app-transaction-pie-chart {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Ensure create transaction doesn't grow too much */
+app-create-transaction {
+  flex-shrink: 0;
+}
+
+/* Allow right column components to scroll within their area */
+app-transaction-filter {
+  flex-shrink: 0;
+}
+
+app-pending-transactions,
+app-completed-transactions {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }

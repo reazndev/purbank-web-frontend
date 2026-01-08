@@ -4,12 +4,14 @@ import { MobileDetectionService } from './shared/services/mobile-detection.servi
 import { MobileWarningComponent } from './shared/mobile-warning/mobile-warning.component';
 import { MobileVerifyModalComponent } from './components/mobile-verify-modal/mobile-verify-modal.component';
 import { MobileVerifyService } from './shared/services/mobile-verify.service';
+import { SessionService } from './shared/services/session.service';
+import { SessionTimeoutModalComponent } from './components/session-timeout-modal/session-timeout-modal.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MobileWarningComponent, MobileVerifyModalComponent],
+  imports: [RouterOutlet, MobileWarningComponent, MobileVerifyModalComponent, SessionTimeoutModalComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -17,6 +19,7 @@ export class App {
   private readonly mobileDetectionService = inject(MobileDetectionService);
   private readonly mobileVerifyService = inject(MobileVerifyService);
   private readonly router = inject(Router);
+  private readonly sessionService = inject(SessionService); // Initialize service
   
   mobileVerifyCode = signal<string | null>(null);
   currentUrl = signal<string>('');

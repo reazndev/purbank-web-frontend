@@ -7,11 +7,13 @@ import { WealthPage } from './pages/wealth/wealth.page';
 import { TransactionsPage } from './pages/transactions/transactions.page';
 import { PaymentsPage } from './pages/payments/payments.page';
 import { AdminPage } from './pages/admin/admin.page';
+import { SessionTimeoutPage } from './pages/session-timeout/session-timeout.page';
 import { adminAuthGuard, authGuard } from './shared/services/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: LoginPage },
   { path: 'login', component: LoginPage },
+  { path: 'session-timeout', component: SessionTimeoutPage },
   { path: 'create-account', component: CreateAccountPage },
   { path: 'support', component: SupportPage },
   {

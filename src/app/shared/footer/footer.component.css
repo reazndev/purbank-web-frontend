@@ -40,3 +40,17 @@
   color: var(--color-black);
   border-bottom-color: var(--color-black);
 }
+
+.footer-center {
+  display: flex;
+  justify-content: center;
+}
+
+.session-timer {
+  font-size: 0.75rem;
+  color: var(--color-accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 300;
+  margin-top: 0.125rem;
+}

@@ -1,17 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SessionService } from '../services/session.service';
-import { LanguageService } from '../services/language.service';
+import { SessionService } from '../../shared/services/session.service';
+import { LanguageService } from '../../shared/services/language.service';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'app-session-timeout-modal',
   standalone: true,
-  imports: [RouterModule, CommonModule],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css'
+  imports: [CommonModule],
+  templateUrl: './session-timeout-modal.component.html',
+  styleUrl: './session-timeout-modal.component.css'
 })
-export class FooterComponent {
+export class SessionTimeoutModalComponent {
   public readonly sessionService = inject(SessionService);
   public readonly languageService = inject(LanguageService);
 

@@ -6,6 +6,7 @@ import { CreateTransactionComponent } from '../../components/transactions/create
 import { CompletedTransactionsComponent } from '../../components/transactions/completed-transactions.component/completed-transactions.component';
 import { PendingTransactionsComponent } from '../../components/transactions/pending-transactions.component/pending-transactions.component';
 import { TransactionFilterComponent } from '../../components/transactions/transaction-filter/transaction-filter.component';
+import { TransactionPieChartComponent } from '../../components/transactions/transaction-pie-chart/transaction-pie-chart.component';
 
 @Component({
   selector: 'app-payments',
@@ -16,7 +17,8 @@ import { TransactionFilterComponent } from '../../components/transactions/transa
     CreateTransactionComponent, 
     CompletedTransactionsComponent, 
     PendingTransactionsComponent, 
-    TransactionFilterComponent
+    TransactionFilterComponent,
+    TransactionPieChartComponent
   ],
   templateUrl: './payments.page.html',
   styleUrl: './payments.page.css',

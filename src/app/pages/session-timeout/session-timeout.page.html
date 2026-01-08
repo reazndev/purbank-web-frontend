@@ -1,0 +1,12 @@
+<div class="timeout-container">
+  <div class="timeout-content">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-alert"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <h1>{{ languageService.translate('sessionExpired') }}</h1>
+    <hr>
+    <p>{{ languageService.translate('sessionTimeoutReason') }}</p>
+    <p>{{ languageService.translate('sessionLoginAgain') }}</p>
+    <a routerLink="/login" class="login-btn">{{ languageService.translate('returnToLogin') }}</a>
+  </div>
+</div>

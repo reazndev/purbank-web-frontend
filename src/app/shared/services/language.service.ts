@@ -113,6 +113,13 @@ export interface Translations {
   outgoing: string;
   internalTransfer: string;
   loading: string;
+  last15Transactions: string;
+  noTransactionData: string;
+  sessionExpired: string;
+  sessionTimeoutReason: string;
+  sessionLoginAgain: string;
+  returnToLogin: string;
+  inactiveIn: string;
 }
 
 @Injectable({
@@ -220,7 +227,14 @@ export class LanguageService {
       incoming: "Eingehend",
       outgoing: "Ausgehend",
       internalTransfer: "Interner Übertrag",
-      loading: "Laden..."
+      loading: "Laden...",
+      last15Transactions: "Letzte 15 Transaktionen (CHF)",
+      noTransactionData: "Keine Transaktionsdaten verfügbar",
+      sessionExpired: "Sitzung abgelaufen",
+      sessionTimeoutReason: "Ihre Sitzung ist aus Sicherheitsgründen wegen Inaktivität abgelaufen.",
+      sessionLoginAgain: "Bitte melden Sie sich erneut an, um Ihre Bankgeschäfte weiter zu verwalten.",
+      returnToLogin: "ZURÜCK ZUM LOGIN",
+      inactiveIn: "Inaktiv in"
     },
     en: {
       dashboard: 'Dashboard',
@@ -320,7 +334,14 @@ export class LanguageService {
       incoming: "Incoming",
       outgoing: "Outgoing",
       internalTransfer: "Internal Transfer",
-      loading: "Loading..."
+      loading: "Loading...",
+      last15Transactions: "Last 15 Transactions (CHF)",
+      noTransactionData: "No transaction data available",
+      sessionExpired: "Session Expired",
+      sessionTimeoutReason: "Your session has timed out due to inactivity for security reasons.",
+      sessionLoginAgain: "Please log in again to continue managing your banking transactions.",
+      returnToLogin: "RETURN TO LOGIN",
+      inactiveIn: "Inactive in"
     }
   };
 
