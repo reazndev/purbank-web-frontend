@@ -45,6 +45,28 @@ export interface CreateRegistrationCodeDto {
   description: string;
 }
 
+export interface AdminKontoDetails {
+  kontoId: string;
+  kontoName: string;
+  balance: number;
+  role: string;
+  zinssatz: number;
+  iban: string;
+  currency: string;
+  status: string;
+  createdAt: string;
+  closedAt: string;
+  accruedInterest: number;
+  lastInterestCalcDate: string;
+}
+
+export interface AdminKontoMember {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -85,5 +107,39 @@ export class AdminService {
 
   deleteRegistrationCode(userId: string, codeId: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/admin/users/${userId}/registration/${codeId}`);
+  }
+
+  // Konto Management Endpoints
+  getKontenForUser(userId: string): Observable<AdminKontoDetails[]> {
+    return this.http.get<AdminKontoDetails[]>(`${this.baseUrl}/admin/konten/user/${userId}`);
+  }
+
+  createKontoForUser(userId: string, name: string, currency: string): Observable<AdminKontoDetails> {
+    return this.http.post<AdminKontoDetails>(`${this.baseUrl}/admin/konten/user/${userId}`, { name, currency });
+  }
+
+  processAbrechnung(): Observable<{ status: string }> {
+    return this.http.post<{ status: string }>(`${this.baseUrl}/admin/konten/abrechnung`, {});
+  }
+
+  getKontoDetails(kontoId: string, userId: string): Observable<AdminKontoDetails> {
+    const params = { userId };
+    return this.http.get<AdminKontoDetails>(`${this.baseUrl}/admin/konten/${kontoId}`, { params });
+  }
+
+  closeKonto(kontoId: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/admin/konten/${kontoId}`);
+  }
+
+  updateKonto(kontoId: string, name: string, zinssatz: number, balanceAdjustment?: number): Observable<AdminKontoDetails> {
+    const params: any = {};
+    if (balanceAdjustment !== undefined && balanceAdjustment !== null) {
+      params.balanceAdjustment = balanceAdjustment;
+    }
+    return this.http.patch<AdminKontoDetails>(`${this.baseUrl}/admin/konten/${kontoId}`, { name, zinssatz }, { params });
+  }
+
+  getKontoMembers(kontoId: string): Observable<AdminKontoMember[]> {
+    return this.http.get<AdminKontoMember[]>(`${this.baseUrl}/admin/konten/${kontoId}/members`);
   }
 }
