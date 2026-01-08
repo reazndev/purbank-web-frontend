@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
@@ -37,18 +37,21 @@ export class CurrencyService {
 
     return this.http.get<CurrencyRates>(`${this.apiUrl}/currencies/rates`).pipe(
       map(rates => {
+        if (!rates || !rates.rates || Object.keys(rates.rates).length === 0) {
+          throw new Error('Invalid rates response');
+        }
         this.cachedRates = rates;
         this.cacheTimestamp = Date.now();
         return rates;
       }),
       catchError(error => {
-        console.error('Failed to fetch currency rates:', error);
-        // Return fallback rates if API fails
+        console.error('Failed to fetch currency rates, using fallback:', error);
+        // Return fallback rates
         return of({
           rates: {
             'CHF': 1,
-            'EUR': 1.05,
-            'USD': 0.95
+            'EUR': 1.05, // 1 CHF = 1.05 EUR
+            'USD': 0.95  // 1 CHF = 0.95 USD
           }
         });
       })
@@ -89,26 +92,15 @@ export class CurrencyService {
       return of(0);
     }
 
-    return this.getRates().pipe(
-      map(ratesData => {
-        const rates = ratesData.rates;
-        let total = 0;
+    const conversionObservables = amounts.map(item => 
+      this.convertAmount(item.amount, item.currency, targetCurrency)
+    );
 
-        for (const item of amounts) {
-          if (item.currency === targetCurrency) {
-            total += item.amount;
-          } else if (rates[item.currency] && rates[targetCurrency]) {
-            // Convert to target currency
-            const rate = rates[targetCurrency] / rates[item.currency];
-            total += item.amount * rate;
-          } else {
-            // If conversion not available, add as-is (fallback)
-            console.warn(`No conversion rate available for ${item.currency} to ${targetCurrency}`);
-            total += item.amount;
-          }
-        }
-
-        return total;
+    return forkJoin(conversionObservables).pipe(
+      map(convertedAmounts => convertedAmounts.reduce((sum, val) => sum + val, 0)),
+      catchError(error => {
+        console.error('Batch currency conversion failed:', error);
+        return of(amounts.reduce((sum, item) => sum + item.amount, 0));
       })
     );
   }
