@@ -1,9 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal, computed } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { MobileDetectionService } from './shared/services/mobile-detection.service';
 import { MobileWarningComponent } from './shared/mobile-warning/mobile-warning.component';
 import { MobileVerifyModalComponent } from './components/mobile-verify-modal/mobile-verify-modal.component';
 import { MobileVerifyService } from './shared/services/mobile-verify.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,31 @@ import { MobileVerifyService } from './shared/services/mobile-verify.service';
 export class App {
   private readonly mobileDetectionService = inject(MobileDetectionService);
   private readonly mobileVerifyService = inject(MobileVerifyService);
+  private readonly router = inject(Router);
   
   mobileVerifyCode = signal<string | null>(null);
+  currentUrl = signal<string>('');
+
+  shouldShowMobileWarning = computed(() => {
+    const isMobile = this.mobileDetectionService.getIsMobile()();
+    const url = this.currentUrl();
+    if (!isMobile) return false;
+    // Allow support and create-account on mobile
+    if (url.includes('/support') || url.includes('/create-account')) {
+      return false;
+    }
+    return true;
+  });
 
   constructor() {
     this.mobileVerifyService.verifyRequest$.subscribe(code => {
       this.mobileVerifyCode.set(code);
+    });
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.currentUrl.set(event.url);
     });
   }
 
@@ -37,9 +57,5 @@ export class App {
   onClosed() {
     this.mobileVerifyCode.set(null);
     this.mobileVerifyService.completeVerification(false);
-  }
-  
-  getIsMobile() {
-    return this.mobileDetectionService.getIsMobile();
   }
 }

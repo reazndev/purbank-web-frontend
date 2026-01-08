@@ -34,7 +34,11 @@
         (click)="togglePassword.emit()"
         [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
       >
-        {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+        @if (showPassword) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off"><path d="M9.88 9.88 3.59 3.59"/><path d="M21 21l-6.3-6.3"/><path d="M2 12s3-7 10-7a7 7 0 0 1 5 2.91"/><path d="M12 19c-3.87 0-7-4-7-7a7 7 0 0 1 1.11-2.71"/><path d="M17 17a7 7 0 0 1-5 2"/><path d="M22 12s-3 7-10 7a7 7 0 0 1-2-.28"/><path d="M15.12 15.12a3 3 0 1 1-4.24-4.24"/></svg>
+        } @else {
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        }
       </button>
     </div>
   </div>

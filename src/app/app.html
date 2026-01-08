@@ -1,4 +1,4 @@
-@if (getIsMobile()()) {
+@if (shouldShowMobileWarning()) {
   <app-mobile-warning></app-mobile-warning>
 } @else {
   <router-outlet></router-outlet>
