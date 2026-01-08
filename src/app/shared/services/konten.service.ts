@@ -9,6 +9,7 @@ export interface Konto {
   kontoName: string;
   balance: number;
   role: string;
+  zinssatz: number;
   iban: string;
   currency: string;
 }

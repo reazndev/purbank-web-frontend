@@ -98,10 +98,10 @@
   margin-bottom: 15px;
   display: grid;
   /* columns: name | role | interest rate | balance | actions */
-  grid-template-columns: 1fr 7rem 6rem 8rem auto;
+  grid-template-columns: 1fr 5rem 6rem 6rem 5rem;
   align-items: center;
   gap: 12px;
-  padding: 0 15px; /* match account-box padding */
+  padding: 0 15px;
 }
 
 .accounts-grid {
@@ -120,7 +120,7 @@
   background-color: var(--color-accent-light);
   padding: 15px;
   display: grid;
-  grid-template-columns: 1fr 7rem 6rem 8rem auto;
+  grid-template-columns: 1fr 5rem 4rem 9rem auto;
   align-items: center;
   gap: 12px;
   margin-bottom: -5px;
@@ -148,8 +148,8 @@
 
 .account-role,
 .account-header-role {
-  text-align: right;
-  justify-self: end;
+  text-align: left;
+  justify-self: start;
   display: flex;
   align-items: center;
   height: 100%;
@@ -157,8 +157,8 @@
 
 .account-interest-rate,
 .account-header-interest-rate {
-  text-align: center;
-  justify-self: center;
+  text-align: right;
+  justify-self: end;
 }
 
 .account-balance,
@@ -286,7 +286,7 @@
 
 .account-header-row {
   display: grid;
-  grid-template-columns: 1fr 0.8fr 1.5fr 0.8fr 1fr auto;
+  grid-template-columns: 1fr 0.8fr 1.5fr 0.8fr 1fr auto 5%;
   gap: 12px;
   padding: 15px;
   font-weight: 500;
@@ -303,7 +303,7 @@
 
 .account-box-expanded {
   display: grid;
-  grid-template-columns: 1fr 0.8fr 1.5fr 0.8fr 1fr auto;
+  grid-template-columns: 1fr 0.8fr 1.5fr 0.8fr 1fr auto 5%;
   gap: 12px;
   padding: 15px;
   background-color: var(--color-accent-light);

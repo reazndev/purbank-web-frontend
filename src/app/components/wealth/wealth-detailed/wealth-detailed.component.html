@@ -22,7 +22,7 @@
     <div class="account-box" *ngFor="let konto of konten">
       <span class="account-name">{{ konto.kontoName }}</span>
       <span class="account-role">{{ konto.role }}</span>
-      <span class="account-interest-rate">N/A</span>
+      <span class="account-interest-rate">{{ (konto.zinssatz || 0).toFixed(2) }}%</span>
       <span class="account-balance">{{ konto.balance.toFixed(2) }} {{ konto.currency }}</span>
       <div class="account-actions">
         <button class="info-btn" (click)="goToTransactions(konto.kontoId)" [title]="languageService.translate('transactions')">
@@ -67,7 +67,7 @@
         <span class="account-value">{{ konto.kontoName }}</span>
         <span class="account-value">{{ konto.role }}</span>
         <span class="account-value">{{ konto.iban }}</span>
-        <span class="account-value">N/A</span>
+        <span class="account-value">{{ (konto.zinssatz || 0).toFixed(2) }}%</span>
         <span class="account-balance">{{ konto.balance.toFixed(2) }} {{ konto.currency }}</span>
         <div class="account-actions">
           <button class="info-btn" (click)="goToTransactions(konto.kontoId)" [title]="languageService.translate('transactions')">
@@ -108,7 +108,7 @@
       </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('interestRate') }}:</span>
-        <span class="detail-value">N/A</span>
+        <span class="detail-value">{{ (selectedKonto.zinssatz || 0).toFixed(2) }}%</span>
       </div>
       
       <div class="members-section">
