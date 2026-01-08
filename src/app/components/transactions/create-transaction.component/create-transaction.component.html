@@ -8,7 +8,7 @@
     <form #transactionForm="ngForm" (ngSubmit)="createPayment()">
     <div class="form-row">
       <select name="account" [(ngModel)]="selectedAccount" required>
-        <option value="">{{ languageService.translate('account') }}</option>
+        <option value="" disabled>{{ languageService.translate('selectAccount') }}</option>
         <option *ngFor="let account of accounts" [value]="account.kontoId">
           {{ account.kontoName }} ({{ account.balance.toFixed(2) }} {{ account.currency }})
         </option>
@@ -17,12 +17,6 @@
         <div class="checkbox-group">
           <input type="checkbox" id="instant" name="isInstant" [(ngModel)]="isInstant">
           <label for="instant">{{ languageService.translate('instantTransaction') }}</label>
-        </div>
-      </div>
-      <div class="transaction-option-box">
-        <div class="checkbox-group">
-          <input type="checkbox" id="reoccuring" name="isReoccuring" [(ngModel)]="isReoccuring">
-          <label for="reoccuring">{{ languageService.translate('reoccuring') }}</label>
         </div>
       </div>
     </div>

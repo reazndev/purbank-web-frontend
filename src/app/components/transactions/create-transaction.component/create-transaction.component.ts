@@ -60,9 +60,6 @@ export class CreateTransactionComponent implements OnInit {
         this.accounts = konten.filter(konto => 
           konto.role === 'OWNER' || konto.role === 'MANAGER'
         );
-        if (this.accounts.length > 0) {
-          this.selectedAccount = this.accounts[0].kontoId;
-        }
         this.isLoading = false;
       },
       error: (error) => {

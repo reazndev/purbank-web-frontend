@@ -61,6 +61,7 @@ export interface Translations {
   viewDetails: string;
   // Page: Transactions
   createTransaction: string;
+  selectAccount: string;
   account: string;
   amount: string;
   ibanTo: string;  // unneeded can probably be removed
@@ -165,6 +166,7 @@ export class LanguageService {
       scrollForMore: 'Scrollen für mehr',
       viewDetails: 'Details anzeigen',
       createTransaction: "Überweisung erfassen",
+      selectAccount: "Konto auswählen",
       account: "Konto",
       amount: "Betrag",
       ibanTo: "IBAN des Empfängers",
@@ -258,6 +260,7 @@ export class LanguageService {
       scrollForMore: 'Scroll for more',
       viewDetails: 'View details',
       createTransaction: "Create Transaction",
+      selectAccount: "Select Account",
       account: "Account",
       amount: "Amount",
       ibanTo: "IBAN of receiver",
