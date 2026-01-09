@@ -128,6 +128,13 @@ export interface Translations {
   wealthHistorySubtitle: string;
   last7Days: string;
   last14Days: string;
+  // Session Timeout Modal
+  sessionTimeoutTitle: string;
+  sessionTimeoutBody: string;
+  sessionTimeoutLabel: string;
+  sessionTimeoutInstruction: string;
+  sessionTimeoutLogout: string;
+  sessionTimeoutStay: string;
 }
 
 @Injectable({
@@ -250,7 +257,13 @@ export class LanguageService {
       wealthHistory: "Vermögensverlauf",
       wealthHistorySubtitle: "Gesamtguthaben letzte 7 Tage (CHF)",
       last7Days: "7 Tage",
-      last14Days: "14 Tage"
+      last14Days: "14 Tage",
+      sessionTimeoutTitle: "Sitzung läuft ab",
+      sessionTimeoutBody: "Ihre Sitzung läuft aufgrund von Inaktivität bald ab.",
+      sessionTimeoutLabel: "Automatischer Logout in:",
+      sessionTimeoutInstruction: 'Klicken Sie auf "ANGEMELDET BLEIBEN", um Ihre aktuelle Sitzung fortzusetzen.',
+      sessionTimeoutLogout: "ABMELDEN",
+      sessionTimeoutStay: "ANGEMELDET BLEIBEN"
     },
     en: {
       dashboard: 'Dashboard',
@@ -365,7 +378,13 @@ export class LanguageService {
       wealthHistory: "Wealth History",
       wealthHistorySubtitle: "Total balance last 7 days (CHF)",
       last7Days: "7 Days",
-      last14Days: "14 Days"
+      last14Days: "14 Days",
+      sessionTimeoutTitle: "Session Timeout Warning",
+      sessionTimeoutBody: "Your session is about to expire due to inactivity.",
+      sessionTimeoutLabel: "Automatic logout in:",
+      sessionTimeoutInstruction: 'Click "STAY LOGGED IN" to continue your current session.',
+      sessionTimeoutLogout: "LOG OUT",
+      sessionTimeoutStay: "STAY LOGGED IN"
     }
   };
 

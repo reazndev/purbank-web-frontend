@@ -1,22 +1,22 @@
 <div class="modal-overlay" *ngIf="sessionService.isWarningVisible()">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Session Timeout Warning</h2>
+      <h2>{{ languageService.translate('sessionTimeoutTitle') }}</h2>
       <hr>
     </div>
     
     <div class="modal-body">
-      <p>Your session is about to expire due to inactivity.</p>
+      <p>{{ languageService.translate('sessionTimeoutBody') }}</p>
       <div class="countdown-container">
-        <span class="countdown-label">Automatic logout in:</span>
+        <span class="countdown-label">{{ languageService.translate('sessionTimeoutLabel') }}</span>
         <span class="countdown-value">{{ formatTime(sessionService.totalTimeRemaining()) }}</span>
       </div>
-      <p class="instruction">Click "STAY LOGGED IN" to continue your current session.</p>
+      <p class="instruction">{{ languageService.translate('sessionTimeoutInstruction') }}</p>
     </div>
 
     <div class="modal-footer">
-      <button class="btn-secondary" (click)="sessionService.logoutNow()">LOG OUT</button>
-      <button class="btn-primary" (click)="sessionService.stayLoggedIn()">STAY LOGGED IN</button>
+      <button class="btn-secondary" (click)="sessionService.logoutNow()">{{ languageService.translate('sessionTimeoutLogout') }}</button>
+      <button class="btn-primary" (click)="sessionService.stayLoggedIn()">{{ languageService.translate('sessionTimeoutStay') }}</button>
     </div>
   </div>
 </div>
