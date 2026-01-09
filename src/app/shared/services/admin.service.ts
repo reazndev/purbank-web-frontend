@@ -182,6 +182,10 @@ export class AdminService {
     return this.http.post<{ status: string }>(`${this.baseUrl}/admin/konten/abrechnung`, {});
   }
 
+  forceDailyCalculation(): Observable<{ status: string }> {
+    return this.http.post<{ status: string }>(`${this.baseUrl}/admin/konten/daily-calculation`, {});
+  }
+
   getKontoDetails(kontoId: string, userId: string): Observable<AdminKontoDetails> {
     const params = { userId };
     return this.http.get<AdminKontoDetails>(`${this.baseUrl}/admin/konten/${kontoId}`, { params });

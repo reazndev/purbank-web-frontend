@@ -83,6 +83,22 @@ export class KontoManagementComponent implements OnChanges {
     });
   }
 
+  triggerDailyCalculation() {
+    this.isLoading = true;
+    this.adminService.forceDailyCalculation().subscribe({
+      next: (res) => {
+        this.successMessage = 'Daily calculation triggered successfully';
+        this.isLoading = false;
+        setTimeout(() => this.successMessage = null, 3000);
+      },
+      error: (err) => {
+        this.error = 'Failed to trigger daily calculation';
+        this.isLoading = false;
+        setTimeout(() => this.error = null, 3000);
+      }
+    });
+  }
+
   openCreateModal() {
     this.showCreateModal = true;
     this.newKontoName = '';

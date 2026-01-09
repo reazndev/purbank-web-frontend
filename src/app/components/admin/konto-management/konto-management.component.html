@@ -2,6 +2,7 @@
   <div class="section-header">
     <h2 class="section-title">KONTO MANAGEMENT</h2>
     <div class="header-actions">
+      <button class="action-btn secondary" (click)="triggerDailyCalculation()">FORCE DAILY CALC</button>
       <button class="action-btn secondary" (click)="triggerAbrechnung()">RUN ABRECHNUNG</button>
       <button class="action-btn primary" (click)="openCreateModal()" [disabled]="!userId">CREATE KONTO</button>
     </div>
