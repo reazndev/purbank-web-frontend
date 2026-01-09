@@ -13,8 +13,8 @@
     <ng-container *ngFor="let group of groupedTransactions">
       <div class="date-header">{{ languageService.formatDate(group.date) }}</div>
       <div class="transaction-box" *ngFor="let transaction of group.transactions">
-        <span class="transaction-name">{{ transaction.message || transaction.iban }}</span>
-        <span class="transaction-balance" [class.negative]="transaction.transactionType === 'OUTGOING'" [class.positive]="transaction.transactionType === 'INCOMING'">
+        <span class="transaction-name">{{ (transaction.transactionType === 'INTEREST' ? '' : (transaction.message || transaction.iban)) || transaction.message }}</span>
+        <span class="transaction-balance" [class.negative]="transaction.transactionType === 'OUTGOING'" [class.positive]="transaction.transactionType === 'INCOMING' || transaction.transactionType === 'INTEREST'">
           {{ transaction.transactionType === 'OUTGOING' ? '-' : '+' }}{{ MathAbs(transaction.amount) | number:'1.2-2' }} {{ transaction.currency }}
         </span>
         <div class="transaction-actions">
@@ -59,9 +59,13 @@
         <span class="detail-label">{{ languageService.translate('accountTo') }}:</span>
         <span class="detail-value">{{ selectedTransaction.iban }}</span>
       </div>
+      <div class="detail-row" *ngIf="selectedTransaction.transactionType === 'INTEREST'">
+        <span class="detail-label">{{ languageService.translate('accountTo') }}:</span>
+        <span class="detail-value">{{ selectedTransaction.iban }}</span>
+      </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('amount') }}:</span>
-        <span class="detail-value" [class.positive]="selectedTransaction.transactionType === 'INCOMING'" [class.negative]="selectedTransaction.transactionType === 'OUTGOING'">
+        <span class="detail-value" [class.positive]="selectedTransaction.transactionType === 'INCOMING' || selectedTransaction.transactionType === 'INTEREST'" [class.negative]="selectedTransaction.transactionType === 'OUTGOING'">
           {{ selectedTransaction.transactionType === 'OUTGOING' ? '-' : '+' }}{{ MathAbs(selectedTransaction.amount) | number:'1.2-2' }} {{ selectedTransaction.currency }}
         </span>
       </div>

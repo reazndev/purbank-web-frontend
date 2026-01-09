@@ -73,7 +73,7 @@ export interface TransactionDTO {
   balanceAfter: number;
   timestamp: string;
   iban: string;
-  transactionType: 'INCOMING' | 'OUTGOING';
+  transactionType: 'INCOMING' | 'OUTGOING' | 'INTEREST';
   currency: string;
   message: string;
   note: string;

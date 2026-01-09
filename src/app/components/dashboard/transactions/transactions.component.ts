@@ -20,7 +20,7 @@ interface TransactionDisplay {
   timestamp: string;
   isPending: boolean;
   currency: string;
-  transactionType?: 'INCOMING' | 'OUTGOING';
+  transactionType?: 'INCOMING' | 'OUTGOING' | 'INTEREST';
 }
 
 @Component({
@@ -109,10 +109,15 @@ export class DashboardTransactionsComponent implements OnInit {
                   const otherPartyOwnAccount = konten.find(k => k.iban === t.iban);
                   const displayIban = otherPartyOwnAccount ? otherPartyOwnAccount.kontoName : t.iban;
 
+                  let name = t.message || sourceKonto.kontoName;
+                  if (t.transactionType === 'INTEREST') {
+                    name = name.replace(/ rate$/, '').replace(/ rate /, ' ');
+                  }
+
                   return {
-                    name: t.message || sourceKonto.kontoName,
+                    name: name,
                     account: sourceKonto.kontoName,
-                    toIban: t.transactionType === 'OUTGOING' ? displayIban : '',
+                    toIban: t.transactionType === 'OUTGOING' || t.transactionType === 'INTEREST' ? displayIban : '',
                     fromIban: t.transactionType === 'INCOMING' ? displayIban : '',
                     amount: t.amount,
                     message: t.message,

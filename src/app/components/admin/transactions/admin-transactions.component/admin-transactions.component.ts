@@ -90,6 +90,11 @@ export class AdminTransactionsComponent implements OnChanges {
   }
 
   processTransactions(data: TransactionDTO[]) {
+    data.forEach(t => {
+      if (t.transactionType === 'INTEREST') {
+        t.message = t.message.replace(/ rate$/, '').replace(/ rate /, ' ');
+      }
+    });
     this.transactions = data.sort((a: TransactionDTO, b: TransactionDTO) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
     this.groupTransactions();
     this.isLoading = false;

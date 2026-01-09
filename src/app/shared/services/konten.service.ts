@@ -20,7 +20,7 @@ export interface Transaction {
   balanceAfter: number;
   timestamp: string;  
   iban: string; // sender IBAN for INCOMING, recipient IBAN for OUTGOING
-  transactionType: 'INCOMING' | 'OUTGOING';
+  transactionType: 'INCOMING' | 'OUTGOING' | 'INTEREST';
   message: string;
   note: string;
   currency: string;

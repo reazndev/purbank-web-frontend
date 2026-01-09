@@ -20,8 +20,20 @@
             <div class="date-header">{{ languageService.formatDate(group.date) }}</div>
             <div class="transaction-row" *ngFor="let transaction of group.transactions">
                 <span class="transaction-value">{{ transaction.name }}</span>
-                <span class="transaction-value">{{ transaction.account }}</span>
-                <span class="transaction-value">{{ transaction.otherPartyIban }}</span>
+                <span class="transaction-value">
+                    <ng-container [ngSwitch]="transaction.transactionType">
+                        <span *ngSwitchCase="'INCOMING'">{{ transaction.otherPartyIban }}</span>
+                        <span *ngSwitchCase="'OUTGOING'">{{ transaction.account }}</span>
+                        <span *ngSwitchCase="'INTEREST'">-</span>
+                    </ng-container>
+                </span>
+                <span class="transaction-value">
+                    <ng-container [ngSwitch]="transaction.transactionType">
+                        <span *ngSwitchCase="'INCOMING'">{{ transaction.account }}</span>
+                        <span *ngSwitchCase="'OUTGOING'">{{ transaction.otherPartyIban }}</span>
+                        <span *ngSwitchCase="'INTEREST'">{{ transaction.account }}</span>
+                    </ng-container>
+                </span>
                 <span class="transaction-value">{{ transaction.note || '-' }}</span>
                 <span class="transaction-balance" [class.positive]="transaction.amount > 0">
                      {{ transaction.amount > 0 ? '' : '- ' }}{{ MathAbs(transaction.amount) | number:'1.2-2' }} {{ transaction.currency }}
@@ -48,7 +60,7 @@
     </div>
     <hr>
     <div class="detail-content" *ngIf="selectedTransaction">
-      <div class="detail-row">
+      <div class="detail-row" *ngIf="selectedTransaction.transactionType !== 'INTEREST'">
         <span class="detail-label">{{ languageService.translate('account') }}:</span>
         <span class="detail-value">{{ selectedTransaction.account }}</span>
       </div>
@@ -59,6 +71,10 @@
       <div class="detail-row" *ngIf="selectedTransaction.transactionType === 'OUTGOING'">
         <span class="detail-label">{{ languageService.translate('toIban') }}:</span>
         <span class="detail-value">{{ selectedTransaction.otherPartyIban }}</span>
+      </div>
+      <div class="detail-row" *ngIf="selectedTransaction.transactionType === 'INTEREST'">
+        <span class="detail-label">{{ languageService.translate('toIban') }}:</span>
+        <span class="detail-value">{{ selectedTransaction.account }}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">{{ languageService.translate('amount') }}:</span>

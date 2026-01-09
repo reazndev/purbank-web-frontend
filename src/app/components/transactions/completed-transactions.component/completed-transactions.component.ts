@@ -15,7 +15,7 @@ interface TransactionDisplay {
   otherPartyIban: string;
   note: string;
   currency: string;
-  transactionType: 'INCOMING' | 'OUTGOING';
+  transactionType: 'INCOMING' | 'OUTGOING' | 'INTEREST';
   locked?: boolean;
 }
 
@@ -134,9 +134,14 @@ export class CompletedTransactionsComponent implements OnInit {
                 const ownAccount = konten.find(k => k.iban === t.iban);
                 const displayIban = ownAccount ? ownAccount.kontoName : t.iban;
 
+                let name = t.message || myKonto.kontoName;
+                if (t.transactionType === 'INTEREST') {
+                  name = name.replace(/ rate$/, '').replace(/ rate /, ' ');
+                }
+
                 return {
                   transactionId: t.transactionId,
-                  name: t.message || myKonto.kontoName,
+                  name: name,
                   account: myKonto.kontoName,
                   accountId: myKonto.kontoId,
                   amount: t.amount,
