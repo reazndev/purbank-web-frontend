@@ -13,18 +13,16 @@
   <div class="konto-list-content" *ngIf="konten.length > 0">
     <div class="list-header-row">
       <span class="col-name">NAME</span>
-      <span class="col-iban">IBAN</span>
       <span class="col-balance">BALANCE</span>
-      <span class="col-status">STATUS</span>
+      <span class="col-iban">IBAN</span>
       <span class="col-actions">ACTIONS</span>
     </div>
 
     <div class="list-scrollable">
       <div class="list-item" *ngFor="let konto of konten">
         <span class="col-name">{{ konto.kontoName }}</span>
-        <span class="col-iban">{{ konto.iban }}</span>
         <span class="col-balance">{{ konto.balance | number:'1.2-2' }} {{ konto.currency }}</span>
-        <span class="col-status" [class.active]="konto.status === 'ACTIVE'">{{ konto.status }}</span>
+        <span class="col-iban" (click)="copyToClipboard(konto.iban)" title="Click to copy IBAN" style="cursor: pointer; font-family: monospace;">{{ konto.iban }}</span>
         <div class="col-actions">
           <button class="icon-btn" (click)="viewDetails(konto.kontoId)" title="Details">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -112,7 +110,9 @@
       </div>
       <div class="detail-item">
         <label>IBAN</label>
-        <span>{{ selectedKonto.iban }}</span>
+        <span class="detail-value" (click)="copyToClipboard(selectedKonto.iban)" title="Click to copy IBAN" style="cursor: pointer; font-family: monospace;">
+            {{ selectedKonto.iban }}
+        </span>
       </div>
       <div class="detail-item">
         <label>Balance</label>

@@ -185,4 +185,14 @@ export class KontoManagementComponent implements OnChanges {
       }
     });
   }
+
+  copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text).then(() => {
+      const originalSuccess = this.successMessage;
+      this.successMessage = 'Copied to clipboard';
+      setTimeout(() => this.successMessage = originalSuccess, 2000);
+    }).catch(err => {
+      console.error('Could not copy text: ', err);
+    });
+  }
 }
