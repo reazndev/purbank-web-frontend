@@ -64,6 +64,8 @@ export interface Translations {
   createTransaction: string;
   selectAccount: string;
   account: string;
+  accountFrom: string;
+  accountTo: string;
   amount: string;
   ibanTo: string;  // unneeded can probably be removed
   instantTransaction: string;
@@ -93,6 +95,7 @@ export interface Translations {
   deletePayment: string;
   apply: string;
   editTransaction: string;
+  editNote: string;
   pendingPayments: string;
   deleteAccountWarning: string;
   inviteMember: string;
@@ -186,6 +189,8 @@ export class LanguageService {
       createTransaction: "Überweisung erfassen",
       selectAccount: "Konto auswählen",
       account: "Konto",
+      accountFrom: "Konto von",
+      accountTo: "Konto zu",
       amount: "Betrag",
       ibanTo: "IBAN des Empfängers",
       instantTransaction: "Sofort",
@@ -214,6 +219,7 @@ export class LanguageService {
       deletePayment: "Zahlung löschen",
       apply: "Bestätigen",
       editTransaction: "Überweisung bearbeiten",
+      editNote: "Notiz bearbeiten",
       pendingPayments: "Überweisungen in Verarbeitung",
       deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 und bei denen Sie der Inhaber sind, können gelöscht werden.",
       inviteMember: "Mitglied einladen",
@@ -297,6 +303,8 @@ export class LanguageService {
       createTransaction: "Create Transaction",
       selectAccount: "Select Account",
       account: "Account",
+      accountFrom: "Account from",
+      accountTo: "Account to",
       amount: "Amount",
       ibanTo: "IBAN of receiver",
       instantTransaction: "Instant",
@@ -325,6 +333,7 @@ export class LanguageService {
       deletePayment: "Delete Payment",
       apply: "Apply",
       editTransaction: "Edit Transaction",
+      editNote: "Edit Note",
       pendingPayments: "Pending Payments",
       deleteAccountWarning: "Only accounts with a balance of 0 where you are the owner can be deleted.",
       inviteMember: "Invite Member",

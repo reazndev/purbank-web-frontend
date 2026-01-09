@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit, effect, inject, Input } from '@angular/core';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Transaction, Konto } from '../../../shared/services/konten.service';
 import { TransactionFilterService } from '../../../shared/services/transaction-filter.service';
 
 interface TransactionDisplay {
+  transactionId: string;
   name: string;
   account: string;
   accountId: string;
@@ -19,7 +21,7 @@ interface TransactionDisplay {
 
 @Component({
   selector: 'app-completed-transactions',
-  imports: [CommonModule, NgTemplateOutlet],
+  imports: [CommonModule, NgTemplateOutlet, FormsModule],
   templateUrl: './completed-transactions.component.html',
   styleUrl: './completed-transactions.component.css',
 })
@@ -31,9 +33,8 @@ export class CompletedTransactionsComponent implements OnInit {
   isLoading = true;
   private filterService = inject(TransactionFilterService);
 
-  // TODO: shocase date in german -> Sonntag, 30. November instead of in English
-  // TODO: show transactions from accounts wiht multiple members with icon (public/icons/users.svg)
-  // TODO: implement automated ftests
+  editingTransactionId: string | null = null;
+  editNoteValue: string = '';
 
   constructor(
     public languageService: LanguageService,
@@ -63,6 +64,30 @@ export class CompletedTransactionsComponent implements OnInit {
   closeDetailModal() {
     this.showDetailModal = false;
     this.selectedTransaction = null;
+  }
+
+  startEditNote(transaction: any) {
+    this.editingTransactionId = transaction.transactionId;
+    this.editNoteValue = transaction.note || '';
+  }
+
+  cancelEditNote() {
+    this.editingTransactionId = null;
+    this.editNoteValue = '';
+  }
+
+  saveNote(transaction: any) {
+    this.kontenService.updateTransactionNote(transaction.accountId, transaction.transactionId, this.editNoteValue).subscribe({
+      next: () => {
+        transaction.note = this.editNoteValue;
+        this.cancelEditNote();
+        const original = this.allTransactions.find(t => t.transactionId === transaction.transactionId);
+        if (original) original.note = this.editNoteValue;
+      },
+      error: (err) => {
+        console.error('Failed to update note', err);
+      }
+    });
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -110,6 +135,7 @@ export class CompletedTransactionsComponent implements OnInit {
                 const displayIban = ownAccount ? ownAccount.kontoName : t.iban;
 
                 return {
+                  transactionId: t.transactionId,
                   name: t.message || myKonto.kontoName,
                   account: myKonto.kontoName,
                   accountId: myKonto.kontoId,

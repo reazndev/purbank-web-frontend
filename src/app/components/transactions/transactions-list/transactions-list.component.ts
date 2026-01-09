@@ -1,10 +1,12 @@
 import { Component, OnInit, effect, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../../shared/services/language.service';
 import { KontenService, Transaction, Konto } from '../../../shared/services/konten.service';
 import { TransactionFilterService } from '../../../shared/services/transaction-filter.service';
 
 interface TransactionDisplay {
+  transactionId: string;
   name: string;
   account: string;
   accountId: string;
@@ -20,7 +22,7 @@ interface TransactionDisplay {
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './transactions-list.component.html',
   styleUrl: './transactions-list.component.css',
 })
@@ -32,6 +34,9 @@ export class TransactionsListComponent implements OnInit {
   
   selectedTransaction: any = null;
   showDetailModal: boolean = false;
+
+  editingTransactionId: string | null = null;
+  editNoteValue: string = '';
 
   constructor(
     public languageService: LanguageService,
@@ -58,6 +63,31 @@ export class TransactionsListComponent implements OnInit {
   closeDetailModal() {
     this.showDetailModal = false;
     this.selectedTransaction = null;
+  }
+
+  startEditNote(transaction: any) {
+    this.editingTransactionId = transaction.transactionId;
+    this.editNoteValue = transaction.note || '';
+  }
+
+  cancelEditNote() {
+    this.editingTransactionId = null;
+    this.editNoteValue = '';
+  }
+
+  saveNote(transaction: any) {
+    this.kontenService.updateTransactionNote(transaction.accountId, transaction.transactionId, this.editNoteValue).subscribe({
+      next: () => {
+        transaction.note = this.editNoteValue;
+        this.cancelEditNote();
+        // Update allTransactions as well to keep it in sync
+        const original = this.allTransactions.find(t => t.transactionId === transaction.transactionId);
+        if (original) original.note = this.editNoteValue;
+      },
+      error: (err) => {
+        console.error('Failed to update note', err);
+      }
+    });
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -96,6 +126,7 @@ export class TransactionsListComponent implements OnInit {
                 const displayIban = ownAccount ? ownAccount.kontoName : t.iban;
 
                 return {
+                  transactionId: t.transactionId,
                   name: t.message || myKonto.kontoName,
                   account: myKonto.kontoName,
                   accountId: myKonto.kontoId,

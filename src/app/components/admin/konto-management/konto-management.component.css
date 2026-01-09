@@ -156,7 +156,7 @@
 }
 
 .modal-content.large {
-  width: 600px;
+  width: 800px;
 }
 
 .modal-header {
@@ -249,4 +249,79 @@
     justify-content: space-between;
     padding: 4px 0;
     font-size: 0.75rem;
+}
+
+.transactions-list-section {
+    border-top: 1px solid var(--color-gray);
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+.transactions-list-section h4 {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+}
+
+.transactions-table-wrapper {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid var(--color-gray-lighter);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.7rem;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 8px;
+    background: var(--color-gray-lighter);
+    position: sticky;
+    top: 0;
+}
+
+.admin-table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--color-gray-lighter);
+}
+
+.col-message {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.col-note {
+    min-width: 120px;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.edit-note-input input {
+    width: 100%;
+    padding: 4px;
+    font-size: 0.7rem;
+    border: 1px solid var(--color-accent);
+}
+
+.edit-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.icon-btn.small {
+    padding: 2px;
+}
+
+.icon-btn.success:hover {
+    color: green;
 }

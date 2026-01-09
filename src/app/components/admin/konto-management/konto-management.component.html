@@ -149,5 +149,59 @@
         </div>
         <div *ngIf="members.length === 0">No members</div>
     </div>
+
+    <div class="transactions-list-section">
+        <h4>Transactions</h4>
+        <div class="transactions-table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Message</th>
+                        <th>Note</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of transactions">
+                        <td>{{ t.timestamp | date:'short' }}</td>
+                        <td [class.negative]="t.transactionType === 'OUTGOING'" [class.positive]="t.transactionType === 'INCOMING'">
+                            {{ t.transactionType === 'OUTGOING' ? '-' : '+' }}{{ t.amount | number:'1.2-2' }} {{ t.currency }}
+                        </td>
+                        <td>{{ t.transactionType }}</td>
+                        <td class="col-message" [title]="t.message">{{ t.message }}</td>
+                        <td class="col-note">
+                            <div *ngIf="editingTransactionId !== t.transactionId">
+                                {{ t.note || '-' }}
+                            </div>
+                            <div *ngIf="editingTransactionId === t.transactionId" class="edit-note-input">
+                                <input [(ngModel)]="editTransactionNote" placeholder="Enter note...">
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="editingTransactionId !== t.transactionId">
+                                <button class="icon-btn small" (click)="startEditTransaction(t)" title="Edit Note">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                </button>
+                            </div>
+                            <div *ngIf="editingTransactionId === t.transactionId" class="edit-actions">
+                                <button class="icon-btn small success" (click)="saveTransactionNote(t.transactionId)" title="Save">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </button>
+                                <button class="icon-btn small danger" (click)="cancelEditTransaction()" title="Cancel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="12" y2="12"></line></svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="transactions.length === 0">
+                        <td colspan="6" class="text-center">No transactions found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
   </div>
 </div>

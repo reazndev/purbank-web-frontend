@@ -152,8 +152,155 @@
 }
 
 .scroll-indicator {
+
   text-align: left;
+
   margin-top: 0px;
+
   font-size: 0.9em;
+
   color: var(--color-accent-dark);
+
 }
+
+
+
+.detail-actions {
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--color-gray-lighter);
+
+    display: flex;
+
+    justify-content: flex-start;
+
+}
+
+
+
+.edit-action-btn {
+
+    background: var(--color-accent-lighter);
+
+    border: 1px solid var(--color-gray-lighter);
+
+    color: var(--color-black);
+
+    padding: 8px 15px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 0.9rem;
+
+    transition: background-color 0.2s;
+
+}
+
+
+
+.edit-action-btn:hover {
+
+    background: var(--color-gray-lighter);
+
+}
+
+
+
+.edit-note-container {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+}
+
+
+
+.edit-note-container input {
+
+    flex-grow: 1;
+
+    padding: 8px;
+
+    font-size: 0.9rem;
+
+    border: 1px solid var(--color-accent);
+
+    border-radius: 4px;
+
+    outline: none;
+
+}
+
+
+
+.edit-actions {
+
+    display: flex;
+
+    gap: 5px;
+
+}
+
+
+
+.action-btn-small {
+
+    background: none;
+
+    border: none;
+
+    padding: 4px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    border-radius: 4px;
+
+    transition: background-color 0.2s;
+
+}
+
+
+
+.action-btn-small:hover {
+
+    background-color: var(--color-gray-lighter);
+
+}
+
+
+
+.action-btn-small.save {
+
+    color: green;
+
+}
+
+
+
+.action-btn-small.cancel {
+
+    color: red;
+
+}
+
+

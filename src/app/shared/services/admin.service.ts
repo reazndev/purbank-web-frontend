@@ -67,6 +67,18 @@ export interface AdminKontoMember {
   role: string;
 }
 
+export interface TransactionDTO {
+  transactionId: string;
+  amount: number;
+  balanceAfter: number;
+  timestamp: string;
+  iban: string;
+  transactionType: 'INCOMING' | 'OUTGOING';
+  currency: string;
+  message: string;
+  note: string;
+}
+
 export interface AuditLog {
   id: string;
   timestamp: string;
@@ -175,6 +187,15 @@ export class AdminService {
 
   getKontoMembers(kontoId: string): Observable<AdminKontoMember[]> {
     return this.http.get<AdminKontoMember[]>(`${this.baseUrl}/admin/konten/${kontoId}/members`);
+  }
+
+  getTransactionsForKonto(kontoId: string): Observable<TransactionDTO[]> {
+    return this.http.get<TransactionDTO[]>(`${this.baseUrl}/admin/transactions/konto/${kontoId}`);
+  }
+
+  // Transaction Management
+  updateTransaction(transactionId: string, data: { note?: string; status?: string }): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/admin/transactions/${transactionId}`, data);
   }
 
   // Audit Logs

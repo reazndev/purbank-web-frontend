@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AdminService, AdminKontoDetails, AdminKontoMember } from '../../../shared/services/admin.service';
+import { AdminService, AdminKontoDetails, AdminKontoMember, TransactionDTO } from '../../../shared/services/admin.service';
 
 @Component({
   selector: 'app-konto-management',
@@ -18,6 +18,7 @@ export class KontoManagementComponent implements OnChanges {
   konten: AdminKontoDetails[] = [];
   selectedKonto: AdminKontoDetails | null = null;
   members: AdminKontoMember[] = [];
+  transactions: TransactionDTO[] = [];
   
   isLoading = false;
   error: string | null = null;
@@ -34,6 +35,10 @@ export class KontoManagementComponent implements OnChanges {
   editKontoName = '';
   editKontoZinssatz = 0;
   editBalanceAdjustment = 0;
+
+  // Transaction Edit Form
+  editingTransactionId: string | null = null;
+  editTransactionNote = '';
 
   // Details Modal
   showDetailsModal = false;
@@ -145,6 +150,7 @@ export class KontoManagementComponent implements OnChanges {
       next: (details) => {
         this.selectedKonto = details;
         this.loadMembers(kontoId);
+        this.loadTransactions(kontoId);
         this.showDetailsModal = true;
         this.isLoading = false;
       },
@@ -164,10 +170,47 @@ export class KontoManagementComponent implements OnChanges {
     });
   }
 
+  loadTransactions(kontoId: string) {
+    this.adminService.getTransactionsForKonto(kontoId).subscribe({
+      next: (transactions) => {
+        this.transactions = transactions;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  startEditTransaction(transaction: TransactionDTO) {
+    this.editingTransactionId = transaction.transactionId;
+    this.editTransactionNote = transaction.note || '';
+  }
+
+  cancelEditTransaction() {
+    this.editingTransactionId = null;
+    this.editTransactionNote = '';
+  }
+
+  saveTransactionNote(transactionId: string) {
+    this.adminService.updateTransaction(transactionId, { note: this.editTransactionNote }).subscribe({
+      next: () => {
+        this.successMessage = 'Transaction note updated';
+        this.editingTransactionId = null;
+        if (this.selectedKonto) {
+            this.loadTransactions(this.selectedKonto.kontoId);
+        }
+        setTimeout(() => this.successMessage = null, 3000);
+      },
+      error: (err) => {
+        this.error = 'Failed to update transaction note';
+        setTimeout(() => this.error = null, 3000);
+      }
+    });
+  }
+
   closeDetailsModal() {
     this.showDetailsModal = false;
     this.selectedKonto = null;
     this.members = [];
+    this.transactions = [];
   }
 
   closeAccount(konto: AdminKontoDetails) {

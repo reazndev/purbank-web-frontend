@@ -77,6 +77,14 @@ export class KontenService {
     return this.http.get<KontoMember[]>(`${this.apiUrl}/konten/${kontoId}/members`);
   }
 
+  updateTransactionNote(kontoId: string, transactionId: string, note: string): Observable<any> {
+    const deviceId = this.userAuthService.getOrCreateDeviceId();
+    return this.http.patch(`${this.apiUrl}/konten/${kontoId}/transactions/${transactionId}`, {
+      note,
+      deviceId
+    });
+  }
+
   inviteMember(kontoId: string, request: InviteMemberRequest): Observable<any> {
     const deviceId = this.userAuthService.getOrCreateDeviceId();
     return this.http.post(`${this.apiUrl}/konten/${kontoId}/members`, {
