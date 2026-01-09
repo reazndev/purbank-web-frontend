@@ -75,7 +75,7 @@
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
 }
 
@@ -90,7 +90,7 @@
   gap: 10px;
   padding: 8px 10px;
   border-bottom: 1px solid var(--color-gray);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   cursor: pointer;
 }
 
@@ -201,7 +201,7 @@
   word-break: break-all;
   margin-top: 5px;
   font-family: monospace;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   max-height: 200px;
   overflow-y: auto;
 }

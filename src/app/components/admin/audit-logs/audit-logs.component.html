@@ -16,13 +16,13 @@
     <div class="logs-scrollable">
       <div class="log-item" *ngFor="let log of logs" (click)="viewDetails(log)">
         <span class="col-time">{{ formatDate(log.timestamp) }}</span>
-        <span class="col-action" [title]="log.action">{{ log.action }}</span>
-        <span class="col-entity" [title]="log.entityType + ' ' + log.entityId">
-            {{ log.entityType }} <small *ngIf="log.entityId">({{ log.entityId.substring(0,8) }}...)</small>
+        <span class="col-action" [title]="log.action || ''">{{ log.action || 'N/A' }}</span>
+        <span class="col-entity" [title]="log.entityType + ' ' + (log.entityId || '')">
+            {{ log.entityType || 'N/A' }} <small *ngIf="log.entityId">({{ log.entityId.substring(0,8) }}...)</small>
         </span>
-        <span class="col-user" [title]="log.userEmail">{{ log.userEmail || log.userId.substring(0,8) }}</span>
-        <span class="col-status" [class]="log.status">{{ log.status }}</span>
-        <span class="col-details text-truncate">{{ log.details }}</span>
+        <span class="col-user" [title]="log.userEmail || ''">{{ log.userEmail || (log.userId ? log.userId.substring(0,8) : 'SYSTEM') }}</span>
+        <span class="col-status" [class]="log.status">{{ log.status || 'N/A' }}</span>
+        <span class="col-details text-truncate">{{ log.details || 'No details' }}</span>
       </div>
       <div class="empty-state" *ngIf="logs.length === 0">No logs found</div>
     </div>
@@ -56,23 +56,23 @@
                 <label>Timestamp:</label> <span>{{ formatDate(selectedLog.timestamp) }}</span>
             </div>
             <div class="detail-row">
-                <label>Action:</label> <span>{{ selectedLog.action }}</span>
+                <label>Action:</label> <span>{{ selectedLog.action || 'N/A' }}</span>
             </div>
             <div class="detail-row">
-                <label>Status:</label> <span [class]="selectedLog.status">{{ selectedLog.status }}</span>
+                <label>Status:</label> <span [class]="selectedLog.status">{{ selectedLog.status || 'N/A' }}</span>
             </div>
             <div class="detail-row">
-                <label>User:</label> <span>{{ selectedLog.userEmail }} ({{ selectedLog.userId }})</span>
+                <label>User:</label> <span>{{ selectedLog.userEmail || 'N/A' }} ({{ selectedLog.userId || 'SYSTEM' }})</span>
             </div>
             <div class="detail-row">
-                <label>Entity:</label> <span>{{ selectedLog.entityType }} - {{ selectedLog.entityId }}</span>
+                <label>Entity:</label> <span>{{ selectedLog.entityType || 'N/A' }} - {{ selectedLog.entityId || 'N/A' }}</span>
             </div>
             <div class="detail-row">
-                <label>IP Address:</label> <span>{{ selectedLog.ipAddress }}</span>
+                <label>IP Address:</label> <span>{{ selectedLog.ipAddress || 'N/A' }}</span>
             </div>
             <div class="detail-row full-width">
                 <label>Details:</label> 
-                <pre class="details-box">{{ selectedLog.details }}</pre>
+                <pre class="details-box">{{ selectedLog.details || 'No additional details available.' }}</pre>
             </div>
             <div class="detail-row full-width" *ngIf="selectedLog.errorMessage">
                 <label>Error:</label> 

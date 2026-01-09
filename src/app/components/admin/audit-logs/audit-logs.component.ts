@@ -80,7 +80,11 @@ export class AuditLogsComponent implements OnInit {
   }
 
   formatDate(dateStr: string): string {
-    return new Date(dateStr).toLocaleString('de-CH', {
+    if (!dateStr) return 'N/A';
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return 'N/A';
+    
+    return date.toLocaleString('de-CH', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
