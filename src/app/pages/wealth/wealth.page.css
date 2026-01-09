@@ -32,6 +32,11 @@
   overflow: hidden;
 }
 
+.app-balance-history-chart {
+  flex: 1;
+  min-height: 0;
+}
+
 .page-content {
   font-size: 1rem;
   font-weight: 300;
