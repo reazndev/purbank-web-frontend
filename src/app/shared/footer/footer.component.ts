@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '../services/session.service';
 import { LanguageService } from '../services/language.service';
@@ -14,6 +14,7 @@ import { LanguageService } from '../services/language.service';
 export class FooterComponent {
   public readonly sessionService = inject(SessionService);
   public readonly languageService = inject(LanguageService);
+  public readonly router = inject(Router);
 
   formatTime(seconds: number): string {
     const mins = Math.floor(seconds / 60);
