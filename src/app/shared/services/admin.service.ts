@@ -77,6 +77,20 @@ export interface TransactionDTO {
   currency: string;
   message: string;
   note: string;
+  executionType?: string;
+  locked?: boolean;
+}
+
+export interface PaymentDTO {
+  id: string;
+  kontoId: string;
+  toIban: string;
+  amount: number;
+  message: string;
+  note: string;
+  executionDate: string;
+  executionType: 'INSTANT' | 'NORMAL';
+  locked?: boolean;
 }
 
 export interface AuditLog {
@@ -193,9 +207,38 @@ export class AdminService {
     return this.http.get<TransactionDTO[]>(`${this.baseUrl}/admin/transactions/konto/${kontoId}`);
   }
 
+  getTransactionsForUser(userId: string): Observable<TransactionDTO[]> {
+    return this.http.get<TransactionDTO[]>(`${this.baseUrl}/admin/transactions`, { params: { userId } });
+  }
+
   // Transaction Management
-  updateTransaction(transactionId: string, data: { note?: string; status?: string }): Observable<any> {
+  updateTransaction(transactionId: string, data: Partial<TransactionDTO>): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/admin/transactions/${transactionId}`, data);
+  }
+
+  deleteTransaction(transactionId: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/admin/transactions/${transactionId}`);
+  }
+
+  // Payment Management
+  getPaymentsForKonto(kontoId: string): Observable<PaymentDTO[]> {
+    return this.http.get<PaymentDTO[]>(`${this.baseUrl}/admin/payments/konto/${kontoId}`);
+  }
+
+  getPaymentsForUser(userId: string): Observable<PaymentDTO[]> {
+    return this.http.get<PaymentDTO[]>(`${this.baseUrl}/admin/payments/user/${userId}`);
+  }
+
+  createPayment(paymentData: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/admin/payments`, paymentData);
+  }
+
+  updatePayment(paymentId: string, paymentData: any): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/admin/payments/${paymentId}`, paymentData);
+  }
+
+  deletePayment(paymentId: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/admin/payments/${paymentId}`);
   }
 
   // Audit Logs

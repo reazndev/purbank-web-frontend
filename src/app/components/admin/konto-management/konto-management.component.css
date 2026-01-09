@@ -97,6 +97,12 @@
   background-color: var(--color-accent-lighter);
 }
 
+.col-name.clickable {
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
 .col-actions {
   display: flex;
   gap: 8px;
@@ -164,6 +170,38 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-gray-dark);
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--color-black);
+    border-bottom: 2px solid var(--color-black);
+}
+
+.tab-btn:hover:not(.active) {
+    color: var(--color-black);
+}
+
+.tab-content {
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 .close-icon {

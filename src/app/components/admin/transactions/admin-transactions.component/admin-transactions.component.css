@@ -1,0 +1,127 @@
+@import '../../../../components/transactions/shared-transactions.css';
+
+.transaction-container {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.scrollable-grid {
+    max-height: 400px;
+}
+
+.transaction-box {
+    grid-template-columns: 1fr auto auto;
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.loading, .error-message, .empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-gray-dark);
+}
+
+.error-message {
+  color: red;
+}
+
+.detail-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--color-gray-lighter);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.edit-action-btn {
+    background: var(--color-accent-lighter);
+    border: 1px solid var(--color-gray-lighter);
+    color: var(--color-black);
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.edit-action-btn:hover {
+    background: var(--color-gray-lighter);
+}
+
+.delete-btn {
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Edit Form Styles */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: var(--color-gray-dark);
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    padding: 8px;
+    border: 1px solid var(--color-gray);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.btn-primary {
+    background-color: var(--color-black);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 1px solid var(--color-gray);
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}

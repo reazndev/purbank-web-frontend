@@ -1,0 +1,173 @@
+@import '../../../../components/transactions/shared-transactions.css';
+
+.admin-payments-container {
+  padding: 0;
+}
+
+.create-payment-section {
+  background-color: var(--color-white);
+  padding: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-gray);
+  padding-bottom: 1.5rem;
+}
+
+.create-payment-section h3 {
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-dark);
+}
+
+.form-group input, .form-group select {
+  padding: 8px;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.button-group {
+    justify-content: flex-end;
+}
+
+.btn-primary {
+  background-color: var(--color-black);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  align-self: flex-end;
+  height: 35px;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.success-message { color: green; margin-bottom: 1rem; font-size: 0.9rem; }
+.error-message { color: red; margin-bottom: 1rem; font-size: 0.9rem; }
+
+/* Payments List Section */
+.payments-list-section h3 {
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.payments-list {
+  /* No border/background to match transactions style */
+}
+
+/* Use shared transaction-box style logic manually or via classes */
+.list-header {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr 1fr 50px;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--color-black);
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--color-gray-dark);
+  margin-bottom: 10px;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr 1fr 50px;
+  padding: 10px 15px;
+  align-items: center;
+  font-size: 0.9rem;
+  background-color: var(--color-accent-light);
+  margin-bottom: 10px;
+  gap: 15px;
+}
+
+.col-amount.negative { color: red; }
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-dark);
+}
+
+.icon-btn:hover {
+  color: var(--color-black);
+}
+
+/* Modal overrides/additions */
+.edit-modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.edit-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.btn-delete {
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.btn-delete:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}

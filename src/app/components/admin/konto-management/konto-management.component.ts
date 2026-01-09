@@ -1,24 +1,26 @@
-import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, AdminKontoDetails, AdminKontoMember, TransactionDTO } from '../../../shared/services/admin.service';
+import { AdminTransactionsComponent } from '../transactions/admin-transactions.component/admin-transactions.component';
+import { AdminPaymentsComponent } from '../payments/admin-payments.component/admin-payments.component';
 
 @Component({
   selector: 'app-konto-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AdminTransactionsComponent, AdminPaymentsComponent],
   templateUrl: './konto-management.component.html',
   styleUrls: ['./konto-management.component.css']
 })
 export class KontoManagementComponent implements OnChanges {
   @Input() userId: string | null = null;
+  @Output() kontoSelected = new EventEmitter<string | null>();
   
   private adminService = inject(AdminService);
   
   konten: AdminKontoDetails[] = [];
   selectedKonto: AdminKontoDetails | null = null;
   members: AdminKontoMember[] = [];
-  transactions: TransactionDTO[] = [];
   
   isLoading = false;
   error: string | null = null;
@@ -36,18 +38,17 @@ export class KontoManagementComponent implements OnChanges {
   editKontoZinssatz = 0;
   editBalanceAdjustment = 0;
 
-  // Transaction Edit Form
-  editingTransactionId: string | null = null;
-  editTransactionNote = '';
-
   // Details Modal
   showDetailsModal = false;
+  activeTab: 'details' | 'transactions' | 'payments' = 'details';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['userId'] && this.userId) {
       this.loadKonten();
+      this.kontoSelected.emit(null);
     } else if (!this.userId) {
       this.konten = [];
+      this.kontoSelected.emit(null);
     }
   }
 
@@ -150,9 +151,10 @@ export class KontoManagementComponent implements OnChanges {
       next: (details) => {
         this.selectedKonto = details;
         this.loadMembers(kontoId);
-        this.loadTransactions(kontoId);
+        this.activeTab = 'details'; // Default to details tab
         this.showDetailsModal = true;
         this.isLoading = false;
+        this.kontoSelected.emit(kontoId);
       },
       error: (err) => {
         this.error = 'Failed to load details';
@@ -170,47 +172,15 @@ export class KontoManagementComponent implements OnChanges {
     });
   }
 
-  loadTransactions(kontoId: string) {
-    this.adminService.getTransactionsForKonto(kontoId).subscribe({
-      next: (transactions) => {
-        this.transactions = transactions;
-      },
-      error: (err) => console.error(err)
-    });
-  }
-
-  startEditTransaction(transaction: TransactionDTO) {
-    this.editingTransactionId = transaction.transactionId;
-    this.editTransactionNote = transaction.note || '';
-  }
-
-  cancelEditTransaction() {
-    this.editingTransactionId = null;
-    this.editTransactionNote = '';
-  }
-
-  saveTransactionNote(transactionId: string) {
-    this.adminService.updateTransaction(transactionId, { note: this.editTransactionNote }).subscribe({
-      next: () => {
-        this.successMessage = 'Transaction note updated';
-        this.editingTransactionId = null;
-        if (this.selectedKonto) {
-            this.loadTransactions(this.selectedKonto.kontoId);
-        }
-        setTimeout(() => this.successMessage = null, 3000);
-      },
-      error: (err) => {
-        this.error = 'Failed to update transaction note';
-        setTimeout(() => this.error = null, 3000);
-      }
-    });
+  selectKonto(kontoId: string) {
+    this.kontoSelected.emit(kontoId);
   }
 
   closeDetailsModal() {
     this.showDetailsModal = false;
     this.selectedKonto = null;
     this.members = [];
-    this.transactions = [];
+    this.activeTab = 'details';
   }
 
   closeAccount(konto: AdminKontoDetails) {
@@ -237,5 +207,9 @@ export class KontoManagementComponent implements OnChanges {
     }).catch(err => {
       console.error('Could not copy text: ', err);
     });
+  }
+
+  setActiveTab(tab: 'details' | 'transactions' | 'payments') {
+    this.activeTab = tab;
   }
 }

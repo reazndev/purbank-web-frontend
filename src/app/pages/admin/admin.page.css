@@ -16,15 +16,21 @@
 
 .admin-layout {
   display: grid;
-  grid-template-areas: 
-    "create settings"
-    "users details"
-    "registration konto"
-    "audit audit";
   grid-template-columns: minmax(400px, 600px) minmax(400px, 600px);
   gap: var(--padding-standard);
   justify-content: center;
-  align-items: start; /* Prevent vertical stretching */
+  align-items: start;
+}
+
+.admin-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-standard);
+}
+
+.audit-section.full-width {
+  grid-column: 1 / -1;
+  width: 100%;
 }
 
 .admin-section {
@@ -33,34 +39,7 @@
   padding: var(--padding-standard);
 }
 
-.create-user-section {
-  grid-area: create;
-}
-
-.user-list-section {
-  grid-area: users;
-}
-
-.user-details-section {
-  grid-area: details;
-}
-
-.registration-section {
-  grid-area: registration;
-}
-
-.konto-management-section {
-  grid-area: konto;
-}
-
-.audit-section {
-  grid-area: audit;
-}
-
-.settings-section {
-  grid-area: settings;
-}
-
+/* Responsive adjustments */
 @media (max-width: 1400px) {
   .admin-container {
     padding: 4rem 10%;
@@ -80,14 +59,6 @@
 
 @media (max-width: 1024px) {
   .admin-layout {
-    grid-template-areas: 
-      "create"
-      "settings"
-      "users"
-      "details"
-      "registration"
-      "konto"
-      "audit";
     grid-template-columns: 1fr;
     max-width: 700px;
     margin: 0 auto;

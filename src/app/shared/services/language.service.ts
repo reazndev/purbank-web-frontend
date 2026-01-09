@@ -96,6 +96,7 @@ export interface Translations {
   apply: string;
   editTransaction: string;
   editNote: string;
+  transactionType: string;
   pendingPayments: string;
   deleteAccountWarning: string;
   inviteMember: string;
@@ -220,6 +221,7 @@ export class LanguageService {
       apply: "Bestätigen",
       editTransaction: "Überweisung bearbeiten",
       editNote: "Notiz bearbeiten",
+      transactionType: "Transaktionstyp",
       pendingPayments: "Überweisungen in Verarbeitung",
       deleteAccountWarning: "Nur Konten mit einem Kontostand von 0 und bei denen Sie der Inhaber sind, können gelöscht werden.",
       inviteMember: "Mitglied einladen",
@@ -334,6 +336,7 @@ export class LanguageService {
       apply: "Apply",
       editTransaction: "Edit Transaction",
       editNote: "Edit Note",
+      transactionType: "Transaction Type",
       pendingPayments: "Pending Payments",
       deleteAccountWarning: "Only accounts with a balance of 0 where you are the owner can be deleted.",
       inviteMember: "Invite Member",
