@@ -216,6 +216,18 @@ export class AdminService {
   }
 
   // Transaction Management
+  createTransaction(kontoId: string, iban: string, amount: number, message: string, note: string, transactionType: string, currency: string): Observable<any> {
+    const params = {
+      iban,
+      amount: amount.toString(),
+      message,
+      note,
+      transactionType,
+      currency
+    };
+    return this.http.post<any>(`${this.baseUrl}/admin/transactions/konto/${kontoId}`, null, { params });
+  }
+
   updateTransaction(transactionId: string, data: Partial<TransactionDTO>): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/admin/transactions/${transactionId}`, data);
   }

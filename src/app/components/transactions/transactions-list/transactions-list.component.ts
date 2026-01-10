@@ -76,13 +76,25 @@ export class TransactionsListComponent implements OnInit {
   }
 
   saveNote(transaction: any) {
-    this.kontenService.updateTransactionNote(transaction.accountId, transaction.transactionId, this.editNoteValue).subscribe({
+    const newValue = this.editNoteValue;
+    this.kontenService.updateTransactionNote(transaction.accountId, transaction.transactionId, newValue).subscribe({
       next: () => {
-        transaction.note = this.editNoteValue;
-        this.cancelEditNote();
+        // Update the object in the list
+        transaction.note = newValue;
+        
+        // Update the selected transaction if it's the same one (creates a new reference for reliable UI update)
+        if (this.selectedTransaction && this.selectedTransaction.transactionId === transaction.transactionId) {
+          this.selectedTransaction = { ...this.selectedTransaction, note: newValue };
+        }
+        
         // Update allTransactions as well to keep it in sync
         const original = this.allTransactions.find(t => t.transactionId === transaction.transactionId);
-        if (original) original.note = this.editNoteValue;
+        if (original) original.note = newValue;
+        
+        // Refresh the groupings so the list reflects the new note
+        this.groupTransactions();
+        
+        this.cancelEditNote();
       },
       error: (err) => {
         console.error('Failed to update note', err);
