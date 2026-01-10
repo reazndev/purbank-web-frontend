@@ -59,4 +59,6 @@
 canvas {
   width: 100% !important;
   height: 100% !important;
+  max-width: 75%;
+  max-height: 75%;
 }
