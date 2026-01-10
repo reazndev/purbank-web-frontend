@@ -1,46 +1,5 @@
 <div class="admin-payments-container">
-  <!-- Create Payment Section -->
-  <div class="create-payment-section">
-    <h3>{{ languageService.translate('createTransaction') }}</h3>
-    <div class="create-form">
-      <div class="form-group" *ngIf="!kontoId">
-          <label>{{ languageService.translate('account') }}</label>
-          <select [(ngModel)]="newPayment.kontoId" (change)="updateCurrency()">
-            <option value="" disabled>{{ languageService.translate('selectAccount') }}</option>
-            <option *ngFor="let account of userAccounts" [value]="account.kontoId">
-              {{ account.kontoName }} ({{ account.balance | number:'1.2-2' }} {{ account.currency }})
-            </option>
-          </select>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>{{ languageService.translate('toIban') }}</label>
-          <input [(ngModel)]="newPayment.toIban" placeholder="CH...">
-        </div>
-        <div class="form-group">
-          <label>{{ languageService.translate('amount') }} <span *ngIf="newPayment.paymentCurrency">({{ newPayment.paymentCurrency }})</span></label>
-          <input type="number" [(ngModel)]="newPayment.amount" placeholder="0.00">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>{{ languageService.translate('message') }}</label>
-          <input [(ngModel)]="newPayment.message">
-        </div>
-        <div class="form-group">
-          <label>{{ languageService.translate('note') }}</label>
-          <input [(ngModel)]="newPayment.note">
-        </div>
-      </div>
-      <div class="form-row">
-        <!-- Execution Date removed as creating a transaction is immediate -->
-        <div class="form-group button-group" style="grid-column: 2;">
-            <button class="btn-primary" (click)="createPayment()" [disabled]="!newPayment.toIban || !newPayment.amount">{{ languageService.translate('create') }}</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  
   <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
