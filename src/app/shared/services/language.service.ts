@@ -67,7 +67,6 @@ export interface Translations {
   accountFrom: string;
   accountTo: string;
   amount: string;
-  ibanTo: string;  // unneeded can probably be removed
   instantTransaction: string;
   after: string; // used for balance after -> combine {balance} + {after}
   message: string;
@@ -84,8 +83,8 @@ export interface Translations {
   // Transaction Details
   transactionDetails: string;
   transactionName: string;
-  toIban: string;  // duplicate can probably be removed
-  fromIban: string; // duplicate can probably be removed
+  toIban: string;
+  fromIban: string;
   executionType: string;
   executionDate: string;
   status: string;
@@ -200,7 +199,6 @@ export class LanguageService {
       accountFrom: "Konto von",
       accountTo: "Konto zu",
       amount: "Betrag",
-      ibanTo: "IBAN des Empfängers",
       instantTransaction: "Sofort",
       after: "danach", // NOT CAPITALISED ON PURPOSE
       message: "Nachricht",
@@ -321,7 +319,6 @@ export class LanguageService {
       accountFrom: "Account from",
       accountTo: "Account to",
       amount: "Amount",
-      ibanTo: "IBAN of receiver",
       instantTransaction: "Instant",
       after: "after", // NOT CAPITALISED ON PURPOSE
       message: "Message",
