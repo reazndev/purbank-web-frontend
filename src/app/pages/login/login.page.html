@@ -133,7 +133,6 @@
 
       <div class="secondary-actions">
         @if (loginMode === 'user') {
-          <a routerLink="/registration" class="secondary-link">{{ translations().newRegistration }}</a>
           <a routerLink="/create-account" class="secondary-link">{{ translations().createAccount }}</a>
         }
         <button type="button" class="admin-toggle" (click)="toggleLoginMode()">
