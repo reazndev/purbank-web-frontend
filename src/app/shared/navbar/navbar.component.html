@@ -3,9 +3,9 @@
         <div class="nav-links">
             <a routerLink="/dashboard" class="nav-link" [class.active]="isRouteActive('/dashboard')">{{ translations().dashboard }}</a>
             <a routerLink="/wealth" class="nav-link" [class.active]="isRouteActive('/wealth')">{{ translations().wealth }}</a>
+            <a routerLink="/payments" class="nav-link" [class.active]="isRouteActive('/payments')">{{ translations().payments }}</a>
             <a routerLink="/transactions" class="nav-link" [class.active]="isRouteActive('/transactions')">{{ translations().transactions }}</a>
-            <a routerLink="/analytics" class="nav-link" [class.active]="isRouteActive('/analytics')">{{ translations().analytics }}</a>
-            <a routerLink="/logout" class="nav-link" [class.active]="isRouteActive('/logout')">{{ translations().logout }}</a>
+            <a (click)="logout()" class="nav-link" style="cursor: pointer;">{{ translations().logout }}</a>
         </div>
         <div class="nav-controls">
             <div class="language-switch">
@@ -19,9 +19,9 @@
                     (click)="setLanguage('en')">EN</span>
             </div>
         </div>
-        <div class="user-info">
-            <div class="user-name">[lastname] [name]</div>
-            <div class="account-number">[kontonummer]</div>
+        <div class="user-info" *ngIf="currentUser">
+            <div class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</div>
+            <div class="account-number">{{ currentUser.contractNumber }}</div>
         </div>
     </div>
 </div>

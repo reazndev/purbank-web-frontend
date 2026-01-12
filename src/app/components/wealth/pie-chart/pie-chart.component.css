@@ -1,9 +1,19 @@
 .pie-chart-container {
-  height: 256px;
+  height: 256px; /* MAXMIN */
+  min-height: 200px; /* MAXMIN */
+  max-height: 400px; /* MAXMIN */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
+  flex-direction: column;
+}
+
+.small-note {
+  font-size: 0.7rem;
+  margin-top: 2px;
+  font-style: italic;
+  color: var(--color-gray);
 }
 
 .chart-box {
@@ -14,18 +24,4 @@
   font-family: var(--font-family);
   color: var(--color-black);
   max-width: 100%;
-}
-
-.chart-box .wealth-header h2 {
-  font-weight: normal;
-  margin-bottom: 10px;
-  margin-top: 0;
-  display: flex;
-  align-items: center;
-}
-
-.chart-box .wealth-header hr {
-  border: 0;
-  border-top: 1px solid var(--color-black);
-  margin-bottom: 8px;
 }

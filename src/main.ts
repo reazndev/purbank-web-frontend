@@ -3,4 +3,7 @@ import { appConfig } from './app/app.config';
 import { App } from './app/app';
 
 bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+  .catch((err) => {
+    // Application bootstrap failed - handle gracefully in production
+    console.error('Application failed to start:', err);
+  });

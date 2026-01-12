@@ -2,24 +2,148 @@
   <div class="login-container">
     <h1 class="login-title">{{ translations().loginTitle }}</h1>
     
-    <form class="login-form">
-      <div class="form-group">
-        <label for="contract-number" class="form-label">{{ translations().contractNumber }}</label>
-        <input type="text" id="contract-number" class="form-input" />
+    @if (showQrCode) {
+      <div class="verification-container">
+        <div class="verification-header">
+          <h2 class="verification-title">{{ translations().mobileVerification }}</h2>
+          <p class="verification-subtitle">{{ translations().scanQrCode }}</p>
+        </div>
+        
+        <app-qr-code [data]="mobileVerifyCode!" [size]="256"></app-qr-code>
+        
+        <div class="verification-status">
+          <div class="status-indicator pending">
+            <div class="pulse-dot"></div>
+            <span>{{ translations().waitingForApproval }}</span>
+          </div>
+        </div>
+        
+        <div class="verification-actions">
+          <button type="button" class="cancel-button" (click)="cancelLogin()">
+            {{ translations().cancel }}
+          </button>
+        </div>
       </div>
-      
-      <div class="form-group">
-        <label for="password" class="form-label">{{ translations().password }}</label>
-        <input type="password" id="password" class="form-input" />
+    } @else if (isApproved) {
+      <div class="verification-container">
+        <div class="status-success">
+          <span class="status-icon">✓</span>
+          <h2>{{ translations().loginApproved }}</h2>
+          <p>{{ translations().redirectingToDashboard }}</p>
+        </div>
       </div>
-      
-      <button type="submit" class="login-button">{{ translations().loginButton }}</button>
-    </form>
+    } @else if (isTimeout) {
+      <div class="verification-container">
+        <div class="status-error">
+          <span class="status-icon">⏱</span>
+          <h2>{{ translations().verificationTimeout }}</h2>
+          <p>{{ translations().verificationTimeoutMessage }}</p>
+          <button type="button" class="login-button" (click)="retryLogin()">
+            {{ translations().tryAgain }}
+          </button>
+        </div>
+      </div>
+    } @else {
+      <!-- Login Form -->
+      <form class="login-form" (ngSubmit)="onSubmit()">
+        @if (loginMode === 'user') {
+          <div class="form-group">
+            <label for="contractNumber" class="form-label">{{ translations().contractNumber }}</label>
+            <input 
+              type="text" 
+              id="contractNumber" 
+              class="form-input" 
+              [(ngModel)]="formState.contractNumber"
+              name="contractNumber"
+              placeholder="12345678"
+              required
+              [disabled]="formState.loading"
+              autocomplete="username"
+            />
+          </div>
+        } @else {
+          <!-- Admin Login: Email & Password -->
+          <div class="form-group">
+            <label for="email" class="form-label">{{ translations().email }}</label>
+            <input 
+              type="email" 
+              id="email" 
+              class="form-input" 
+              [(ngModel)]="formState.email"
+              name="email"
+              placeholder="admin@purbank.ch"
+              required
+              [disabled]="formState.loading"
+              autocomplete="email"
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="password" class="form-label">{{ translations().password }}</label>
+            <div class="password-input-wrapper">
+              <input 
+                [type]="showPassword ? 'text' : 'password'"
+                id="password" 
+                class="form-input"
+                [(ngModel)]="formState.password"
+                name="password"
+                placeholder="{{ translations().enterYourPassword }}"
+                required
+                [disabled]="formState.loading"
+                autocomplete="current-password"
+              />
+              <button 
+                type="button" 
+                class="password-toggle"
+                (click)="togglePasswordVisibility()"
+                [attr.aria-label]="showPassword ? translations().hidePassword : translations().showPassword"
+              >
+                @if (showPassword) {
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off"><path d="M9.88 9.88 3.59 3.59"/><path d="M21 21l-6.3-6.3"/><path d="M2 12s3-7 10-7a7 7 0 0 1 5 2.91"/><path d="M12 19c-3.87 0-7-4-7-7a7 7 0 0 1 1.11-2.71"/><path d="M17 17a7 7 0 0 1-5 2"/><path d="M22 12s-3 7-10 7a7 7 0 0 1-2-.28"/><path d="M15.12 15.12a3 3 0 1 1-4.24-4.24"/></svg>
+                } @else {
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                }
+              </button>
+            </div>
+          </div>
+        }
 
-    <div class="secondary-actions">
-      <a routerLink="/registration" class="secondary-link">{{ translations().newRegistration }}</a>
-      <a routerLink="/create-account" class="secondary-link">{{ translations().createAccount }}</a>
-    </div>
+        @if (formState.error) {
+          <div class="error-message">
+            {{ formState.error }}
+          </div>
+        }
+        
+        <button 
+          type="submit" 
+          class="login-button"
+          [disabled]="formState.loading"
+        >
+          @if (formState.loading) {
+            @if (loginMode === 'user') {
+              {{ translations().initiatingLogin }}
+            } @else {
+              {{ translations().loggingIn }}
+            }
+          } @else {
+            {{ translations().loginButton }}
+          }
+        </button>
+      </form>
+
+      <div class="secondary-actions">
+        @if (loginMode === 'user') {
+          <a routerLink="/create-account" class="secondary-link">{{ translations().createAccount }}</a>
+        }
+        <button type="button" class="admin-toggle" (click)="toggleLoginMode()">
+          @if (loginMode === 'user') {
+            {{ translations().adminLogin }}
+          } @else {
+            {{ translations().userLogin }}
+          }
+        </button>
+      </div>
+    }
     
     <app-language-toggle></app-language-toggle>
   </div>

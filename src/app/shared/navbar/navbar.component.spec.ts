@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NavbarComponent } from './navbar.component';
 import { provideRouter, Router } from '@angular/router';
 import { LanguageService } from '../services/language.service';
@@ -23,7 +24,6 @@ describe('NavbarComponent', () => {
       dashboard: 'Dashboard',
       wealth: 'Wealth',
       transactions: 'Transactions',
-      analytics: 'Analytics',
       logout: 'Logout'
     }),
     setLanguage: jasmine.createSpy('setLanguage')
@@ -31,13 +31,12 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent],
+      imports: [NavbarComponent, HttpClientTestingModule],
       providers: [
         provideRouter([
           { path: 'dashboard', component: DummyComponent },
           { path: 'wealth', component: DummyComponent },
           { path: 'transactions', component: DummyComponent },
-          { path: 'analytics', component: DummyComponent },
           { path: 'logout', component: DummyComponent }
         ]),
         { provide: LanguageService, useValue: mockLanguageService }

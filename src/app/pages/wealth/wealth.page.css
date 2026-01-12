@@ -1,16 +1,17 @@
 .page-container {
-  margin-top: 7vh;
+  margin-top: 9vh;
   display: grid;
   grid-template-areas: "left-column right-column";
   grid-template-columns: 70% 30%;
-  grid-template-rows: 1fr;
+  grid-template-rows: 100%; /* MAXMIN */
   gap: 24px;
-  min-height: calc(100vh - 60px);
-  padding: 4rem clamp(1rem, calc(50vw - 475px), 25%);
+  height: 85vh; /* MAXMIN */
+  padding: 2rem clamp(1rem, calc(50vw - 475px), 25%);
   background-color: var(--color-white);
   max-width: 100%;
   box-sizing: border-box;
   justify-content: center;
+  overflow: hidden;
 }
 
 .left-column {
@@ -18,6 +19,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  height: 100%; /* MAXMIN */
+  overflow: hidden;
 }
 
 .right-column {
@@ -25,6 +28,13 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  height: 100%; /* MAXMIN */
+  overflow: hidden;
+}
+
+.app-balance-history-chart {
+  flex: 1;
+  min-height: 0;
 }
 
 .page-content {

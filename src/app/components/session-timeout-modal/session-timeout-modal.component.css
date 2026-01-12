@@ -1,0 +1,110 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: var(--color-white);
+  padding: 40px;
+  border: 1px solid var(--color-gray);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-family);
+  color: var(--color-black);
+}
+
+.modal-header h2 {
+  font-weight: normal;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.2rem;
+}
+
+.modal-header hr {
+  border: 0;
+  border-top: 1px solid var(--color-black);
+  margin-bottom: 25px;
+}
+
+.modal-body {
+  margin-bottom: 30px;
+}
+
+.modal-body p {
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: var(--color-accent-light);
+}
+
+.countdown-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: var(--color-accent-dark);
+}
+
+.countdown-value {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-primary, .btn-secondary {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--color-black);
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-primary {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-black);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}

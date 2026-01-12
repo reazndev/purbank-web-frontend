@@ -1,12 +1,10 @@
 <app-navbar></app-navbar>
 <div class="page-container">
-    <div class="transaction-column">
-        <app-create-transaction></app-create-transaction>
-        <app-reoccuring-transactions></app-reoccuring-transactions>
-    </div>
-    <div class="transaction-column">
-        <app-pending-transactions></app-pending-transactions>
-        <app-completed-transactions></app-completed-transactions>
+    <div class="transaction-content">
+        <app-transaction-filter [showTypeFilter]="true"></app-transaction-filter>
+        <div class="list-wrapper">
+             <app-transactions-list></app-transactions-list>
+        </div>
     </div>
 </div>
 <app-footer></app-footer>

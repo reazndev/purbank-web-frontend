@@ -5,11 +5,13 @@
   </div>
 
   <div class="form-container">
-    <form #transactionForm="ngForm">
+    <form #transactionForm="ngForm" (ngSubmit)="createPayment()">
     <div class="form-row">
-      <select name="account" [(ngModel)]="selectedAccount" required>
-        <option value="">{{ languageService.translate('account') }}</option>
-        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+      <select name="account" [(ngModel)]="selectedAccount" (change)="onAccountChange()" required>
+        <option value="" disabled>{{ languageService.translate('selectAccount') }}</option>
+        <option *ngFor="let account of accounts" [value]="account.kontoId">
+          {{ account.kontoName }} ({{ account.balance.toFixed(2) }} {{ account.currency }})
+        </option>
       </select>
       <div class="transaction-option-box">
         <div class="checkbox-group">
@@ -17,25 +19,40 @@
           <label for="instant">{{ languageService.translate('instantTransaction') }}</label>
         </div>
       </div>
+    </div>
+
+    <div class="form-row">
+      <div class="iban-container">
+        <input *ngIf="!isInternalTransfer" type="text" name="ibanReceiver" [(ngModel)]="ibanReceiver" [placeholder]="languageService.translate('toIban')" required>
+        <select *ngIf="isInternalTransfer" name="internalAccount" [(ngModel)]="selectedDestinationAccount" (change)="onDestinationAccountChange()" required>
+          <option value="" disabled selected>{{ languageService.translate('account') }}</option>
+          <option *ngFor="let account of getAvailableDestinationAccounts()" [value]="account.kontoId">
+            {{ account.kontoName }}
+          </option>
+        </select>
+      </div>
       <div class="transaction-option-box">
         <div class="checkbox-group">
-          <input type="checkbox" id="reoccuring" name="isReoccuring" [(ngModel)]="isReoccuring">
-          <label for="reoccuring">{{ languageService.translate('reoccuring') }}</label>
+          <input type="checkbox" id="internalTransfer" name="isInternalTransfer" [(ngModel)]="isInternalTransfer" (change)="onInternalTransferToggle()">
+          <label for="internalTransfer">{{ languageService.translate('internalTransfer') }}</label>
         </div>
       </div>
     </div>
 
-    <div class="form-row">
-      <input type="text" name="ibanReceiver" [(ngModel)]="ibanReceiver" [placeholder]="languageService.translate('ibanTo')" required>
+    <div class="form-row" *ngIf="!isInstant">
+      <input type="date" name="executionDate" [(ngModel)]="executionDate" [min]="getMinDate()" [placeholder]="languageService.translate('executionDate')" required>
     </div>
 
     <div class="form-row">
-      <input type="number" name="amount" [(ngModel)]="amount" [placeholder]="languageService.translate('amount')" required>
+      <input type="number" name="amount" [(ngModel)]="amount" (ngModelChange)="updateBalanceAfter()" [placeholder]="languageService.translate('amount')" required>
+      <select name="currency" [(ngModel)]="paymentCurrency" (ngModelChange)="updateBalanceAfter()" class="currency-select" required>
+        <option *ngFor="let currency of availableCurrencies" [value]="currency">{{ currency }}</option>
+      </select>
       <div class="balance-after-box">
         <div class="balance-after">
           <div class="balance-label">{{ languageService.translate('after') }}</div>
           <div class="vertical-line"></div>
-          <div class="balance-value">{{ calculateBalanceAfter() }} CHF</div>
+          <div class="balance-value">{{ balanceAfter }} {{ getSelectedAccountCurrency() }}</div>
         </div>
       </div>
     </div>
@@ -48,10 +65,17 @@
       <input type="text" name="note" [(ngModel)]="note" [placeholder]="languageService.translate('note')">
     </div>
 
+    <div class="form-row" *ngIf="errorMessage">
+      <div class="error-message">{{ errorMessage }}</div>
+    </div>
+
+    <div class="form-row" *ngIf="successMessage">
+      <div class="success-message">{{ successMessage }}</div>
+    </div>
+
     <div class="form-row">
-      <button type="submit" [disabled]="!transactionForm.valid">{{ languageService.translate('submit') }}</button>
+      <button type="submit" [disabled]="!transactionForm.valid || isSubmitting || isLoading">{{ isSubmitting ? 'Processing...' : languageService.translate('submit') }}</button>
     </div>
   </form>
   </div>
-
 </div>

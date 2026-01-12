@@ -1,5 +1,16 @@
-@if (getIsMobile()()) {
+@if (shouldShowMobileWarning()) {
   <app-mobile-warning></app-mobile-warning>
 } @else {
   <router-outlet></router-outlet>
 }
+
+@if (mobileVerifyCode()) {
+  <app-mobile-verify-modal 
+    [mobileVerifyCode]="mobileVerifyCode()!"
+    (verified)="onVerified()"
+    (rejected)="onRejected()"
+    (closed)="onClosed()">
+  </app-mobile-verify-modal>
+}
+
+<app-session-timeout-modal></app-session-timeout-modal>

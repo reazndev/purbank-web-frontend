@@ -1,8 +1,93 @@
 /* shared transaction styles */
 @import '../shared-transactions.css';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 .transaction-container {
   grid-area: completed-transactions;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-header h2 {
+  font-weight: normal;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  color: var(--color-accent-dark);
+}
+
+.transaction-header hr {
+  border: 0;
+  border-top: 1px solid var(--color-black);
+  margin-bottom: 20px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--color-white);
+  padding: 40px;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 800px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.full-height-grid {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 5px;
+  overscroll-behavior: contain;
+}
+
+.transactions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  margin-bottom: 15px;
+  grid-auto-rows: min-content;
 }
 
 .date-header {
@@ -15,24 +100,207 @@
 }
 
 .scrollable-grid {
-  max-height: 350px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: none;
 }
 
-/* Override transaction box layout for completed transactions */
 .transaction-box {
   padding: 12px 10px;
-  grid-template-columns: 10ch 1fr auto auto;
+  grid-template-columns: 1fr auto auto;
   gap: 10px 15px;
   min-height: 44px;
 }
 
-.transaction-name {
-  max-width: 10ch;
+
+.transaction-header-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1.6fr 1fr 150px;
+  gap: 15px;
+  padding: 10px 15px;
+  background-color: var(--color-white);
+  border-bottom: 2px solid var(--color-gray);
+  margin-bottom: 10px;
+}
+
+.transaction-header-row span:last-child {
+  text-align: right;
+}
+
+.transaction-box-expanded {
+  background-color: var(--color-accent-light);
+  padding: 10px 15px;
+  display: grid;
+  grid-template-columns: 1.5fr 1.6fr 1fr 150px;
+  gap: 15px;
+  align-items: center;
+  min-height: auto;
+  height: fit-content;
+  line-height: 1.2;
+}
+
+.transaction-label {
+  font-weight: 500;
+  color: var(--color-gray-dark);
+  font-size: 0.9em;
+}
+
+.transaction-value {
+  font-size: 0.9em;
+  word-break: break-all;
+  line-height: 1.2;
 }
 
 .scroll-indicator {
+
   text-align: left;
+
   margin-top: 0px;
+
   font-size: 0.9em;
+
   color: var(--color-accent-dark);
+
 }
+
+
+
+.detail-actions {
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--color-gray-lighter);
+
+    display: flex;
+
+    justify-content: flex-start;
+
+}
+
+
+
+.edit-action-btn {
+
+    background: var(--color-accent-lighter);
+
+    border: 1px solid var(--color-gray-lighter);
+
+    color: var(--color-black);
+
+    padding: 8px 15px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 0.9rem;
+
+    transition: background-color 0.2s;
+
+}
+
+
+
+.edit-action-btn:hover {
+
+    background: var(--color-gray-lighter);
+
+}
+
+
+
+.edit-note-container {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+}
+
+
+
+.edit-note-container input {
+
+    flex-grow: 1;
+
+    padding: 8px;
+
+    font-size: 0.9rem;
+
+    border: 1px solid var(--color-accent);
+
+    border-radius: 4px;
+
+    outline: none;
+
+}
+
+
+
+.edit-actions {
+
+    display: flex;
+
+    gap: 5px;
+
+}
+
+
+
+.action-btn-small {
+
+    background: none;
+
+    border: none;
+
+    padding: 4px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    border-radius: 4px;
+
+    transition: background-color 0.2s;
+
+}
+
+
+
+.action-btn-small:hover {
+
+    background-color: var(--color-gray-lighter);
+
+}
+
+
+
+.action-btn-small.save {
+
+    color: green;
+
+}
+
+
+
+.action-btn-small.cancel {
+
+    color: red;
+
+}
+
+

@@ -1,16 +1,17 @@
 .page-container {
-  margin-top: 7vh;
+  margin-top: 9vh;
   display: grid;
   grid-template-areas: "wealth transactions" "chart transactions";
-  grid-template-columns: minmax(300px, 475px) minmax(300px, 475px);
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: minmax(0, 1.72fr) minmax(0, 1fr); /* MAXMIN */
   gap: 24px;
-  min-height: calc(100vh - 60px);
-  padding: 4rem clamp(1rem, calc(50vw - 475px), 25%);
+  height: 85vh; /* MAXMIN */
+  padding: 2rem clamp(1rem, calc(50vw - 475px), 25%);
   background-color: var(--color-white);
   max-width: 100%;
   box-sizing: border-box;
   justify-content: center;
+  overflow: hidden;
 }
 
 .wealth {

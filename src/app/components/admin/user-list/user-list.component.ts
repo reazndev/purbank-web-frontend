@@ -1,15 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface User {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  contractNumber: string;
-  status: string;
-  createdAt: string;
-}
+import { AdminService, User } from '../../../shared/services/admin.service';
 
 @Component({
   selector: 'app-user-list',
@@ -18,12 +9,39 @@ interface User {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
   @Output() userSelected = new EventEmitter<string>();
   
   users: User[] = [];
   selectedUserId: string | null = null;
   isLoading = false;
+  errorMessage: string | null = null;
+
+  constructor(readonly adminService: AdminService) {}
+
+  ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.adminService.getAllUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        if (error.status === 403) {
+          this.errorMessage = 'Access denied. Your account does not have admin privileges. Please ensure the JWT token includes the ADMIN role.';
+        } else {
+          this.errorMessage = 'Failed to load users. Please try again.';
+        }
+        this.isLoading = false;
+      }
+    });
+  }
 
   selectUser(userId: string) {
     this.selectedUserId = userId;
@@ -32,10 +50,10 @@ export class UserListComponent {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
+    return date.toLocaleDateString('de-CH', { 
       year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
+      month: '2-digit', 
+      day: '2-digit' 
     });
   }
 }

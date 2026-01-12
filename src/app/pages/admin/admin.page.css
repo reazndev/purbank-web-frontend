@@ -1,7 +1,5 @@
 .admin-container {
   padding: 4rem clamp(1rem, calc(50vw - 600px), 25%);
-  min-height: calc(100vh - 120px);
-  margin-top: 80px;
   margin-bottom: 60px;
 }
 
@@ -18,12 +16,21 @@
 
 .admin-layout {
   display: grid;
-  grid-template-areas: 
-    "users details"
-    "users registration";
   grid-template-columns: minmax(400px, 600px) minmax(400px, 600px);
   gap: var(--padding-standard);
   justify-content: center;
+  align-items: start;
+}
+
+.admin-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-standard);
+}
+
+.audit-section.full-width {
+  grid-column: 1 / -1;
+  width: 100%;
 }
 
 .admin-section {
@@ -32,18 +39,7 @@
   padding: var(--padding-standard);
 }
 
-.user-list-section {
-  grid-area: users;
-}
-
-.user-details-section {
-  grid-area: details;
-}
-
-.registration-section {
-  grid-area: registration;
-}
-
+/* Responsive adjustments */
 @media (max-width: 1400px) {
   .admin-container {
     padding: 4rem 10%;
@@ -63,10 +59,6 @@
 
 @media (max-width: 1024px) {
   .admin-layout {
-    grid-template-areas: 
-      "users"
-      "details"
-      "registration";
     grid-template-columns: 1fr;
     max-width: 700px;
     margin: 0 auto;

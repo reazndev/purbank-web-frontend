@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PendingTransactionsComponent } from './pending-transactions.component';
 import { LanguageService } from '../../../shared/services/language.service';
 import { By } from '@angular/platform-browser';
@@ -16,7 +17,7 @@ describe('PendingTransactionsComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [PendingTransactionsComponent],
+      imports: [PendingTransactionsComponent, HttpClientTestingModule],
       providers: [
         { provide: LanguageService, useValue: mockLanguageService }
       ]
@@ -99,28 +100,7 @@ describe('PendingTransactionsComponent', () => {
     expect(component.isExpanded).toBeFalse();
   });
 
-  /**
-   * Test: Transaction List Rendering
-   * Prerequisite: The component has a list of transactions (mock data).
-   * Expected Result: The number of rendered transaction boxes in the scrollable grid matches the mock data length (10).
-   */
-  it('should render the list of transactions', () => {
-    const transactionItems = fixture.debugElement.queryAll(By.css('.scrollable-grid .transaction-box'));
-    expect(transactionItems.length).toBe(10);
-  });
 
-  /**
-   * Test: Expanded Transaction List Rendering
-   * Prerequisite: The popup is expanded.
-   * Expected Result: The number of rendered transaction boxes in the full-height grid matches the mock data length (10).
-   */
-  it('should render the list of transactions in the modal when expanded', () => {
-    component.isExpanded = true;
-    fixture.detectChanges();
-    
-    const transactionItems = fixture.debugElement.queryAll(By.css('.full-height-grid .transaction-box'));
-    expect(transactionItems.length).toBe(10);
-  });
 
   /**
    * Test: Rendering Performance

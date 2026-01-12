@@ -66,7 +66,13 @@ select {
   border: 1px solid var(--color-gray);
   box-sizing: border-box;
   background-color: var(--color-white);
+  color: var(--color-black);
   flex: 1.5;
+}
+
+select option {
+  color: var(--color-black);
+  background-color: var(--color-white);
 }
 
 input {
@@ -76,9 +82,28 @@ input {
   background-color: var(--color-white);
 }
 
+.iban-container {
+  flex: 1;
+}
+
+.iban-container input,
+.iban-container select {
+  width: 100%;
+}
+
 input[name="amount"] {
-  width: 40%;
+  width: 30%;
   flex: unset;
+}
+
+.currency-select {
+  width: 20%;
+  flex: unset;
+  padding: 8px;
+  border: 1px solid var(--color-gray);
+  box-sizing: border-box;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -95,6 +120,7 @@ input[type="number"] {
 input[name="ibanReceiver"],
 input[name="message"],
 input[name="note"],
+input[name="executionDate"],
 button[type="submit"] {
   width: 100%;
 }
@@ -106,7 +132,7 @@ button[type="submit"] {
   display: flex;
   align-items: stretch;
   justify-content: center;
-  width: 60%;
+  width: 50%;
   flex: unset;
 }
 
@@ -160,7 +186,7 @@ button[type="submit"]:disabled {
 
 .form-container {
   padding: 0px;
-  border-radius: 4px;
+  border-radius: 0px;
   margin-top: 10px;
 }
 
@@ -169,8 +195,25 @@ button[type="submit"]:disabled {
   padding: 6px;
   background-color: transparent;
   display: flex;
+}
+
+.error-message {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+  border-radius: 0px;
+}
+
+.success-message {
+  width: 100%;
+  padding: 10px;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+  border-radius: 0px;
   align-items: center;
   justify-content: center;
   flex: 1;
 }
-

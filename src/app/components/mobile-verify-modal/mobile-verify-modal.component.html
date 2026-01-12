@@ -1,0 +1,43 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Mobile Verification Required</h2>
+      <button class="close-btn" (click)="close()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      @if (status === 'PENDING') {
+        <p>Please scan this QR code with your Purbank mobile app to authorize this action.</p>
+        <div class="qr-container">
+          <app-qr-code [data]="mobileVerifyCode" [size]="256"></app-qr-code>
+        </div>
+        <div class="status-indicator">
+          <span class="spinner"></span>
+          Awaiting mobile approval...
+        </div>
+      } @else if (status === 'APPROVED') {
+        <div class="status-message success">
+          <i class="icon-success">✓</i>
+          <p>Action approved! Continuing...</p>
+        </div>
+      } @else if (status === 'REJECTED') {
+        <div class="status-message error">
+          <i class="icon-error">✕</i>
+          <p>Action rejected on mobile device.</p>
+          <button class="retry-btn" (click)="startPolling()">Retry</button>
+        </div>
+      } @else if (status === 'EXPIRED' || status === 'INVALID') {
+        <div class="status-message error">
+          <i class="icon-error">!</i>
+          <p>Verification request expired or is invalid.</p>
+          <button class="retry-btn" (click)="close()">Close</button>
+        </div>
+      } @else if (status === 'ERROR') {
+        <div class="status-message error">
+          <p>{{ errorMessage }}</p>
+          <button class="retry-btn" (click)="startPolling()">Try Again</button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

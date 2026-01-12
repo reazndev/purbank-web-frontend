@@ -1,7 +1,10 @@
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-left">
-      <span class="copyright">Purbank © 2025</span>
+      <span class="copyright">Purbank © 2026</span>
+    </div>
+    <div class="footer-center" *ngIf="sessionService.inactivityTimeRemaining() > 0 && router.url !== '/support' && router.url !== '/create-account' && router.url !== '/login' && router.url !== '/'">
+      <span class="session-timer">{{ languageService.translate('inactiveIn') }}: {{  formatTime(sessionService.inactivityTimeRemaining()) }}</span>             
     </div>
     <div class="footer-right">
       <a routerLink="/support" class="support-link">Support</a>

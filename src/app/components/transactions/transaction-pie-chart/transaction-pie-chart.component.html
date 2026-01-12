@@ -1,0 +1,13 @@
+<div class="pie-chart-box">
+  <div class="chart-header">
+    <h3>{{ languageService.translate('analytics') }}</h3>
+    <p class="subtitle">{{ languageService.translate('last15Transactions') }}</p>
+    <hr>
+  </div>
+  
+  <div class="canvas-container" [class.loading]="isLoading">
+    <canvas #pieCanvas></canvas>
+    <div *ngIf="isLoading" class="loader">{{ languageService.translate('loading') }}</div>
+    <div *ngIf="!isLoading && dataPoints.length === 0" class="no-data">{{ languageService.translate('noTransactionData') }}</div>
+  </div>
+</div>

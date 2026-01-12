@@ -1,6 +1,20 @@
 /* shared transaction styles */
 @import '../../transactions/shared-transactions.css';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* MAXMIN */
+  min-height: 0;
+  overflow: hidden;
+}
+
+.transaction-container {
+  height: 100%; /* MAXMIN */
+  display: flex;
+  flex-direction: column;
+}
+
 .transaction-header h2 {
   margin-bottom: 10px;
   margin-top: 0;
@@ -10,15 +24,37 @@
   margin-left: auto;
 }
 
-/* Override transaction grid gap for dashboard */
-.transactions-grid {
-  gap: 15px;
+.transactions-wrapper {
+  flex: 1; /* MAXMIN */
+  height: auto; /* MAXMIN */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  min-height: 0;
 }
 
-/* Override transaction box layout for dashboard */
+.transactions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
 .transaction-box {
   grid-template-columns: 1fr auto auto;
   min-height: 0;
+}
+
+.date-header {
+  font-size: 0.9em;
+  color: var(--color-gray-dark);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: normal;
+  padding-left: 5px;
+}
+
+.transaction-box.pending {
+  background-color: var(--color-accent-lighter);
 }
 
 .transaction-name {

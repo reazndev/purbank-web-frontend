@@ -2,16 +2,44 @@
   <h1 class="admin-title">USER MANAGEMENT</h1>
   
   <div class="admin-layout">
-    <div class="admin-section user-list-section">
-      <app-user-list (userSelected)="onUserSelected($event)"></app-user-list>
+    <div class="admin-column left-column">
+      <div class="admin-section user-list-section">
+        <app-user-list (userSelected)="onUserSelected($event)"></app-user-list>
+      </div>
+
+      <div class="admin-section konto-management-section">
+        <app-konto-management [userId]="selectedUserId" (kontoSelected)="onKontoSelected($event)"></app-konto-management>
+      </div>
+
+      <div class="admin-section settings-section">
+        <app-change-password></app-change-password>
+      </div>
+
+      <div class="admin-section payments-section" *ngIf="selectedUserId">
+        <app-admin-payments [userId]="selectedUserId" [kontoId]="selectedKontoId"></app-admin-payments>
+      </div>
+    </div>
+
+    <div class="admin-column right-column">
+      <div class="admin-section create-user-section">
+        <app-create-user (userCreated)="onUserCreated()"></app-create-user>
+      </div>
+      
+      <div class="admin-section user-details-section">
+        <app-user-details [userId]="selectedUserId"></app-user-details>
+      </div>
+      
+      <div class="admin-section registration-section">
+        <app-registration-codes [userId]="selectedUserId"></app-registration-codes>
+      </div>
+
+      <div class="admin-section transactions-section" *ngIf="selectedUserId">
+        <app-admin-transactions [userId]="selectedUserId" [kontoId]="selectedKontoId"></app-admin-transactions>
+      </div>
     </div>
     
-    <div class="admin-section user-details-section">
-      <app-user-details [userId]="selectedUserId"></app-user-details>
-    </div>
-    
-    <div class="admin-section registration-section">
-      <app-registration-codes [userId]="selectedUserId"></app-registration-codes>
+    <div class="admin-section audit-section full-width">
+      <app-audit-logs></app-audit-logs>
     </div>
   </div>
 </main>
