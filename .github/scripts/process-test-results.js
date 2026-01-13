@@ -106,4 +106,5 @@ ${detailsLines.join('\n')}
 console.log(output);
 fs.writeFileSync('test-summary.md', output);
 
-// AI GENERATED
+// AI GENERATED - Gemini 3.0 (1.12.2025) 
+// Prompt: "For the tests and the github workflow: can you make it so that...

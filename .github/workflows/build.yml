@@ -40,7 +40,8 @@ jobs:
         run: npm run test:ci
         continue-on-error: true
 
-      # AI GEN START
+      # AI GENERATED - Gemini 3.0 (1.12.2025) 
+      # Prompt: "For the tests and the github workflow: can you make it so that...""
       - name: Process Test Results
         if: always()
         run: node .github/scripts/process-test-results.js
@@ -62,7 +63,7 @@ jobs:
       - name: Check Test Status
         if: steps.run_tests.outcome == 'failure'
         run: exit 1
-      # AI GEN END
+      # AI GENERATION END
 
       # {6} Build it :)
       - name: Build
