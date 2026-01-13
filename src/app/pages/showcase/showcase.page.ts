@@ -33,7 +33,7 @@ export class ShowcasePage {
   bigVideo = { src: 'showcase/showcase-gesamt.mp4', title: 'Purbank Full System Showcase' };
 
   authors = [
-    { name: 'David Koteski', portfolio: 'https://seakyy.github.io/' },
+    { name: 'David Koteski', portfolio: 'https://koteski.ch' },
     { name: 'Lukas Hilfiker', portfolio: 'https://lukas.hilfiker.dev/' },
     { name: 'Milan Jankovic', portfolio: 'https://bettercallmilan.github.io/' },
     { name: 'Florian Ruby', portfolio: 'https://ruu.by' }
