@@ -14,7 +14,7 @@
     <h1 class="section-title">IDPA - Kontenführung - Purbank</h1>
     <p class="section-subtitle">
       @for (author of authors; track author.name; let last = $last) {
-        <a [href]="author.portfolio" class="author-link" target="_blank">{{ author.name }}</a>{{ last ? '' : ', ' }}
+        <a [href]="author.portfolio" class="author-link" target="_blank" rel="noopener noreferrer">{{ author.name }}</a>{{ last ? '' : ', ' }}
       }
     </p>
   </section>
