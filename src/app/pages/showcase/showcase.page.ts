@@ -35,8 +35,15 @@ export class ShowcasePage {
   authors = [
     { name: 'David Koteski', portfolio: 'https://koteski.ch' },
     { name: 'Lukas Hilfiker', portfolio: 'https://lukas.hilfiker.dev/' },
-    { name: 'Milan Jankovic', portfolio: 'https://bettercallmilan.github.io/' },
-    { name: 'Florian Ruby', portfolio: 'https://ruu.by' }
+    { name: 'Milan Jankovic', portfolio: '#' },
+    { name: 'Florian Ruby', portfolio: '#' }
+  ];
+
+  repositories = [
+    { name: 'Backend', url: 'https://github.com/reazndev/purbank-backend' },
+    { name: 'Mobile App', url: 'https://github.com/reazndev/purbank-mobile-app' },
+    { name: 'Web Frontend', url: 'https://github.com/reazndev/purbank-web-frontend' },
+    { name: 'Meta', url: 'https://github.com/reazndev/purbank-meta' }
   ];
 
   videos = [
