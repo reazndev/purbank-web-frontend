@@ -12,7 +12,11 @@
 <main class="showcase-main">
   <section class="hero-section">
     <h1 class="section-title">IDPA - Kontenführung - Purbank</h1>
-    <p class="section-subtitle">David Koteski, Lukas Hilfiker, Milan Jankovic & Florian Ruby</p>
+    <p class="section-subtitle">
+      @for (author of authors; track author.name; let last = $last) {
+        <a [href]="author.portfolio" class="author-link" target="_blank">{{ author.name }}</a>{{ last ? '' : ', ' }}
+      }
+    </p>
   </section>
 
   <section class="content-section">

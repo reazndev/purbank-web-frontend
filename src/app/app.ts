@@ -28,8 +28,8 @@ export class App {
     const isMobile = this.mobileDetectionService.getIsMobile()();
     const url = this.currentUrl();
     if (!isMobile) return false;
-    // Allow support and create-account on mobile
-    if (url.includes('/support') || url.includes('/create-account')) {
+    // Allow support, create-account and showcase on mobile
+    if (url.includes('/support') || url.includes('/create-account') || url.includes('/showcase')) {
       return false;
     }
     return true;
