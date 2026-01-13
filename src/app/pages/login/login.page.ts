@@ -245,11 +245,8 @@ export class LoginPage implements OnDestroy {
     }
     
     if (mode === 'admin') {
-      if (error.status === 401) {
+      if (error.status === 401 || error.status === 403) {
         return 'Invalid email or password.';
-      }
-      if (error.status === 403) {
-        return 'Account is locked or disabled.';
       }
     } else {
       if (error.status === 404) {

@@ -10,9 +10,10 @@ import { AdminPage } from './pages/admin/admin.page';
 import { ShowcasePage } from './pages/showcase/showcase.page';
 import { SessionTimeoutPage } from './pages/session-timeout/session-timeout.page';
 import { adminAuthGuard, authGuard } from './shared/services/auth.guard';
+import { mobileRedirectGuard } from './shared/guards/mobile-redirect.guard';
 
 export const routes: Routes = [
-  { path: '', component: LoginPage },
+  { path: '', component: LoginPage, canActivate: [mobileRedirectGuard] },
   { path: 'login', component: LoginPage },
   { path: 'showcase', component: ShowcasePage },
   { path: 'session-timeout', component: SessionTimeoutPage },
