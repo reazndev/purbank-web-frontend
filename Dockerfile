@@ -29,8 +29,16 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy built application from builder stage
 COPY --from=builder /app/dist/purbank-frontend/browser /usr/share/nginx/html
 
+# Create assets directory if it doesn't exist
+RUN mkdir -p /usr/share/nginx/html/assets
+
+# Copy entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 # Expose port 80
 EXPOSE 80
 
-# Start nginx
+# Use entrypoint script to generate runtime config before starting nginx
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]

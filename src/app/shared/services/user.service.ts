@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 
 export interface User {
   id: string;
@@ -17,7 +17,8 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = environment.apiUrl;
+  private runtimeConfig = inject(RuntimeConfigService);
+  private get apiUrl() { return this.runtimeConfig.getApiUrl(); }
 
   constructor(private http: HttpClient) {}
 

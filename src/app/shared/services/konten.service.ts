@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserAuthService } from './user-auth.service';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 
 export interface Konto {
   kontoId: string;
@@ -18,7 +18,7 @@ export interface Transaction {
   transactionId: string;
   amount: number;
   balanceAfter: number;
-  timestamp: string;  
+  timestamp: string;
   iban: string; // sender IBAN for INCOMING, recipient IBAN for OUTGOING
   transactionType: 'INCOMING' | 'OUTGOING' | 'INTEREST';
   message: string;
@@ -44,7 +44,8 @@ export interface InviteMemberRequest {
   providedIn: 'root'
 })
 export class KontenService {
-  private apiUrl = environment.apiUrl;
+  private runtimeConfig = inject(RuntimeConfigService);
+  private get apiUrl() { return this.runtimeConfig.getApiUrl(); }
   private userAuthService = inject(UserAuthService);
 
   constructor(private http: HttpClient) {}
