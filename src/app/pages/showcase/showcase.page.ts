@@ -35,8 +35,8 @@ export class ShowcasePage {
   authors = [
     { name: 'David Koteski', portfolio: 'https://koteski.ch' },
     { name: 'Lukas Hilfiker', portfolio: 'https://lukas.hilfiker.dev/' },
-    { name: 'Milan Jankovic', portfolio: '#' },
-    { name: 'Florian Ruby', portfolio: '#' }
+    { name: 'Milan Jankovic', portfolio: 'https://bettercallmilan.github.io' },
+    { name: 'Florian Ruby', portfolio: 'https://ruu.by' }
   ];
 
   repositories = [
