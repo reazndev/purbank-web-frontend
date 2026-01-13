@@ -16,32 +16,39 @@ export class ShowcasePage {
   translations = computed(() => this.languageService.getTranslations());
   
   screenshots = [
-    { src: 'showcase/dashboard.png', alt: 'User Dashboard' },
-    { src: 'showcase/wealth.png', alt: 'Wealth Overview' },
-    { src: 'showcase/payments.png', alt: 'Payment Interface' },
-    { src: 'showcase/transactions.png', alt: 'Transaction History' },
-    { src: 'showcase/admin-dashboard.png', alt: 'Admin Dashboard' },
-    { src: 'showcase/admin-audit-log.png', alt: 'Admin Audit Log' }
+    { src: 'showcase-assets/dashboard.png', alt: 'User Dashboard' },
+    { src: 'showcase-assets/wealth.png', alt: 'Wealth Overview' },
+    { src: 'showcase-assets/payments.png', alt: 'Payment Interface' },
+    { src: 'showcase-assets/transactions.png', alt: 'Transaction History' },
+    { src: 'showcase-assets/admin-dashboard.png', alt: 'Admin Dashboard' },
+    { src: 'showcase-assets/admin-audit-log.png', alt: 'Admin Audit Log' }
   ];
 
   diagrams = [
-    { src: 'showcase/ERM-diagram.png', alt: 'ERM Diagram' },
-    { src: 'showcase/login-flow.png', alt: 'Login Flow' },
-    { src: 'showcase/setup-flow.png', alt: 'System Setup Flow' }
+    { src: 'showcase-assets/ERM-diagram.png', alt: 'ERM Diagram' },
+    { src: 'showcase-assets/login-flow.png', alt: 'Login Flow' },
+    { src: 'showcase-assets/setup-flow.png', alt: 'System Setup Flow' }
   ];
 
-  bigVideo = { src: 'showcase/showcase-gesamt.mp4', title: 'Purbank Full System Showcase' };
+  bigVideo = { src: 'showcase-assets/showcase-gesamt.mp4', title: 'Purbank Full System Showcase' };
 
   authors = [
     { name: 'David Koteski', portfolio: 'https://koteski.ch' },
     { name: 'Lukas Hilfiker', portfolio: 'https://lukas.hilfiker.dev/' },
-    { name: 'Milan Jankovic', portfolio: 'https://bettercallmilan.github.io/' },
+    { name: 'Milan Jankovic', portfolio: 'https://bettercallmilan.github.io' },
     { name: 'Florian Ruby', portfolio: 'https://ruu.by' }
   ];
 
+  repositories = [
+    { name: 'Backend', url: 'https://github.com/reazndev/purbank-backend' },
+    { name: 'Mobile App', url: 'https://github.com/reazndev/purbank-mobile-app' },
+    { name: 'Web Frontend', url: 'https://github.com/reazndev/purbank-web-frontend' },
+    { name: 'Meta', url: 'https://github.com/reazndev/purbank-meta' }
+  ];
+
   videos = [
-    { src: 'showcase/konto-management.mp4', title: 'Account Management' },
-    { src: 'showcase/create-transaction.mp4', title: 'Transaction Flow' }
+    { src: 'showcase-assets/konto-management.mp4', title: 'Account Management' },
+    { src: 'showcase-assets/create-transaction.mp4', title: 'Transaction Flow' }
   ];
 
   constructor() {}
