@@ -1,10 +1,33 @@
 .main-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 60px);
   padding: 2rem;
   background-color: var(--color-white);
+}
+
+.showcase-link {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-gray);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.showcase-link:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
 }
 
 .login-container {

@@ -134,6 +134,13 @@ export interface Translations {
   sessionTimeoutInstruction: string;
   sessionTimeoutLogout: string;
   sessionTimeoutStay: string;
+  // Showcase Page
+  showcaseBrand: string;
+  backToLogin: string;
+  productVideos: string;
+  interfacePreviews: string;
+  exploreShowcase: string;
+  systemDiagrams: string;
 }
 
 @Injectable({
@@ -261,7 +268,13 @@ export class LanguageService {
       sessionTimeoutLabel: "Automatischer Logout in:",
       sessionTimeoutInstruction: 'Klicken Sie auf "ANGEMELDET BLEIBEN", um Ihre aktuelle Sitzung fortzusetzen.',
       sessionTimeoutLogout: "ABMELDEN",
-      sessionTimeoutStay: "ANGEMELDET BLEIBEN"
+      sessionTimeoutStay: "ANGEMELDET BLEIBEN",
+      showcaseBrand: "PURBANK SHOWCASE",
+      backToLogin: "ZURÜCK ZUM LOGIN",
+      productVideos: "PRODUKT-VIDEOS",
+      interfacePreviews: "INTERFACE-VORSCHAU",
+      exploreShowcase: "SHOWCASE ENTDECKEN",
+      systemDiagrams: "SYSTEM-DIAGRAMME"
     },
     en: {
       dashboard: 'Dashboard',
@@ -381,7 +394,13 @@ export class LanguageService {
       sessionTimeoutLabel: "Automatic logout in:",
       sessionTimeoutInstruction: 'Click "STAY LOGGED IN" to continue your current session.',
       sessionTimeoutLogout: "LOG OUT",
-      sessionTimeoutStay: "STAY LOGGED IN"
+      sessionTimeoutStay: "STAY LOGGED IN",
+      showcaseBrand: "PURBANK SHOWCASE",
+      backToLogin: "BACK TO LOGIN",
+      productVideos: "PRODUCT VIDEOS",
+      interfacePreviews: "INTERFACE PREVIEWS",
+      exploreShowcase: "EXPLORE SHOWCASE",
+      systemDiagrams: "SYSTEM DIAGRAMS"
     }
   };
 

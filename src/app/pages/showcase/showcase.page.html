@@ -1,0 +1,99 @@
+<div class="navbar">
+  <div class="navbar-content">
+      <div class="nav-links">
+          <div class="nav-brand">{{ translations().showcaseBrand }}</div>
+      </div>
+      <div class="nav-controls">
+          <a routerLink="/login" class="nav-link">{{ translations().backToLogin }}</a>
+      </div>
+  </div>
+</div>
+
+<main class="showcase-main">
+  <section class="hero-section">
+    <h1 class="section-title">IDPA - Kontenführung - Purbank</h1>
+    <p class="section-subtitle">David Koteski, Lukas Hilfiker, Milan Jankovic & Florian Ruby</p>
+  </section>
+
+  <section class="content-section">
+    <div class="standard-container big-video-card">
+      <div class="video-wrapper big">
+        <video autoplay loop muted controls class="showcase-video">
+          <source [src]="bigVideo.src" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="card-info">
+        <h2 class="group-title no-border">{{ bigVideo.title }}</h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2 class="group-title">{{ translations().productVideos }}</h2>
+    <div class="media-grid">
+      @for (video of videos; track video.title) {
+        <div class="standard-container media-card">
+          <div class="video-wrapper">
+            <video controls class="showcase-video">
+              <source [src]="video.src" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">{{ video.title }}</h3>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2 class="group-title">{{ translations().interfacePreviews }}</h2>
+    <div class="media-grid">
+      @for (shot of screenshots; track shot.alt) {
+        <div class="standard-container media-card">
+          <div class="image-wrapper">
+            <button class="enlarge-btn" (click)="openImage(shot.src)" [attr.aria-label]="translations().viewDetails">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+            <img [src]="shot.src" [alt]="shot.alt" class="showcase-img" (click)="openImage(shot.src)">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">{{ shot.alt }}</h3>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2 class="group-title">{{ translations().systemDiagrams }}</h2>
+    <div class="media-grid">
+      @for (diag of diagrams; track diag.alt) {
+        <div class="standard-container media-card">
+          <div class="image-wrapper">
+            <button class="enlarge-btn" (click)="openImage(diag.src)" [attr.aria-label]="translations().viewDetails">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+            <img [src]="diag.src" [alt]="diag.alt" class="showcase-img" (click)="openImage(diag.src)">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">{{ diag.alt }}</h3>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</main>
+
+@if (selectedImage) {
+  <div class="modal-overlay" (click)="closeImage()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeImage()">&times;</button>
+      <img [src]="selectedImage" class="modal-image">
+    </div>
+  </div>
+}
+
+<app-footer></app-footer>
