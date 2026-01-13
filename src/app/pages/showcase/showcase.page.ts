@@ -1,0 +1,53 @@
+import { Component, computed, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { FooterComponent } from '../../shared/footer/footer.component';
+import { LanguageService } from '../../shared/services/language.service';
+
+@Component({
+  selector: 'app-showcase',
+  standalone: true,
+  imports: [CommonModule, RouterLink, FooterComponent],
+  templateUrl: './showcase.page.html',
+  styleUrls: ['./showcase.page.css']
+})
+export class ShowcasePage {
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
+  
+  screenshots = [
+    { src: 'showcase/dashboard.png', alt: 'User Dashboard' },
+    { src: 'showcase/wealth.png', alt: 'Wealth Overview' },
+    { src: 'showcase/payments.png', alt: 'Payment Interface' },
+    { src: 'showcase/transactions.png', alt: 'Transaction History' },
+    { src: 'showcase/admin-dashboard.png', alt: 'Admin Dashboard' },
+    { src: 'showcase/admin-audit-log.png', alt: 'Admin Audit Log' }
+  ];
+
+  diagrams = [
+    { src: 'showcase/ERM-diagram.png', alt: 'ERM Diagram' },
+    { src: 'showcase/login-flow.png', alt: 'Login Flow' },
+    { src: 'showcase/setup-flow.png', alt: 'System Setup Flow' }
+  ];
+
+  bigVideo = { src: 'showcase/showcase-gesamt.mp4', title: 'Purbank Full System Showcase' };
+
+  videos = [
+    { src: 'showcase/konto-management.mp4', title: 'Account Management' },
+    { src: 'showcase/create-transaction.mp4', title: 'Transaction Flow' }
+  ];
+
+  constructor() {}
+
+  selectedImage: string | null = null;
+
+  openImage(src: string): void {
+    this.selectedImage = src;
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+  }
+
+  closeImage(): void {
+    this.selectedImage = null;
+    document.body.style.overflow = 'auto';
+  }
+}
