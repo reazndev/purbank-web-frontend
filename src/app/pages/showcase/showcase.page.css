@@ -316,18 +316,4 @@
   .modal-content {
     max-width: 95%;
   }
-
-  .close-modal {
-    top: 10px;
-    right: 10px;
-    color: var(--color-black);
-    background: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
 }
