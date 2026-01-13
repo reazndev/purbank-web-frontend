@@ -18,8 +18,7 @@
   <section class="content-section">
     <div class="standard-container big-video-card">
       <div class="video-wrapper big">
-        <video autoplay loop muted playsinline controls class="showcase-video">
-          <source [src]="bigVideo.src" type="video/mp4">
+        <video autoplay loop muted playsinline controls class="showcase-video" [src]="bigVideo.src">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -35,8 +34,7 @@
       @for (video of videos; track video.title) {
         <div class="standard-container media-card">
           <div class="video-wrapper">
-            <video controls class="showcase-video">
-              <source [src]="video.src" type="video/mp4">
+            <video controls class="showcase-video" [src]="video.src">
               Your browser does not support the video tag.
             </video>
           </div>
