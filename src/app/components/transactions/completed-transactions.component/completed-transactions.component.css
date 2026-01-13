@@ -130,13 +130,25 @@
 .transaction-box-expanded {
   background-color: var(--color-accent-light);
   padding: 10px 15px;
-  display: grid;
-  grid-template-columns: 1.5fr 1.6fr 1fr 150px;
-  gap: 15px;
+  display: flex;
   align-items: center;
+  gap: 15px;
   min-height: auto;
   height: fit-content;
   line-height: 1.2;
+  white-space: nowrap;
+}
+
+.transaction-box-expanded .transaction-value:nth-child(1) { flex: 1.5; min-width: 0; }
+.transaction-box-expanded .transaction-value:nth-child(2) { flex: 1.6; min-width: 0; }
+.transaction-box-expanded .transaction-value:nth-child(3) { flex: 1; min-width: 0; }
+.transaction-box-expanded .transaction-balance { 
+  flex: 0 0 150px; 
+  text-align: right; 
+}
+
+.transaction-box-expanded .info-btn {
+  flex: 0 0 20px;
 }
 
 .transaction-label {
