@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, forkJoin } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 
 export interface CurrencyRates {
   rates: Record<string, number>;
@@ -19,7 +19,8 @@ export interface ConversionResult {
   providedIn: 'root'
 })
 export class CurrencyService {
-  private apiUrl = environment.apiUrl;
+  private runtimeConfig = inject(RuntimeConfigService);
+  private get apiUrl() { return this.runtimeConfig.getApiUrl(); }
   private cachedRates: CurrencyRates | null = null;
   private cacheTimestamp: number = 0;
   private CACHE_DURATION = 5 * 60 * 1000; // 5 minutes

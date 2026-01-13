@@ -75,8 +75,20 @@ Note: if you normally use ```sudo docker compose up -d``` then make sure to perf
 Docker pulls the latest build from the repo, there might not be one yet.
 We do this as else it would have to download all dependencies which takes 15m+.
 
-Note: the `extra_hosts: "host.docker.internal:host-gateway"` entry is used in
-`docker-compose.yml` to allow containers to reach services running on the host
-at `localhost` (Linux requires Docker Engine >= 20.10). If you prefer to run
-the backend as a container on the same network, you can instead connect both
-compose stacks to the same `purbank-network`.
+### Configuring API URL at Runtime
+
+The API URL can be configured at runtime using environment variables, allowing you to use the same Docker image across different environments (development, staging, production).
+
+**Method 1: Using environment variables directly**
+
+```bash
+API_URL=https://api.example.com/api/v1 docker compose up -d
+```
+
+**Default Value:**
+If no `API_URL` is specified, the application defaults to: `https://ebanking.purbank.ch/api/v1`
+
+**Examples:**
+- Local development: `API_URL=http://localhost:8080/api/v1`
+- Staging: `API_URL=https://api.staging.example.com/api/v1`
+- Production: `API_URL=https://ebanking.purbank.ch/api/v1`

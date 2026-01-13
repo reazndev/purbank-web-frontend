@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 
 export interface User {
   id: string;
@@ -131,7 +131,8 @@ export interface AuditLogFilters {
   providedIn: 'root'
 })
 export class AdminService {
-  private readonly baseUrl = environment.apiUrl;
+  private runtimeConfig = inject(RuntimeConfigService);
+  private get baseUrl() { return this.runtimeConfig.getApiUrl(); }
 
   constructor(private readonly http: HttpClient) {}
 

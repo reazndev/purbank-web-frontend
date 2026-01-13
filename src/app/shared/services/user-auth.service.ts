@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError, timer, Subject } from 'rxjs';
 import { tap, catchError, switchMap, takeUntil, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 
 export interface UserLoginRequest {
   contractNumber: string;
@@ -47,7 +47,7 @@ export interface TokenPayload {
   contractNumber?: string;
 }
 
-export type LoginState = 
+export type LoginState =
   | 'idle'
   | 'awaiting_mobile_verification'
   | 'approved'
@@ -60,24 +60,25 @@ export type LoginState =
   providedIn: 'root'
 })
 export class UserAuthService {
-  private readonly BASE_URL = environment.apiUrl;
+  private runtimeConfig = inject(RuntimeConfigService);
+  private get BASE_URL() { return this.runtimeConfig.getApiUrl(); }
   private readonly ACCESS_TOKEN_KEY = 'user_access_token';
   private readonly REFRESH_TOKEN_KEY = 'user_refresh_token';
   private readonly DEVICE_ID_KEY = 'device_id';
   private readonly CONTRACT_NUMBER_KEY = 'contract_number';
-  
+
   private readonly POLLING_INTERVAL_MS = 2000;
   private readonly POLLING_TIMEOUT_MS = 300000; // 5 minutes
-  
+
   private currentUserSubject = new BehaviorSubject<TokenPayload | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  
+
   private loginStateSubject = new BehaviorSubject<LoginState>('idle');
   public loginState$ = this.loginStateSubject.asObservable();
-  
+
   private mobileVerifyCodeSubject = new BehaviorSubject<string | null>(null);
   public mobileVerifyCode$ = this.mobileVerifyCodeSubject.asObservable();
-  
+
   private stopPolling$ = new Subject<void>();
 
   constructor(

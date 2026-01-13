@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 
 export interface LoginRequest {
   email: string;
@@ -33,11 +33,12 @@ export interface TokenPayload {
   providedIn: 'root'
 })
 export class AdminLoginService {
-  private readonly BASE_URL = environment.apiUrl;
+  private runtimeConfig = inject(RuntimeConfigService);
+  private get BASE_URL() { return this.runtimeConfig.getApiUrl(); }
   private readonly ACCESS_TOKEN_KEY = 'access_token';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly ADMIN_FLAG_KEY = 'is_admin_user';
-  
+
   private currentUserSubject = new BehaviorSubject<TokenPayload | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
