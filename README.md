@@ -1,5 +1,11 @@
 # PurbankFrontend
 
+Installation & Setup guide found in https://github.com/reazndev/purbank-meta
+
+To run it by itself help yourself with the auto generated readme below!
+
+---
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
 
 ## Development server
