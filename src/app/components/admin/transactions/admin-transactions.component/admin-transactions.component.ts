@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, TransactionDTO } from '../../../../shared/services/admin.service';
@@ -17,6 +17,7 @@ export class AdminTransactionsComponent implements OnChanges {
   
   private adminService: AdminService = inject(AdminService);
   public languageService: LanguageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
   
   transactions: TransactionDTO[] = [];
   isLoading = false;

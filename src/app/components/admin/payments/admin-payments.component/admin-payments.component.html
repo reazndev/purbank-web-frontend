@@ -5,16 +5,16 @@
 
   <!-- Payments List -->
   <div class="payments-list-section">
-    <h3>{{ languageService.translate('pendingPayments') }}</h3>
+    <h3>{{ translations().pendingPayments }}</h3>
     
-    <div *ngIf="isLoading" class="loading">{{ languageService.translate('loading') }}</div>
+    <div *ngIf="isLoading" class="loading">{{ translations().loading }}</div>
 
     <div class="payments-list" *ngIf="!isLoading && payments.length > 0">
       <div class="list-header">
-        <span>{{ languageService.translate('toIban') }}</span>
-        <span>{{ languageService.translate('message') }}</span>
-        <span>{{ languageService.translate('amount') }}</span>
-        <span>{{ languageService.translate('executionDate') }}</span>
+        <span>{{ translations().toIban }}</span>
+        <span>{{ translations().message }}</span>
+        <span>{{ translations().amount }}</span>
+        <span>{{ translations().executionDate }}</span>
         <span></span>
       </div>
       
@@ -24,7 +24,7 @@
         <span class="col-amount negative">- {{ MathAbs(payment.amount) | number:'1.2-2' }}</span>
         <span class="col-date">{{ payment.executionDate | date }}</span>
         <span class="col-actions">
-          <button class="icon-btn" (click)="openEditModal(payment)" [title]="languageService.translate('editTransaction')">
+          <button class="icon-btn" (click)="openEditModal(payment)" [title]="translations().editTransaction">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
           </button>
         </span>
@@ -32,7 +32,7 @@
     </div>
 
     <div *ngIf="!isLoading && payments.length === 0" class="empty-state">
-      {{ languageService.translate('noTransactionData') }}
+      {{ translations().noTransactionData }}
     </div>
   </div>
 </div>
@@ -41,7 +41,7 @@
 <div class="modal-overlay" *ngIf="showEditModal" (click)="closeEditModal()">
   <div class="edit-modal-content" (click)="$event.stopPropagation()">
     <div class="detail-header">
-      <h2>{{ languageService.translate('editTransaction') }}</h2>
+      <h2>{{ translations().editTransaction }}</h2>
       <button class="icon-btn" (click)="closeEditModal()">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
       </button>
@@ -49,40 +49,40 @@
     <hr>
     <div class="edit-form">
       <div class="form-group">
-        <label>{{ languageService.translate('toIban') }}</label>
+        <label>{{ translations().toIban }}</label>
         <input [(ngModel)]="editPaymentData.toIban">
       </div>
       <div class="form-group">
-        <label>{{ languageService.translate('amount') }}</label>
+        <label>{{ translations().amount }}</label>
         <input type="number" [(ngModel)]="editPaymentData.amount">
       </div>
       <div class="form-group">
-        <label>{{ languageService.translate('message') }}</label>
+        <label>{{ translations().message }}</label>
         <input [(ngModel)]="editPaymentData.message">
       </div>
       <div class="form-group">
-        <label>{{ languageService.translate('note') }}</label>
+        <label>{{ translations().note }}</label>
         <input [(ngModel)]="editPaymentData.note">
       </div>
       <div class="form-group">
-        <label>{{ languageService.translate('executionType') }}</label>
+        <label>{{ translations().executionType }}</label>
         <select [(ngModel)]="editPaymentData.executionType">
             <option value="NORMAL">NORMAL</option>
             <option value="INSTANT">INSTANT</option>
         </select>
       </div>
       <div class="form-group">
-        <label>{{ languageService.translate('executionDate') }}</label>
+        <label>{{ translations().executionDate }}</label>
         <input type="date" [(ngModel)]="editPaymentData.executionDate">
       </div>
       <div class="form-group">
-        <label>{{ languageService.translate('locked') }}</label>
-        <span>{{ selectedPayment?.locked ? languageService.translate('yes') : languageService.translate('no') }}</span>
+        <label>{{ translations().locked }}</label>
+        <span>{{ selectedPayment?.locked ? translations().yes : translations().no }}</span>
       </div>
       
       <div class="modal-actions">
-        <button class="btn-delete" (click)="selectedPayment && deletePayment(selectedPayment.id)">{{ languageService.translate('deletePayment') }}</button>
-        <button class="btn-primary" (click)="updatePayment()">{{ languageService.translate('apply') }}</button>
+        <button class="btn-delete" (click)="selectedPayment && deletePayment(selectedPayment.id)">{{ translations().deletePayment }}</button>
+        <button class="btn-primary" (click)="updatePayment()">{{ translations().apply }}</button>
       </div>
     </div>
   </div>

@@ -1,18 +1,18 @@
 <div class="create-user-container">
   <div class="create-user-header">
-    <h2>Create New User</h2>
+    <h2>{{ translations().createUser }}</h2>
     <button 
       class="btn-toggle" 
       (click)="toggleCreateForm()"
       [class.active]="showCreateForm">
-      {{ showCreateForm ? 'Cancel' : '+ New User' }}
+      {{ showCreateForm ? translations().cancel : translations().createUserBtn }}
     </button>
   </div>
 
   <div class="create-form" *ngIf="showCreateForm">
     <form (ngSubmit)="createUser()">
       <div class="form-group">
-        <label for="email">Email *</label>
+        <label for="email">{{ translations().email }} *</label>
         <input
           type="email"
           id="email"
@@ -25,7 +25,7 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="firstName">First Name *</label>
+          <label for="firstName">{{ translations().firstName }} *</label>
           <input
             type="text"
             id="firstName"
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-          <label for="lastName">Last Name *</label>
+          <label for="lastName">{{ translations().lastName }} *</label>
           <input
             type="text"
             id="lastName"
@@ -50,8 +50,8 @@
       </div>
 
       <div class="form-group">
-        <label for="contractNumber">Contract Number (auto-generated)</label>
-        <p class="field-info">Contract number will be automatically generated</p>
+        <label for="contractNumber">{{ translations().contractNumberAuto }}</label>
+        <p class="field-info">{{ translations().contractNumberAutoHint }}</p>
       </div>
 
       <div class="alert alert-error" *ngIf="errorMessage">
@@ -68,13 +68,13 @@
           class="btn-secondary" 
           (click)="toggleCreateForm()"
           [disabled]="isCreating">
-          Cancel
+          {{ translations().cancel }}
         </button>
         <button 
           type="submit" 
           class="btn-primary"
           [disabled]="isCreating || !isFormValid()">
-          {{ isCreating ? 'Creating...' : 'Create User' }}
+          {{ isCreating ? translations().creating : translations().createUser }}
         </button>
       </div>
     </form>

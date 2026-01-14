@@ -1,51 +1,51 @@
 <div class="user-details-container">
   <div class="section-header">
-    <h2 class="section-title">USER DETAILS</h2>
+    <h2 class="section-title">{{ translations().userDetails }}</h2>
   </div>
 
   <div class="user-details-content" *ngIf="!isLoading && userDetails">
     <div class="detail-row">
-      <label class="detail-label">USER ID</label>
+      <label class="detail-label">{{ translations().userId }}</label>
       <span class="detail-value detail-id">{{ userDetails.id }}</span>
     </div>
 
     <div class="detail-row">
-      <label class="detail-label">NAME</label>
+      <label class="detail-label">{{ translations().name }}</label>
       <span class="detail-value">{{ userDetails.firstName }} {{ userDetails.lastName }}</span>
     </div>
 
     <div class="detail-row">
-      <label class="detail-label">EMAIL</label>
+      <label class="detail-label">{{ translations().email }}</label>
       <span class="detail-value">{{ userDetails.email }}</span>
     </div>
 
     <div class="detail-row">
-      <label class="detail-label">CONTRACT NUMBER</label>
+      <label class="detail-label">{{ translations().contractNumber }}</label>
       <span class="detail-value detail-contract">{{ userDetails.contractNumber }}</span>
     </div>
 
     <div class="detail-row">
-      <label class="detail-label">STATUS</label>
+      <label class="detail-label">{{ translations().status }}</label>
       <span class="detail-value detail-status" [class.active]="userDetails.status === 'ACTIVE'">
         {{ userDetails.status }}
       </span>
     </div>
 
     <div class="detail-row">
-      <label class="detail-label">CREATED AT</label>
+      <label class="detail-label">{{ translations().createdAt }}</label>
       <span class="detail-value detail-date">{{ formatDate(userDetails.createdAt) }}</span>
     </div>
   </div>
 
   <div class="empty-state" *ngIf="!isLoading && !userDetails && !userId">
-    <p>SELECT A USER TO VIEW DETAILS</p>
+    <p>{{ translations().selectUserToViewDetails }}</p>
   </div>
 
   <div class="empty-state" *ngIf="!isLoading && !userDetails && userId">
-    <p>USER DETAILS NOT AVAILABLE</p>
+    <p>{{ translations().userDetailsNotAvailable }}</p>
   </div>
 
   <div class="loading-state" *ngIf="isLoading">
-    <p>LOADING USER DETAILS...</p>
+    <p>{{ translations().loadingUserDetails }}</p>
   </div>
 </div>

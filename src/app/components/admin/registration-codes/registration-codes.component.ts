@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, RegistrationCode } from '../../../shared/services/admin.service';
+import { LanguageService } from '../../../shared/services/language.service';
 
 @Component({
   selector: 'app-registration-codes',
@@ -13,6 +14,9 @@ import { AdminService, RegistrationCode } from '../../../shared/services/admin.s
 export class RegistrationCodesComponent implements OnChanges {
   @Input() userId: string | null = null;
   
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
+
   registrationCodes: RegistrationCode[] = [];
   isLoading = false;
   showCreateForm = false;
@@ -93,14 +97,7 @@ export class RegistrationCodesComponent implements OnChanges {
 
   formatDate(dateString: string): string {
     if (!dateString) return 'N/A';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.languageService.formatDate(dateString);
   }
 
   copyToClipboard(code: string) {
