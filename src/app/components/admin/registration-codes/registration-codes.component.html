@@ -1,23 +1,23 @@
 <div class="registration-codes-container">
   <!-- Toast Notification -->
   <div class="toast" [class.show]="showCopiedToast">
-    CODE COPIED
+    {{ translations().codeCopied }}
   </div>
 
   <div class="section-header">
-    <h2 class="section-title">REGISTRATION CODES</h2>
+    <h2 class="section-title">{{ translations().registrationCodes }}</h2>
     <button 
       class="create-button" 
       [disabled]="!userId"
       (click)="toggleCreateForm()"
       *ngIf="!showCreateForm">
-      + NEW CODE
+      {{ translations().newCode }}
     </button>
   </div>
 
   <div class="create-form" *ngIf="showCreateForm && userId">
     <div class="form-group">
-      <label class="form-label">TITLE *</label>
+      <label class="form-label">{{ translations().title }} *</label>
       <input 
         type="text" 
         class="form-input" 
@@ -27,11 +27,11 @@
     </div>
 
     <div class="form-group">
-      <label class="form-label">DESCRIPTION</label>
+      <label class="form-label">{{ translations().description }}</label>
       <textarea 
         class="form-textarea" 
         [(ngModel)]="newCodeDescription"
-        placeholder="Optional description"
+        [placeholder]="translations().optionalDescription"
         rows="3"
         [disabled]="isCreating"></textarea>
     </div>
@@ -41,13 +41,13 @@
         class="form-button form-button-primary" 
         (click)="createRegistrationCode()"
         [disabled]="!newCodeTitle.trim() || isCreating">
-        {{ isCreating ? 'CREATING...' : 'CREATE CODE' }}
+        {{ isCreating ? translations().creating : translations().createCode }}
       </button>
       <button 
         class="form-button form-button-secondary" 
         (click)="toggleCreateForm()"
         [disabled]="isCreating">
-        CANCEL
+        {{ translations().cancel }}
       </button>
     </div>
   </div>
@@ -57,7 +57,7 @@
       <div *ngFor="let code of registrationCodes" class="code-card" [class.used]="code.status === 'USED'">
         <div class="code-header">
           <h3 class="code-title">{{ code.title }}</h3>
-          <span class="code-status" [class.open]="code.status === 'OPEN'">{{ code.status }}</span>
+          <span class="code-status" [class.open]="code.status === 'OPEN'">{{ code.status === 'USED' ? translations().used : code.status }}</span>
         </div>
 
         <div class="code-description" *ngIf="code.description">
@@ -70,17 +70,17 @@
             class="copy-button" 
             (click)="copyToClipboard(code.registrationCode)"
             *ngIf="code.status === 'OPEN'">
-            COPY
+            {{ translations().copy }}
           </button>
         </div>
 
         <div class="code-meta">
           <div class="meta-item">
-            <span class="meta-label">CREATED:</span>
+            <span class="meta-label">{{ translations().createdAt }}:</span>
             <span class="meta-value">{{ formatDate(code.createdAt) }}</span>
           </div>
           <div class="meta-item" *ngIf="code.usedAt">
-            <span class="meta-label">USED:</span>
+            <span class="meta-label">{{ translations().used }}:</span>
             <span class="meta-value">{{ formatDate(code.usedAt) }}</span>
           </div>
         </div>
@@ -88,20 +88,20 @@
     </div>
 
     <div class="codes-footer">
-      <span class="codes-count">{{ registrationCodes.length }} CODE(S) TOTAL</span>
+      <span class="codes-count">{{ registrationCodes.length }} {{ translations().codesTotal }}</span>
     </div>
   </div>
 
   <div class="empty-state" *ngIf="!isLoading && registrationCodes.length === 0 && userId && !showCreateForm">
-    <p>NO REGISTRATION CODES FOUND</p>
-    <p class="empty-hint">CREATE A NEW CODE TO GET STARTED</p>
+    <p>{{ translations().noRegistrationCodesFound }}</p>
+    <p class="empty-hint">{{ translations().createCodeToStart }}</p>
   </div>
 
   <div class="empty-state" *ngIf="!isLoading && !userId && !showCreateForm">
-    <p>SELECT A USER TO MANAGE REGISTRATION CODES</p>
+    <p>{{ translations().selectUserToManageCodes }}</p>
   </div>
 
   <div class="loading-state" *ngIf="isLoading">
-    <p>LOADING REGISTRATION CODES...</p>
+    <p>{{ translations().loadingRegistrationCodes }}</p>
   </div>
 </div>

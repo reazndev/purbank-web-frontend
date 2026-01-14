@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, AuditLog, AuditLogFilters } from '../../../shared/services/admin.service';
+import { LanguageService } from '../../../shared/services/language.service';
 
 @Component({
   selector: 'app-audit-logs',
@@ -12,6 +13,8 @@ import { AdminService, AuditLog, AuditLogFilters } from '../../../shared/service
 })
 export class AuditLogsComponent implements OnInit {
   private adminService = inject(AdminService);
+  private languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
 
   logs: AuditLog[] = [];
   totalElements = 0;
@@ -81,17 +84,6 @@ export class AuditLogsComponent implements OnInit {
 
   formatDate(dateStr: string): string {
     if (!dateStr) return 'N/A';
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return 'N/A';
-    
-    return date.toLocaleString('de-CH', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
-    });
+    return this.languageService.formatDate(dateStr);
   }
 }

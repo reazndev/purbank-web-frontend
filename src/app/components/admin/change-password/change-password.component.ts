@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminLoginService } from '../../../shared/services/admin-login.service';
+import { LanguageService } from '../../../shared/services/language.service';
 
 interface PasswordFormState {
   currentPassword: string;
@@ -21,6 +22,8 @@ interface PasswordFormState {
 })
 export class ChangePasswordComponent {
   private readonly adminLoginService = inject(AdminLoginService);
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
 
   formState: PasswordFormState = {
     currentPassword: '',

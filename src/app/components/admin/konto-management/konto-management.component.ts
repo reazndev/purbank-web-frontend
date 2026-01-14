@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, SimpleChanges, inject, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject, Output, EventEmitter, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService, AdminKontoDetails, AdminKontoMember, TransactionDTO } from '../../../shared/services/admin.service';
+import { LanguageService } from '../../../shared/services/language.service';
 import { AdminTransactionsComponent } from '../transactions/admin-transactions.component/admin-transactions.component';
 import { AdminPaymentsComponent } from '../payments/admin-payments.component/admin-payments.component';
 
@@ -17,6 +18,8 @@ export class KontoManagementComponent implements OnChanges {
   @Output() kontoSelected = new EventEmitter<string | null>();
   
   private adminService = inject(AdminService);
+  private languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
   
   konten: AdminKontoDetails[] = [];
   selectedKonto: AdminKontoDetails | null = null;

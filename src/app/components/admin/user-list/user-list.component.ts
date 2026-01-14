@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService, User } from '../../../shared/services/admin.service';
+import { LanguageService } from '../../../shared/services/language.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,6 +13,9 @@ import { AdminService, User } from '../../../shared/services/admin.service';
 export class UserListComponent implements OnInit {
   @Output() userSelected = new EventEmitter<string>();
   
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
+
   users: User[] = [];
   selectedUserId: string | null = null;
   isLoading = false;

@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService, UserDetails } from '../../../shared/services/admin.service';
+import { LanguageService } from '../../../shared/services/language.service';
 
 @Component({
   selector: 'app-user-details',
@@ -12,6 +13,9 @@ import { AdminService, UserDetails } from '../../../shared/services/admin.servic
 export class UserDetailsComponent implements OnChanges {
   @Input() userId: string | null = null;
   
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
+
   userDetails: UserDetails | null = null;
   isLoading = false;
   errorMessage: string | null = null;
@@ -46,13 +50,6 @@ export class UserDetailsComponent implements OnChanges {
   }
 
   formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return this.languageService.formatDate(dateString);
   }
 }

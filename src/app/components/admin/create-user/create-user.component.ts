@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../../shared/services/admin.service';
+import { LanguageService } from '../../../shared/services/language.service';
 
 @Component({
   selector: 'app-create-user',
@@ -12,6 +13,9 @@ import { AdminService } from '../../../shared/services/admin.service';
 })
 export class CreateUserComponent {
   @Output() userCreated = new EventEmitter<void>();
+
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
 
   showCreateForm = false;
   isCreating = false;

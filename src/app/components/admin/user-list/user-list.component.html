@@ -1,14 +1,14 @@
 <div class="user-list-container">
   <div class="section-header">
-    <h2 class="section-title">ALL USERS</h2>
+    <h2 class="section-title">{{ translations().allUsers }}</h2>
   </div>
 
   <div class="user-list-content" *ngIf="!isLoading && users.length > 0">
     <div class="user-list-header">
-      <span class="header-name">NAME</span>
-      <span class="header-email">EMAIL</span>
-      <span class="header-contract">CONTRACT</span>
-      <span class="header-status">STATUS</span>
+      <span class="header-name">{{ translations().name }}</span>
+      <span class="header-email">{{ translations().email }}</span>
+      <span class="header-contract">{{ translations().contract }}</span>
+      <span class="header-status">{{ translations().status }}</span>
     </div>
 
     <div class="user-list-scrollable">
@@ -25,15 +25,15 @@
     </div>
 
     <div class="user-list-footer">
-      <span class="user-count">{{ users.length }} USERS TOTAL</span>
+      <span class="user-count">{{ users.length }} {{ translations().usersTotal }}</span>
     </div>
   </div>
 
   <div class="empty-state" *ngIf="!isLoading && users.length === 0">
-    <p>NO USERS FOUND</p>
+    <p>{{ translations().noUsersFound }}</p>
   </div>
 
   <div class="loading-state" *ngIf="isLoading">
-    <p>LOADING USERS...</p>
+    <p>{{ translations().loadingUsers }}</p>
   </div>
 </div>

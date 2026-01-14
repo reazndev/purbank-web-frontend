@@ -1,6 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../shared/footer/footer.component';
+import { LanguageToggleComponent } from '../../shared/language-toggle/language-toggle.component';
+import { LanguageService } from '../../shared/services/language.service';
 import { UserListComponent } from '../../components/admin/user-list/user-list.component';
 import { UserDetailsComponent } from '../../components/admin/user-details/user-details.component';
 import { RegistrationCodesComponent } from '../../components/admin/registration-codes/registration-codes.component';
@@ -17,6 +19,7 @@ import { AdminPaymentsComponent } from '../../components/admin/payments/admin-pa
   imports: [
     CommonModule,
     FooterComponent,
+    LanguageToggleComponent,
     UserListComponent,
     UserDetailsComponent,
     RegistrationCodesComponent,
@@ -33,6 +36,9 @@ import { AdminPaymentsComponent } from '../../components/admin/payments/admin-pa
 export class AdminPage {
   @ViewChild(UserListComponent) userListComponent!: UserListComponent;
   
+  private readonly languageService = inject(LanguageService);
+  translations = computed(() => this.languageService.getTranslations());
+
   selectedUserId: string | null = null;
   selectedKontoId: string | null = null;
 

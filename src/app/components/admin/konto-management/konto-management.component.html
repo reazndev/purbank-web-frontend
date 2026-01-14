@@ -1,10 +1,10 @@
 <div class="konto-management-container">
   <div class="section-header">
-    <h2 class="section-title">KONTO MANAGEMENT</h2>
+    <h2 class="section-title">{{ translations().kontoManagement }}</h2>
     <div class="header-actions">
-      <button class="action-btn secondary" (click)="triggerDailyCalculation()">FORCE DAILY CALC</button>
-      <button class="action-btn secondary" (click)="triggerAbrechnung()">RUN ABRECHNUNG</button>
-      <button class="action-btn primary" (click)="openCreateModal()" [disabled]="!userId">CREATE KONTO</button>
+      <button class="action-btn secondary" (click)="triggerDailyCalculation()">{{ translations().forceDailyCalc }}</button>
+      <button class="action-btn secondary" (click)="triggerAbrechnung()">{{ translations().runAbrechnung }}</button>
+      <button class="action-btn primary" (click)="openCreateModal()" [disabled]="!userId">{{ translations().createKonto }}</button>
     </div>
   </div>
 
@@ -13,25 +13,25 @@
 
   <div class="konto-list-content" *ngIf="konten.length > 0">
     <div class="list-header-row">
-      <span class="col-name">NAME</span>
-      <span class="col-balance">BALANCE</span>
-      <span class="col-iban">IBAN</span>
-      <span class="col-actions">ACTIONS</span>
+      <span class="col-name">{{ translations().name }}</span>
+      <span class="col-balance">{{ translations().balance }}</span>
+      <span class="col-iban">{{ translations().iban }}</span>
+      <span class="col-actions">{{ translations().actions }}</span>
     </div>
 
     <div class="list-scrollable">
       <div class="list-item" *ngFor="let konto of konten">
-        <span class="col-name clickable" (click)="selectKonto(konto.kontoId)" title="Select Account">{{ konto.kontoName }}</span>
+        <span class="col-name clickable" (click)="selectKonto(konto.kontoId)" [title]="translations().selectAccount">{{ konto.kontoName }}</span>
         <span class="col-balance">{{ konto.balance | number:'1.2-2' }} {{ konto.currency }}</span>
-        <span class="col-iban" (click)="copyToClipboard(konto.iban)" title="Click to copy IBAN" style="cursor: pointer; font-family: monospace;">{{ konto.iban }}</span>
+        <span class="col-iban" (click)="copyToClipboard(konto.iban)" [title]="translations().copy" style="cursor: pointer; font-family: monospace;">{{ konto.iban }}</span>
         <div class="col-actions">
-          <button class="icon-btn" (click)="viewDetails(konto.kontoId)" title="Details">
+          <button class="icon-btn" (click)="viewDetails(konto.kontoId)" [title]="translations().viewDetails">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
           </button>
-          <button class="icon-btn" (click)="openEditModal(konto)" title="Edit">
+          <button class="icon-btn" (click)="openEditModal(konto)" [title]="translations().editTransaction">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
           </button>
-          <button class="icon-btn danger" (click)="closeAccount(konto)" title="Close" *ngIf="konto.status === 'ACTIVE'">
+          <button class="icon-btn danger" (click)="closeAccount(konto)" [title]="translations().closeAccount" *ngIf="konto.status === 'ACTIVE'">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
           </button>
         </div>
@@ -40,21 +40,21 @@
   </div>
 
   <div class="empty-state" *ngIf="!isLoading && konten.length === 0">
-    <p *ngIf="!userId">SELECT A USER TO VIEW ACCOUNTS</p>
-    <p *ngIf="userId">NO ACCOUNTS FOUND</p>
+    <p *ngIf="!userId">{{ translations().selectUserToViewAccounts }}</p>
+    <p *ngIf="userId">{{ translations().noAccountsFound }}</p>
   </div>
 </div>
 
 <!-- Create Modal -->
 <div class="modal-overlay" *ngIf="showCreateModal">
   <div class="modal-content">
-    <h3>Create New Account</h3>
+    <h3>{{ translations().createKontoTitle }}</h3>
     <div class="form-group">
-      <label>Name</label>
-      <input [(ngModel)]="newKontoName" placeholder="Account Name">
+      <label>{{ translations().name }}</label>
+      <input [(ngModel)]="newKontoName" [placeholder]="translations().accountname">
     </div>
     <div class="form-group">
-      <label>Currency</label>
+      <label>{{ translations().currency }}</label>
       <select [(ngModel)]="newKontoCurrency">
         <option value="CHF">CHF</option>
         <option value="EUR">EUR</option>
@@ -62,8 +62,8 @@
       </select>
     </div>
     <div class="modal-actions">
-      <button class="btn-cancel" (click)="closeCreateModal()">Cancel</button>
-      <button class="btn-confirm" (click)="createKonto()" [disabled]="!newKontoName">Create</button>
+      <button class="btn-cancel" (click)="closeCreateModal()">{{ translations().cancel }}</button>
+      <button class="btn-confirm" (click)="createKonto()" [disabled]="!newKontoName">{{ translations().create }}</button>
     </div>
   </div>
 </div>
@@ -71,23 +71,23 @@
 <!-- Edit Modal -->
 <div class="modal-overlay" *ngIf="showEditModal">
   <div class="modal-content">
-    <h3>Edit Account</h3>
+    <h3>{{ translations().editAccount }}</h3>
     <div class="form-group">
-      <label>Name</label>
-      <input [(ngModel)]="editKontoName" placeholder="Account Name">
+      <label>{{ translations().name }}</label>
+      <input [(ngModel)]="editKontoName" [placeholder]="translations().accountname">
     </div>
     <div class="form-group">
-      <label>Interest Rate (%)</label>
+      <label>{{ translations().interestRate }} (%)</label>
       <input type="number" [(ngModel)]="editKontoZinssatz" step="0.1">
     </div>
     <div class="form-group">
-      <label>Balance Adjustment (+/-)</label>
+      <label>{{ translations().balanceAdjustment }}</label>
       <input type="number" [(ngModel)]="editBalanceAdjustment" step="0.1">
-      <small>Enter amount to add/subtract from current balance</small>
+      <small>{{ translations().enterAmountAdjustment }}</small>
     </div>
     <div class="modal-actions">
-      <button class="btn-cancel" (click)="closeEditModal()">Cancel</button>
-      <button class="btn-confirm" (click)="updateKonto()">Update</button>
+      <button class="btn-cancel" (click)="closeEditModal()">{{ translations().cancel }}</button>
+      <button class="btn-confirm" (click)="updateKonto()">{{ translations().update }}</button>
     </div>
   </div>
 </div>
@@ -96,15 +96,15 @@
 <div class="modal-overlay" *ngIf="showDetailsModal && selectedKonto">
   <div class="modal-content large">
     <div class="modal-header">
-        <h3>Account Details</h3>
+        <h3>{{ translations().transactionDetails }}</h3>
         <button class="close-icon" (click)="closeDetailsModal()">X</button>
     </div>
 
     <!-- Tabs -->
     <div class="tabs">
-      <button class="tab-btn" [class.active]="activeTab === 'details'" (click)="setActiveTab('details')">DETAILS</button>
-      <button class="tab-btn" [class.active]="activeTab === 'transactions'" (click)="setActiveTab('transactions')">TRANSACTIONS</button>
-      <button class="tab-btn" [class.active]="activeTab === 'payments'" (click)="setActiveTab('payments')">PAYMENTS</button>
+      <button class="tab-btn" [class.active]="activeTab === 'details'" (click)="setActiveTab('details')">{{ translations().details }}</button>
+      <button class="tab-btn" [class.active]="activeTab === 'transactions'" (click)="setActiveTab('transactions')">{{ translations().transactions }}</button>
+      <button class="tab-btn" [class.active]="activeTab === 'payments'" (click)="setActiveTab('payments')">{{ translations().payments }}</button>
     </div>
     
     <div class="tab-content">
@@ -116,49 +116,49 @@
             <span>{{ selectedKonto.kontoId }}</span>
           </div>
           <div class="detail-item">
-            <label>Name</label>
+            <label>{{ translations().name }}</label>
             <span>{{ selectedKonto.kontoName }}</span>
           </div>
           <div class="detail-item">
-            <label>IBAN</label>
-            <span class="detail-value" (click)="copyToClipboard(selectedKonto.iban)" title="Click to copy IBAN" style="cursor: pointer; font-family: monospace;">
+            <label>{{ translations().iban }}</label>
+            <span class="detail-value" (click)="copyToClipboard(selectedKonto.iban)" [title]="translations().copy" style="cursor: pointer; font-family: monospace;">
                 {{ selectedKonto.iban }}
             </span>
           </div>
           <div class="detail-item">
-            <label>Balance</label>
+            <label>{{ translations().balance }}</label>
             <span>{{ selectedKonto.balance | number:'1.2-2' }} {{ selectedKonto.currency }}</span>
           </div>
           <div class="detail-item">
-            <label>Interest Rate</label>
+            <label>{{ translations().interestRate }}</label>
             <span>{{ ((selectedKonto.zinssatz || 0) * 100) | number:'1.2-2' }}%</span>
           </div>
           <div class="detail-item">
-            <label>Accrued Interest</label>
+            <label>{{ translations().accruedInterest }}</label>
             <span>{{ selectedKonto.accruedInterest | number:'1.2-5' }}</span>
           </div>
           <div class="detail-item">
-            <label>Last Calc Date</label>
+            <label>{{ translations().lastCalcDate }}</label>
             <span>{{ selectedKonto.lastInterestCalcDate }}</span>
           </div>
           <div class="detail-item">
-            <label>Status</label>
+            <label>{{ translations().status }}</label>
             <span>{{ selectedKonto.status }}</span>
           </div>
           <div class="detail-item">
-            <label>Created At</label>
+            <label>{{ translations().createdAt }}</label>
             <span>{{ selectedKonto.createdAt | date }}</span>
           </div>
         </div>
 
         <div class="members-list-section">
-            <h4>Members</h4>
+            <h4>{{ translations().members }}</h4>
             <div class="member-row" *ngFor="let member of members">
                 <span>{{ member.name }}</span>
                 <span class="member-email">{{ member.email }}</span>
                 <span class="member-role">{{ member.role }}</span>
             </div>
-            <div *ngIf="members.length === 0">No members</div>
+            <div *ngIf="members.length === 0">{{ translations().noMembers }}</div>
         </div>
       </div>
 

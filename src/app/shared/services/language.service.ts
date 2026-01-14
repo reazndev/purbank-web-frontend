@@ -141,6 +141,76 @@ export interface Translations {
   interfacePreviews: string;
   exploreShowcase: string;
   systemDiagrams: string;
+  // Admin Interface
+  userManagement: string;
+  allUsers: string;
+  name: string;
+  contract: string;
+  usersTotal: string;
+  noUsersFound: string;
+  loadingUsers: string;
+  kontoManagement: string;
+  forceDailyCalc: string;
+  runAbrechnung: string;
+  createKonto: string;
+  createKontoTitle: string;
+  selectUserToViewAccounts: string;
+  noAccountsFound: string;
+  adminSettings: string;
+  changePassword: string;
+  changePasswordTitle: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  changing: string;
+  createUser: string;
+  createUserBtn: string;
+  firstName: string;
+  lastName: string;
+  contractNumberAuto: string;
+  contractNumberAutoHint: string;
+  creating: string;
+  userDetails: string;
+  userId: string;
+  createdAt: string;
+  selectUserToViewDetails: string;
+  userDetailsNotAvailable: string;
+  loadingUserDetails: string;
+  registrationCodes: string;
+  codeCopied: string;
+  newCode: string;
+  title: string;
+  optionalDescription: string;
+  createCode: string;
+  copy: string;
+  used: string;
+  codesTotal: string;
+  noRegistrationCodesFound: string;
+  createCodeToStart: string;
+  selectUserToManageCodes: string;
+  loadingRegistrationCodes: string;
+  auditLogs: string;
+  timestamp: string;
+  action: string;
+  entity: string;
+  user: string;
+  details: string;
+  loadingLogs: string;
+  logDetails: string;
+  ipAddress: string;
+  noAdditionalDetails: string;
+  page: string;
+  of: string;
+  total: string;
+  actions: string;
+  balanceAdjustment: string;
+  enterAmountAdjustment: string;
+  update: string;
+  editAccount: string;
+  accruedInterest: string;
+  lastCalcDate: string;
+  members: string;
+  noMembers: string;
 }
 
 @Injectable({
@@ -274,7 +344,77 @@ export class LanguageService {
       productVideos: "PRODUKT-VIDEOS",
       interfacePreviews: "INTERFACE-VORSCHAU",
       exploreShowcase: "SHOWCASE ENTDECKEN",
-      systemDiagrams: "SYSTEM-DIAGRAMME"
+      systemDiagrams: 'SYSTEM-DIAGRAMME',
+      // Admin Interface
+      userManagement: "BENUTZERVERWALTUNG",
+      allUsers: "ALLE BENUTZER",
+      name: "NAME",
+      contract: "VERTRAG",
+      usersTotal: "BENUTZER TOTAL",
+      noUsersFound: "KEINE BENUTZER GEFUNDEN",
+      loadingUsers: "LADE BENUTZER...",
+      kontoManagement: "KONTOVERWALTUNG",
+      forceDailyCalc: "TAGESABSCHLUSS ERZWINGEN",
+      runAbrechnung: "ABRECHNUNG STARTEN",
+      createKonto: "KONTO ERSTELLEN",
+      createKontoTitle: "Neues Konto erstellen",
+      selectUserToViewAccounts: "WÄHLEN SIE EINEN BENUTZER, UM KONTEN ANZUZEIGEN",
+      noAccountsFound: "KEINE KONTEN GEFUNDEN",
+      adminSettings: "ADMIN EINSTELLUNGEN",
+      changePassword: "PASSWORT ÄNDERN",
+      changePasswordTitle: "Passwort ändern",
+      currentPassword: "Aktuelles Passwort",
+      newPassword: "Neues Passwort",
+      confirmNewPassword: "Neues Passwort bestätigen",
+      changing: "Ändern...",
+      createUser: "Neuen Benutzer erstellen",
+      createUserBtn: "+ NEUER BENUTZER",
+      firstName: "Vorname",
+      lastName: "Nachname",
+      contractNumberAuto: "Vertragsnummer (automatisch generiert)",
+      contractNumberAutoHint: "Vertragsnummer wird automatisch generiert",
+      creating: "Erstelle...",
+      userDetails: "BENUTZERDETAILS",
+      userId: "BENUTZER ID",
+      createdAt: "ERSTELLT AM",
+      selectUserToViewDetails: "WÄHLEN SIE EINEN BENUTZER FÜR DETAILS",
+      userDetailsNotAvailable: "BENUTZERDETAILS NICHT VERFÜGBAR",
+      loadingUserDetails: "LADE BENUTZERDETAILS...",
+      registrationCodes: "REGISTRIERUNGSCODES",
+      codeCopied: "CODE KOPIERT",
+      newCode: "+ NEUER CODE",
+      title: "TITEL",
+      optionalDescription: "Optionale Beschreibung",
+      createCode: "CODE ERSTELLEN",
+      copy: "KOPIEREN",
+      used: "BENUTZT",
+      codesTotal: "CODE(S) TOTAL",
+      noRegistrationCodesFound: "KEINE REGISTRIERUNGSCODES GEFUNDEN",
+      createCodeToStart: "ERSTELLEN SIE EINEN NEUEN CODE, UM ZU BEGINNEN",
+      selectUserToManageCodes: "WÄHLEN SIE EINEN BENUTZER, UM CODES ZU VERWALTEN",
+      loadingRegistrationCodes: "LADE REGISTRIERUNGSCODES...",
+      auditLogs: "AUDIT LOGS",
+      timestamp: "ZEITSTEMPEL",
+      action: "AKTION",
+      entity: "ENTITÄT",
+      user: "BENUTZER",
+      details: "DETAILS",
+      loadingLogs: "Lade Logs...",
+      logDetails: "Log Details",
+      ipAddress: "IP Adresse",
+      noAdditionalDetails: "Keine weiteren Details verfügbar.",
+      page: "Seite",
+      of: "von",
+      total: "Gesamt",
+      actions: "AKTIONEN",
+      balanceAdjustment: "Saldoanpassung (+/-)",
+      enterAmountAdjustment: "Betrag eingeben, um ihn zum aktuellen Saldo hinzuzufügen oder davon abzuziehen",
+      update: "Aktualisieren",
+      editAccount: "Konto bearbeiten",
+      accruedInterest: "Aufgelaufene Zinsen",
+      lastCalcDate: "Letztes Berechnungsdatum",
+      members: "Mitglieder",
+      noMembers: "Keine Mitglieder"
     },
     en: {
       dashboard: 'Dashboard',
@@ -400,7 +540,77 @@ export class LanguageService {
       productVideos: "PRODUCT VIDEOS",
       interfacePreviews: "INTERFACE PREVIEWS",
       exploreShowcase: "EXPLORE SHOWCASE",
-      systemDiagrams: "SYSTEM DIAGRAMS"
+      systemDiagrams: 'SYSTEM DIAGRAMS',
+      // Admin Interface
+      userManagement: "USER MANAGEMENT",
+      allUsers: "ALL USERS",
+      name: "NAME",
+      contract: "CONTRACT",
+      usersTotal: "USERS TOTAL",
+      noUsersFound: "NO USERS FOUND",
+      loadingUsers: "LOADING USERS...",
+      kontoManagement: "KONTO MANAGEMENT",
+      forceDailyCalc: "FORCE DAILY CALC",
+      runAbrechnung: "RUN ABRECHNUNG",
+      createKonto: "CREATE KONTO",
+      createKontoTitle: "Create New Account",
+      selectUserToViewAccounts: "SELECT A USER TO VIEW ACCOUNTS",
+      noAccountsFound: "NO ACCOUNTS FOUND",
+      adminSettings: "ADMIN SETTINGS",
+      changePassword: "CHANGE PASSWORD",
+      changePasswordTitle: "Change Password",
+      currentPassword: "Current Password",
+      newPassword: "New Password",
+      confirmNewPassword: "Confirm New Password",
+      changing: "Changing...",
+      createUser: "Create New User",
+      createUserBtn: "+ NEW USER",
+      firstName: "First Name",
+      lastName: "Last Name",
+      contractNumberAuto: "Contract Number (auto-generated)",
+      contractNumberAutoHint: "Contract number will be automatically generated",
+      creating: "Creating...",
+      userDetails: "USER DETAILS",
+      userId: "USER ID",
+      createdAt: "CREATED AT",
+      selectUserToViewDetails: "SELECT A USER TO VIEW DETAILS",
+      userDetailsNotAvailable: "USER DETAILS NOT AVAILABLE",
+      loadingUserDetails: "LOADING USER DETAILS...",
+      registrationCodes: "REGISTRATION CODES",
+      codeCopied: "CODE COPIED",
+      newCode: "+ NEW CODE",
+      title: "TITLE",
+      optionalDescription: "Optional description",
+      createCode: "CREATE CODE",
+      copy: "COPY",
+      used: "USED",
+      codesTotal: "CODE(S) TOTAL",
+      noRegistrationCodesFound: "NO REGISTRATION CODES FOUND",
+      createCodeToStart: "CREATE A NEW CODE TO GET STARTED",
+      selectUserToManageCodes: "SELECT A USER TO MANAGE REGISTRATION CODES",
+      loadingRegistrationCodes: "LOADING REGISTRATION CODES...",
+      auditLogs: "AUDIT LOGS",
+      timestamp: "TIMESTAMP",
+      action: "ACTION",
+      entity: "ENTITY",
+      user: "USER",
+      details: "DETAILS",
+      loadingLogs: "Loading logs...",
+      logDetails: "Log Details",
+      ipAddress: "IP Address",
+      noAdditionalDetails: "No additional details available.",
+      page: "Page",
+      of: "of",
+      total: "total",
+      actions: "ACTIONS",
+      balanceAdjustment: "Balance Adjustment (+/-)",
+      enterAmountAdjustment: "Enter amount to add/subtract from current balance",
+      update: "Update",
+      editAccount: "Edit Account",
+      accruedInterest: "Accrued Interest",
+      lastCalcDate: "Last Calc Date",
+      members: "Members",
+      noMembers: "No members"
     }
   };
 
